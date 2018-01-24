@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/categoryRelativeLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_smaller"
+    android:foreground="?attr/selectableItemBackground"
+    android:focusable="true"
+    android:clickable="true">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_category"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/card_name_category_alternate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_category"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/padding_small"
+        android:textColor="#424242"
+        android:textSize="12sp"
+        android:theme="@style/MediumBodyText"
+        android:typeface="serif" />
+
+</RelativeLayout>

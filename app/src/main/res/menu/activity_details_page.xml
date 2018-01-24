@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_ur"
+        android:icon="@drawable/information"
+        android:title="@string/url"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_locatin"
+        android:title="@string/open_in_map"
+        android:icon="@drawable/map_marker"
+        app:showAsAction="ifRoom"/>
+</menu>
