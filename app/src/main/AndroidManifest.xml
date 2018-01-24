@@ -88,7 +88,8 @@
                 android:name="android.webkit.WebView.EnableSafeBrowsing"
                 android:value="true" />
         </activity>
-        <activity android:name=".activities.StatePreferenceActivity"/>
+        <activity android:name=".activities.StatePreferenceActivity" />
+        <activity android:name=".activities.BioScreenActivity"></activity>
     </application>
 
 </manifest>

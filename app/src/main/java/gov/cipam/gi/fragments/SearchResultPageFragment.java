@@ -23,6 +23,7 @@ import gov.cipam.gi.model.Categories;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
 import gov.cipam.gi.model.States;
+import gov.cipam.gi.utils.Constants;
 
 
 /**
@@ -50,8 +51,8 @@ public class SearchResultPageFragment extends Fragment {
 
     public static SearchResultPageFragment newInstance(String query,String type) {
         Bundle args = new Bundle();
-        args.putString("query",query);
-        args.putString("type",type);
+        args.putString(Constants.KEY_QUERY,query);
+        args.putString(Constants.KEY_TYPE,type);
         SearchResultPageFragment fragment = new SearchResultPageFragment();
         fragment.setArguments(args);
         return fragment;
@@ -72,10 +73,8 @@ public class SearchResultPageFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-
-
-        mQuery=getArguments().getString("query");
-        mType=getArguments().getString("type");
+        mQuery=getArguments().getString(Constants.KEY_QUERY);
+        mType=getArguments().getString(Constants.KEY_TYPE);
         fetchDataFromAllDB();
 
         searchResultAdapter=new SearchListAdapter(getActivity(),searchListHeaders,parentChildListMapping);
@@ -89,37 +88,32 @@ public class SearchResultPageFragment extends Fragment {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 String clickedGroup=searchListHeaders.get(groupPosition);
-                Intent intent;
                 switch (clickedGroup) {
                     case (Database.GI_PRODUCT):
 
                         Product product = (Product) parentChildListMapping.get(clickedGroup).get(childPosition);
 
-                        intent = new Intent(getContext(), ProductListActivity.class);
-                        intent.putExtra("type", clickedGroup);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("ppp", product);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        startActivity(new Intent(getContext(), ProductListActivity.class)
+                                .putExtra(Constants.KEY_TYPE, clickedGroup)
+                                .putExtras(bundle));
                         break;
 
                     case Database.GI_CATEGORY:
                         Categories categories = (Categories) parentChildListMapping.get(clickedGroup).get(childPosition);
 
-                        intent = new Intent(getContext(), ProductListActivity.class);
-                        intent.putExtra("type", clickedGroup);
-                        intent.putExtra("value", categories.getName());
-                        startActivity(intent);
+                        startActivity(new Intent(getContext(), ProductListActivity.class)
+                                .putExtra(Constants.KEY_TYPE, clickedGroup)
+                                .putExtra(Constants.KEY_VALUE, categories.getName()));
                         break;
 
                     case Database.GI_STATE:
 
                         States states = (States) parentChildListMapping.get(clickedGroup).get(childPosition);
-
-                        intent = new Intent(getContext(), ProductListActivity.class);
-                        intent.putExtra("type", clickedGroup);
-                        intent.putExtra("value", states.getName());
-                        startActivity(intent);
+                        startActivity(new Intent(getContext(), ProductListActivity.class)
+                                .putExtra(Constants.KEY_TYPE, clickedGroup)
+                                .putExtra(Constants.KEY_VALUE, states.getName()));
                         break;
 
                     default:
@@ -156,6 +150,7 @@ public class SearchResultPageFragment extends Fragment {
                 searchListHeaders.add(Database.GI_PRODUCT);
                 parentChildListMapping.put(Database.GI_PRODUCT, productList);
             }
+            cursor.close();
         }
 
         {
@@ -171,6 +166,7 @@ public class SearchResultPageFragment extends Fragment {
                 searchListHeaders.add(Database.GI_STATE);
                 parentChildListMapping.put(Database.GI_STATE, stateList);
             }
+            stateCursor.close();
         }
 
         {
@@ -186,8 +182,11 @@ public class SearchResultPageFragment extends Fragment {
                 searchListHeaders.add(Database.GI_CATEGORY);
                 parentChildListMapping.put(Database.GI_CATEGORY, categoryList);
             }
+            categoryCursor.close();
         }
-        {   Cursor sellerCursor=database.query(Database.GI_SELLER_TABLE,null,Database.GI_SELLER_NAME+" LIKE ?",selectionArgs,null,null,null);
+
+        {
+            Cursor sellerCursor=database.query(Database.GI_SELLER_TABLE,null,Database.GI_SELLER_NAME+" LIKE ?",selectionArgs,null,null,null);
             while(sellerCursor.moveToNext()){
 
                 String name,address,contact;
@@ -205,6 +204,7 @@ public class SearchResultPageFragment extends Fragment {
                 searchListHeaders.add(Database.GI_SELLER);
                 parentChildListMapping.put(Database.GI_SELLER,sellerList);
             }
+            sellerCursor.close();
         }
 
     }

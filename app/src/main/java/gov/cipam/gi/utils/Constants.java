@@ -17,4 +17,7 @@ public class Constants {
 
     public static final String KEY_TEXT_SIZE ="text_size" ;
     public static final String KEY_DOWNLOAD_IMAGES ="image_download" ;
+    public static final String KEY_TYPE ="type" ;
+    public static final String KEY_VALUE ="value" ;
+    public static final String KEY_QUERY ="query" ;
 }

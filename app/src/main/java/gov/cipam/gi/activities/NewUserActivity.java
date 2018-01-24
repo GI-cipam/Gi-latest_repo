@@ -20,13 +20,13 @@ import gov.cipam.gi.utils.Constants;
 public class NewUserActivity extends AppCompatActivity implements View.OnClickListener{
 
     CircleImageView     appLogoImage;
-    Button              skipLoginButton,registerUserButton;
+    Button              skipLoginBtn,registerUserButton;
     FirebaseAuth        mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_user);
+        setContentView(R.layout.test);
 
         launchActivity();
         mAuth = FirebaseAuth.getInstance();
@@ -35,10 +35,11 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        skipLoginButton=findViewById(R.id.skipLogin);
-        registerUserButton=findViewById(R.id.registerUser);
+        appLogoImage=findViewById(R.id.appIcon);
+        skipLoginBtn=findViewById(R.id.btnSkipLogin);
+        registerUserButton=findViewById(R.id.btnLogin);
 
-        skipLoginButton.setOnClickListener(this);
+        skipLoginBtn.setOnClickListener(this);
         registerUserButton.setOnClickListener(this);
     }
 
@@ -69,12 +70,12 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
 
         switch (id){
 
-            case R.id.skipLogin:
+            case R.id.btnSkipLogin:
                 GuestLogin login = new GuestLogin(this);
                 login.guestLogin();
                 break;
 
-            case R.id.registerUser:
+            case R.id.btnLogin:
                 startActivity(new Intent(this,LoginActivity.class));
                 finish();
                 break;

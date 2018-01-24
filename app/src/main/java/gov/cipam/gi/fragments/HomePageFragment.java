@@ -5,15 +5,12 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Vibrator;
 import android.widget.ScrollView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,14 +29,14 @@ import gov.cipam.gi.common.DatabaseFetch;
 import gov.cipam.gi.database.Database;
 import gov.cipam.gi.model.Categories;
 import gov.cipam.gi.model.States;
-import gov.cipam.gi.utils.RecyclerViewClickListener;
+import gov.cipam.gi.utils.Constants;
 import gov.cipam.gi.utils.StartSnapHelper;
 
 /**
  * Created by karan on 11/20/2017.
  */
 
-public class HomePageFragment extends Fragment implements RecyclerViewClickListener, CategoryAdapter.setOnCategoryClickListener, StatesAdapter.setOnStateClickedListener
+public class HomePageFragment extends Fragment implements CategoryAdapter.setOnCategoryClickListener, StatesAdapter.setOnStateClickedListener
 ,GIAdapter.setOnGIClickListener{
 
     RecyclerView                    rvState,rvCategory,rvTop;
@@ -126,19 +123,6 @@ public class HomePageFragment extends Fragment implements RecyclerViewClickListe
         setRetainInstance(true);
     }
 
-
-    @Override
-    public void onClick(View view, int position) {
-        startActivity(new Intent(getContext(), ProductListActivity.class));
-    }
-
-
-    @Override
-    public void onLongClick(View view, int position) {
-        Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(100);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
@@ -152,24 +136,24 @@ public class HomePageFragment extends Fragment implements RecyclerViewClickListe
     @Override
     public void onCategoryClicked(View view, int position) {
         Intent intent=new Intent(getContext(),ProductListActivity.class);
-        intent.putExtra("type", Database.GI_CATEGORY);
-        intent.putExtra("value",mDisplayCategoryList.get(position).getName());
+        intent.putExtra(Constants.KEY_TYPE, Database.GI_CATEGORY);
+        intent.putExtra(Constants.KEY_VALUE,mDisplayCategoryList.get(position).getName());
         startActivity(intent);
     }
 
     @Override
     public void onStateClickedListener(View view, int position) {
         Intent intent=new Intent(getContext(),ProductListActivity.class);
-        intent.putExtra("type",Database.GI_STATE);
-        intent.putExtra("value",mDisplayStateList.get(position).getName());
+        intent.putExtra(Constants.KEY_TYPE,Database.GI_STATE);
+        intent.putExtra(Constants.KEY_VALUE,mDisplayStateList.get(position).getName());
         startActivity(intent);
     }
 
     @Override
     public void onGIClicked(View view, int position) {
         Intent intent=new Intent(getContext(),ProductListActivity.class);
-        intent.putExtra("type", Database.GI_CATEGORY);
-        intent.putExtra("value",mDisplayCategoryList.get(position).getName());
+        intent.putExtra(Constants.KEY_TYPE, Database.GI_CATEGORY);
+        intent.putExtra(Constants.KEY_VALUE,mDisplayCategoryList.get(position).getName());
         startActivity(intent);
     }
 }

@@ -17,9 +17,9 @@ import gov.cipam.gi.database.Database;
 import gov.cipam.gi.fragments.ProductDetailFragment;
 import gov.cipam.gi.fragments.ProductListFragment;
 import gov.cipam.gi.model.Product;
+import gov.cipam.gi.utils.Constants;
 
 public class ProductListActivity extends BaseActivity{
-
 
     Database databaseInstance;
     SQLiteDatabase database;
@@ -41,9 +41,9 @@ public class ProductListActivity extends BaseActivity{
         database = databaseInstance.getReadableDatabase();
 
         Intent intent = getIntent();
-        type = intent.getStringExtra("type");
+        type = intent.getStringExtra(Constants.KEY_TYPE);
         if(type.equals(Database.GI_CATEGORY) || type.equals(Database.GI_STATE)) {
-            value = intent.getStringExtra("value");
+            value = intent.getStringExtra(Constants.KEY_VALUE);
             fetchGIFromDB();
         }
         else{

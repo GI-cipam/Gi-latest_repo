@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +21,7 @@ import gov.cipam.gi.model.Categories;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
 import gov.cipam.gi.model.States;
+import gov.cipam.gi.utils.Constants;
 
 public class SearchResultsActivity extends BaseActivity {
 
@@ -55,8 +55,8 @@ public class SearchResultsActivity extends BaseActivity {
 
             Intent intent=getIntent();
             Bundle bundle=intent.getExtras();
-            mQuery=bundle.getString("query");
-            mType=bundle.getString("type");
+            mQuery=bundle.getString(Constants.KEY_QUERY);
+            mType=bundle.getString(Constants.KEY_TYPE);
 
             relativeLayout=findViewById(R.id.search_not_found);
             relativeLayout.setVisibility(View.INVISIBLE);
@@ -87,7 +87,7 @@ public class SearchResultsActivity extends BaseActivity {
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("ppp", product);
                             startActivity(new Intent(SearchResultsActivity.this, ProductListActivity.class)
-                                    .putExtra("type", clickedGroup)
+                                    .putExtra(Constants.KEY_TYPE, clickedGroup)
                                     .putExtras(bundle));
                             break;
 
@@ -95,8 +95,8 @@ public class SearchResultsActivity extends BaseActivity {
                             Categories categories = (Categories) parentChildListMapping.get(clickedGroup).get(childPosition);
 
                             startActivity(new Intent(SearchResultsActivity.this, ProductListActivity.class)
-                                    .putExtra("type", clickedGroup)
-                                    .putExtra("value", categories.getName()));
+                                    .putExtra(Constants.KEY_TYPE, clickedGroup)
+                                    .putExtra(Constants.KEY_VALUE, categories.getName()));
 
                             break;
 
@@ -104,8 +104,8 @@ public class SearchResultsActivity extends BaseActivity {
                             States states = (States) parentChildListMapping.get(clickedGroup).get(childPosition);
 
                             startActivity(new Intent(SearchResultsActivity.this, ProductListActivity.class)
-                                    .putExtra("type", clickedGroup)
-                                    .putExtra("value", states.getName()));
+                                    .putExtra(Constants.KEY_TYPE, clickedGroup)
+                                    .putExtra(Constants.KEY_VALUE, states.getName()));
 
                             break;
                     }
@@ -142,6 +142,7 @@ public class SearchResultsActivity extends BaseActivity {
                 searchListHeaders.add(Database.GI_PRODUCT);
                 parentChildListMapping.put(Database.GI_PRODUCT, productList);
             }
+            cursor.close();
         }
 
         {
@@ -157,6 +158,7 @@ public class SearchResultsActivity extends BaseActivity {
                 searchListHeaders.add(Database.GI_STATE);
                 parentChildListMapping.put(Database.GI_STATE, stateList);
             }
+            stateCursor.close();
         }
 
         {
@@ -172,6 +174,7 @@ public class SearchResultsActivity extends BaseActivity {
                 searchListHeaders.add(Database.GI_CATEGORY);
                 parentChildListMapping.put(Database.GI_CATEGORY, categoryList);
             }
+            categoryCursor.close();
         }
         {   Cursor sellerCursor=database.query(Database.GI_SELLER_TABLE,null,Database.GI_SELLER_NAME+" LIKE ?",selectionArgs,null,null,null);
             while(sellerCursor.moveToNext()){
@@ -191,6 +194,7 @@ public class SearchResultsActivity extends BaseActivity {
                 searchListHeaders.add(Database.GI_SELLER);
                 parentChildListMapping.put(Database.GI_SELLER,sellerList);
             }
+            sellerCursor.close();
         }
 
     }

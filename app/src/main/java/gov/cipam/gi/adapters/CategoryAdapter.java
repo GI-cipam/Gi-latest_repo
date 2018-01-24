@@ -9,13 +9,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.model.Categories;
@@ -60,7 +56,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     public void onSuccess() {
                         holder.progressBar.setVisibility(View.INVISIBLE);
                     }
-
                     @Override
                     public void onError() {
                         holder.progressBar.setVisibility(View.INVISIBLE);

@@ -99,6 +99,11 @@ public class HomePageActivity extends BaseActivity
         fab1 = findViewById(R.id.floatingActionButton1);
         fab2 = findViewById(R.id.floatingActionButton2);
         fab3 = findViewById(R.id.floatingActionButton3);
+
+        fabMenu.setVisibility(View.INVISIBLE);
+        fab3.setVisibility(View.INVISIBLE);
+        fab2.setVisibility(View.INVISIBLE);
+        fab1.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -241,10 +246,6 @@ public class HomePageActivity extends BaseActivity
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     selectedFragment=HomePageFragment.newInstance();
-                    fabMenu.setVisibility(View.INVISIBLE);
-                    fab3.setVisibility(View.INVISIBLE);
-                    fab2.setVisibility(View.INVISIBLE);
-                    fab1.setVisibility(View.INVISIBLE);
 
                     break;
                 case R.id.navigation_map:
@@ -293,6 +294,10 @@ public class HomePageActivity extends BaseActivity
                         .build();
                 startActivityForResult(intent,REQUEST_INVITE);
                 break;
+
+            case R.id.nav_bio:
+                startActivity(new Intent(this,BioScreenActivity.class));
+
         }
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);

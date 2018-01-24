@@ -1,5 +1,6 @@
 package gov.cipam.gi.fragments;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.ProductListActivity;
 import gov.cipam.gi.adapters.ProductListAdapter;
+import gov.cipam.gi.utils.Constants;
 import gov.cipam.gi.utils.DetailsTransition;
 
 /**
@@ -28,6 +31,7 @@ import gov.cipam.gi.utils.DetailsTransition;
 
 public class ProductListFragment extends Fragment implements  ProductListAdapter.setOnProductClickedListener {
 
+    String type;
     RecyclerView productListRecycler;
     ProductListAdapter productListAdapter;
 
@@ -49,10 +53,11 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-//
+
+        Intent intent = getActivity().getIntent();
+        type = intent.getStringExtra(Constants.KEY_TYPE);
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -62,6 +67,9 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
         productListAdapter=new ProductListAdapter(ProductListActivity.subGIList,getContext(),this);
         productListRecycler.setAdapter(productListAdapter);
 
+       /* Toolbar toolbar=getActivity().findViewById(R.id.product_activity_toolbar);
+
+        toolbar.setTitle(type);*/
         onConfigurationChanged(new Configuration());
         //productListRecycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         //productListRecycler.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));

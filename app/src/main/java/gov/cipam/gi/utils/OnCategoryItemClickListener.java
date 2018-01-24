@@ -1,9 +1,10 @@
 package gov.cipam.gi.utils;
+import android.os.Bundle;
 import android.view.View;
 
 //Interface to add user defined functions to handle click activities on recyclerview
-public interface RecyclerViewClickListener {
-    void onClick(View view, int position);
+public interface OnCategoryItemClickListener {
+    void onClick(Bundle bundle);
     void onLongClick(View view, int position);
 }
 
