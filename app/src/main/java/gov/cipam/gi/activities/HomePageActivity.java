@@ -43,7 +43,6 @@ import gov.cipam.gi.fragments.HomePageFragment;
 import gov.cipam.gi.fragments.MapsFragment;
 import gov.cipam.gi.fragments.YoutubeFragment;
 import gov.cipam.gi.model.Product;
-import gov.cipam.gi.model.StatePreference;
 import gov.cipam.gi.model.Users;
 import gov.cipam.gi.utils.Constants;
 import gov.cipam.gi.utils.NetworkChangeReceiver;
@@ -289,7 +288,6 @@ public class HomePageActivity extends BaseActivity
                 break;
 
             case R.id.nav_sign_up:
-                startActivity(new Intent(this, SampleActivity.class));
                 break;
 
             case R.id.nav_about_us:
