@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -55,7 +56,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         Picasso.with(mContext)
                 .load(GIList.get(position).getDpurl())
                 .fit()
-//                .placeholder(R.drawable.image)
+                //.placeholder(R.drawable.image)
                 .into(holder.imageView);
         ViewCompat.setTransitionName(holder.imageView,GIList.get(position).getUid());
     }
@@ -68,19 +69,20 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView        mTitle,mFiller,mState,mCategory;
-        public ImageView       imageView;
-        private RelativeLayout  relativeLayout;
+        public ImageView        imageView;
+        private LinearLayout    linearLayout;
 
         private ProductViewHolder(View itemView) {
             super(itemView);
             mItemView=itemView;
-            relativeLayout=itemView.findViewById(R.id.relativeLayoutProduct);
+            linearLayout=itemView.findViewById(R.id.linearLayoutProduct);
             mTitle=itemView.findViewById(R.id.productListTitle);
             mFiller=itemView.findViewById(R.id.productListDesc);
             mState=itemView.findViewById(R.id.productListStateName);
             mCategory=itemView.findViewById(R.id.productListCategoryName);
             imageView=itemView.findViewById(R.id.productListImage);
-            relativeLayout.setOnClickListener(this);
+
+            linearLayout.setOnClickListener(this);
         }
 
         @Override

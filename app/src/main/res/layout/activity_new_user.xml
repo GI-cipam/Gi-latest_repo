@@ -27,7 +27,8 @@
             android:id="@+id/skipLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/registerUser"
             android:background="@drawable/introbutton"
             android:text="Guest Login"
             android:textSize="14sp" />

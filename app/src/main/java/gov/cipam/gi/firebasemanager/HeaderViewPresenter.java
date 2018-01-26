@@ -26,6 +26,7 @@ public class HeaderViewPresenter implements View.OnClickListener {
     private ImageView imgevProfile;
     private TextView textvName;
     private TextView textvEmail;
+    private TextView txtvNameInitials;
     private FirebaseAuth mAuth;
     private Users users;
 
@@ -41,6 +42,8 @@ public class HeaderViewPresenter implements View.OnClickListener {
         imgevProfile =  view.findViewById(R.id.userImage);
         textvName =view.findViewById(R.id.nav_header_name);
         textvEmail = view.findViewById(R.id.nav_header_email);
+        txtvNameInitials=view.findViewById(R.id.userNameShort);
+        txtvNameInitials.setVisibility(View.INVISIBLE);
         view.setOnClickListener(this);
         setData();
     }
@@ -63,12 +66,11 @@ public class HeaderViewPresenter implements View.OnClickListener {
             }
             else
             {
+                txtvNameInitials.setVisibility(View.VISIBLE);
+                txtvNameInitials.setText(users.getName().substring(0,1));
                 textvEmail.setText(user.getEmail());
                 textvName.setText("Hi "+users.getName().substring(0,1).toUpperCase()+users.getName().substring(1));
-                Picasso.with(context)
-                        .load(mAuth.getCurrentUser().getPhotoUrl())
-                        .fit()
-                        .into(imgevProfile);
+                imgevProfile.setImageResource(R.drawable.circle);
             }
         }
     }

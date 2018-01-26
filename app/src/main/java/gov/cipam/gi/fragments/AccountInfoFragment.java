@@ -1,13 +1,15 @@
-package gov.cipam.gi.activities;
+package gov.cipam.gi.fragments;
 
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -28,41 +30,55 @@ import gov.cipam.gi.common.SharedPref;
 import gov.cipam.gi.model.Users;
 import gov.cipam.gi.utils.Constants;
 
-public class AccountInfoActivity extends BaseActivity implements View.OnClickListener {
-    private TextView                tvChangePass,tvUpdatePass;
-    private ImageView               profileImage;
+/**
+ * Created by karan on 1/25/2018.
+ */
+
+public class AccountInfoFragment extends Fragment implements View.OnClickListener{
+
+    TextView                        tvChangePass,tvUpdatePass;
+    ImageView                       profileImage;
     private TextInputLayout         mChangePassFieldLayout;
-    private EditText                mNameField,mEmailField,mChangePassField;
-    private String                  name,email;
-    private DatabaseReference       mDatabaseUser;
+    EditText                        mNameField,mEmailField,mChangePassField;
+    DatabaseReference               mDatabaseUser;
     private static String           TAG = "AccountInfoActivity";
     private static String           user_id;
-    private FirebaseAuth            mAuth;
-    private Users                   user;
+    private FirebaseAuth mAuth;
+    Users user;
 
+    public static AccountInfoFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        AccountInfoFragment fragment = new AccountInfoFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_info);
-        setUpToolbar(this);
+
         mDatabaseUser = FirebaseDatabase.getInstance().getReference(Constants.KEY_USERS);
         mAuth = FirebaseAuth.getInstance();
+    }
 
-        profileImage=findViewById(R.id.profileImage);
-        mNameField =findViewById(R.id.nameField);
-        mEmailField =findViewById(R.id.emailField);
-        tvChangePass =findViewById(R.id.changePass);
-        tvChangePass.setOnClickListener(this);
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_account_info,container,false);
     }
 
     @Override
-    protected int getToolbarID() {
-        return R.id.account_info_toolbar;
-    }
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-    @Override
-    protected void onStart() {
-        Users user = SharedPref.getSavedObjectFromPreference(AccountInfoActivity.this,Constants.KEY_USER_INFO,Constants.KEY_USER_DATA,Users.class);
+        profileImage=view.findViewById(R.id.profileImage);
+        mNameField =view.findViewById(R.id.nameField);
+        mEmailField =view.findViewById(R.id.emailField);
+        tvChangePass =view.findViewById(R.id.changePass);
+
+        user = SharedPref.getSavedObjectFromPreference(getContext(),Constants.KEY_USER_INFO,Constants.KEY_USER_DATA,Users.class);
         if(user!=null) {
             mEmailField.setText(user.getEmail());
             mNameField.setText(user.getName());
@@ -70,29 +86,20 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
         }
         else {
-            Toast.makeText(AccountInfoActivity.this,getString(R.string.toast_signin_again_request),Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),getString(R.string.toast_signin_again_request),Toast.LENGTH_LONG).show();
         }
-        super.onStart();
-    }
-
-
-    @Override
-    public void onClick(View view) {
-
-        switch (view.getId()){
-            case R.id.changePass:
-                changePasswordDialog();
-                break;
-        }
+        
+        tvChangePass.setOnClickListener(this);
+        
     }
 
     private void changePasswordDialog() {
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountInfoActivity.this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle("Change Password");
         alertDialog.setMessage("Enter new password");
 
-        final EditText newPass = new EditText(AccountInfoActivity.this);
+        final EditText newPass = new EditText(getContext());
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         newPass.setLayoutParams(lp);
@@ -109,11 +116,11 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(AccountInfoActivity.this, getString(R.string.toast_password_change_success),
+                                        Toast.makeText(getContext(), getString(R.string.toast_password_change_success),
                                                 Toast.LENGTH_SHORT).show();
                                         Log.d(TAG, "User password updated.");
                                     }
-                                    else Toast.makeText(AccountInfoActivity.this, getString(R.string.toast_password_change_failed),
+                                    else Toast.makeText(getContext(), getString(R.string.toast_password_change_failed),
                                             Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -130,16 +137,13 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
         alertDialog.show();
     }
-
+    
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id=item.getItemId();
-
-        switch (id){
-            case android.R.id.home:
-                onBackPressed();
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.changePass:
+                changePasswordDialog();
                 break;
         }
-        return true;
     }
 }

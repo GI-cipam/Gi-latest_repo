@@ -59,7 +59,7 @@ public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.YoutubeV
 
     public class YoutubeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mName,mDate,mDesc;
-        private ImageView mDp,mShare;
+        private ImageView mDp;
 
         private YoutubeViewHolder(View itemView) {
             super(itemView);
@@ -67,11 +67,9 @@ public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.YoutubeV
             mName =itemView.findViewById(R.id.youtubeTitle);
             mDesc=itemView.findViewById(R.id.youtubeDesc);
             mDate= itemView.findViewById(R.id.youtubeDate);
-            mShare=itemView.findViewById(R.id.shareButton);
             mDp =itemView.findViewById(R.id.youtubeImage);
 
-            mShare.setOnClickListener(this);
-
+            mDp.setOnClickListener(this);
         }
 
         @Override

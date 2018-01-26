@@ -7,35 +7,38 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.view.Window;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import gov.cipam.gi.activities.MapsActivity;
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.WebViewActivity;
 import gov.cipam.gi.adapters.GiUniquenessListAdapter;
 import gov.cipam.gi.adapters.SellerListAdapter;
+import gov.cipam.gi.adapters.UniquenessPagerAdapter;
 import gov.cipam.gi.database.Database;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
@@ -45,6 +48,7 @@ import gov.cipam.gi.utils.CommonUtils;
 import gov.cipam.gi.utils.CustomTabActivityHelper;
 import gov.cipam.gi.utils.PaletteGenerate;
 import gov.cipam.gi.utils.StartSnapHelper;
+import gov.cipam.gi.utils.WrapContentHeightViewPager;
 
 import static gov.cipam.gi.utils.Constants.EXTRA_URL;
 
@@ -53,17 +57,22 @@ import static gov.cipam.gi.utils.Constants.EXTRA_URL;
  */
 
 public class ProductDetailFragment extends Fragment implements SellerListAdapter.setOnSellerClickListener
-,GiUniquenessListAdapter.setOnItemClickListener{
+,GiUniquenessListAdapter.setOnItemClickListener,ViewPager.OnPageChangeListener{
 //    Seller seller;
 //    SellerFirebaseAdapter sellerFirebaseAdapter;
 //    DatabaseReference mDatabaseReference;
-
+    int page_position = 0;
+    TextView txtvTitleHistory,txtvTitleDesc;
+    LinearLayout historyLinearLayout,descLinearLayout;
     String name,address,contact;
     TextView txtState,txtCategory,txtHistory,txtDesc;
     Double lon,lat;
-    RecyclerView rvSeller,rvUniqueness;
+    LinearLayout dotsLinearLayout;
+    WrapContentHeightViewPager viewPager;
+    private TextView[] dots;
+    RecyclerView rvSeller;
     ArrayList<Seller> sellerList;
-    List<Uniqueness> uniquenessList;
+    ArrayList<Uniqueness> uniquenessList;
     Database databaseInstance;
     SQLiteDatabase database;
     ImageView imageView;
@@ -173,46 +182,47 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        rvSeller= view.findViewById(R.id.seller_recycler_view);
-        rvUniqueness=view.findViewById(R.id.recycler_unique);
-        imageView=getActivity().findViewById(R.id.productDetailImage);
-        txtState=view.findViewById(R.id.detail_stateName);
-        txtCategory=view.findViewById(R.id.detail_categoryName);
-        txtHistory = view.findViewById(R.id.productHistory);
-        txtDesc=view.findViewById(R.id.productDesc);
+        rvSeller = view.findViewById(R.id.seller_recycler_view);
+        imageView = view.findViewById(R.id.productDetailImage);
+        txtState = view.findViewById(R.id.detail_stateName);
+        txtCategory = view.findViewById(R.id.detail_categoryName);
+        viewPager = view.findViewById(R.id.vp_slider);
+        dotsLinearLayout = view.findViewById(R.id.ll_dots);
 
-        rvUniqueness.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        startSnapHelper.attachToRecyclerView(rvUniqueness);
+        historyLinearLayout = view.findViewById(R.id.childHistoryCard);
+        descLinearLayout = view.findViewById(R.id.childDescCard);
 
-        rvSeller.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        txtvTitleHistory = historyLinearLayout.findViewById(R.id.headingText);
+        txtvTitleHistory.setText("History");
+        txtHistory = historyLinearLayout.findViewById(R.id.descText);
 
-        imageView = getActivity().findViewById(R.id.productDetailImage);
-        imageView.setVisibility(View.VISIBLE);
-        CommonUtils.loadImage(imageView,mBitmap,getActivity());
-        rvUniqueness.setAdapter(new GiUniquenessListAdapter(getContext(),uniquenessList,this));
-        rvSeller.setAdapter(new SellerListAdapter(getContext(), sellerList, this));
+        txtvTitleDesc = descLinearLayout.findViewById(R.id.headingText);
+        txtvTitleDesc.setText("Description");
+        txtDesc = descLinearLayout.findViewById(R.id.descText);
+
         setData();
+
+        addBottomDots(0);
+        //setAutoScroll();
+
+        rvSeller.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+        CommonUtils.loadImage(imageView, mBitmap, getActivity());
+        rvSeller.setAdapter(new SellerListAdapter(getContext(), sellerList, this));
+        viewPager.setAdapter(new UniquenessPagerAdapter(uniquenessList,getActivity()));
+        viewPager.setOnPageChangeListener(this);
+
     }
 
     private void openCustomChromeTab(Uri uri) {
         CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
 
-        // set toolbar colors
         intentBuilder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
-        intentBuilder.addMenuItem(getString(R.string.title_menu_1), createPendingIntent(ChromeTabActionBroadcastReceiver.ACTION_MENU_ITEM_1));
-        intentBuilder.addMenuItem(getString(R.string.title_menu_2), createPendingIntent(ChromeTabActionBroadcastReceiver.ACTION_MENU_ITEM_2));
-
-        // set action button
         intentBuilder.setActionButton(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher), "Action Button", createPendingIntent(ChromeTabActionBroadcastReceiver.ACTION_ACTION_BUTTON));
-
-        // build custom tabs intent
         CustomTabsIntent customTabsIntent = intentBuilder.build();
-
-        // call helper to open custom tab
         CustomTabActivityHelper.openCustomTab(getActivity(), customTabsIntent, uri, new CustomTabActivityHelper.CustomTabFallback() {
             @Override
             public void openUri(Activity activity, Uri uri) {
-                // fall back, call open open webview
                 openWebView(uri);
             }
         });
@@ -241,6 +251,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
         uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
         uniquenessList.add(uniqueness);
+
         uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
         uniquenessList.add(uniqueness);
 
@@ -268,9 +279,68 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         setRetainInstance(true);
     }
 
+    private void setAutoScroll(){
+        final Handler handler = new Handler();
+
+        final Runnable update = new Runnable() {
+            public void run() {
+                if (page_position == uniquenessList.size()) {
+                    page_position = 0;
+                } else {
+                    page_position = page_position + 1;
+                }
+                viewPager.setCurrentItem(page_position, true);
+            }
+        };
+
+        new Timer().schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, 100, 5000);
+    }
+
+    private void addBottomDots(int currentPage) {
+        dots = new TextView[uniquenessList.size()];
+
+        dotsLinearLayout.removeAllViews();
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new TextView(getActivity());
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dots[i].setTextColor(Color.parseColor("#3897f0"));
+            dotsLinearLayout.addView(dots[i]);
+        }
+
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(Color.parseColor("#d3d3d3"));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        addBottomDots(0);
+    }
+
     @Override
     public void onItemClicked(View v, int Position) {
 
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        addBottomDots(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
 }

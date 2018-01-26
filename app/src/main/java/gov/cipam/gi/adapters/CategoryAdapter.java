@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -73,17 +74,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         private TextView mName;
         private ImageView mDp;
         private ProgressBar progressBar;
-        private RelativeLayout relativeLayout;
+        private LinearLayout linearLayout;
 
         private CategoryViewHolder(View itemView) {
             super(itemView);
 
-            relativeLayout=itemView.findViewById(R.id.categoryRelativeLayout);
+            linearLayout=itemView.findViewById(R.id.categoryRelativeLayout);
             mName =itemView.findViewById(R.id.card_name_category_alternate);
             mDp =itemView.findViewById(R.id.image_category);
             //progressBar=itemView.findViewById(R.id.progressBarCategory);
             mDp.setBackground(itemView.getResources().getDrawable(R.drawable.category_manufactured_icon));
-            relativeLayout.setOnClickListener(this);
+            linearLayout.setOnClickListener(this);
         }
 
         @Override

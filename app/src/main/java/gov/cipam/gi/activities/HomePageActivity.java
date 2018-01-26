@@ -43,6 +43,7 @@ import gov.cipam.gi.fragments.HomePageFragment;
 import gov.cipam.gi.fragments.MapsFragment;
 import gov.cipam.gi.fragments.YoutubeFragment;
 import gov.cipam.gi.model.Product;
+import gov.cipam.gi.model.StatePreference;
 import gov.cipam.gi.model.Users;
 import gov.cipam.gi.utils.Constants;
 import gov.cipam.gi.utils.NetworkChangeReceiver;
@@ -62,6 +63,7 @@ public class HomePageActivity extends BaseActivity
     String mQuery="";
     FloatingActionButton fabMenu, fab1, fab2, fab3;
     BottomNavigationView navigation;
+    String navItem;
     NavigationView navigationView;
     Cursor searchCursorHistory,searchCursorOther;
     SearchCursorAdapter searchCursorAdapter;
@@ -190,8 +192,8 @@ public class HomePageActivity extends BaseActivity
 //                searchCursorAdapter.notifyDataSetChanged();
                 }
                 Bundle args=new Bundle();
-                args.putString("query",query);
-                args.putString("type",Database.GI_HISTORY);
+                args.putString(Constants.KEY_QUERY,query);
+                args.putString(Constants.KEY_TYPE,Database.GI_HISTORY);
                 Intent intent=new Intent(HomePageActivity.this,SearchResultsActivity.class);
                 intent.putExtras(args);
                 startActivity(intent);
@@ -246,6 +248,10 @@ public class HomePageActivity extends BaseActivity
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     selectedFragment=HomePageFragment.newInstance();
+                    fabMenu.setVisibility(View.INVISIBLE);
+                    fab3.setVisibility(View.INVISIBLE);
+                    fab2.setVisibility(View.INVISIBLE);
+                    fab1.setVisibility(View.INVISIBLE);
 
                     break;
                 case R.id.navigation_map:
@@ -277,15 +283,19 @@ public class HomePageActivity extends BaseActivity
         switch(item.getItemId()){
 
             case R.id.nav_account:
-                startActivity(new Intent(this,AccountInfoActivity.class));
+                navItem="AccountInfo";
+                startActivity(new Intent(this,NavItemActivity.class)
+                        .putExtra(Constants.NAV_CATEGORY,navItem));
                 break;
 
             case R.id.nav_sign_up:
-                startActivity(new Intent(this, StatePreferenceActivity.class));
+                startActivity(new Intent(this, SampleActivity.class));
                 break;
 
             case R.id.nav_about_us:
-                startActivity(new Intent(this,AboutActivity.class));
+                navItem="AboutScreen";
+                startActivity(new Intent(this,NavItemActivity.class)
+                        .putExtra(Constants.NAV_CATEGORY,navItem));
                 break;
 
             case R.id.nav_share:
@@ -296,8 +306,10 @@ public class HomePageActivity extends BaseActivity
                 break;
 
             case R.id.nav_bio:
-                startActivity(new Intent(this,BioScreenActivity.class));
-
+                navItem="BioScreen";
+                startActivity(new Intent(this,NavItemActivity.class)
+                        .putExtra(Constants.NAV_CATEGORY,navItem));
+                break;
         }
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
@@ -440,20 +452,20 @@ public class HomePageActivity extends BaseActivity
 
             case Database.GI_CATEGORY:
             startActivity(new Intent(this,ProductListActivity.class)
-            .putExtra("type",type)
-            .putExtra("value",name));
+                    .putExtra(Constants.KEY_TYPE,type)
+                    .putExtra(Constants.KEY_VALUE,name));
             break;
 
             case Database.GI_STATE:
             startActivity(new Intent(this,ProductListActivity.class)
-            .putExtra("type",type)
-            .putExtra("value",name));
+                    .putExtra(Constants.KEY_TYPE,type)
+                    .putExtra(Constants.KEY_VALUE,name));
             break;
 
             case Database.GI_HISTORY:
             Bundle args=new Bundle();
-            args.putString("query",name);
-            args.putString("type",Database.GI_HISTORY);
+            args.putString(Constants.KEY_QUERY,name);
+            args.putString(Constants.KEY_TYPE,Database.GI_HISTORY);
             startActivity(new Intent(HomePageActivity.this,SearchResultsActivity.class)
             .putExtras(args));
             break;
@@ -481,7 +493,7 @@ public class HomePageActivity extends BaseActivity
             bundle.putSerializable("ppp",oneGI);
             startActivity(new Intent(this,ProductListActivity.class)
             .putExtras(bundle)
-            .putExtra("type",type));
+            .putExtra(Constants.KEY_TYPE,type));
 
             cursor.close();
             break;

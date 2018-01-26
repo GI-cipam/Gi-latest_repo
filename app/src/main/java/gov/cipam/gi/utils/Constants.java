@@ -20,4 +20,5 @@ public class Constants {
     public static final String KEY_TYPE ="type" ;
     public static final String KEY_VALUE ="value" ;
     public static final String KEY_QUERY ="query" ;
+    public static final String NAV_CATEGORY ="nav_item" ;
 }

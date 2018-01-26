@@ -31,14 +31,11 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         launchActivity();
         mAuth = FirebaseAuth.getInstance();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
-
         appLogoImage=findViewById(R.id.appIcon);
         skipLoginBtn=findViewById(R.id.btnSkipLogin);
         registerUserButton=findViewById(R.id.btnLogin);
 
+        appLogoImage.setImageResource(R.drawable.account);
         skipLoginBtn.setOnClickListener(this);
         registerUserButton.setOnClickListener(this);
     }

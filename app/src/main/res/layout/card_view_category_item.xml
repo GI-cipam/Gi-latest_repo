@@ -11,7 +11,7 @@
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:id="@+id/categoryRelativeLayou"
+        android:id="@+id/categoryRelativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:foreground="?attr/selectableItemBackground"
@@ -20,17 +20,20 @@
 
         <ImageView
             android:id="@+id/card_dp_category"
-            android:layout_width="@dimen/image_parameter"
-            android:layout_height="@dimen/image_parameter_medium"
-            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_parameter"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:foreground="@drawable/image_gradient"
+            android:scaleType="centerCrop"
             tools:ignore="ContentDescription,UnusedAttribute" />
 
         <View
             android:id="@+id/categoryItemView"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:foreground="@drawable/search"
             android:visibility="invisible" />
 
@@ -38,7 +41,8 @@
             android:id="@+id/card_name_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_dp_category"
+            android:layout_alignBottom="@+id/card_dp_category"
+            android:layout_alignParentStart="true"
             android:padding="@dimen/padding_smaller"
             android:textAlignment="center"
             android:textColor="@color/gray"

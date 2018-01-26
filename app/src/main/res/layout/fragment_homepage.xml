@@ -15,16 +15,32 @@
         android:orientation="vertical"
         android:weightSum="5">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_gi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="200dp"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:context=".activities.SampleActivity">
 
-        <RelativeLayout
+            <gov.cipam.gi.utils.WrapContentHeightViewPager
+                android:id="@+id/gi_vp_slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/gi_ll_dots"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"/>
+        </RelativeLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_smaller"
+            android:orientation="vertical"
             android:layout_weight="2">
             <TextView
                 android:id="@+id/category_text"
@@ -41,15 +57,15 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_categories"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/category_text"/>
-        </RelativeLayout>
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_smaller"
             android:layout_weight="2"
+            android:orientation="vertical"
             android:background="?attr/layout_bg">
 
             <TextView
@@ -67,11 +83,9 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_states"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/states_text" />
+                android:layout_height="wrap_content"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

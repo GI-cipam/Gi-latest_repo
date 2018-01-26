@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -52,17 +52,17 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
     public class StatePreferenceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mName;
         private ImageView mDp;
-        private RelativeLayout relativeLayout;
+        private LinearLayout linearLayout;
 
         private StatePreferenceViewHolder(View itemView) {
             super(itemView);
 
-            relativeLayout=itemView.findViewById(R.id.state_preference_parent);
+            linearLayout=itemView.findViewById(R.id.state_preference_parent);
             mName =itemView.findViewById(R.id.statePreferenceName);
             mDp =itemView.findViewById(R.id.statePreferenceImage);
             //progressBar=itemView.findViewById(R.id.progressBarCategory);
 
-            relativeLayout.setOnClickListener(this);
+            linearLayout.setOnClickListener(this);
         }
 
         @Override

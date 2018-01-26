@@ -25,16 +25,8 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".activities.AccountInfoActivity"
-            android:label="@string/account_info"
-            android:parentActivityName=".activities.HomePageActivity" />
-        <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/settings" />
-        <activity
-            android:name=".activities.AboutActivity"
-            android:label="@string/about_us"
-            android:parentActivityName=".activities.HomePageActivity" />
         <activity android:name=".activities.IntroActivity" />
         <activity
             android:name=".activities.ProductListActivity"
@@ -75,7 +67,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
+        <activity android:name=".activities.SampleActivity"/>
         <activity
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
@@ -89,7 +81,7 @@
                 android:value="true" />
         </activity>
         <activity android:name=".activities.StatePreferenceActivity" />
-        <activity android:name=".activities.BioScreenActivity"></activity>
+        <activity android:name=".activities.NavItemActivity"/>
     </application>
 
 </manifest>

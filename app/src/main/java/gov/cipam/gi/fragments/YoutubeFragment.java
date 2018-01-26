@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import gov.cipam.gi.R;
+import gov.cipam.gi.activities.SampleActivity;
 import gov.cipam.gi.adapters.YoutubeAdapter;
 import gov.cipam.gi.model.youtubeItem;
 
@@ -181,17 +183,7 @@ public class YoutubeFragment extends Fragment implements View.OnClickListener,Yo
 
     @Override
     public void onItemClickedListener(View view, int position) {
-        try {
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_SUBJECT, items.get(position).getVideoLink());
-            String sAux = "\nLet me recommend you this application\n\n";
-            sAux = sAux + "https://play.google.com/store/apps/details?id=Orion.Soft \n\n";
-            i.putExtra(Intent.EXTRA_TEXT, sAux);
-            startActivity(Intent.createChooser(i, "choose one"));
-        } catch(Exception e) {
-            //e.toString();
-        }
+        Toast.makeText(getContext(),items.get(position).getVideoLink(),Toast.LENGTH_SHORT).show();
     }
 
     private void showFABMenu(){
