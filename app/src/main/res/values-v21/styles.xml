@@ -17,4 +17,8 @@
         <item name="android:focusable">true</item>
     </style>
 
+    <style name="TextViewCustom">
+        <item name="android:textSize">?attr/text_size_detail</item>
+    </style>
+
 </resources>

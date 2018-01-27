@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.ProductListActivity;
@@ -30,7 +32,7 @@ import gov.cipam.gi.utils.DetailsTransition;
  * Created by karan on 12/14/2017.
  */
 
-public class ProductListFragment extends Fragment implements  ProductListAdapter.setOnProductClickedListener {
+public class ProductListFragment extends BaseFragment implements  ProductListAdapter.setOnProductClickedListener {
 
     String type;
     RecyclerView productListRecycler;
@@ -65,11 +67,12 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        setUpToolbar(getActivity());
         productListRecycler=view.findViewById(R.id.product_list_recycler_view);
         productListAdapter=new ProductListAdapter(ProductListActivity.subGIList,getContext(),this);
         productListRecycler.setAdapter(productListAdapter);
-        onConfigurationChanged(new Configuration());
+        productListRecycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        //onConfigurationChanged(new Configuration());
     }
 
     @Override
@@ -104,12 +107,14 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
             isImageLoaded=true;
             bitmap = drawable.getBitmap();
         }
+
         ProductDetailFragment productDetailFragment=ProductDetailFragment.newInstance(ProductListActivity.subGIList.get(position),bitmap);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 productDetailFragment.setSharedElementEnterTransition(new DetailsTransition());
                 productDetailFragment.setEnterTransition(new Fade());
                 this.setSharedElementEnterTransition(new DetailsTransition());
                 this.setEnterTransition(new Fade());
+                this.setExitTransition(new Fade());
             }
 
         ProductListFragment productListFragment=new ProductListFragment();
@@ -123,16 +128,23 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
     }
 
     @Override
+    protected int getToolbarID() {
+        return R.id.list_toolbar;
+    }
+
+    /*@Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         Configuration c=getContext().getResources().getConfiguration();
 
         if(c.orientation==Configuration.ORIENTATION_PORTRAIT){
             productListRecycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+
         }
         else if(c.orientation==Configuration.ORIENTATION_LANDSCAPE){
             productListRecycler.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+            productListRecycler.addItemDecoration(new DividerItemDecoration(getContext(), StaggeredGridLayoutManager.HORIZONTAL));
         }
-    }
+    }*/
 
 }

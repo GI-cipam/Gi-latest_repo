@@ -36,15 +36,15 @@ import gov.cipam.gi.utils.Constants;
 
 public class AccountInfoFragment extends Fragment implements View.OnClickListener{
 
-    TextView                        tvChangePass,tvUpdatePass;
-    ImageView                       profileImage;
+    TextView                        tvChangePass,tvUpdatePass,tvNameShort;
+    ImageView                       ivProfile;
     private TextInputLayout         mChangePassFieldLayout;
     EditText                        mNameField,mEmailField,mChangePassField;
     DatabaseReference               mDatabaseUser;
     private static String           TAG = "AccountInfoActivity";
     private static String           user_id;
     private FirebaseAuth mAuth;
-    Users user;
+    Users users;
 
     public static AccountInfoFragment newInstance() {
 
@@ -73,24 +73,43 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        profileImage=view.findViewById(R.id.profileImage);
+        tvNameShort=view.findViewById(R.id.nameInitials);
+        ivProfile=view.findViewById(R.id.profileImage);
         mNameField =view.findViewById(R.id.nameField);
         mEmailField =view.findViewById(R.id.emailField);
         tvChangePass =view.findViewById(R.id.changePass);
 
-        user = SharedPref.getSavedObjectFromPreference(getContext(),Constants.KEY_USER_INFO,Constants.KEY_USER_DATA,Users.class);
-        if(user!=null) {
-            mEmailField.setText(user.getEmail());
-            mNameField.setText(user.getName());
-            profileImage.setImageResource(R.drawable.account);
-
-        }
-        else {
-            Toast.makeText(getContext(),getString(R.string.toast_signin_again_request),Toast.LENGTH_LONG).show();
-        }
+        setData();
         
         tvChangePass.setOnClickListener(this);
         
+    }
+
+    private void setData() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("HeaderViewPresenter", "user.getDisplayName(): " + user.getDisplayName());
+        users = SharedPref.getSavedObjectFromPreference(getContext(), Constants.KEY_USER_INFO,Constants.KEY_USER_DATA,Users.class);
+
+        if(users!=null) {
+
+            mEmailField.setText(getContext().getString(R.string.login_request));
+            mNameField.setText(getContext().getString(R.string.hi));
+            ivProfile.setImageResource(R.drawable.account);
+
+            if (mAuth.getCurrentUser().isAnonymous()){
+                mEmailField.setText(getContext().getString(R.string.login_request));
+                mNameField.setText(getContext().getString(R.string.hi));
+                ivProfile.setImageResource(R.drawable.account);
+            }
+            else
+            {
+                tvNameShort.setVisibility(View.VISIBLE);
+                tvNameShort.setText(users.getName().substring(0,1));
+                mEmailField.setText(user.getEmail());
+                mNameField.setText("Hi "+users.getName().substring(0,1).toUpperCase()+users.getName().substring(1));
+                ivProfile.setImageResource(R.drawable.account);
+            }
+        }
     }
 
     private void changePasswordDialog() {

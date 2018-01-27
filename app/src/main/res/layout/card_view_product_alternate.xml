@@ -1,0 +1,115 @@
+<LinearLayout android:id="@+id/linearLayoutProduct"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/productListImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_parameter_large"
+            android:cropToPadding="true"
+            android:background="?attr/selectableItemBackground"
+            android:transitionName="commonImage"
+            tools:ignore="ContentDescription,UnusedAttribute"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_parameter_large"
+            android:background="@drawable/image_gradient"/>
+        <TextView
+            android:id="@+id/productListCategoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/productListTitle"
+            android:layout_marginBottom="@dimen/margin_smaller"
+            android:layout_marginTop="@dimen/margin_smaller"
+            android:background="@color/black_overlay"
+            android:padding="@dimen/padding_smaller"
+            android:textColor="@color/gray_very_light"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/productListStateName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/productListCategoryName"
+            android:layout_alignBottom="@+id/productListCategoryName"
+            android:layout_toEndOf="@+id/productListCategoryName"
+            android:background="@color/black_overlay"
+            android:padding="@dimen/padding_smaller"
+            android:text="West Bengal"
+            android:textAlignment="viewStart"
+            android:textColor="@color/gray_very_light"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/productListTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/productListImage"
+            android:layout_alignParentStart="true"
+            android:letterSpacing="0.02"
+            android:paddingBottom="@dimen/padding_small"
+            android:paddingEnd="@dimen/padding_small"
+            android:paddingStart="@dimen/padding_small"
+            android:shadowColor="@color/black_1"
+            android:shadowRadius="5"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:theme="@style/LargeBodyText"
+            tools:text="Headline" />
+    </RelativeLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/productListDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:lineSpacingExtra="3sp"
+            android:padding="@dimen/padding_small"
+            android:text="@string/permission_rationale"
+            android:textColor="#1f1f1f"
+            android:textSize="14sp" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="wrap_content"
+            android:layout_height="1sp"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/padding_small"
+            android:background="@color/greyColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small">
+
+
+    </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

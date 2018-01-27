@@ -72,7 +72,7 @@ public class SearchCursorAdapter extends CursorAdapter {
         suggestion_Type.setText("in "+suggestion_type);
 
         if(suggestion_type.equals(Database.GI_HISTORY)){
-            suggestionImage.setImageResource(R.drawable.clock);
+            suggestionImage.setImageResource(R.drawable.history);
         }
         else{
             suggestionImage.setImageResource(R.drawable.information_outline);

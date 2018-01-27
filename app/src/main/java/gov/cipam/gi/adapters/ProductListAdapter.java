@@ -27,7 +27,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private ArrayList<Product>          GIList;
     private Context                     mContext;
     private setOnProductClickedListener mListener;
-    View mItemView;
+    private View mItemView;
 
     public ProductListAdapter(ArrayList<Product> GIList, Context mContext, setOnProductClickedListener mListener) {
         this.GIList = GIList;
@@ -41,7 +41,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_product_list,parent,false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_product_alternate,parent,false);
         return  new ProductListAdapter.ProductViewHolder(itemView);
     }
 
@@ -68,7 +68,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView        mTitle,mFiller,mState,mCategory;
+        public TextView        mTitle,mFiller,mState,mCategory;
         public ImageView        imageView;
         private LinearLayout    linearLayout;
 

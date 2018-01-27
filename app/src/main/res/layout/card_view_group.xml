@@ -30,6 +30,6 @@
         android:lineSpacingExtra="4sp"
         android:text="@string/permission_rationale"
         android:textColor="#1f1f1f"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
 </LinearLayout>

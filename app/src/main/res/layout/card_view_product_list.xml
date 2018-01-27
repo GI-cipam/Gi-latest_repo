@@ -24,7 +24,7 @@
         <ImageView
             android:id="@+id/productListImage"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/image_parameter"
+            android:layout_height="@dimen/image_parameter_large"
             android:cropToPadding="true"
             android:background="?attr/selectableItemBackground"
             android:foreground="@drawable/image_gradient"
@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
-                android:lineSpacingExtra="3sp"
+                                android:lineSpacingExtra="3sp"
                 android:padding="@dimen/padding_small"
                 android:text="@string/permission_rationale"
                 android:textColor="#1f1f1f"
@@ -85,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_smaller"
+            android:transitionName="categoryTransition"
             android:textColor="@color/gray_deep"
             android:textSize="12sp" />
 
@@ -94,6 +95,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_smaller"
                 android:text="West Bengal"
+                android:transitionName="stateTransition"
                 android:textAlignment="viewStart"
                 android:textColor="@color/gray_deep"
                 android:textSize="12sp" />

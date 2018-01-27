@@ -56,7 +56,7 @@ import static gov.cipam.gi.utils.Constants.EXTRA_URL;
  * Created by karan on 12/14/2017.
  */
 
-public class ProductDetailFragment extends Fragment implements SellerListAdapter.setOnSellerClickListener
+public class ProductDetailFragment extends BaseFragment implements SellerListAdapter.setOnSellerClickListener
 ,GiUniquenessListAdapter.setOnItemClickListener,ViewPager.OnPageChangeListener{
 //    Seller seller;
 //    SellerFirebaseAdapter sellerFirebaseAdapter;
@@ -105,6 +105,11 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     }
 
     @Override
+    protected int getToolbarID() {
+        return R.id.detail_toolbar;
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         sellerList = new ArrayList<>();
         uniquenessList=new ArrayList<>();
@@ -113,8 +118,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
         database = databaseInstance.getReadableDatabase();
         paletteGenerate=new PaletteGenerate();
-        toolbar=((AppCompatActivity) getActivity()).findViewById(R.id.product_activity_toolbar);
-
+        //toolbar=((AppCompatActivity) getActivity()).findViewById(R.id.product_activity_toolbar);
         populateSellerListFromDB();
         setHasOptionsMenu(true);
 
@@ -181,7 +185,9 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setUpToolbar(getActivity());
 
+        mToolbar.setBackgroundColor(Color.TRANSPARENT);
         rvSeller = view.findViewById(R.id.seller_recycler_view);
         imageView = view.findViewById(R.id.productDetailImage);
         txtState = view.findViewById(R.id.detail_stateName);

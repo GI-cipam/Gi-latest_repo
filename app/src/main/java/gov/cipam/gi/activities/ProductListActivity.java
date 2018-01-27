@@ -96,7 +96,7 @@ public class ProductListActivity extends BaseActivity{
 
     @Override
     protected int getToolbarID() {
-        return R.id.product_activity_toolbar;
+        return 0;
     }
 
     @Override
