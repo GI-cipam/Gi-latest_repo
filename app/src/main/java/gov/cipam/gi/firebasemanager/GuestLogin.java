@@ -50,9 +50,6 @@ public class GuestLogin {
                             SharedPref.saveObjectToSharedPreference(context, Constants.KEY_USER_INFO, Constants.KEY_USER_DATA,user);
                             context.startActivity(new Intent(context, HomePageActivity.class));
 
-
-
-
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInAnonymously:failure", task.getException());

@@ -32,8 +32,7 @@ public class DetailsTransition extends TransitionSet {
     }
 
     private void init() {
-        setOrdering(ORDERING_TOGETHER);
-                addTransition(new ChangeTransform())
-                .addTransition(new ChangeClipBounds());
+        setOrdering(ORDERING_SEQUENTIAL);
+                addTransition(new ChangeTransform());
     }
 }

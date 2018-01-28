@@ -37,12 +37,7 @@ public abstract class BaseFragment extends Fragment {
         sharedPreferencesListener();
     }*/
 
-    /*@Override
-    protected void onStart() {
-        super.onStart();
 
-        PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(prefListener);
-    }*/
 
     //get toolbar ID
     protected abstract int getToolbarID();

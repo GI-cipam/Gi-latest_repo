@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -57,7 +59,7 @@ import static gov.cipam.gi.utils.Constants.EXTRA_URL;
  */
 
 public class ProductDetailFragment extends BaseFragment implements SellerListAdapter.setOnSellerClickListener
-,GiUniquenessListAdapter.setOnItemClickListener,ViewPager.OnPageChangeListener{
+,GiUniquenessListAdapter.setOnItemClickListener,ViewPager.OnPageChangeListener,View.OnClickListener{
 //    Seller seller;
 //    SellerFirebaseAdapter sellerFirebaseAdapter;
 //    DatabaseReference mDatabaseReference;
@@ -68,6 +70,7 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
     TextView txtState,txtCategory,txtHistory,txtDesc;
     Double lon,lat;
     LinearLayout dotsLinearLayout;
+    FloatingActionButton speechToTextFab;
     WrapContentHeightViewPager viewPager;
     private TextView[] dots;
     RecyclerView rvSeller;
@@ -194,6 +197,7 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
         txtCategory = view.findViewById(R.id.detail_categoryName);
         viewPager = view.findViewById(R.id.vp_slider);
         dotsLinearLayout = view.findViewById(R.id.ll_dots);
+        speechToTextFab=view.findViewById(R.id.fabSpeechToText);
 
         historyLinearLayout = view.findViewById(R.id.childHistoryCard);
         descLinearLayout = view.findViewById(R.id.childDescCard);
@@ -217,7 +221,7 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
         rvSeller.setAdapter(new SellerListAdapter(getContext(), sellerList, this));
         viewPager.setAdapter(new UniquenessPagerAdapter(uniquenessList,getActivity()));
         viewPager.setOnPageChangeListener(this);
-
+        speechToTextFab.setOnClickListener(this);
     }
 
     private void openCustomChromeTab(Uri uri) {
@@ -348,5 +352,13 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.fabSpeechToText:
+                Toast.makeText(getContext(), "Fab Clicked", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -16,6 +16,16 @@
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:focusable">true</item>
     </style>
+    <style name="FabStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/margin_smaller</item>
+        <item name="android:src">@drawable/account</item>
+        <item name="borderWidth">0dp</item>
+        <item name="elevation">6dp</item>
+        <item name="pressedTranslationZ">12dp</item>
+        <item name="rippleColor">@android:color/white</item>
+    </style>
 
     <style name="TextViewCustom">
         <item name="android:textSize">?attr/text_size_detail</item>
