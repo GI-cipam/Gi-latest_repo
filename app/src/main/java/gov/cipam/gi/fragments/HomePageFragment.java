@@ -31,7 +31,6 @@ import gov.cipam.gi.R;
 import gov.cipam.gi.activities.ProductListActivity;
 
 import gov.cipam.gi.adapters.CategoryAdapter;
-import gov.cipam.gi.adapters.GIAdapter;
 import gov.cipam.gi.adapters.GiSliderImageAdapter;
 import gov.cipam.gi.adapters.StatesAdapter;
 import gov.cipam.gi.common.DatabaseFetch;

@@ -35,8 +35,6 @@ public class SearchCursorAdapter extends CursorAdapter {
         this.mListener = mListener;
     }
 
-
-
     public interface setOnSuggestionClickListener{
         void onSuggestionClickListener(View view, String type, String name);
     }

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -83,7 +82,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             mName =itemView.findViewById(R.id.card_name_category_alternate);
             mDp =itemView.findViewById(R.id.image_category);
             //progressBar=itemView.findViewById(R.id.progressBarCategory);
-            mDp.setBackground(itemView.getResources().getDrawable(R.drawable.category_manufactured_icon));
+            mDp.setImageResource(R.drawable.circle);
             linearLayout.setOnClickListener(this);
         }
 

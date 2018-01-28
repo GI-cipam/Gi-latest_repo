@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="gov.cipam.gi.activities.HomePageActivity">
 
     <LinearLayout
@@ -16,12 +15,9 @@
         android:weightSum="5">
 
         <RelativeLayout android:layout_width="match_parent"
-            android:layout_height="200dp"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            tools:context=".activities.SampleActivity">
+            android:layout_height="200dp">
 
-            <gov.cipam.gi.utils.WrapContentHeightViewPager
+            <android.support.v4.view.ViewPager
                 android:id="@+id/gi_vp_slider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -29,9 +25,9 @@
             <LinearLayout
                 android:id="@+id/gi_ll_dots"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="@dimen/margin_small"
                 android:gravity="center"
                 android:orientation="horizontal"/>
         </RelativeLayout>

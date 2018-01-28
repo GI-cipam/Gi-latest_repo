@@ -58,7 +58,7 @@ import static gov.cipam.gi.utils.Constants.EXTRA_URL;
  * Created by karan on 12/14/2017.
  */
 
-public class ProductDetailFragment extends BaseFragment implements SellerListAdapter.setOnSellerClickListener
+public class ProductDetailFragment extends Fragment implements SellerListAdapter.setOnSellerClickListener
 ,GiUniquenessListAdapter.setOnItemClickListener,ViewPager.OnPageChangeListener,View.OnClickListener{
 //    Seller seller;
 //    SellerFirebaseAdapter sellerFirebaseAdapter;
@@ -70,7 +70,6 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
     TextView txtState,txtCategory,txtHistory,txtDesc;
     Double lon,lat;
     LinearLayout dotsLinearLayout;
-    FloatingActionButton speechToTextFab;
     WrapContentHeightViewPager viewPager;
     private TextView[] dots;
     RecyclerView rvSeller;
@@ -107,10 +106,6 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
         return fragment;
     }
 
-    @Override
-    protected int getToolbarID() {
-        return R.id.detail_toolbar;
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -188,16 +183,14 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setUpToolbar(getActivity());
 
-        mToolbar.setBackgroundColor(Color.TRANSPARENT);
         rvSeller = view.findViewById(R.id.seller_recycler_view);
         imageView = view.findViewById(R.id.productDetailImage);
         txtState = view.findViewById(R.id.detail_stateName);
         txtCategory = view.findViewById(R.id.detail_categoryName);
         viewPager = view.findViewById(R.id.vp_slider);
         dotsLinearLayout = view.findViewById(R.id.ll_dots);
-        speechToTextFab=view.findViewById(R.id.fabSpeechToText);
+        toolbar=getActivity().findViewById(R.id.product_activity_toolbar);
 
         historyLinearLayout = view.findViewById(R.id.childHistoryCard);
         descLinearLayout = view.findViewById(R.id.childDescCard);
@@ -221,7 +214,6 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
         rvSeller.setAdapter(new SellerListAdapter(getContext(), sellerList, this));
         viewPager.setAdapter(new UniquenessPagerAdapter(uniquenessList,getActivity()));
         viewPager.setOnPageChangeListener(this);
-        speechToTextFab.setOnClickListener(this);
     }
 
     private void openCustomChromeTab(Uri uri) {
@@ -255,6 +247,9 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
         txtHistory.setText(product.getDetail());
         txtCategory.setText(product.getCategory());
         txtState.setText(product.getState());
+
+        //toolbar.setTitle(product.getName());
+        //toolbar.setSubtitle(product.getState()+" " +product.getCategory());
 
         Uniqueness uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
         uniquenessList.add(uniqueness);
@@ -331,7 +326,7 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        addBottomDots(0);
+
     }
 
     @Override
@@ -357,8 +352,7 @@ public class ProductDetailFragment extends BaseFragment implements SellerListAda
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.fabSpeechToText:
-                Toast.makeText(getContext(), "Fab Clicked", Toast.LENGTH_SHORT).show();
+
         }
     }
 }

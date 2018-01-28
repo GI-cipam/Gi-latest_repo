@@ -4,22 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="gov.cipam.gi.activities.HomePageActivity">
+    tools:showIn="@layout/activity_home_page">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/appBarLayout">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:elevation="4sp"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
+        <include layout="@layout/toolbar"
+            android:id="@+id/toolbar"/>
 
     <include
         android:id="@+id/content_home_page"
@@ -27,7 +15,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_marginBottom="56dp"
-        android:layout_below="@+id/appBarLayout" />
+        android:layout_below="@+id/toolbar" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton1"
@@ -69,6 +57,5 @@
         android:layout_alignTop="@+id/floatingActionButton2"
         android:clickable="true"
         android:focusable="true"
-        app:srcCompat="@drawable/account"
-        tools:ignore="VectorDrawableCompat" />
+        app:srcCompat="@drawable/information"/>
 </RelativeLayout>

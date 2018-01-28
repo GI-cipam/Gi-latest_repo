@@ -45,6 +45,7 @@
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="18sp"
+            android:visibility="invisible"
             android:theme="@style/MediumBodyText"
             android:typeface="serif" />
 

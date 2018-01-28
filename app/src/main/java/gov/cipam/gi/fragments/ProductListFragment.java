@@ -1,18 +1,14 @@
 package gov.cipam.gi.fragments;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.ProductListActivity;
@@ -32,7 +27,7 @@ import gov.cipam.gi.utils.DetailsTransition;
  * Created by karan on 12/14/2017.
  */
 
-public class ProductListFragment extends BaseFragment implements  ProductListAdapter.setOnProductClickedListener {
+public class ProductListFragment extends Fragment implements  ProductListAdapter.setOnProductClickedListener {
 
     String type;
     RecyclerView productListRecycler;
@@ -67,7 +62,6 @@ public class ProductListFragment extends BaseFragment implements  ProductListAda
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setUpToolbar(getActivity());
         productListRecycler=view.findViewById(R.id.product_list_recycler_view);
         productListAdapter=new ProductListAdapter(ProductListActivity.subGIList,getContext(),this);
         productListRecycler.setAdapter(productListAdapter);
@@ -127,10 +121,6 @@ public class ProductListFragment extends BaseFragment implements  ProductListAda
 
     }
 
-    @Override
-    protected int getToolbarID() {
-        return R.id.list_toolbar;
-    }
 
     /*@Override
     public void onConfigurationChanged(Configuration newConfig) {

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -24,10 +25,11 @@ import gov.cipam.gi.model.States;
  * Created by NITANT SOOD on 10-01-2018.
  */
 
-public class SearchListAdapter extends BaseExpandableListAdapter {
+public class SearchListAdapter extends BaseExpandableListAdapter implements View.OnClickListener{
     public Context mContext;
     private ArrayList<String> parentHeaders;
     private Map<String,ArrayList> parentChildListMapping;
+
 
     public SearchListAdapter(Context mContext, ArrayList<String> myParentHeaders, Map<String, ArrayList> parentChildListMapping) {
         this.mContext = mContext;
@@ -85,16 +87,20 @@ public class SearchListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         LayoutInflater inflator = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflator.inflate(R.layout.card_view_search_item,null);
-        TextView childText=convertView.findViewById(R.id.search_list_tv1);
-        TextView textView=convertView.findViewById(R.id.search_list_tv2);
+        LinearLayout linearLayout=convertView.findViewById(R.id.search_list_linear_layout);
+        TextView tvTitle=convertView.findViewById(R.id.search_list_tv1);
+        TextView tvFiller=convertView.findViewById(R.id.search_list_tv2);
+        TextView tvExtra=convertView.findViewById(R.id.search_list_tv3);
         ImageView imageView=convertView.findViewById(R.id.search_list_image);
 
+        linearLayout.setOnClickListener(this);
         String parentName=parentHeaders.get(groupPosition);
         switch (parentName){
             case Database.GI_PRODUCT:
             Product product=(Product) parentChildListMapping.get(parentName).get(childPosition);
-            childText.setText(product.getName());
-            textView.setText(product.getState()+"  "+product.getCategory());
+            tvTitle.setText(product.getName());
+            tvFiller.setText(product.getState()+"  "+product.getCategory());
+            tvExtra.setVisibility(View.INVISIBLE);
             Picasso.with(parent.getContext())
                     .load(product.getDpurl())
                     .into(imageView);
@@ -102,8 +108,9 @@ public class SearchListAdapter extends BaseExpandableListAdapter {
 
             case Database.GI_CATEGORY:
             Categories categories=(Categories) parentChildListMapping.get(parentName).get(childPosition);
-            childText.setText(categories.getName());
-            textView.setVisibility(View.INVISIBLE);
+            tvTitle.setText(categories.getName());
+            tvFiller.setVisibility(View.INVISIBLE);
+            tvExtra.setVisibility(View.INVISIBLE);
             Picasso.with(parent.getContext())
                     .load(categories.getDpurl())
                     .into(imageView);
@@ -111,8 +118,9 @@ public class SearchListAdapter extends BaseExpandableListAdapter {
 
             case Database.GI_STATE:
             States state=(States) parentChildListMapping.get(parentName).get(childPosition);
-            childText.setText(state.getName());
-            textView.setVisibility(View.INVISIBLE);
+            tvTitle.setText(state.getName());
+            tvFiller.setVisibility(View.INVISIBLE);
+            tvExtra.setVisibility(View.INVISIBLE);
             Picasso.with(parent.getContext())
                     .load(state.getDpurl())
                     .into(imageView);
@@ -120,10 +128,11 @@ public class SearchListAdapter extends BaseExpandableListAdapter {
 
         case Database.GI_SELLER:
             Seller seller=(Seller) parentChildListMapping.get(parentName).get(childPosition);
-            childText.setText(seller.getName());
+            tvTitle.setText(seller.getName());
+            tvExtra.setText(seller.getcontact());
             imageView.setImageResource(R.drawable.account);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            textView.setText(seller.getaddress());
+            tvFiller.setText(seller.getaddress());
             break;
 
         }
@@ -133,5 +142,10 @@ public class SearchListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
