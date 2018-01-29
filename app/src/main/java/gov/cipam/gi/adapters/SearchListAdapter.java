@@ -25,7 +25,7 @@ import gov.cipam.gi.model.States;
  * Created by NITANT SOOD on 10-01-2018.
  */
 
-public class SearchListAdapter extends BaseExpandableListAdapter implements View.OnClickListener{
+public class SearchListAdapter extends BaseExpandableListAdapter{
     public Context mContext;
     private ArrayList<String> parentHeaders;
     private Map<String,ArrayList> parentChildListMapping;
@@ -93,7 +93,6 @@ public class SearchListAdapter extends BaseExpandableListAdapter implements View
         TextView tvExtra=convertView.findViewById(R.id.search_list_tv3);
         ImageView imageView=convertView.findViewById(R.id.search_list_image);
 
-        linearLayout.setOnClickListener(this);
         String parentName=parentHeaders.get(groupPosition);
         switch (parentName){
             case Database.GI_PRODUCT:
@@ -144,8 +143,4 @@ public class SearchListAdapter extends BaseExpandableListAdapter implements View
         return true;
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

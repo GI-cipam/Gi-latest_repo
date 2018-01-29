@@ -210,7 +210,12 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
         rvSeller.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        CommonUtils.loadImage(imageView, mBitmap, getActivity());
+        if(mBitmap!=null) {
+            CommonUtils.loadImageFromBitmap(imageView, mBitmap, getActivity());
+        }
+        else{
+            CommonUtils.loadImageFromURL(imageView,product.getDpurl(),getActivity());
+        }
         rvSeller.setAdapter(new SellerListAdapter(getContext(), sellerList, this));
         viewPager.setAdapter(new UniquenessPagerAdapter(uniquenessList,getActivity()));
         viewPager.setOnPageChangeListener(this);

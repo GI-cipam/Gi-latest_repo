@@ -74,6 +74,7 @@ public class SearchResultsActivity extends BaseActivity {
             for(int i=0;i<searchListHeaders.size();i++){
                 searchResultListView.expandGroup(i,true);
             }
+
             searchResultListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
 
@@ -81,7 +82,7 @@ public class SearchResultsActivity extends BaseActivity {
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                     String clickedGroup=searchListHeaders.get(groupPosition);
                     switch (clickedGroup) {
-                        case Database.GI_PRODUCT:
+                        case Database.GI_PRODUCT: {
                             Product product = (Product) parentChildListMapping.get(clickedGroup).get(childPosition);
 
                             Bundle bundle = new Bundle();
@@ -90,6 +91,8 @@ public class SearchResultsActivity extends BaseActivity {
                                     .putExtra(Constants.KEY_TYPE, clickedGroup)
                                     .putExtras(bundle));
                             break;
+                        }
+
 
                         case Database.GI_CATEGORY:
                             Categories categories = (Categories) parentChildListMapping.get(clickedGroup).get(childPosition);
