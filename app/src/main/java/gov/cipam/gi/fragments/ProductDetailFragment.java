@@ -118,10 +118,13 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         paletteGenerate=new PaletteGenerate();
         //toolbar=((AppCompatActivity) getActivity()).findViewById(R.id.product_activity_toolbar);
         populateSellerListFromDB();
+        populateUniquenessFromDB();
         setHasOptionsMenu(true);
 
         super.onCreate(savedInstanceState);
     }
+
+
 
     private void populateSellerListFromDB() {
 
@@ -144,6 +147,16 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
             sellerList.add(oneSeller);
         }
         sellerCursor.close();
+    }
+    private void populateUniquenessFromDB() {
+        String[] s={product.getUid()};
+        Cursor uniquenessCursor=database.query(Database.GI_UNIQUENESS_TABLE,null,Database.GI_UNIQUENESS_UID+"=?",s,null,null,null);
+        while(uniquenessCursor.moveToNext()){
+            String value=uniquenessCursor.getString(uniquenessCursor.getColumnIndex(Database.GI_UNIQUENESS_VALUE));
+            Uniqueness uniqueness=new Uniqueness(value);
+
+            uniquenessList.add(uniqueness);
+        }
     }
 
     @Override
@@ -256,20 +269,23 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         //toolbar.setTitle(product.getName());
         //toolbar.setSubtitle(product.getState()+" " +product.getCategory());
 
-        Uniqueness uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);
 
-        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);
 
-        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);
 
-        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);
-
-        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);
+//        Uniqueness uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
+//        uniquenessList.add(uniqueness);
+//
+//        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
+//        uniquenessList.add(uniqueness);
+//
+//        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
+//        uniquenessList.add(uniqueness);
+//
+//        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
+//        uniquenessList.add(uniqueness);
+//
+//        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
+//        uniquenessList.add(uniqueness);
 
     }
     @Override

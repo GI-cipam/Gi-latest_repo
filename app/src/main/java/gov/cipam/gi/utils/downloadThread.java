@@ -80,12 +80,12 @@ public class downloadThread implements Runnable {
                         oneSeller.setUid(currentUID);
                         oneGISellersList.add(oneSeller);
                     }
-                    /*for(DataSnapshot oneUniquenessData : uniquenessData.getChildren()){
+                    for(DataSnapshot oneUniquenessData : uniquenessData.getChildren()){
                         Uniqueness oneUniqueness=oneUniquenessData.getValue(Uniqueness.class);
                         oneUniqueness.setUid(currentUID);
                         oneGIUniquenessList.add(oneUniqueness);
-                    }*/
-                    //currentGI.setUniqueness(oneGIUniquenessList);
+                    }
+                    currentGI.setUniqueness(oneGIUniquenessList);
                     currentGI.setSeller(oneGISellersList);
                     mainGIList.add(currentGI);
                 }
@@ -218,17 +218,17 @@ public class downloadThread implements Runnable {
                     database.insert(Database.GI_SEARCH_TABLE,null,contentValuesSellerSearch);
                 }
 
-                /*ArrayList<Uniqueness> currentUniquenessList=mainGIList.get(i).getUniqueness();
+                ArrayList<Uniqueness> currentUniquenessList=mainGIList.get(i).getUniqueness();
                 for(int k=0;k<currentUniquenessList.size();k++){
                     Uniqueness oneUniqueness=currentUniquenessList.get(k);
 
                     ContentValues contentValuesUniqueness=new ContentValues();
 
                     contentValuesUniqueness.put(Database.GI_UNIQUENESS_UID,oneUniqueness.getUid());
-                    contentValuesUniqueness.put(Database.GI_UNIQUENESS_VALUE,oneUniqueness.getUniqueness());
+                    contentValuesUniqueness.put(Database.GI_UNIQUENESS_VALUE,oneUniqueness.getInfo());
 
                     database.insert(Database.GI_UNIQUENESS_TABLE,null,contentValuesUniqueness);
-                }*/
+                }
             }
             for(int i=0;i<mStateList.size();i++){
                 States currentState=mStateList.get(i);

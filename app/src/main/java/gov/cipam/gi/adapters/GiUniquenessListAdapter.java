@@ -41,7 +41,7 @@ public class GiUniquenessListAdapter extends RecyclerView.Adapter<GiUniquenessLi
 
     @Override
     public void onBindViewHolder(SellerViewHolder holder, int position) {
-      holder.tvUniqueness.setText(mUniquenessList.get(position).getUniqueness());
+      holder.tvUniqueness.setText(mUniquenessList.get(position).getInfo());
     }
 
     @Override

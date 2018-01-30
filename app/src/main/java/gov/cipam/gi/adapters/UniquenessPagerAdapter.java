@@ -37,7 +37,7 @@ public class UniquenessPagerAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.uniqueness_pager_item, container, false);
         txtUni=view.findViewById(R.id.card_gi_uniqueness);
 
-        txtUni.setText(mUniqueness.get(position).getUniqueness());
+        txtUni.setText(mUniqueness.get(position).getInfo());
         container.addView(view);
 
         return view;
