@@ -15,17 +15,17 @@
         android:focusable="true"
         android:clickable="true">
 
-        <gov.cipam.gi.utils.SquareImageView
+        <ImageView
             android:id="@+id/stateListImage"
             android:layout_width="@dimen/image_parameter"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/image_parameter_medium"
             android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription" />
 
         <View
             android:layout_width="@dimen/image_parameter"
-            android:layout_height="@dimen/image_parameter"
+            android:layout_height="@dimen/image_parameter_medium"
             android:layout_centerHorizontal="true"
             android:layout_margin="1dp"
             android:background="@drawable/image_gradient"
