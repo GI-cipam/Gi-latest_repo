@@ -37,14 +37,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_smaller"
             android:orientation="vertical"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:background="@android:color/white">
+
             <TextView
                 android:id="@+id/category_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif"
                 android:padding="@dimen/padding_smaller"
                 android:text="Categories"
+                android:textAllCaps="false"
                 android:textColor="?attr/text_color_primary"
                 android:textStyle="bold"
                 android:theme="@style/LargeBodyText"
@@ -68,9 +71,10 @@
                 android:id="@+id/states_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif"
                 android:padding="@dimen/padding_smaller"
                 android:text="States"
+                android:textAllCaps="false"
                 android:textColor="?attr/text_color_primary"
                 android:textStyle="bold"
                 android:theme="@style/LargeBodyText"

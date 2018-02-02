@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.FloatingActionButton;
@@ -32,6 +33,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -84,6 +86,14 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     Toolbar toolbar;
     boolean isImagePreLoaded = false;
     public static Bitmap mBitmap;
+
+    //TTS object
+    private TextToSpeech myTTS;
+    //status check code
+    private int MY_DATA_CHECK_CODE = 0;
+    //sample string
+    String hiss;
+    int fabCheck = 0;
 
 
     @Nullable
@@ -151,8 +161,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         super.onPrepareOptionsMenu(menu);
         MenuItem settingsAction=menu.findItem(R.id.action_settings_product_list);
         settingsAction.setVisible(false);
-        MenuItem refreshOption=menu.findItem(R.id.menu_refresh);
-        refreshOption.setVisible(false);
     }
 
     @Override
@@ -170,6 +178,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
                         .putExtra("longitude",lon)
                         .putExtra("address",address));
                 break;
+
             case R.id.action_url:
 
                 String url="https://google.com";
@@ -210,7 +219,12 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
         rvSeller.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        CommonUtils.loadImage(imageView, mBitmap, getActivity());
+        if(mBitmap!=null) {
+            CommonUtils.loadImageFromBitmap(imageView, mBitmap, getActivity());
+        }
+        else{
+            CommonUtils.loadImageFromURL(imageView,product.getDpurl(),getActivity());
+        }
         rvSeller.setAdapter(new SellerListAdapter(getContext(), sellerList, this));
         viewPager.setAdapter(new UniquenessPagerAdapter(uniquenessList,getActivity()));
         viewPager.setOnPageChangeListener(this);
@@ -251,7 +265,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         //toolbar.setTitle(product.getName());
         //toolbar.setSubtitle(product.getState()+" " +product.getCategory());
 
-        Uniqueness uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
+        /*Uniqueness uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
         uniquenessList.add(uniqueness);
 
         uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
@@ -264,7 +278,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         uniquenessList.add(uniqueness);
 
         uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);
+        uniquenessList.add(uniqueness);*/
 
     }
     @Override
@@ -347,6 +361,12 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getActivity().setTitle(product.getName());
     }
 
     @Override

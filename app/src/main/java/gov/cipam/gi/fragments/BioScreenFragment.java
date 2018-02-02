@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,8 @@ public class BioScreenFragment extends Fragment implements BioAdapter.setOnBioCl
 
         mBioList=new ArrayList<>();
 
+        Toolbar toolbar=getActivity().findViewById(R.id.nav_activity_toolbar);
+        toolbar.setTitle("Developers");
         recyclerView=view.findViewById(R.id.bioRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(new BioAdapter(mBioList,this));
@@ -68,6 +71,12 @@ public class BioScreenFragment extends Fragment implements BioAdapter.setOnBioCl
 
         bio=new Bio("Random Name","email.e@gmail.com");
         mBioList.add(bio);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getActivity().setTitle(getString(R.string.developer_screen));
     }
 
     @Override

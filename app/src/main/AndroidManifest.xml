@@ -67,7 +67,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <activity android:name=".activities.SampleActivity"/>
+
         <activity
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
@@ -81,7 +81,7 @@
                 android:value="true" />
         </activity>
         <activity android:name=".activities.StatePreferenceActivity" />
-        <activity android:name=".activities.NavItemActivity"/>
+        <activity android:name=".activities.NavItemActivity" />
     </application>
 
 </manifest>

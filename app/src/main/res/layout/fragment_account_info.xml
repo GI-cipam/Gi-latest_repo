@@ -49,13 +49,16 @@
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:orientation="vertical"
-                android:padding="@dimen/padding_small">
+                android:paddingTop="@dimen/padding_small"
+                android:paddingStart="@dimen/padding_small"
+                android:paddingBottom="@dimen/padding_small"
+                android:paddingEnd="@dimen/padding_small">
 
                 <TextView
                     android:id="@+id/nameText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/padding_smaller"
+                    android:paddingBottom="@dimen/padding_smaller"
                     android:text="@string/general_information"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
@@ -64,7 +67,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="1sp"
                     android:layout_marginBottom="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_small"
                     android:background="@color/gray_light" />
 
                 <TextView
@@ -122,12 +124,10 @@
 
                 <TextView
                     android:id="@+id/changePass"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    android:clickable="true"
                     android:enabled="true"
-                    android:focusable="true"
                     android:padding="@dimen/padding_smaller"
                     android:text="Change Password"
                     android:textColor="@color/colorAccent"

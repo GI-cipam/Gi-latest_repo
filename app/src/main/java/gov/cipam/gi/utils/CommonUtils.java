@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import gov.cipam.gi.R;
 
 /**
@@ -50,13 +52,25 @@ public class CommonUtils {
         return true;
     }
 
-    public static void loadImage(final ImageView imageView, Bitmap mBitmap, Activity activity) {
+    public static void loadImageFromBitmap(final ImageView imageView, Bitmap mBitmap, Activity activity) {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         boolean image_download = sharedPreferences.getBoolean(Constants.KEY_DOWNLOAD_IMAGES, true);
 
         if (image_download) {
             imageView.setImageBitmap(mBitmap);
+        } else {
+            imageView.setImageResource(R.drawable.image_off);
+        }
+    }
+
+    public static void loadImageFromURL(final ImageView imageView,String ImageUrl, Activity activity) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        boolean image_download = sharedPreferences.getBoolean(Constants.KEY_DOWNLOAD_IMAGES, true);
+
+        if (image_download) {
+            Picasso.with(activity).load(ImageUrl).into(imageView);
         } else {
             imageView.setImageResource(R.drawable.image_off);
         }

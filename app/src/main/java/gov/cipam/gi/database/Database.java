@@ -83,15 +83,15 @@ public class Database extends SQLiteOpenHelper {
                 GI_SEARCH_ID+" integer primary key autoincrement, "+GI_SEARCH_NAME+" text, "+
                 GI_SEARCH_TYPE+" text);";
 
-        /*String createTableGIUniqueness="Create table "+GI_UNIQUENESS_TABLE+"( "+
-                GI_UNIQUENESS_UID+" text, "+GI_UNIQUENESS_VALUE+" text);";*/
+        String createTableGIUniqueness="Create table "+GI_UNIQUENESS_TABLE+"( "+
+                GI_UNIQUENESS_UID+" text, "+GI_UNIQUENESS_VALUE+" text);";
 
         db.execSQL(createTableGICategory);
         db.execSQL(createTableGIProducts);
         db.execSQL(createTableGISeller);
         db.execSQL(createTableGIState);
         db.execSQL(createTableGISearch);
-        //db.execSQL(createTableGIUniqueness);
+        db.execSQL(createTableGIUniqueness);
     }
 
     @Override

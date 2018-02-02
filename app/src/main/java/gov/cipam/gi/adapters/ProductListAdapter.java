@@ -68,21 +68,21 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView        mTitle,mFiller,mState,mCategory;
-        public ImageView        imageView;
-        private LinearLayout    linearLayout;
+        public TextView             mTitle,mFiller,mState,mCategory;
+        public ImageView            imageView;
+        private RelativeLayout      relativeLayout;
 
         private ProductViewHolder(View itemView) {
             super(itemView);
             mItemView=itemView;
-            linearLayout=itemView.findViewById(R.id.linearLayoutProduct);
+            relativeLayout=itemView.findViewById(R.id.relativeLayoutProduct);
             mTitle=itemView.findViewById(R.id.productListTitle);
             mFiller=itemView.findViewById(R.id.productListDesc);
             mState=itemView.findViewById(R.id.productListStateName);
             mCategory=itemView.findViewById(R.id.productListCategoryName);
             imageView=itemView.findViewById(R.id.productListImage);
 
-            linearLayout.setOnClickListener(this);
+            relativeLayout.setOnClickListener(this);
         }
 
         @Override
@@ -90,5 +90,4 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             mListener.onProductClicked(this,getAdapterPosition());
         }
     }
-
 }

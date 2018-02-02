@@ -46,74 +46,77 @@ public class SearchResultsActivity extends BaseActivity {
 
     RelativeLayout relativeLayout;
 
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.fragment_search_results);
-            setUpToolbar(this);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_search_results);
+        setUpToolbar(this);
 
 
-            Intent intent=getIntent();
-            Bundle bundle=intent.getExtras();
-            mQuery=bundle.getString(Constants.KEY_QUERY);
-            mType=bundle.getString(Constants.KEY_TYPE);
+        Intent intent=getIntent();
+        Bundle bundle=intent.getExtras();
+        mQuery=bundle.getString(Constants.KEY_QUERY);
+        mType=bundle.getString(Constants.KEY_TYPE);
 
-            relativeLayout=findViewById(R.id.search_not_found);
-            relativeLayout.setVisibility(View.INVISIBLE);
+        relativeLayout=findViewById(R.id.search_not_found);
+        relativeLayout.setVisibility(View.INVISIBLE);
 
-            databaseInstance = new Database(this);
-            database = databaseInstance.getReadableDatabase();
-            fetchDataFromAllDB();
-            if(searchListHeaders.size()==0){
-                relativeLayout.setVisibility(View.VISIBLE);
-            }
-            searchResultAdapter=new SearchListAdapter(this,searchListHeaders,parentChildListMapping);
-            searchResultListView= findViewById(R.id.searchResultListView);
-            searchResultListView.setAdapter(searchResultAdapter);
-
-            for(int i=0;i<searchListHeaders.size();i++){
-                searchResultListView.expandGroup(i,true);
-            }
-            searchResultListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-
-                @Override
-                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                    String clickedGroup=searchListHeaders.get(groupPosition);
-                    switch (clickedGroup) {
-                        case Database.GI_PRODUCT:
-                            Product product = (Product) parentChildListMapping.get(clickedGroup).get(childPosition);
-
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("ppp", product);
-                            startActivity(new Intent(SearchResultsActivity.this, ProductListActivity.class)
-                                    .putExtra(Constants.KEY_TYPE, clickedGroup)
-                                    .putExtras(bundle));
-                            break;
-
-                        case Database.GI_CATEGORY:
-                            Categories categories = (Categories) parentChildListMapping.get(clickedGroup).get(childPosition);
-
-                            startActivity(new Intent(SearchResultsActivity.this, ProductListActivity.class)
-                                    .putExtra(Constants.KEY_TYPE, clickedGroup)
-                                    .putExtra(Constants.KEY_VALUE, categories.getName()));
-
-                            break;
-
-                        case Database.GI_STATE:
-                            States states = (States) parentChildListMapping.get(clickedGroup).get(childPosition);
-
-                            startActivity(new Intent(SearchResultsActivity.this, ProductListActivity.class)
-                                    .putExtra(Constants.KEY_TYPE, clickedGroup)
-                                    .putExtra(Constants.KEY_VALUE, states.getName()));
-
-                            break;
-                    }
-                    return true;
-                }
-            });
-
+        databaseInstance = new Database(this);
+        database = databaseInstance.getReadableDatabase();
+        fetchDataFromAllDB();
+        if(searchListHeaders.size()==0){
+            relativeLayout.setVisibility(View.VISIBLE);
         }
+        searchResultAdapter=new SearchListAdapter(this,searchListHeaders,parentChildListMapping);
+        searchResultListView= findViewById(R.id.searchResultListView);
+        searchResultListView.setAdapter(searchResultAdapter);
+
+        for(int i=0;i<searchListHeaders.size();i++){
+            searchResultListView.expandGroup(i,true);
+        }
+
+        searchResultListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                String clickedGroup=searchListHeaders.get(groupPosition);
+                switch (clickedGroup) {
+                    case Database.GI_PRODUCT: {
+                        Product product = (Product) parentChildListMapping.get(clickedGroup).get(childPosition);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("ppp", product);
+                        startActivity(new Intent(SearchResultsActivity.this, ProductListActivity.class)
+                                .putExtra(Constants.KEY_TYPE, clickedGroup)
+                                .putExtras(bundle));
+                        break;
+                    }
+
+
+                    case Database.GI_CATEGORY:
+                        Categories categories = (Categories) parentChildListMapping.get(clickedGroup).get(childPosition);
+
+                        startActivity(new Intent(SearchResultsActivity.this, ProductListActivity.class)
+                                .putExtra(Constants.KEY_TYPE, clickedGroup)
+                                .putExtra(Constants.KEY_VALUE, categories.getName()));
+
+                        break;
+
+                    case Database.GI_STATE:
+                        States states = (States) parentChildListMapping.get(clickedGroup).get(childPosition);
+
+                        startActivity(new Intent(SearchResultsActivity.this, ProductListActivity.class)
+                                .putExtra(Constants.KEY_TYPE, clickedGroup)
+                                .putExtra(Constants.KEY_VALUE, states.getName()));
+
+                        break;
+                }
+                return true;
+            }
+        });
+
+    }
 
 
     private void fetchDataFromAllDB() {
@@ -199,10 +202,10 @@ public class SearchResultsActivity extends BaseActivity {
 
     }
 
-        @Override
-        protected int getToolbarID() {
-            return R.id.product_search_toolbar;
-        }
+    @Override
+    protected int getToolbarID() {
+        return R.id.product_search_toolbar;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -211,13 +214,13 @@ public class SearchResultsActivity extends BaseActivity {
     }
 
     @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-            switch (item.getItemId()){
-                case android.R.id.home:
-                    onBackPressed();
-                    break;
-            }
-            return true;
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
+        return true;
+    }
 }

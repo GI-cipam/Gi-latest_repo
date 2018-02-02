@@ -16,6 +16,7 @@
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:focusable">true</item>
     </style>
+    
     <style name="FabStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -26,7 +27,14 @@
         <item name="pressedTranslationZ">12dp</item>
         <item name="rippleColor">@android:color/white</item>
     </style>
-
+    
+    <style name="TextViewTags">
+        <item name="android:padding">@dimen/padding_smaller</item>
+        <item name="android:text">West Bengal</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/gray_deep</item>
+        <item name="android:textSize">@dimen/tag_text</item>
+    </style>
     <style name="TextViewCustom">
         <item name="android:textSize">?attr/text_size_detail</item>
     </style>

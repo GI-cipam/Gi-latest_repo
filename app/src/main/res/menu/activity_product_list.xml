@@ -7,11 +7,6 @@
     android:id="@+id/action_settings_product_list"
     android:title="@string/settings"
     app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/menu_refresh"
-        android:title="@string/menu_refresh"
-        app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/action_url"
         android:icon="@drawable/information"

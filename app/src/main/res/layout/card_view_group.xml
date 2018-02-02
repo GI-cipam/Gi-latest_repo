@@ -4,9 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/padding_small"
     android:focusable="true"
     android:clickable="true"
+    android:paddingTop="@dimen/padding_smaller"
+    android:paddingBottom="@dimen/padding_small"
     android:foreground="?attr/selectableItemBackground">
 
     <TextView
@@ -14,6 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Uniqueness"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/padding_smaller"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
     <View
         android:id="@+id/dividerViewUni"
@@ -26,6 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_smaller"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
         android:fontFamily="serif"
         android:lineSpacingExtra="4sp"
         android:text="@string/permission_rationale"

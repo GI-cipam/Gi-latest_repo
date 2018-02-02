@@ -2,8 +2,6 @@ package gov.cipam.gi.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,30 +10,26 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import gov.cipam.gi.R;
 import gov.cipam.gi.firebasemanager.GuestLogin;
 import gov.cipam.gi.utils.Constants;
 
 public class NewUserActivity extends AppCompatActivity implements View.OnClickListener{
 
-    CircleImageView     appLogoImage;
     Button              skipLoginBtn,registerUserButton;
     FirebaseAuth        mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+        setContentView(R.layout.activity_new_user);
 
         launchActivity();
         mAuth = FirebaseAuth.getInstance();
 
-        appLogoImage=findViewById(R.id.appIcon);
-        skipLoginBtn=findViewById(R.id.btnSkipLogin);
-        registerUserButton=findViewById(R.id.btnLogin);
+        skipLoginBtn=findViewById(R.id.skipLogin);
+        registerUserButton=findViewById(R.id.registerUser);
 
-        appLogoImage.setImageResource(R.drawable.account);
         skipLoginBtn.setOnClickListener(this);
         registerUserButton.setOnClickListener(this);
     }
@@ -67,12 +61,12 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
 
         switch (id){
 
-            case R.id.btnSkipLogin:
+            case R.id.skipLogin:
                 GuestLogin login = new GuestLogin(this);
                 login.guestLogin();
                 break;
 
-            case R.id.btnLogin:
+            case R.id.registerUser:
                 startActivity(new Intent(this,LoginActivity.class));
                 finish();
                 break;

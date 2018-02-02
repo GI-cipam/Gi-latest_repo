@@ -117,7 +117,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         giSliderViewPager.setOnPageChangeListener(this);
     }
 
-    private void setAutoScroll(){
+    /*private void setAutoScroll(){
         final Handler handler = new Handler();
 
         final Runnable update = new Runnable() {
@@ -138,7 +138,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
                 handler.post(update);
             }
         }, 100, 5000);
-    }
+    }*/
 
     private void addBottomDots(int currentPage) {
         dots = new TextView[mDisplayCategoryList.size()];

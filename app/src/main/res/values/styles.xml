@@ -60,4 +60,5 @@
     <style name="LargeTitleText">
         <item name="android:textSize">27sp</item>
     </style>
+
 </resources>

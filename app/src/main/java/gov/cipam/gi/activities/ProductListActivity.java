@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,7 +20,7 @@ import gov.cipam.gi.fragments.ProductListFragment;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.utils.Constants;
 
-public class ProductListActivity extends BaseActivity{
+public class ProductListActivity extends BaseActivity implements FragmentManager.OnBackStackChangedListener{
 
     Database databaseInstance;
     SQLiteDatabase database;
@@ -126,10 +127,30 @@ public class ProductListActivity extends BaseActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void setTitle(final CharSequence title) {
+        mToolbar.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+            ProductListActivity.super.setTitle(title);
+            }
+        }, 200);
+    }
+
     public void fragmentInflate(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.product_list_frame_layout, fragment);
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void onBackStackChanged() {
+        if (getCurrentFragment() instanceof ProductListFragment){
+            setTitle(Constants.KEY_TYPE);
+        }
+    }
+
+    private Fragment getCurrentFragment(){
+        return getSupportFragmentManager().findFragmentById(R.id.product_list_frame_layout);
+    }
 }

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,6 +74,8 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Toolbar toolbar=getActivity().findViewById(R.id.nav_activity_toolbar);
+        toolbar.setTitle("Account Information");
         tvNameShort=view.findViewById(R.id.nameInitials);
         ivProfile=view.findViewById(R.id.profileImage);
         mNameField =view.findViewById(R.id.nameField);
@@ -107,7 +110,6 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
                 tvNameShort.setText(users.getName().substring(0,1));
                 mEmailField.setText(user.getEmail());
                 mNameField.setText("Hi "+users.getName().substring(0,1).toUpperCase()+users.getName().substring(1));
-                ivProfile.setImageResource(R.drawable.account);
             }
         }
     }
@@ -156,7 +158,13 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
 
         alertDialog.show();
     }
-    
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getActivity().setTitle(getString(R.string.account_info));
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){

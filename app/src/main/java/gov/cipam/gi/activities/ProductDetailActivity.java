@@ -115,9 +115,8 @@ public class ProductDetailActivity extends BaseActivity {
     }
 
     public void fragmentInflate(Fragment fragment){
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.product_detail_frame_layout, fragment);
-        fragmentTransaction.commit();
+
+
     }
 
     @Override

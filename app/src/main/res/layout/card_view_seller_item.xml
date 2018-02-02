@@ -14,23 +14,30 @@
         android:foreground="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:padding="@dimen/margin_small"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/card_seller_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_smaller"
+            android:layout_marginEnd="@dimen/margin_smaller"
+            android:layout_marginStart="@dimen/margin_smaller"
+            android:layout_marginTop="@dimen/margin_smaller"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
         <View
             android:id="@+id/dividerView"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/greyColor"/>
+
         <TextView
             android:id="@+id/card_seller_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_smaller"
+            android:layout_marginEnd="@dimen/margin_smaller"
+            android:layout_marginStart="@dimen/margin_smaller"
             android:layout_marginTop="@dimen/margin_smaller"
             android:fontFamily="serif"
             android:lineSpacingExtra="4sp"
@@ -42,6 +49,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autoLink="phone"
+            android:layout_marginBottom="@dimen/margin_smaller"
+            android:layout_marginEnd="@dimen/margin_smaller"
+            android:layout_marginStart="@dimen/margin_smaller"
             android:linksClickable="true"
             android:text="11/12"
             android:textColorLink="@color/drawer_blue"
