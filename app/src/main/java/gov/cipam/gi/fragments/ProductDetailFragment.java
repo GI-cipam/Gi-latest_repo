@@ -264,24 +264,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         txtCategory.setText(product.getCategory());
         txtState.setText(product.getState());
 
-        //toolbar.setTitle(product.getName());
-        //toolbar.setSubtitle(product.getState()+" " +product.getCategory());
-
-        /*Uniqueness uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);
-
-        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);
-
-        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);
-
-        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);
-
-        uniqueness=new Uniqueness("Achha chalta hun duao mein yaad rakhna");
-        uniquenessList.add(uniqueness);*/
-
     }
     @Override
     public void onSellerClicked(View v, int Position) {
