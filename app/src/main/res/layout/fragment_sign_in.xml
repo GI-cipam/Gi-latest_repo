@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
+        android:layout_gravity="center"
         android:padding="@dimen/activity_horizontal_margin">
 
         <de.hdodenhof.circleimageview.CircleImageView
