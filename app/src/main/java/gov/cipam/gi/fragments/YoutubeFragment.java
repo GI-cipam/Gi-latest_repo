@@ -41,8 +41,6 @@ public class YoutubeFragment extends Fragment implements View.OnClickListener,Yo
     private RecyclerView recyclerView;
     private ArrayList<youtubeItem> items = new ArrayList<>();
     Button dataButton;
-    boolean isFABOpen=false;
-    FloatingActionButton fabMenu, fab1, fab2, fab3;
 
     public static YoutubeFragment newInstance() {
 
@@ -74,13 +72,6 @@ public class YoutubeFragment extends Fragment implements View.OnClickListener,Yo
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL));
 
-        fabMenu = getActivity().findViewById(R.id.floatingActionButtonMenu);
-        fab1 = getActivity().findViewById(R.id.floatingActionButton1);
-        fab2 = getActivity().findViewById(R.id.floatingActionButton2);
-        fab3 = getActivity().findViewById(R.id.floatingActionButton3);
-
-        fab1.setOnClickListener(this);
-        fabMenu.setOnClickListener(this);
         dataButton.setOnClickListener(this);
         loadRecyclerViewData();
     }
@@ -160,20 +151,6 @@ public class YoutubeFragment extends Fragment implements View.OnClickListener,Yo
             case R.id.dataButton:
                 recyclerView.setAdapter(new YoutubeAdapter(this,items,getActivity()));
                 break;
-            case R.id.floatingActionButtonMenu:
-                if(!isFABOpen){
-                    showFABMenu();
-                }else{
-                    closeFABMenu();
-                }
-                break;
-            case R.id.floatingActionButton1:
-                /*FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-                SocialFeedFragment elf = new SocialFeedFragment().newInstance();
-                ft.replace(R.id.home_page_frame_layout, elf)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .addToBackStack(null)
-                .commit();*/
         }
 
     }
@@ -181,20 +158,6 @@ public class YoutubeFragment extends Fragment implements View.OnClickListener,Yo
     @Override
     public void onItemClickedListener(View view, int position) {
         Toast.makeText(getContext(),items.get(position).getVideoLink(),Toast.LENGTH_SHORT).show();
-    }
-
-    private void showFABMenu(){
-        isFABOpen=true;
-        fab1.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
-        fab2.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
-        fab3.animate().translationY(-getResources().getDimension(R.dimen.standard_155));
-    }
-
-    private void closeFABMenu(){
-        isFABOpen=false;
-        fab1.animate().translationY(0);
-        fab2.animate().translationY(0);
-        fab3.animate().translationY(0);
     }
 
     @Override

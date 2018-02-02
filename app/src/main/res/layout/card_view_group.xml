@@ -8,7 +8,7 @@
     android:clickable="true"
     android:paddingTop="@dimen/padding_smaller"
     android:paddingBottom="@dimen/padding_small"
-    android:foreground="?attr/selectableItemBackground">
+    android:background="?attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/headingText"
@@ -33,9 +33,9 @@
         android:layout_marginStart="@dimen/margin_small"
         android:layout_marginEnd="@dimen/margin_small"
         android:fontFamily="serif"
+        style="?attr/text_size_detail"
         android:lineSpacingExtra="4sp"
         android:text="@string/permission_rationale"
-        android:textColor="#1f1f1f"
-        android:textSize="14sp"/>
+        android:textColor="#1f1f1f" />
 
 </LinearLayout>

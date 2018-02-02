@@ -27,17 +27,18 @@
             android:layout_width="@dimen/image_parameter"
             android:layout_height="@dimen/image_parameter"
             android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
-            android:background="@drawable/image_gradient"/>
+            android:layout_margin="1dp"
+            android:background="@drawable/image_gradient"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/stateListName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/stateListImage"
+            android:layout_below="@id/stateListImage"
             android:layout_centerHorizontal="true"
             android:text="Name"
-            android:textColor="@android:color/white"
+            android:textColor="@color/gray_deep"
             android:theme="@style/MediumBodyText" />
 
         <ProgressBar

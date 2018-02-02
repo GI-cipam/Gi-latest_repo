@@ -84,6 +84,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                recreate();
             }
         };
     }

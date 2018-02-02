@@ -33,7 +33,6 @@ public class ProductListActivity extends BaseActivity implements FragmentManager
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setUpFont();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
         setUpToolbar(this);

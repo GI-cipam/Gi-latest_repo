@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Indications-master.iml" filepath="$PROJECT_DIR$/Indications-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://E:\Downloads\Indications-master\gu.iml" filepath="E:\Downloads\Indications-master\gu.iml" />
     </modules>
   </component>
 </project>

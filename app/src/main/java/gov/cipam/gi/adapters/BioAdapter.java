@@ -41,9 +41,16 @@ public class BioAdapter extends RecyclerView.Adapter<BioAdapter.BioViewHolder> {
 
     @Override
     public void onBindViewHolder(BioViewHolder holder, int position) {
-        holder.mName.setText(mBioList.get(position).getName());
         holder.mEmail.setText(mBioList.get(position).getEmail());
-        holder.mDp.setImageResource(R.drawable.account);
+        switch (position){
+            case 0:holder.mDp.setImageResource(R.drawable.kd);
+                holder.mName.setText("Kunwar Deepak");
+                break;
+
+        }
+
+
+
     }
 
     @Override

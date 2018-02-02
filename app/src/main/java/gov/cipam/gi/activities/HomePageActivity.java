@@ -41,6 +41,7 @@ import gov.cipam.gi.database.Database;
 import gov.cipam.gi.firebasemanager.HeaderViewPresenter;
 import gov.cipam.gi.fragments.HomePageFragment;
 import gov.cipam.gi.fragments.MapsFragment;
+import gov.cipam.gi.fragments.SocialFeedFragment;
 import gov.cipam.gi.fragments.YoutubeFragment;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Users;
@@ -60,7 +61,6 @@ public class HomePageActivity extends BaseActivity
     FrameLayout frameLayout;
     String[] historyItem;
     String mQuery="";
-    FloatingActionButton fabMenu, fab1, fab2, fab3;
     BottomNavigationView navigation;
     String navItem;
     NavigationView navigationView;
@@ -95,16 +95,6 @@ public class HomePageActivity extends BaseActivity
 
         user = SharedPref.getSavedObjectFromPreference(HomePageActivity.this, Constants.KEY_USER_INFO,Constants.KEY_USER_DATA,Users.class);
         setNavigation();
-
-        fabMenu = findViewById(R.id.floatingActionButtonMenu);
-        fab1 = findViewById(R.id.floatingActionButton1);
-        fab2 = findViewById(R.id.floatingActionButton2);
-        fab3 = findViewById(R.id.floatingActionButton3);
-
-        fabMenu.setVisibility(View.INVISIBLE);
-        fab3.setVisibility(View.INVISIBLE);
-        fab2.setVisibility(View.INVISIBLE);
-        fab1.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -247,27 +237,12 @@ public class HomePageActivity extends BaseActivity
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     selectedFragment=HomePageFragment.newInstance();
-                    fabMenu.setVisibility(View.INVISIBLE);
-                    fab3.setVisibility(View.INVISIBLE);
-                    fab2.setVisibility(View.INVISIBLE);
-                    fab1.setVisibility(View.INVISIBLE);
-
                     break;
                 case R.id.navigation_map:
                     selectedFragment=MapsFragment.newInstance();
-                    fabMenu.setVisibility(View.INVISIBLE);
-                    fab3.setVisibility(View.INVISIBLE);
-                    fab2.setVisibility(View.INVISIBLE);
-                    fab1.setVisibility(View.INVISIBLE);
-
                     break;
                 case R.id.navigation_social_feed:
-                    selectedFragment= YoutubeFragment.newInstance();
-                    fabMenu.setVisibility(View.VISIBLE);
-                    fab3.setVisibility(View.VISIBLE);
-                    fab2.setVisibility(View.VISIBLE);
-                    fab1.setVisibility(View.VISIBLE);
-
+                    selectedFragment= SocialFeedFragment.newInstance();
                     break;
             }
             fragmentInflate(selectedFragment);
@@ -449,52 +424,52 @@ public class HomePageActivity extends BaseActivity
         switch (type){
 
             case Database.GI_CATEGORY:
-            startActivity(new Intent(this,ProductListActivity.class)
-                    .putExtra(Constants.KEY_TYPE,type)
-                    .putExtra(Constants.KEY_VALUE,name));
-            break;
+                startActivity(new Intent(this,ProductListActivity.class)
+                        .putExtra(Constants.KEY_TYPE,type)
+                        .putExtra(Constants.KEY_VALUE,name));
+                break;
 
             case Database.GI_STATE:
-            startActivity(new Intent(this,ProductListActivity.class)
-                    .putExtra(Constants.KEY_TYPE,type)
-                    .putExtra(Constants.KEY_VALUE,name));
-            break;
+                startActivity(new Intent(this,ProductListActivity.class)
+                        .putExtra(Constants.KEY_TYPE,type)
+                        .putExtra(Constants.KEY_VALUE,name));
+                break;
 
             case Database.GI_HISTORY:
-            Bundle args=new Bundle();
-            args.putString(Constants.KEY_QUERY,name);
-            args.putString(Constants.KEY_TYPE,Database.GI_HISTORY);
-            startActivity(new Intent(HomePageActivity.this,SearchResultsActivity.class)
-            .putExtras(args));
-            break;
+                Bundle args=new Bundle();
+                args.putString(Constants.KEY_QUERY,name);
+                args.putString(Constants.KEY_TYPE,Database.GI_HISTORY);
+                startActivity(new Intent(HomePageActivity.this,SearchResultsActivity.class)
+                        .putExtras(args));
+                break;
 
             case Database.GI_PRODUCT:
 
-            String[] s = {name};
-            Cursor cursor = database.query(Database.GI_PRODUCT_TABLE, null, Database.GI_PRODUCT_NAME + "=?", s, null, null, null);
+                String[] s = {name};
+                Cursor cursor = database.query(Database.GI_PRODUCT_TABLE, null, Database.GI_PRODUCT_NAME + "=?", s, null, null, null);
 
-            cursor.moveToNext();
-            String detail, category, state, dpurl, uid, history,description;
+                cursor.moveToNext();
+                String detail, category, state, dpurl, uid, history,description;
 
-            name = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_NAME));
-            detail = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DETAIL));
-            category = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_CATEGORY));
-            state = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_STATE));
-            dpurl = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DP_URL));
-            uid = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_UID));
-            history=cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_HISTORY));
-            description=cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DESCRIPTION));
+                name = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_NAME));
+                detail = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DETAIL));
+                category = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_CATEGORY));
+                state = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_STATE));
+                dpurl = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DP_URL));
+                uid = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_UID));
+                history=cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_HISTORY));
+                description=cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DESCRIPTION));
 
-            Product oneGI = new Product(name,dpurl,detail,category,state,description,history,uid);
+                Product oneGI = new Product(name,dpurl,detail,category,state,description,history,uid);
 
-            Bundle bundle=new Bundle();
-            bundle.putSerializable("ppp",oneGI);
-            startActivity(new Intent(this,ProductListActivity.class)
-            .putExtras(bundle)
-            .putExtra(Constants.KEY_TYPE,type));
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("ppp",oneGI);
+                startActivity(new Intent(this,ProductListActivity.class)
+                        .putExtras(bundle)
+                        .putExtra(Constants.KEY_TYPE,type));
 
-            cursor.close();
-            break;
+                cursor.close();
+                break;
         }
 
     }

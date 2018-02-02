@@ -15,7 +15,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scaleType="center"
-        app:srcCompat="@drawable/image2" />
+        app:srcCompat="@drawable/image2"
+        tools:ignore="ContentDescription"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

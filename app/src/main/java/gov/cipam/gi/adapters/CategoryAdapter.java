@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -56,6 +55,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             holder.view.setBackgroundResource(iconResource[i]);
             holder.mDp.setImageResource(bgDrawable[i]);
         }
+        /*String DpUrl=mCategoryList.get(position).getDpurl();
+        holder.mName.setText(mCategoryList.get(position).getName());
+
+        holder.progressBar.setVisibility(View.VISIBLE);
+        Picasso.with(mContext)
+                .load(DpUrl)
+                .resize(400,600)
+                .into(holder.mDp, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.INVISIBLE);
+                    }
+                    @Override
+                    public void onError() {
+                        holder.progressBar.setVisibility(View.INVISIBLE);
+                        holder.mDp.setImageResource(R.drawable.image);
+                    }
+                });
+>>>>>>> 525b621ad907adbdd9f4a9d107d162659a0731e6*/
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,20 +17,23 @@ import gov.cipam.gi.utils.Constants;
 
 public class NewUserActivity extends AppCompatActivity implements View.OnClickListener{
 
+    ImageView           appIcon;
     Button              skipLoginBtn,registerUserButton;
     FirebaseAuth        mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_user);
+        setContentView(R.layout.test);
 
         launchActivity();
         mAuth = FirebaseAuth.getInstance();
 
-        skipLoginBtn=findViewById(R.id.skipLogin);
-        registerUserButton=findViewById(R.id.registerUser);
+        skipLoginBtn=findViewById(R.id.btnSkipLogin);
+        registerUserButton=findViewById(R.id.btnLogin);
+        appIcon=findViewById(R.id.appIcon);
 
+        appIcon.setImageResource(R.drawable.image1);
         skipLoginBtn.setOnClickListener(this);
         registerUserButton.setOnClickListener(this);
     }
@@ -61,12 +65,12 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
 
         switch (id){
 
-            case R.id.skipLogin:
+            case R.id.btnSkipLogin:
                 GuestLogin login = new GuestLogin(this);
                 login.guestLogin();
                 break;
 
-            case R.id.registerUser:
+            case R.id.btnLogin:
                 startActivity(new Intent(this,LoginActivity.class));
                 finish();
                 break;

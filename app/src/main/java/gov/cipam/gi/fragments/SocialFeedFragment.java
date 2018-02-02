@@ -1,5 +1,6 @@
 package gov.cipam.gi.fragments;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ProgressBar;
 
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.tweetui.SearchTimeline;
@@ -24,6 +27,7 @@ import gov.cipam.gi.R;
  */
 
 public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+    ProgressBar progressBar;
 
     RecyclerView                        recyclerView;
     SwipeRefreshLayout                  swipeRefreshLayout;
@@ -55,10 +59,11 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Twitter.initialize(getContext());
+        progressBar = view.findViewById(R.id.progressBar);
         recyclerView = view.findViewById(R.id.recyclerViewSocialFeed);
         swipeRefreshLayout=view.findViewById(R.id.socialFeedSwipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        setProgressDialogAnimation(progressBar,0);
         final SearchTimeline searchTimeline = new SearchTimeline.Builder()
                 .query("#hiking")
                 .maxItemsPerRequest(50)
@@ -86,5 +91,12 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
         super.onPrepareOptionsMenu(menu);
         MenuItem item=menu.findItem(R.id.action_search);
         item.setVisible(false);
+    }
+
+    private void setProgressDialogAnimation(ProgressBar mProgressBar, int process) {
+        ObjectAnimator animation = ObjectAnimator.ofInt(mProgressBar, "progress", 0, process);
+        animation.setDuration(3);//30 second
+        animation.setInterpolator(new DecelerateInterpolator());
+        animation.start();
     }
 }

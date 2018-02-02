@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -61,10 +62,8 @@ import static gov.cipam.gi.utils.Constants.EXTRA_URL;
  */
 
 public class ProductDetailFragment extends Fragment implements SellerListAdapter.setOnSellerClickListener
-,GiUniquenessListAdapter.setOnItemClickListener,ViewPager.OnPageChangeListener,View.OnClickListener{
-//    Seller seller;
-//    SellerFirebaseAdapter sellerFirebaseAdapter;
-//    DatabaseReference mDatabaseReference;
+        ,GiUniquenessListAdapter.setOnItemClickListener,ViewPager.OnPageChangeListener,View.OnClickListener,TextToSpeech.OnInitListener{
+
     int page_position = 0;
     TextView txtvTitleHistory,txtvTitleDesc;
     LinearLayout historyLinearLayout,descLinearLayout;
@@ -87,18 +86,18 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     boolean isImagePreLoaded = false;
     public static Bitmap mBitmap;
 
-    //TTS object
     private TextToSpeech myTTS;
-    //status check code
     private int MY_DATA_CHECK_CODE = 0;
-    //sample string
-    String hiss;
-    int fabCheck = 0;
+    int tts_check = 0;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        Intent checkTTSIntent = new Intent();
+        checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
         return inflater.inflate(R.layout.fragment_product_detail, container, false);
     }
 
@@ -126,7 +125,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
         database = databaseInstance.getReadableDatabase();
         paletteGenerate=new PaletteGenerate();
-        //toolbar=((AppCompatActivity) getActivity()).findViewById(R.id.product_activity_toolbar);
         populateSellerListFromDB();
         setHasOptionsMenu(true);
 
@@ -134,8 +132,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     }
 
     private void populateSellerListFromDB() {
-
-//        String[] s={ProductDetailActivity.currentProduct.getUid()};
 
         Bundle b=getArguments();
         product=(Product)b.get("nalin");
@@ -185,7 +181,18 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
                 openCustomChromeTab(uri);
                 break;
             case R.id.action_tts:
-                /**Define TTS action here*/
+
+                /*Define TTS action here*/
+                if (tts_check==0){
+                    //get the text entered
+                    String words = product.getHistory();
+                    speakWords(words);
+                    tts_check=1;
+                }
+                else {
+                    myTTS.stop();
+                    tts_check=0;
+                }
                 break;
         }
         return true;
@@ -232,6 +239,14 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         viewPager.setOnPageChangeListener(this);
     }
 
+
+    //speak the user text
+    private void speakWords(String speech) {
+        //speak straight away
+        myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+
     private void openCustomChromeTab(Uri uri) {
         CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
 
@@ -260,7 +275,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
     private void setData(){
         txtDesc.setText(product.getDescription());
-        txtHistory.setText(product.getDetail());
+        txtHistory.setText(product.getHistory());
         txtCategory.setText(product.getCategory());
         txtState.setText(product.getState());
 
@@ -323,8 +338,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
     @Override
     public void onDestroyView() {
+        myTTS.shutdown();
         super.onDestroyView();
-
     }
 
     @Override
@@ -357,6 +372,34 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     public void onClick(View v) {
         switch (v.getId()){
 
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == MY_DATA_CHECK_CODE) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                //the user has the necessary data - create the TTS
+                myTTS = new TextToSpeech(getContext(), this);
+            }
+            else {
+                //no data - install it now
+                Intent installTTSIntent = new Intent();
+                installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installTTSIntent);
+            }
+        }
+    }
+
+    @Override
+    public void onInit(int initStatus) {
+        //check for successful instantiation
+        if (initStatus == TextToSpeech.SUCCESS) {
+            if(myTTS.isLanguageAvailable(Locale.US)==TextToSpeech.LANG_AVAILABLE)
+                myTTS.setLanguage(Locale.US);
+        }
+        else if (initStatus == TextToSpeech.ERROR) {
+            Toast.makeText(getContext(), "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
         }
     }
 }
