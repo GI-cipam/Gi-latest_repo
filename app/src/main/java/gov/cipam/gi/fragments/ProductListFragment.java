@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.ProductListActivity;
@@ -32,7 +31,6 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
     String type;
     RecyclerView productListRecycler;
     ProductListAdapter productListAdapter;
-    ImageView imageView;
 
     public static ProductListFragment newInstance() {
 
@@ -65,8 +63,8 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
         productListRecycler=view.findViewById(R.id.product_list_recycler_view);
         productListAdapter=new ProductListAdapter(ProductListActivity.subGIList,getContext(),this);
         productListRecycler.setAdapter(productListAdapter);
+        //productListRecycler.setLayoutManager(new GridLayoutManager(getContext(),1));
         productListRecycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        //onConfigurationChanged(new Configuration());
     }
 
     @Override
@@ -76,7 +74,6 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
         switch (id){
             case android.R.id.home:
                 getActivity().onBackPressed();
-            //onCreateDialog(productListRecycler);
         }
         return true;
 
@@ -121,20 +118,10 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
 
     }
 
-
-    /*@Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        Configuration c=getContext().getResources().getConfiguration();
-
-        if(c.orientation==Configuration.ORIENTATION_PORTRAIT){
-            productListRecycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-
-        }
-        else if(c.orientation==Configuration.ORIENTATION_LANDSCAPE){
-            productListRecycler.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-            productListRecycler.addItemDecoration(new DividerItemDecoration(getContext(), StaggeredGridLayoutManager.HORIZONTAL));
-        }
-    }*/
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getActivity().setTitle(type);
+    }
 
 }

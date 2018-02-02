@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_parameter_large"
             android:cropToPadding="true"
+            android:scaleType="centerCrop"
             android:background="?attr/selectableItemBackground"
             android:foreground="@drawable/image_gradient"
             android:transitionName="commonImage"

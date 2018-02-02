@@ -1,11 +1,9 @@
 package gov.cipam.gi.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,7 +28,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import gov.cipam.gi.R;
-import gov.cipam.gi.activities.SampleActivity;
 import gov.cipam.gi.adapters.YoutubeAdapter;
 import gov.cipam.gi.model.youtubeItem;
 
@@ -198,5 +195,11 @@ public class YoutubeFragment extends Fragment implements View.OnClickListener,Yo
         fab1.animate().translationY(0);
         fab2.animate().translationY(0);
         fab3.animate().translationY(0);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getActivity().setTitle("Social Feed");
     }
 }

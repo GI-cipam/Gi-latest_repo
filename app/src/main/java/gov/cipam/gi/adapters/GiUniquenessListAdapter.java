@@ -16,7 +16,6 @@ import gov.cipam.gi.model.Uniqueness;
 /**
  * Created by NITANT SOOD on 24-12-2017.
  */
-
 public class GiUniquenessListAdapter extends RecyclerView.Adapter<GiUniquenessListAdapter.SellerViewHolder> {
 
     Context mContext;
@@ -41,7 +40,7 @@ public class GiUniquenessListAdapter extends RecyclerView.Adapter<GiUniquenessLi
 
     @Override
     public void onBindViewHolder(SellerViewHolder holder, int position) {
-      holder.tvUniqueness.setText(mUniquenessList.get(position).getInfo());
+        holder.tvUniqueness.setText(mUniquenessList.get(position).getInfo());
     }
 
     @Override

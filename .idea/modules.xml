@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Gi-latest_repo.iml" filepath="$PROJECT_DIR$/Gi-latest_repo.iml" />
-      <module fileurl="file://C:\Users\NITANT SOOD\AndroidStudioProjects\Gi-latest_repo\Indications-master.iml" filepath="C:\Users\NITANT SOOD\AndroidStudioProjects\Gi-latest_repo\Indications-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Indications-master.iml" filepath="$PROJECT_DIR$/Indications-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://E:\Downloads\Indications-master\gu.iml" filepath="E:\Downloads\Indications-master\gu.iml" />
     </modules>
   </component>
 </project>
