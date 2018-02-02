@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ProductDetailActivity">
+    tools:context=".activities.LoginActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -12,29 +12,11 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         android:fitsSystemWindows="true">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:contentScrim="@color/colorPrimary"
-            app:expandedTitleMarginStart="48dp"
-            app:expandedTitleMarginEnd="64dp">
-
-            <ImageView
-                android:id="@+id/login_activity_image"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/image_parameter"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/image3"
-                tools:ignore="ContentDescription" />
-
             <include
                 android:id="@+id/login_activity_toolbar"
                 layout="@layout/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </android.support.design.widget.CollapsingToolbarLayout>
-
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"

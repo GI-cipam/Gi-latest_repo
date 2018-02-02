@@ -171,4 +171,5 @@ Temple authorities claim politicians from across all parties are expected to vis
     <string name="general_information">General Information</string>
     <string name="account_settings">Account Settings</string>
     <string name="developers">Developers</string>
+    <string name="text_to_speech">Text To Speech</string>
 </resources>

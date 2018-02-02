@@ -180,10 +180,12 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
                 break;
 
             case R.id.action_url:
-
                 String url="https://google.com";
                 Uri uri=Uri.parse(url);
                 openCustomChromeTab(uri);
+                break;
+            case R.id.action_tts:
+                /**Define TTS action here*/
                 break;
         }
         return true;
