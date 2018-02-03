@@ -37,13 +37,13 @@ import gov.cipam.gi.utils.Constants;
 
 public class AccountInfoFragment extends Fragment implements View.OnClickListener{
 
-    TextView                        tvChangePass,tvUpdatePass,tvNameShort;
-    ImageView                       ivProfile;
-    private TextInputLayout         mChangePassFieldLayout;
-    EditText                        mNameField,mEmailField,mChangePassField;
-    DatabaseReference               mDatabaseUser;
-    private static String           TAG = "AccountInfoActivity";
-    private static String           user_id;
+    TextView tvChangePass;
+    TextView tvNameShort;
+    ImageView ivProfile;
+    EditText mNameField;
+    EditText mEmailField;
+    DatabaseReference mDatabaseUser;
+    private static String TAG = "AccountInfoActivity";
     private FirebaseAuth mAuth;
     Users users;
 
@@ -62,6 +62,7 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
 
         mDatabaseUser = FirebaseDatabase.getInstance().getReference(Constants.KEY_USERS);
         mAuth = FirebaseAuth.getInstance();
+
     }
 
     @Nullable
@@ -81,10 +82,8 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
         mNameField =view.findViewById(R.id.nameField);
         mEmailField =view.findViewById(R.id.emailField);
         tvChangePass =view.findViewById(R.id.changePass);
-
-        setData();
-        
         tvChangePass.setOnClickListener(this);
+        setData();
         
     }
 
@@ -95,10 +94,6 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
 
         if(users!=null) {
 
-            mEmailField.setText(getContext().getString(R.string.login_request));
-            mNameField.setText(getContext().getString(R.string.hi));
-            ivProfile.setImageResource(R.drawable.account);
-
             if (mAuth.getCurrentUser().isAnonymous()){
                 mEmailField.setText(getContext().getString(R.string.login_request));
                 mNameField.setText(getContext().getString(R.string.hi));
@@ -106,6 +101,10 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
             }
             else
             {
+/*                mEmailField.setText(getContext().getString(R.string.login_request));
+                mNameField.setText(getContext().getString(R.string.hi));
+                ivProfile.setImageResource(R.drawable.account);*/
+
                 tvNameShort.setVisibility(View.VISIBLE);
                 tvNameShort.setText(users.getName().substring(0,1));
                 mEmailField.setText(user.getEmail());
@@ -118,17 +117,22 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle("Change Password");
-        alertDialog.setMessage("Enter new password");
-
-        final EditText newPass = new EditText(getContext());
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        newPass.setLayoutParams(lp);
-        alertDialog.setView(newPass);
-
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertDialog.setMessage("Reset Password Email will be sent to registered Email address");
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String emailAddress =users.getEmail() ;
+
+                mAuth.sendPasswordResetEmail(emailAddress)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getContext(),"Reset Password Email Sent",Toast.LENGTH_LONG).show();
+                                    Log.d(TAG, "Email sent.");
+                                }
+                            }
+                        });
+    /*            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                 final String newPassword = newPass.getText().toString();
                 if (!TextUtils.isEmpty(newPassword)){
@@ -146,11 +150,11 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
                                 }
                             });
                 }
-                else newPass.setError("Enter Password");
+                else newPass.setError("Enter Password");*/
             }
         });
 
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }

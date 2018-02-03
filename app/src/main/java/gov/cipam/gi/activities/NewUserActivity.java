@@ -66,6 +66,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         switch (id){
 
             case R.id.btnSkipLogin:
+
                 GuestLogin login = new GuestLogin(this);
                 login.guestLogin();
                 break;
@@ -75,6 +76,16 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        System.exit(1);
     }
 }
 

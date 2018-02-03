@@ -76,7 +76,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void setmMap(){
         mMap.addMarker(new MarkerOptions().position(sellerLocation).title(""+sellerAddress));
 
-
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 sellerLocation,12));
 

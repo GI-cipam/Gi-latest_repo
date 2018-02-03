@@ -99,12 +99,18 @@ public class HomePageActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
         DrawerLayout drawer =findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
+        else
+            intent.addCategory(Intent.CATEGORY_HOME);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        System.exit(1);
 
-        super.onBackPressed();
     }
 
     private void setNavigation(){
@@ -124,13 +130,20 @@ public class HomePageActivity extends BaseActivity
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_home_page, menu);
+        if (mAuth.getCurrentUser().isAnonymous()){
+            inflater.inflate(R.menu.activity_home_page_anonymous, menu);
+            searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+            setSearchParameters();
+
+            }
+        else
+        {inflater.inflate(R.menu.activity_home_page, menu);
 //        SearchManager searchManager =
 //                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView =
-                (SearchView) menu.findItem(R.id.action_search).getActionView();
-        setSearchParameters();
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        setSearchParameters();}
 
 //        searchView.setSearchableInfo(
 //                searchManager.getSearchableInfo(getComponentName()));
@@ -263,6 +276,8 @@ public class HomePageActivity extends BaseActivity
                 break;
 
             case R.id.nav_sign_up:
+                mAuth.signOut();
+                startActivity(new Intent(this,LoginActivity.class));
                 break;
 
             case R.id.nav_about_us:
@@ -478,4 +493,6 @@ public class HomePageActivity extends BaseActivity
     public void onClick(View view) {
 
     }
+
+
 }
