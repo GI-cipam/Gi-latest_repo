@@ -99,6 +99,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         dotsLinearLayout=view.findViewById(R.id.gi_ll_dots);
         scrollView=view.findViewById(R.id.scroll_view_home);
 
+        scrollView.setSmoothScrollingEnabled(true);
         startSnapHelper.attachToRecyclerView(rvState);
         startSnapHelper1.attachToRecyclerView(rvCategory);
 

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.model.Categories;
@@ -47,33 +48,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         iconResource= new int[]{R.drawable.corn,R.drawable.truck,R.drawable.palette,R.drawable.cookie,R.drawable.earth,R.drawable.view_dashboard};
         bgDrawable=new int[]{R.drawable.circle_bg_blue,R.drawable.circle_bg_orange,R.drawable.circle_bg_red,R.drawable.circle_bg_green,R.drawable.circle_bg_pink,R.drawable.circle_bg_purple};
-        String DpUrl=mCategoryList.get(position).getDpurl();
         holder.mName.setText(mCategoryList.get(position).getName());
 
+        //int random= bgDrawable[(new Random().nextInt(bgDrawable.length))];
         for (int i=0;i<position+1;i++){
-
             holder.view.setBackgroundResource(iconResource[i]);
             holder.mDp.setImageResource(bgDrawable[i]);
         }
-        /*String DpUrl=mCategoryList.get(position).getDpurl();
-        holder.mName.setText(mCategoryList.get(position).getName());
-
-        holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(mContext)
-                .load(DpUrl)
-                .resize(400,600)
-                .into(holder.mDp, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        holder.progressBar.setVisibility(View.INVISIBLE);
-                    }
-                    @Override
-                    public void onError() {
-                        holder.progressBar.setVisibility(View.INVISIBLE);
-                        holder.mDp.setImageResource(R.drawable.image);
-                    }
-                });
->>>>>>> 525b621ad907adbdd9f4a9d107d162659a0731e6*/
     }
 
     @Override
