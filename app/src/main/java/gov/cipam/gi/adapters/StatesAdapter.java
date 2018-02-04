@@ -10,8 +10,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
@@ -48,9 +50,16 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
         String DpUrl=mListOfStates.get(position).getDpurl();
         holder.progressBar.setVisibility(View.VISIBLE);
         //holder.mCircularImage.setImageResource(R.drawable.image1);
+
+        Transformation transformation=new RoundedTransformationBuilder()
+                .borderWidth(3)
+                .cornerRadius(2)
+                .oval(false)
+                .build();
         Picasso.with(mContext)
                 .load(DpUrl)
                 .placeholder(R.drawable.image)
+                .transform(transformation)
                 .into(holder.mDp, new Callback() {
                     @Override
                     public void onSuccess() {

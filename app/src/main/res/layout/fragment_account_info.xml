@@ -133,7 +133,11 @@
                     android:text="Change Password"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp" />
-
+                <Button
+                    android:id="@+id/open"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/select"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>

@@ -1,24 +1,19 @@
-<android.support.v7.widget.CardView android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutProduct"
     android:foreground="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    app:cardUseCompatPadding="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/relativeLayoutProduct"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    android:layout_margin="@dimen/margin_smallest"
+    android:background="@drawable/card_bg"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/productListImage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_parameter_large"
                 android:cropToPadding="true"
-                android:background="?attr/selectableItemBackground"
                 android:transitionName="commonImage"
                 tools:ignore="ContentDescription,UnusedAttribute"/>
 
@@ -85,4 +80,3 @@
                 style="@style/TextViewTags" />
 
         </RelativeLayout>
-</android.support.v7.widget.CardView>

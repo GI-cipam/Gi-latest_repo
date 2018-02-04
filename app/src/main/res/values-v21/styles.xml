@@ -37,6 +37,7 @@
     </style>
     <style name="TextViewCustom">
         <item name="android:textSize">?attr/text_size_detail</item>
+
     </style>
 
 </resources>

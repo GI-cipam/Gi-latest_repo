@@ -27,14 +27,14 @@
 
     <TextView
         android:id="@+id/descText"
+        style="?attr/text_size_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_smaller"
-        android:layout_marginStart="@dimen/margin_small"
         android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_smaller"
         android:fontFamily="serif"
-        style="?attr/text_size_detail"
-        android:lineSpacingExtra="4sp"
+        android:lineSpacingExtra="2sp"
         android:text="@string/permission_rationale"
         android:textColor="#1f1f1f" />
 

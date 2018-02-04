@@ -1,9 +1,9 @@
 package gov.cipam.gi.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -62,7 +62,17 @@ StatePreferenceAdapter.setOnPreferenceStateClickListener{
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return true;
+    }
+
+    @Override
     public void onPreferenceStateClicked(View view, int position) {
-        startActivity(new Intent(this,HomePageActivity.class));
     }
 }

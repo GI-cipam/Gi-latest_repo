@@ -1,6 +1,7 @@
 package gov.cipam.gi.fragments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import gov.cipam.gi.R;
+import gov.cipam.gi.activities.StatePreferenceActivity;
 import gov.cipam.gi.common.SharedPref;
 import gov.cipam.gi.model.Users;
 import gov.cipam.gi.utils.Constants;
@@ -42,6 +45,7 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
     ImageView ivProfile;
     EditText mNameField;
     EditText mEmailField;
+    Button btn;
     DatabaseReference mDatabaseUser;
     private static String TAG = "AccountInfoActivity";
     private FirebaseAuth mAuth;
@@ -75,13 +79,14 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toolbar toolbar=getActivity().findViewById(R.id.nav_activity_toolbar);
-        toolbar.setTitle("Account Information");
+        btn=view.findViewById(R.id.open);
         tvNameShort=view.findViewById(R.id.nameInitials);
         ivProfile=view.findViewById(R.id.profileImage);
         mNameField =view.findViewById(R.id.nameField);
         mEmailField =view.findViewById(R.id.emailField);
         tvChangePass =view.findViewById(R.id.changePass);
+
+        btn.setOnClickListener(this);
         tvChangePass.setOnClickListener(this);
         setData();
         
@@ -175,6 +180,8 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
             case R.id.changePass:
                 changePasswordDialog();
                 break;
+            case R.id.open:
+                startActivity(new Intent(getContext(), StatePreferenceActivity.class));
         }
     }
 }
