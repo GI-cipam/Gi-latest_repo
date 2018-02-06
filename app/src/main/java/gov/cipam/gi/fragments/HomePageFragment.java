@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -54,7 +55,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     ScrollView                      scrollView;
     FirebaseAuth                    mAuth;
     DatabaseReference               mDatabaseState,mDatabaseCategory;
-    StartSnapHelper                 startSnapHelper,startSnapHelper1,startSnapHelper2;
+    StartSnapHelper                 startSnapHelper,startSnapHelper1;
     private DatabaseFetch           databaseFetch;
     public static ArrayList<States> mDisplayStateList=new ArrayList<>();
     public static ArrayList<Categories>  mDisplayCategoryList=new ArrayList<>();
@@ -86,7 +87,6 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         mDatabaseCategory = FirebaseDatabase.getInstance().getReference("Categories");
         startSnapHelper=new StartSnapHelper();
         startSnapHelper1=new StartSnapHelper();
-        startSnapHelper2=new StartSnapHelper();
     }
 
     @Override
@@ -109,7 +109,13 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         rvCategory.setAdapter(new CategoryAdapter(mDisplayCategoryList,getContext(),this));
         giSliderViewPager.setAdapter(new GiSliderImageAdapter(mDisplayCategoryList,getActivity(),this));
 
-        rvState.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        rvState.setLayoutManager(new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL,false) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+
         rvCategory.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
         giSliderViewPager.setOnPageChangeListener(this);

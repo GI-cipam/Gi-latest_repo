@@ -17,23 +17,20 @@ import gov.cipam.gi.utils.Constants;
 
 public class NewUserActivity extends AppCompatActivity implements View.OnClickListener{
 
-    ImageView           appIcon;
     Button              skipLoginBtn,registerUserButton;
     FirebaseAuth        mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+        setContentView(R.layout.activity_main);
 
         launchActivity();
         mAuth = FirebaseAuth.getInstance();
 
         skipLoginBtn=findViewById(R.id.btnSkipLogin);
         registerUserButton=findViewById(R.id.btnLogin);
-        appIcon=findViewById(R.id.appIcon);
 
-        appIcon.setImageResource(R.drawable.image1);
         skipLoginBtn.setOnClickListener(this);
         registerUserButton.setOnClickListener(this);
     }

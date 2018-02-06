@@ -1,5 +1,10 @@
 package gov.cipam.gi.utils;
 
+import java.util.ArrayList;
+
+import gov.cipam.gi.model.StatePreference;
+import gov.cipam.gi.model.States;
+
 /**
  * Created by karan on 11/10/2017.
  */
@@ -21,4 +26,5 @@ public class Constants {
     public static final String KEY_VALUE ="value" ;
     public static final String KEY_QUERY ="query" ;
     public static final String NAV_CATEGORY ="nav_item" ;
+    public static final ArrayList<StatePreference> states=new ArrayList<>();
 }

@@ -1,6 +1,7 @@
 package gov.cipam.gi.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import gov.cipam.gi.R;
+import gov.cipam.gi.activities.StatePreferenceActivity;
 import gov.cipam.gi.firebasemanager.FirebaseAuthentication;
 import gov.cipam.gi.utils.CommonUtils;
 import gov.cipam.gi.utils.Constants;
@@ -107,6 +109,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.sign_up_button:
                 signUp();
+                startActivity(new Intent(getContext(), StatePreferenceActivity.class));
                 break;
         }
     }

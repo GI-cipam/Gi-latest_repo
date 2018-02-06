@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -52,10 +53,10 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
         //holder.mCircularImage.setImageResource(R.drawable.image1);
 
         Transformation transformation=new RoundedTransformationBuilder()
-                .borderWidth(3)
-                .cornerRadius(2)
+                .cornerRadiusDp(4)
                 .oval(false)
                 .build();
+
         Picasso.with(mContext)
                 .load(DpUrl)
                 .placeholder(R.drawable.image)
@@ -81,7 +82,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
 
     public class StateViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mName;
-        private ImageView mDp;
+        private RoundedImageView mDp;
         private ProgressBar progressBar;
         private RelativeLayout relativeLayout;
 
@@ -89,7 +90,6 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
             super(itemView);
 
             relativeLayout=itemView.findViewById(R.id.stateListRelativeLayout);
-            //mCircularImage=itemView.findViewById(R.id.stateListBottomImage);
             mName =itemView.findViewById(R.id.stateListName);
             mDp =itemView.findViewById(R.id.stateListImage);
             progressBar=itemView.findViewById(R.id.progressBarState);
