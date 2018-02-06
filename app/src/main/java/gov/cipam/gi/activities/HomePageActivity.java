@@ -34,8 +34,11 @@ import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 import gov.cipam.gi.R;
 import gov.cipam.gi.adapters.SearchCursorAdapter;
+import gov.cipam.gi.background.LocationService;
 import gov.cipam.gi.common.SharedPref;
 import gov.cipam.gi.database.Database;
 import gov.cipam.gi.firebasemanager.HeaderViewPresenter;
@@ -44,6 +47,7 @@ import gov.cipam.gi.fragments.MapsFragment;
 import gov.cipam.gi.fragments.SocialFeedFragment;
 import gov.cipam.gi.fragments.YoutubeFragment;
 import gov.cipam.gi.model.Product;
+import gov.cipam.gi.model.Seller;
 import gov.cipam.gi.model.Users;
 import gov.cipam.gi.utils.Constants;
 import gov.cipam.gi.utils.NetworkChangeReceiver;
@@ -54,6 +58,8 @@ public class HomePageActivity extends BaseActivity
         TabLayout.OnTabSelectedListener, SearchCursorAdapter.setOnSuggestionClickListener {
 
     private static final int REQUEST_INVITE = 23;
+    public static final int MIN_NOTIFICATION_DISTANCE=50;
+    public static final int MIN_NOTIFICATION_SELLER_DISTANCE=100;
     private FirebaseAuth mAuth;
     private DrawerLayout drawer;
     Users user;
@@ -85,8 +91,18 @@ public class HomePageActivity extends BaseActivity
         databaseInstance = new Database(this);
         database = databaseInstance.getWritableDatabase();
 
-        if(savedInstanceState==null){
-            fragmentInflate(HomePageFragment.newInstance());
+        Intent intent=getIntent();
+        boolean isFromNotification=intent.getBooleanExtra("isFromNotification",false);
+        if(isFromNotification){
+            ArrayList<Seller> myList=(ArrayList<Seller>) intent.getSerializableExtra("selectedSellerList");
+            Toast.makeText(this,myList.size()+" from Main", Toast.LENGTH_SHORT).show();
+            fragmentInflate(MapsFragment.newInstance(myList));
+        }
+        else{
+            Toast.makeText(this, "Not from Notification", Toast.LENGTH_SHORT).show();
+            if(savedInstanceState==null) {
+                fragmentInflate(HomePageFragment.newInstance());
+            }
         }
 
         mAuth = FirebaseAuth.getInstance();
@@ -233,6 +249,10 @@ public class HomePageActivity extends BaseActivity
                 break;
             case R.id.action_search:
                 break;
+            case R.id.action_start_service:
+                Intent intent=new Intent(this,LocationService.class);
+                startService(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -249,7 +269,7 @@ public class HomePageActivity extends BaseActivity
                     selectedFragment=HomePageFragment.newInstance();
                     break;
                 case R.id.navigation_map:
-                    selectedFragment=MapsFragment.newInstance();
+                    selectedFragment=MapsFragment.newInstance(null);
                     break;
                 case R.id.navigation_social_feed:
                     selectedFragment= SocialFeedFragment.newInstance();
