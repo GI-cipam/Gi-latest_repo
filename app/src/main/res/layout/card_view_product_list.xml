@@ -1,107 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout android:id="@+id/productListFrame"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardUseCompatPadding="true"
-    android:elevation="@dimen/card_elevation"
-    app:cardCornerRadius="@dimen/card_radius">
-    <LinearLayout
-        android:id="@+id/linearLayoutProduct"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical">
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/productListImage"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/image_parameter_large"
-            android:cropToPadding="true"
-            android:scaleType="centerCrop"
-            android:background="?attr/selectableItemBackground"
-            android:foreground="@drawable/image_gradient"
-            android:transitionName="commonImage"
-            tools:ignore="ContentDescription,UnusedAttribute"/>
-
-        <TextView
-            android:id="@+id/productListTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/productListImage"
-            android:layout_alignParentStart="true"
-            android:letterSpacing="0.02"
-            android:paddingBottom="@dimen/padding_small"
-            android:paddingEnd="@dimen/padding_small"
-            android:paddingStart="@dimen/padding_small"
-            android:shadowColor="@color/black_1"
-            android:shadowRadius="5"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:theme="@style/LargeBodyText"
-            tools:text="Headline" />
-    </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/productListDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="serif"
-                                android:lineSpacingExtra="3sp"
-                android:padding="@dimen/padding_small"
-                android:text="@string/permission_rationale"
-                android:textColor="#1f1f1f"
-                android:textSize="14sp" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="wrap_content"
-            android:layout_height="1sp"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:layout_marginStart="@dimen/padding_small"
-            android:background="@color/greyColor" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small">
-
-        <TextView
-            android:id="@+id/productListCategoryName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_smaller"
-            android:transitionName="categoryTransition"
-            android:textColor="@color/gray_deep"
-            android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/productListStateName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/padding_smaller"
-                android:text="West Bengal"
-                android:transitionName="stateTransition"
-                android:textAlignment="viewStart"
-                android:textColor="@color/gray_deep"
-                android:textSize="12sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-</android.support.v7.widget.CardView>
+    android:padding="@dimen/padding_smallest"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground">
+    <include layout="@layout/card_view_product_alternate"/>
+</FrameLayout>

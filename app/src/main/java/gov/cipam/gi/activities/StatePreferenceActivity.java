@@ -30,8 +30,8 @@ StatePreferenceAdapter.setOnPreferenceStateClickListener{
 
         rvStatePreference=findViewById(R.id.recycler_preference_state);
         rvStatePreference.setLayoutManager(new GridLayoutManager(this,3));
-        rvStatePreference.addItemDecoration(new DividerItemDecoration(this,GridLayoutManager.VERTICAL));
-        rvStatePreference.addItemDecoration(new DividerItemDecoration(this,GridLayoutManager.HORIZONTAL));
+        //rvStatePreference.addItemDecoration(new DividerItemDecoration(this,GridLayoutManager.VERTICAL));
+        //rvStatePreference.addItemDecoration(new DividerItemDecoration(this,GridLayoutManager.HORIZONTAL));
         rvStatePreference.setAdapter(new StatePreferenceAdapter(statePreferences,this));
 
         prepareList();

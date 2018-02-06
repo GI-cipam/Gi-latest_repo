@@ -1,22 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/relativeLayoutProduct"
-    android:padding="1dp"
-    android:background="@drawable/card_bg"
-    android:foreground="?attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_bg"
+    android:padding="1dp">
 
-            <ImageView
-                android:id="@+id/productListImage"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/image_parameter_large"
-                android:cropToPadding="true"
-                android:transitionName="commonImage"
-                tools:ignore="ContentDescription,UnusedAttribute"/>
+    <ImageView
+        android:id="@+id/productListImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_parameter_large"
+        android:cropToPadding="true"
+        android:scaleType="centerCrop"
+        android:transitionName="commonImage"
+        tools:ignore="ContentDescription,UnusedAttribute" />
 
     <View
         android:layout_width="match_parent"
@@ -25,59 +21,59 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/image_gradient" />
 
-            <TextView
-                android:id="@+id/productListTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/productListImage"
-                android:letterSpacing="0.02"
-                android:paddingBottom="@dimen/padding_small"
-                android:paddingEnd="@dimen/padding_small"
-                android:paddingStart="@dimen/padding_small"
-                android:shadowColor="@color/black_1"
-                android:shadowRadius="5"
-                android:text="Hill"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:theme="@style/LargeBodyText"
-                tools:text="Headline" />
+    <TextView
+        android:id="@+id/productListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/productListImage"
+        android:letterSpacing="0.02"
+        android:paddingBottom="@dimen/padding_small"
+        android:paddingEnd="@dimen/padding_small"
+        android:paddingStart="@dimen/padding_small"
+        android:shadowColor="@color/black_1"
+        android:shadowRadius="5"
+        android:text="Hill"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:theme="@style/LargeBodyText"
+        tools:text="Headline" />
 
-            <TextView
-                android:id="@+id/productListDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/productListImage"
-                android:fontFamily="serif"
-                android:lineSpacingExtra="3sp"
-                android:padding="@dimen/padding_small"
-                android:text="@string/permission_rationale"
-                android:textColor="#1f1f1f"
-                android:textSize="14sp" />
+    <TextView
+        android:id="@+id/productListDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/productListImage"
+        android:fontFamily="serif"
+        android:lineSpacingExtra="3sp"
+        android:padding="@dimen/padding_small"
+        android:text="@string/permission_rationale"
+        android:textColor="#1f1f1f"
+        android:textSize="14sp" />
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="wrap_content"
-                android:layout_height="1sp"
-                android:layout_below="@id/productListDesc"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:layout_marginStart="@dimen/padding_small"
-                android:background="@color/greyColor" />
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1sp"
+        android:layout_below="@id/productListDesc"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginStart="@dimen/padding_small"
+        android:background="@color/greyColor" />
 
-            <TextView
-                android:id="@+id/productListCategoryName"
-                style="@style/TextViewTags"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/divider"
-                android:layout_toEndOf="@+id/productListStateName" />
+    <TextView
+        android:id="@+id/productListCategoryName"
+        style="@style/TextViewTags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
+        android:layout_toEndOf="@+id/productListStateName" />
 
-            <TextView
-                android:id="@+id/productListStateName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/divider"
-                android:layout_marginStart="@dimen/margin_smaller"
-                style="@style/TextViewTags" />
-
-        </RelativeLayout>
+    <TextView
+        android:id="@+id/productListStateName"
+        style="@style/TextViewTags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/divider"
+        android:layout_marginStart="@dimen/margin_smaller" />
+</RelativeLayout>

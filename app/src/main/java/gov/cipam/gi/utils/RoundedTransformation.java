@@ -14,6 +14,9 @@ import android.graphics.Shader;
 
 public class RoundedTransformation implements com.squareup.picasso.Transformation {
 
+    private final int _radius;
+    private final int _margin;
+    private final String _key;
     // radius is corner radii in dp
     // margin is the board in dp
     public RoundedTransformation(final int radius, final int margin) {
@@ -44,8 +47,4 @@ public class RoundedTransformation implements com.squareup.picasso.Transformatio
     public String key() {
         return _key;
     }
-
-    private final int _radius;
-    private final int _margin;
-    private final String _key;
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -44,7 +45,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_product_alternate,parent,false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_product_list,parent,false);
         return  new ProductListAdapter.ProductViewHolder(itemView);
     }
 
@@ -73,19 +74,19 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         public TextView             mTitle,mFiller,mState,mCategory;
         public ImageView            imageView;
-        private RelativeLayout      relativeLayout;
+        private FrameLayout         frameLayout;
 
         private ProductViewHolder(View itemView) {
             super(itemView);
             mItemView=itemView;
-            relativeLayout=itemView.findViewById(R.id.relativeLayoutProduct);
+            frameLayout=itemView.findViewById(R.id.productListFrame);
             mTitle=itemView.findViewById(R.id.productListTitle);
             mFiller=itemView.findViewById(R.id.productListDesc);
             mState=itemView.findViewById(R.id.productListStateName);
             mCategory=itemView.findViewById(R.id.productListCategoryName);
             imageView=itemView.findViewById(R.id.productListImage);
 
-            relativeLayout.setOnClickListener(this);
+            frameLayout.setOnClickListener(this);
         }
 
         @Override

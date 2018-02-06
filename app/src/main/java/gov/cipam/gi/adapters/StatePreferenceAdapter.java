@@ -8,14 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.model.StatePreference;
-import gov.cipam.gi.utils.Constants;
+import gov.cipam.gi.utils.RoundedTransformation;
 
 /**
  * Created by NITANT SOOD on 28-11-2017.
@@ -46,7 +50,26 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
     public void onBindViewHolder(final StatePreferenceViewHolder holder, int position) {
 
         holder.mName.setText(statePreferences.get(position).getState());
-        holder.mDp.setImageResource(R.drawable.image1);
+
+        holder.progressBar.setVisibility(View.VISIBLE);
+
+        Picasso.with(holder.itemView.getContext())
+                .load("https://www.w3schools.com/howto/img_fjords.jpg")
+                .transform(new RoundedTransformation(10,0))
+                .resize(200,200)
+                .centerCrop()
+                .into(holder.mDp, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        holder.progressBar.setVisibility(View.INVISIBLE);
+                        holder.mDp.setImageResource(R.drawable.image);
+                    }
+                });
     }
 
     @Override
@@ -57,17 +80,19 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
     public class StatePreferenceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mName;
         private ImageView mDp;
-        private LinearLayout linearLayout;
+        private RelativeLayout relativeLayout;
+        private ProgressBar progressBar;
 
         private StatePreferenceViewHolder(View itemView) {
             super(itemView);
 
-            linearLayout=itemView.findViewById(R.id.state_preference_parent);
+            relativeLayout=itemView.findViewById(R.id.state_preference_parent);
             mName =itemView.findViewById(R.id.statePreferenceName);
             mDp =itemView.findViewById(R.id.statePreferenceImage);
-            //progressBar=itemView.findViewById(R.id.progressBarCategory);
+            progressBar=itemView.findViewById(R.id.progressBarStatePreference);
 
-            linearLayout.setOnClickListener(this);
+            progressBar.setVisibility(View.INVISIBLE);
+            relativeLayout.setOnClickListener(this);
         }
 
         @Override
@@ -77,11 +102,11 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
 
             if(statePreference.contains(statePreferences.get(getAdapterPosition()))){
                 statePreference.remove(statePreferences.get(getAdapterPosition()));
-                linearLayout.setBackgroundColor(Color.TRANSPARENT);
+                relativeLayout.setBackgroundColor(Color.TRANSPARENT);
             }
             else {
                 statePreference.add(statePreferences.get(getAdapterPosition()));
-                linearLayout.setBackgroundColor(ContextCompat.getColor(v.getContext(),R.color.colorSelector));
+                relativeLayout.setBackgroundColor(ContextCompat.getColor(v.getContext(),R.color.colorSelector));
             }
 
         }

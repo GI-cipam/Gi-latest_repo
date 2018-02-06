@@ -3,9 +3,8 @@
     <attr name="text_color_primary" format="reference"/>
     <attr name="text_color_secondary" format="reference"/>
     <attr name="text_size_primary" format="reference"/>
-
+    <attr name="exp_text" format="integer"/>
     <attr name="layout_bg" format="reference"/>
-
     <attr name="text_size_detail" format="reference" />
     <attr name="text_size_title" format="reference" />
 

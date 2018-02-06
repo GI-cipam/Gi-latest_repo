@@ -33,6 +33,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.ms.square.android.expandabletextview.ExpandableTextView;
+
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Timer;
@@ -65,10 +67,10 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         ,GiUniquenessListAdapter.setOnItemClickListener,ViewPager.OnPageChangeListener,View.OnClickListener,TextToSpeech.OnInitListener{
 
     int page_position = 0;
-    TextView txtvTitleHistory,txtvTitleDesc;
+    ExpandableTextView etvHistory,etvDesc;
+    TextView txtvTitleHistory,txtvTitleDesc,txtState,txtCategory,txtHistory,txtDesc;
     LinearLayout historyLinearLayout,descLinearLayout;
     String name,address,contact;
-    TextView txtState,txtCategory,txtHistory,txtDesc;
     Double lon,lat;
     LinearLayout dotsLinearLayout;
     WrapContentHeightViewPager viewPager;
@@ -208,18 +210,18 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         txtCategory = view.findViewById(R.id.detail_categoryName);
         viewPager = view.findViewById(R.id.vp_slider);
         dotsLinearLayout = view.findViewById(R.id.ll_dots);
-        toolbar=getActivity().findViewById(R.id.product_activity_toolbar);
-
         historyLinearLayout = view.findViewById(R.id.childHistoryCard);
         descLinearLayout = view.findViewById(R.id.childDescCard);
 
         txtvTitleHistory = historyLinearLayout.findViewById(R.id.headingText);
         txtvTitleHistory.setText("History");
-        txtHistory = historyLinearLayout.findViewById(R.id.descText);
+        etvHistory=historyLinearLayout.findViewById(R.id.expand_text_view);
+        //txtHistory = historyLinearLayout.findViewById(R.id.descText);
 
         txtvTitleDesc = descLinearLayout.findViewById(R.id.headingText);
         txtvTitleDesc.setText("Description");
-        txtDesc = descLinearLayout.findViewById(R.id.descText);
+        etvDesc=descLinearLayout.findViewById(R.id.expand_text_view);
+        //txtDesc = descLinearLayout.findViewById(R.id.descText);
 
         setData();
 
@@ -274,8 +276,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     }
 
     private void setData(){
-        txtDesc.setText(product.getDescription());
-        txtHistory.setText(product.getHistory());
+        etvHistory.setText(product.getDescription());
+        etvDesc.setText(product.getHistory());
         txtCategory.setText(product.getCategory());
         txtState.setText(product.getState());
 

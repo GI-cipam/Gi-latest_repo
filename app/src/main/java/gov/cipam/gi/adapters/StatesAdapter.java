@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.model.States;
+import gov.cipam.gi.utils.RoundedTransformation;
 
 /**
  * Created by NITANT SOOD on 28-11-2017.
@@ -51,16 +52,12 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
         String DpUrl=mListOfStates.get(position).getDpurl();
         holder.progressBar.setVisibility(View.VISIBLE);
         //holder.mCircularImage.setImageResource(R.drawable.image1);
-
-        Transformation transformation=new RoundedTransformationBuilder()
-                .cornerRadiusDp(4)
-                .oval(false)
-                .build();
-
         Picasso.with(mContext)
                 .load(DpUrl)
+                .transform(new RoundedTransformation(10,0))
+                .resize(400,400)
                 .placeholder(R.drawable.image)
-                .transform(transformation)
+                .centerCrop()
                 .into(holder.mDp, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -82,7 +79,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
 
     public class StateViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mName;
-        private RoundedImageView mDp;
+        private ImageView mDp;
         private ProgressBar progressBar;
         private RelativeLayout relativeLayout;
 
