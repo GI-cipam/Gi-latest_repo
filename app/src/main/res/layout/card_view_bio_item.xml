@@ -10,7 +10,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:clickable="true"
-    android:foreground="?attr/selectableItemBackground">
+    android:background="?attr/selectableItemBackground">
 
     <ImageView
         tools:ignore="ContentDescription"

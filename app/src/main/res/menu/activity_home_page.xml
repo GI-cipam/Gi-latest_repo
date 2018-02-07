@@ -8,6 +8,9 @@
         <item
         android:id="@+id/action_logout"
         android:title="@string/logout"/>
+        <item
+            android:id="@+id/action_start_service"
+            android:title="Start Service"/>
     </group>
     <item
         android:id="@+id/action_search"

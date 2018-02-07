@@ -19,12 +19,15 @@ import gov.cipam.gi.model.Bio;
 
 public class BioAdapter extends RecyclerView.Adapter<BioAdapter.BioViewHolder> {
 
-    List<Bio> mBioList;
+    private String[]dev_names;
+    private String[]dev_email;
+    /*int[] dev_dp={R.drawable.circle_bg_red,
+    R.drawable.circle_bg_purple,R.drawable.circle_bg_blue
+    ,R.drawable.circle_bg_green,R.drawable.circle_bg_orange};*/
     Context mContext;
     BioAdapter.setOnBioClickListener mListener;
 
-    public BioAdapter(List<Bio> mBioList, BioAdapter.setOnBioClickListener mListener) {
-        this.mBioList = mBioList;
+    public BioAdapter( BioAdapter.setOnBioClickListener mListener) {
         this.mListener = mListener;
     }
 
@@ -41,21 +44,20 @@ public class BioAdapter extends RecyclerView.Adapter<BioAdapter.BioViewHolder> {
 
     @Override
     public void onBindViewHolder(BioViewHolder holder, int position) {
-        holder.mEmail.setText(mBioList.get(position).getEmail());
-        switch (position){
-            case 0:holder.mDp.setImageResource(R.drawable.kd);
-                holder.mName.setText("Kunwar Deepak");
-                break;
 
+        dev_names=holder.itemView.getResources().getStringArray(R.array.dev_names);
+        dev_email=holder.itemView.getResources().getStringArray(R.array.dev_emails);
+        holder.mDp.setImageResource(R.drawable.kd);
+
+        for (int i=0;i<=position;i++){
+            holder.mName.setText(dev_names[i]);
+            holder.mEmail.setText(dev_email[i]);
         }
-
-
-
     }
 
     @Override
     public int getItemCount() {
-        return mBioList.size();
+        return 5;
     }
 
     public class BioViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

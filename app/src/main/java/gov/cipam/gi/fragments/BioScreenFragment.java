@@ -24,7 +24,6 @@ import gov.cipam.gi.model.Bio;
 public class BioScreenFragment extends Fragment implements BioAdapter.setOnBioClickListener{
 
     RecyclerView recyclerView;
-    List<Bio> mBioList;
 
     public static BioScreenFragment newInstance() {
 
@@ -45,32 +44,9 @@ public class BioScreenFragment extends Fragment implements BioAdapter.setOnBioCl
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mBioList=new ArrayList<>();
-
-        Toolbar toolbar=getActivity().findViewById(R.id.nav_activity_toolbar);
-        toolbar.setTitle("Developers");
         recyclerView=view.findViewById(R.id.bioRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        recyclerView.setAdapter(new BioAdapter(mBioList,this));
-        setData();
-    }
-
-    private void setData(){
-
-        Bio bio=new Bio("Random Name","email.e@gmail.com");
-        mBioList.add(bio);
-
-        bio=new Bio("Random Name","email.e@gmail.com");
-        mBioList.add(bio);
-
-        bio=new Bio("Random Name","email.e@gmail.com");
-        mBioList.add(bio);
-
-        bio=new Bio("Random Name","email.e@gmail.com");
-        mBioList.add(bio);
-
-        bio=new Bio("Random Name","email.e@gmail.com");
-        mBioList.add(bio);
+        recyclerView.setAdapter(new BioAdapter(this));
     }
 
     @Override

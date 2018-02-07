@@ -6,6 +6,9 @@
         android:id="@+id/action_settings"
         android:icon="@drawable/settings"
         android:title="@string/settings" />
+        <item
+            android:id="@+id/action_start_service"
+            android:title="Start Service"/>
 
     </group>
     <item

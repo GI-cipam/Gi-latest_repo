@@ -20,6 +20,7 @@ import gov.cipam.gi.model.Categories;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
 import gov.cipam.gi.model.States;
+import gov.cipam.gi.utils.RoundedTransformation;
 
 /**
  * Created by NITANT SOOD on 10-01-2018.
