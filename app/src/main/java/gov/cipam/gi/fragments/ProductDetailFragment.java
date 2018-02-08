@@ -64,7 +64,7 @@ import static gov.cipam.gi.utils.Constants.EXTRA_URL;
  */
 
 public class ProductDetailFragment extends Fragment implements SellerListAdapter.setOnSellerClickListener
-        ,GiUniquenessListAdapter.setOnItemClickListener,ViewPager.OnPageChangeListener,View.OnClickListener,TextToSpeech.OnInitListener{
+        ,ViewPager.OnPageChangeListener,View.OnClickListener,TextToSpeech.OnInitListener{
 
     int page_position = 0;
     ExpandableTextView etvHistory,etvDesc;
@@ -84,7 +84,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     StartSnapHelper startSnapHelper;
     PaletteGenerate paletteGenerate;
     Product product;
-    Toolbar toolbar;
     boolean isImagePreLoaded = false;
     public static Bitmap mBitmap;
 
@@ -212,7 +211,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         dotsLinearLayout = view.findViewById(R.id.ll_dots);
         historyLinearLayout = view.findViewById(R.id.childHistoryCard);
         descLinearLayout = view.findViewById(R.id.childDescCard);
-
         txtvTitleHistory = historyLinearLayout.findViewById(R.id.headingText);
         txtvTitleHistory.setText("History");
         etvHistory=historyLinearLayout.findViewById(R.id.expand_text_view);
@@ -228,7 +226,9 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         addBottomDots(0);
         //setAutoScroll();
 
-        rvSeller.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        rvSeller.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        rvSeller.setAdapter(new SellerListAdapter(getContext(), sellerList, this));
+        viewPager.setAdapter(new UniquenessPagerAdapter(uniquenessList,getActivity()));
 
         if(mBitmap!=null) {
             CommonUtils.loadImageFromBitmap(imageView, mBitmap, getActivity());
@@ -236,8 +236,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         else{
             CommonUtils.loadImageFromURL(imageView,product.getDpurl(),getActivity());
         }
-        rvSeller.setAdapter(new SellerListAdapter(getContext(), sellerList, this));
-        viewPager.setAdapter(new UniquenessPagerAdapter(uniquenessList,getActivity()));
+
         viewPager.setOnPageChangeListener(this);
     }
 
@@ -280,6 +279,20 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         etvDesc.setText(product.getHistory());
         txtCategory.setText(product.getCategory());
         txtState.setText(product.getState());
+
+        Uniqueness uniqueness=new Uniqueness(getString(R.string.long_text));
+        uniquenessList.add(uniqueness);
+
+        uniqueness=new Uniqueness(getString(R.string.long_text));
+        uniquenessList.add(uniqueness);
+        uniqueness=new Uniqueness(getString(R.string.long_text));
+        uniquenessList.add(uniqueness);
+
+        uniqueness=new Uniqueness(getString(R.string.long_text));
+        uniquenessList.add(uniqueness);
+
+        uniqueness=new Uniqueness(getString(R.string.long_text));
+        uniquenessList.add(uniqueness);
 
     }
     @Override
@@ -342,11 +355,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     public void onDestroyView() {
         myTTS.shutdown();
         super.onDestroyView();
-    }
-
-    @Override
-    public void onItemClicked(View v, int Position) {
-
     }
 
     @Override

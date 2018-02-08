@@ -148,4 +148,5 @@
     <string name="account_settings">Account Settings</string>
     <string name="developers">Developers</string>
     <string name="text_to_speech">Text To Speech</string>
+    <string name="note">&#35;</string>
 </resources>

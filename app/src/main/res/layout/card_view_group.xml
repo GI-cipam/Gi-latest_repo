@@ -14,15 +14,19 @@
         android:id="@+id/headingText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Uniqueness"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_small"
         android:layout_marginBottom="@dimen/padding_smaller"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_small"
+        android:text="Uniqueness"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/colorPrimaryDark" />
+
     <View
         android:id="@+id/dividerViewUni"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginEnd="@dimen/margin_smaller"
+        android:layout_marginStart="@dimen/margin_smaller"
         android:background="@color/greyColor" />
 
     <com.ms.square.android.expandabletextview.ExpandableTextView
@@ -49,23 +53,10 @@
             android:id="@id/expand_collapse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
+            android:padding="@dimen/padding_smallest"
             android:layout_gravity="end|bottom"
             android:background="@android:color/transparent"/>
 
     </com.ms.square.android.expandabletextview.ExpandableTextView>
-
-    <!--<TextView
-        android:id="@+id/descText"
-        style="?attr/text_size_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_smaller"
-        android:fontFamily="serif"
-        android:lineSpacingExtra="2sp"
-        android:text="@string/permission_rationale"
-        android:textColor="#1f1f1f" />-->
 
 </LinearLayout>

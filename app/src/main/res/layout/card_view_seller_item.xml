@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_layout"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_smaller"
-    app:cardUseCompatPadding="true"
-    android:orientation="horizontal">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical">
+    android:background="@drawable/card_bg"
+    android:layout_margin="@dimen/margin_smallest"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <TextView
             android:id="@+id/card_seller_name"
@@ -24,11 +17,14 @@
             android:layout_marginEnd="@dimen/margin_smaller"
             android:layout_marginStart="@dimen/margin_smaller"
             android:layout_marginTop="@dimen/margin_smaller"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/colorPrimaryDark" />
         <View
             android:id="@+id/dividerView"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/margin_smaller"
+            android:layout_marginStart="@dimen/margin_smaller"
             android:background="@color/greyColor"/>
 
         <TextView
@@ -57,5 +53,4 @@
             android:textColorLink="@color/drawer_blue"
             android:textSize="14sp" />
     </LinearLayout>
-</android.support.v7.widget.CardView>
 

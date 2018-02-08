@@ -54,8 +54,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         ViewCompat.setTransitionName(holder.itemView.findViewById(R.id.productListImage),String.valueOf(position+"_image"));
         holder.mTitle.setText(GIList.get(position).getName());
         holder.mFiller.setText(GIList.get(position).getDetail());
-        holder.mState.setText(GIList.get(position).getState());
-        holder.mCategory.setText(GIList.get(position).getCategory());
+        holder.mState.setText(holder.itemView.getResources().getString(R.string.note)+ GIList.get(position).getState());
+        holder.mCategory.setText(holder.itemView.getResources().getString(R.string.note)+GIList.get(position).getCategory());
 
         Picasso.with(mContext)
                 .load(GIList.get(position).getDpurl())

@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -180,16 +179,6 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     public void onDestroyView() {
         super.onDestroyView();
         setRetainInstance(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id=item.getItemId();
-
-        switch (id){
-            case R.id.action_settings:
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

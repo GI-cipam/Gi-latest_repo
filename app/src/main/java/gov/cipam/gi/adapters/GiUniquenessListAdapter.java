@@ -16,51 +16,45 @@ import gov.cipam.gi.model.Uniqueness;
 /**
  * Created by NITANT SOOD on 24-12-2017.
  */
-public class GiUniquenessListAdapter extends RecyclerView.Adapter<GiUniquenessListAdapter.SellerViewHolder> {
+public class GiUniquenessListAdapter extends RecyclerView.Adapter<GiUniquenessListAdapter.UniquenessViewHolder> {
 
     Context mContext;
     private List<Uniqueness> mUniquenessList;
-    private setOnItemClickListener mListener;
-
-    public GiUniquenessListAdapter(Context mContext, List<Uniqueness> mUniquenessList, setOnItemClickListener mListener) {
+    String[] unique;
+    public GiUniquenessListAdapter(Context mContext) {
         this.mContext = mContext;
-        this.mUniquenessList = mUniquenessList;
-        this.mListener = mListener;
     }
 
-    public interface setOnItemClickListener{
-        void onItemClicked(View v, int Position);
-    }
     @Override
-    public SellerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public UniquenessViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_uniqueness_item,parent,false);
-        return  new GiUniquenessListAdapter.SellerViewHolder(itemView);
+        return  new GiUniquenessListAdapter.UniquenessViewHolder(itemView);
 
     }
 
     @Override
-    public void onBindViewHolder(SellerViewHolder holder, int position) {
-        holder.tvUniqueness.setText(mUniquenessList.get(position).getInfo());
+    public void onBindViewHolder(UniquenessViewHolder holder, int position) {
+        unique=holder.itemView.getResources().getStringArray(R.array.dummy_text);
+        //holder.tvUniqueness.setText(mUniquenessList.get(position).getInfo());
+
+        for(int i=0;i<=position;i++){
+            holder.tvUniqueness.setText(unique[i]);
+            holder.tvposition.setText(String.valueOf(i+1));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mUniquenessList.size();
+        return 5;
     }
 
-    public class SellerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView tvUniqueness;
+    public class UniquenessViewHolder extends RecyclerView.ViewHolder {
+        private TextView tvUniqueness,tvposition;
 
-        public SellerViewHolder(View itemView) {
+        public UniquenessViewHolder(View itemView) {
             super(itemView);
-
-            tvUniqueness =itemView.findViewById(R.id.card_gi_uniqueness);
-        }
-
-        @Override
-        public void onClick(View v) {
-            mListener.onItemClicked(v,getAdapterPosition());
+            tvUniqueness = itemView.findViewById(R.id.gi_uniqueness);
+            tvposition=itemView.findViewById(R.id.uniqueness_text);
         }
     }
-
 }
