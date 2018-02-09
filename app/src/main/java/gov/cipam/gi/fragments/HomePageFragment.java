@@ -53,7 +53,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     LinearLayout dotsLinearLayout;
     RecyclerView rvState, rvCategory;
     ViewPager giSliderViewPager;
-    ScrollView scrollView;
+    NestedScrollView scrollView;
     FirebaseAuth mAuth;
     DatabaseReference mDatabaseState, mDatabaseCategory;
     StartSnapHelper startSnapHelper, startSnapHelper1;
@@ -107,6 +107,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         txtState.setTypeface(typeface);
 
         scrollView.setSmoothScrollingEnabled(true);
+        scrollView.setNestedScrollingEnabled(true);
         startSnapHelper.attachToRecyclerView(rvState);
         startSnapHelper1.attachToRecyclerView(rvCategory);
 

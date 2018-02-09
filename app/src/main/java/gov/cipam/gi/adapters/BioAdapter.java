@@ -47,8 +47,11 @@ public class BioAdapter extends RecyclerView.Adapter<BioAdapter.BioViewHolder> {
 
         dev_names=holder.itemView.getResources().getStringArray(R.array.dev_names);
         dev_email=holder.itemView.getResources().getStringArray(R.array.dev_emails);
-        holder.mDp.setImageResource(R.drawable.kd);
-
+        if(position==0){
+            holder.mDp.setImageResource(R.drawable.ns1);
+        }else {
+            holder.mDp.setImageResource(R.drawable.kd);
+        }
         for (int i=0;i<=position;i++){
             holder.mName.setText(dev_names[i]);
             holder.mEmail.setText(dev_email[i]);

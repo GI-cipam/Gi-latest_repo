@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Explore the hidden gems from India"
+        android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="24sp" />
 
