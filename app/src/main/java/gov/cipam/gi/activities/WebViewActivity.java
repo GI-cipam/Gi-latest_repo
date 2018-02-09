@@ -2,6 +2,7 @@ package gov.cipam.gi.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -19,8 +20,6 @@ public class WebViewActivity extends BaseActivity {
         setContentView(R.layout.activity_web_view);
         setUpToolbar(this);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.close);
-        getSupportActionBar().setSubtitle("https://google.co.in/");
         webView=findViewById(R.id.webView);
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
@@ -29,23 +28,27 @@ public class WebViewActivity extends BaseActivity {
 
         final Activity activity = this;
         webView.setWebViewClient(new MyBrowser());
-        /*webView.setWebChromeClient(new WebChromeClient() {
-
-            public void onProgressChanged(WebView view, int progress) {
-                // Activities and WebViews measure progress with different scales.
-                // The progress meter will automatically disappear when we reach 100%
-                activity.setProgress(progress * 1000);
-            }
-        });*/
-
         webView.loadUrl("https://google.co.in/");
 
+        setupActionBar(webView.getUrl());
     }
+
     private class MyBrowser extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             return true;
+        }
+
+    }
+
+    private void setupActionBar(String url) {
+        setSupportActionBar(this.mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.close);
+            actionBar.setTitle("");
         }
     }
 

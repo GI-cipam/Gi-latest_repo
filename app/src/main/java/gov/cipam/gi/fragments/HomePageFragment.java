@@ -3,9 +3,10 @@ package gov.cipam.gi.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,7 +27,6 @@ import java.util.ArrayList;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.ProductListActivity;
-
 import gov.cipam.gi.adapters.CategoryAdapter;
 import gov.cipam.gi.adapters.GiSliderImageAdapter;
 import gov.cipam.gi.adapters.StatesAdapter;
@@ -41,23 +41,24 @@ import gov.cipam.gi.utils.StartSnapHelper;
  * Created by karan on 11/20/2017.
  */
 
-public class HomePageFragment extends Fragment implements CategoryAdapter.setOnCategoryClickListener, 
+public class HomePageFragment extends Fragment implements CategoryAdapter.setOnCategoryClickListener,
         StatesAdapter.setOnStateClickedListener
-        ,GiSliderImageAdapter.setOnGiClickListener
-        ,ViewPager.OnPageChangeListener{
+        , GiSliderImageAdapter.setOnGiClickListener
+        , ViewPager.OnPageChangeListener {
 
-    private TextView[]              dots;
-    int                             page_position = 0;
-    LinearLayout                    dotsLinearLayout;
-    RecyclerView                    rvState,rvCategory;
-    ViewPager                       giSliderViewPager;
-    ScrollView                      scrollView;
-    FirebaseAuth                    mAuth;
-    DatabaseReference               mDatabaseState,mDatabaseCategory;
-    StartSnapHelper                 startSnapHelper,startSnapHelper1;
-    private DatabaseFetch           databaseFetch;
-    public static ArrayList<States> mDisplayStateList=new ArrayList<>();
-    public static ArrayList<Categories>  mDisplayCategoryList=new ArrayList<>();
+    TextView txtCategory,txtState;
+    private TextView[] dots;
+    int page_position = 0;
+    LinearLayout dotsLinearLayout;
+    RecyclerView rvState, rvCategory;
+    ViewPager giSliderViewPager;
+    ScrollView scrollView;
+    FirebaseAuth mAuth;
+    DatabaseReference mDatabaseState, mDatabaseCategory;
+    StartSnapHelper startSnapHelper, startSnapHelper1;
+    private DatabaseFetch databaseFetch;
+    public static ArrayList<States> mDisplayStateList = new ArrayList<>();
+    public static ArrayList<Categories> mDisplayCategoryList = new ArrayList<>();
 
     public static HomePageFragment newInstance() {
 
@@ -79,24 +80,29 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         setHasOptionsMenu(true);
         mAuth = FirebaseAuth.getInstance();
 
-        databaseFetch=new DatabaseFetch();
+        databaseFetch = new DatabaseFetch();
         databaseFetch.populateDisplayListFromDB(getContext());
 
         mDatabaseState = FirebaseDatabase.getInstance().getReference("States");
         mDatabaseCategory = FirebaseDatabase.getInstance().getReference("Categories");
-        startSnapHelper=new StartSnapHelper();
-        startSnapHelper1=new StartSnapHelper();
+        startSnapHelper = new StartSnapHelper();
+        startSnapHelper1 = new StartSnapHelper();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        rvState =  view.findViewById(R.id.recycler_states);
-        rvCategory =  view.findViewById(R.id.recycler_categories);
+        txtCategory=view.findViewById(R.id.category_text);
+        txtState=view.findViewById(R.id.states_text);
+        rvState = view.findViewById(R.id.recycler_states);
+        rvCategory = view.findViewById(R.id.recycler_categories);
         giSliderViewPager = view.findViewById(R.id.gi_vp_slider);
-        dotsLinearLayout=view.findViewById(R.id.gi_ll_dots);
-        scrollView=view.findViewById(R.id.scroll_view_home);
+        dotsLinearLayout = view.findViewById(R.id.gi_ll_dots);
+        scrollView = view.findViewById(R.id.scroll_view_home);
+
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/choplin_semibold.otf");
+        txtCategory.setTypeface(typeface);
+        txtState.setTypeface(typeface);
 
         scrollView.setSmoothScrollingEnabled(true);
         startSnapHelper.attachToRecyclerView(rvState);
@@ -104,18 +110,18 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
 
         addBottomDots(0);
         //setAutoScroll();
-        rvState.setAdapter(new StatesAdapter(this,mDisplayStateList,getContext()));
-        rvCategory.setAdapter(new CategoryAdapter(mDisplayCategoryList,getContext(),this));
-        giSliderViewPager.setAdapter(new GiSliderImageAdapter(mDisplayCategoryList,getActivity(),this));
+        rvState.setAdapter(new StatesAdapter(this, mDisplayStateList, getContext()));
+        rvCategory.setAdapter(new CategoryAdapter(mDisplayCategoryList, getContext(), this));
+        giSliderViewPager.setAdapter(new GiSliderImageAdapter(mDisplayCategoryList, getActivity(), this));
 
-        rvState.setLayoutManager(new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL,false) {
+        rvState.setLayoutManager(new GridLayoutManager(getContext(), getActivity().getResources().getInteger(R.integer.portrait_grid_no), GridLayoutManager.VERTICAL, false) {
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         });
 
-        rvCategory.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        rvCategory.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         giSliderViewPager.setOnPageChangeListener(this);
     }
@@ -183,23 +189,23 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
 
     @Override
     public void onCategoryClicked(View view, int position) {
-        startActivity(new Intent(getContext(),ProductListActivity.class)
+        startActivity(new Intent(getContext(), ProductListActivity.class)
                 .putExtra(Constants.KEY_TYPE, Database.GI_CATEGORY)
-                .putExtra(Constants.KEY_VALUE,mDisplayCategoryList.get(position).getName()));
+                .putExtra(Constants.KEY_VALUE, mDisplayCategoryList.get(position).getName()));
     }
 
     @Override
     public void onStateClickedListener(View view, int position) {
-        startActivity(new Intent(getContext(),ProductListActivity.class)
-                .putExtra(Constants.KEY_TYPE,Database.GI_STATE)
-                .putExtra(Constants.KEY_VALUE,mDisplayStateList.get(position).getName()));
+        startActivity(new Intent(getContext(), ProductListActivity.class)
+                .putExtra(Constants.KEY_TYPE, Database.GI_STATE)
+                .putExtra(Constants.KEY_VALUE, mDisplayStateList.get(position).getName()));
     }
 
     @Override
     public void onGiItemClicked(View view, int position) {
-        startActivity(new Intent(getContext(),ProductListActivity.class)
+        startActivity(new Intent(getContext(), ProductListActivity.class)
                 .putExtra(Constants.KEY_TYPE, Database.GI_CATEGORY)
-                .putExtra(Constants.KEY_VALUE,mDisplayCategoryList.get(position).getName()));
+                .putExtra(Constants.KEY_VALUE, mDisplayCategoryList.get(position).getName()));
     }
 
     @Override

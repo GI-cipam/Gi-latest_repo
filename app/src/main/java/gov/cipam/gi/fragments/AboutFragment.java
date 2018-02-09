@@ -34,8 +34,6 @@ public class AboutFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toolbar toolbar=getActivity().findViewById(R.id.nav_activity_toolbar);
-        toolbar.setTitle("About The App");
     }
 
     @Override

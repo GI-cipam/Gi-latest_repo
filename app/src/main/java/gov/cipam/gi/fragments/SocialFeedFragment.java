@@ -16,8 +16,13 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.SearchTimeline;
+import com.twitter.sdk.android.tweetui.TimelineResult;
 import com.twitter.sdk.android.tweetui.TweetTimelineRecyclerViewAdapter;
 
 import gov.cipam.gi.R;
@@ -29,6 +34,7 @@ import gov.cipam.gi.R;
 public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     ProgressBar progressBar;
 
+    TweetTimelineRecyclerViewAdapter    adapter;
     RecyclerView                        recyclerView;
     SwipeRefreshLayout                  swipeRefreshLayout;
     private static final String         LOG_TAG ="Refresh" ;
@@ -42,6 +48,7 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
         fragment.setArguments(args);
         return fragment;
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,22 +65,22 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Twitter.initialize(getContext());
+
         progressBar = view.findViewById(R.id.progressBar);
         recyclerView = view.findViewById(R.id.recyclerViewSocialFeed);
         swipeRefreshLayout=view.findViewById(R.id.socialFeedSwipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        setProgressDialogAnimation(progressBar,0);
+        //setProgressDialogAnimation(progressBar,0);
+
         final SearchTimeline searchTimeline = new SearchTimeline.Builder()
                 .query("#hiking")
                 .maxItemsPerRequest(50)
                 .build();
 
-        final TweetTimelineRecyclerViewAdapter adapter =
-                new TweetTimelineRecyclerViewAdapter.Builder(getContext())
-                        .setTimeline(searchTimeline)
-                        .setViewStyle(R.style.tw__TweetLightWithActionsStyle)
-                        .build();
+        adapter = new TweetTimelineRecyclerViewAdapter.Builder(getContext())
+                .setTimeline(searchTimeline)
+                .setViewStyle(R.style.tw__TweetLightWithActionsStyle)
+                .build();
 
         recyclerView.setAdapter(adapter);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -82,8 +89,19 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
 
     @Override
     public void onRefresh() {
-        Log.i(LOG_TAG, "onRefresh called from SwipeRefreshLayout");
-        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(true);
+        adapter.refresh(new Callback<TimelineResult<Tweet>>() {
+            @Override
+            public void success(Result<TimelineResult<Tweet>> result) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+
+        });
     }
 
     @Override
@@ -93,10 +111,10 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
         item.setVisible(false);
     }
 
-    private void setProgressDialogAnimation(ProgressBar mProgressBar, int process) {
+    /*private void setProgressDialogAnimation(ProgressBar mProgressBar, int process) {
         ObjectAnimator animation = ObjectAnimator.ofInt(mProgressBar, "progress", 0, process);
         animation.setDuration(3);//30 second
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
-    }
+    }*/
 }

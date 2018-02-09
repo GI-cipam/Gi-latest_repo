@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterConfig;
+
 import gov.cipam.gi.R;
 import gov.cipam.gi.utils.Constants;
 
@@ -29,6 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         setUpFont();
 
         super.onCreate(savedInstanceState);
+
+        initializeTwitter();
 
         sharedPreferencesListener();
     }
@@ -57,6 +62,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    protected void initializeTwitter(){
+
+        Twitter.initialize(this);
+        Twitter.getInstance();
     }
 
     protected void setUpFont() {

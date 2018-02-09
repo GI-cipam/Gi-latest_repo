@@ -50,8 +50,7 @@
                 android:textAlignment="center"
                 android:textColor="?attr/text_color_primary"
                 android:textStyle="bold"
-                android:theme="@style/LargeBodyText"
-                android:typeface="normal" />
+                android:theme="@style/LargeBodyText" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_categories"
@@ -79,8 +78,7 @@
                 android:textAllCaps="false"
                 android:textColor="?attr/text_color_primary"
                 android:textStyle="bold"
-                android:theme="@style/LargeBodyText"
-                android:typeface="normal" />
+                android:theme="@style/LargeBodyText" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_states"

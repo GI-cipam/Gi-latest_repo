@@ -85,7 +85,7 @@ public class HomePageActivity extends BaseActivity
         setContentView(R.layout.activity_home_page);
 
         setUpToolbar(this);
-
+        initializeTwitter();
         showErrorSnackbar();
         databaseInstance = new Database(this);
         database = databaseInstance.getWritableDatabase();
@@ -120,7 +120,7 @@ public class HomePageActivity extends BaseActivity
             drawer.closeDrawer(GravityCompat.START);
         }
         else
-        startActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME)
+       startActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }

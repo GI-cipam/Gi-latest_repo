@@ -1,6 +1,7 @@
 package gov.cipam.gi.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,10 +72,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         private CategoryViewHolder(View itemView) {
             super(itemView);
 
+            Typeface typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/choplin_light.otf");
+
             view=itemView.findViewById(R.id.categoryIcon);
             linearLayout=itemView.findViewById(R.id.categoryLinearLayout);
             mName =itemView.findViewById(R.id.card_name_category_alternate);
             mDp =itemView.findViewById(R.id.image_category);
+
+            mName.setTypeface(typeface);
             linearLayout.setOnClickListener(this);
         }
 

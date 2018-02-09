@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:scrollbarSize="3dp"
-    android:scrollbarThumbVertical="@color/colorAccent">
+    android:scrollbarSize="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"

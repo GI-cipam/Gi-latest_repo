@@ -2,6 +2,7 @@ package gov.cipam.gi.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import gov.cipam.gi.model.Product;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductViewHolder> {
 
+    String                              strHashtag;
     private ArrayList<Product>          GIList;
     private Context                     mContext;
     private setOnProductClickedListener mListener;
@@ -51,11 +53,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
+
+        strHashtag=holder.itemView.getResources().getString(R.string.note);
         ViewCompat.setTransitionName(holder.itemView.findViewById(R.id.productListImage),String.valueOf(position+"_image"));
         holder.mTitle.setText(GIList.get(position).getName());
         holder.mFiller.setText(GIList.get(position).getDetail());
-        holder.mState.setText(holder.itemView.getResources().getString(R.string.note)+ GIList.get(position).getState());
-        holder.mCategory.setText(holder.itemView.getResources().getString(R.string.note)+GIList.get(position).getCategory());
+        holder.mState.setText(strHashtag.concat(GIList.get(position).getState()));
+        holder.mCategory.setText(strHashtag.concat(GIList.get(position).getCategory()));
 
         Picasso.with(mContext)
                 .load(GIList.get(position).getDpurl())
@@ -79,6 +83,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         private ProductViewHolder(View itemView) {
             super(itemView);
             mItemView=itemView;
+
+
+
             frameLayout=itemView.findViewById(R.id.productListFrame);
             mTitle=itemView.findViewById(R.id.productListTitle);
             mFiller=itemView.findViewById(R.id.productListDesc);
@@ -86,6 +93,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             mCategory=itemView.findViewById(R.id.productListCategoryName);
             imageView=itemView.findViewById(R.id.productListImage);
 
+            //mFiller.setTypeface(typeface);
             frameLayout.setOnClickListener(this);
         }
 

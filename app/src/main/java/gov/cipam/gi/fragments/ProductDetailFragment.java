@@ -253,6 +253,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
         intentBuilder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
         intentBuilder.setActionButton(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher), "Action Button", createPendingIntent(ChromeTabActionBroadcastReceiver.ACTION_ACTION_BUTTON));
+        intentBuilder.setShowTitle(true);
         CustomTabsIntent customTabsIntent = intentBuilder.build();
         CustomTabActivityHelper.openCustomTab(getActivity(), customTabsIntent, uri, new CustomTabActivityHelper.CustomTabFallback() {
             @Override
@@ -275,8 +276,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     }
 
     private void setData(){
-        etvHistory.setText(product.getDescription());
-        etvDesc.setText(product.getHistory());
+        etvHistory.setText(product.getHistory());
+        etvDesc.setText(product.getDescription());
         txtCategory.setText(product.getCategory());
         txtState.setText(product.getState());
 

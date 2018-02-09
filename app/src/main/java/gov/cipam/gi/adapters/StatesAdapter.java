@@ -1,6 +1,7 @@
 package gov.cipam.gi.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +86,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
 
         private StateViewHolder(View itemView) {
             super(itemView);
+            Typeface typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/choplin_book.otf");
 
             relativeLayout=itemView.findViewById(R.id.stateListRelativeLayout);
             mName =itemView.findViewById(R.id.stateListName);
@@ -92,6 +94,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
             progressBar=itemView.findViewById(R.id.progressBarState);
             relativeLayout.setOnClickListener(this);
 
+            mName.setTypeface(typeface);
         }
 
         @Override

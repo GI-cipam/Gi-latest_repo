@@ -38,7 +38,7 @@
         android:textAlignment="center"
         android:textColor="@color/md_grey_900"
         android:textStyle="bold"
-        android:theme="@style/MediumBodyText" />
+        android:theme="@style/SmallBodyText" />
 
         <ProgressBar
             android:id="@+id/progressBarState"
