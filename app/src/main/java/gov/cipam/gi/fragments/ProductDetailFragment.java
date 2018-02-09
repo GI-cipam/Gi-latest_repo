@@ -275,8 +275,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     }
 
     private void setData(){
-        etvHistory.setText(product.getDescription());
-        etvDesc.setText(product.getHistory());
+        etvHistory.setText(product.getHistory());
+        etvDesc.setText(product.getDescription());
         txtCategory.setText(product.getCategory());
         txtState.setText(product.getState());
 

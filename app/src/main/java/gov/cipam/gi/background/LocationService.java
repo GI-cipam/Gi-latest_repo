@@ -64,7 +64,7 @@ public class LocationService extends IntentService implements DirectionFinderLis
     @Override
     public void onCreate() {
         super.onCreate();
-        Toast.makeText(this, "Inside Service", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Inside Service", Toast.LENGTH_SHORT).show();
         sharedPreferences=getSharedPreferences("abc",MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
@@ -139,7 +139,7 @@ public class LocationService extends IntentService implements DirectionFinderLis
 
     private void checkTravelDistance() {
 //        Toast.makeText(this,currentLocation.latitude+","+currentLocation.longitude+"..."+savedLocation.latitude+","+savedLocation.longitude, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Inside Distance Checker", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Inside Distance Checker", Toast.LENGTH_SHORT).show();
         String origin=currentLocation.latitude+","+currentLocation.longitude;
         String destination=savedLocation.latitude+","+savedLocation.longitude;
         try {
@@ -186,7 +186,7 @@ public class LocationService extends IntentService implements DirectionFinderLis
         else{
             //When the nearby sellers are to be searched
             if(route.size()!=0) {
-                Toast.makeText(this, "Seller Distance found", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Seller Distance found", Toast.LENGTH_SHORT).show();
                 int distanceFromSellerToLocation = route.get(0).distance.value;
                 if (distanceFromSellerToLocation <= HomePageActivity.MIN_NOTIFICATION_SELLER_DISTANCE * 1000) {
                     selectedWithinRangeSellers.add(sellerList.get(index));
@@ -201,7 +201,7 @@ public class LocationService extends IntentService implements DirectionFinderLis
     private void searchNearbySellers() {
         Cursor sellerCursor=database.query(Database.GI_SELLER_TABLE,null,null,null,null,null,null,null);
         while(sellerCursor.moveToNext()){
-            String name,address,contact;
+            String name,address,contact,uid;
             Double lon,lat;
 
             name=sellerCursor.getString(sellerCursor.getColumnIndex(Database.GI_SELLER_NAME));
@@ -209,8 +209,9 @@ public class LocationService extends IntentService implements DirectionFinderLis
             contact=sellerCursor.getString(sellerCursor.getColumnIndex(Database.GI_SELLER_CONTACT));
             lat=sellerCursor.getDouble(sellerCursor.getColumnIndex(Database.GI_SELLER_LAT));
             lon=sellerCursor.getDouble(sellerCursor.getColumnIndex(Database.GI_SELLER_LON));
+            uid=sellerCursor.getString(sellerCursor.getColumnIndex(Database.GI_SELLER_UID));
 
-            Seller oneSeller = new Seller(name, address, contact, lon, lat);
+            Seller oneSeller = new Seller(name, address, contact, lon, lat,uid);
 
             sellerList.add(oneSeller);
         }
@@ -237,7 +238,7 @@ public class LocationService extends IntentService implements DirectionFinderLis
     private void showNotification() {
         Toast.makeText(this, "Size of Selected Sellers :"+selectedWithinRangeSellers.size(), Toast.LENGTH_SHORT).show();
         if(selectedWithinRangeSellers.size()>0){
-            Toast.makeText(this, "Should show notification now !!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Should show notification now !!", Toast.LENGTH_SHORT).show();
             long[] vibrate_patter={0,500,300,800};
             Toast.makeText(this, "Making Notification", Toast.LENGTH_SHORT).show();
             Uri uri= Uri.parse("uri://");

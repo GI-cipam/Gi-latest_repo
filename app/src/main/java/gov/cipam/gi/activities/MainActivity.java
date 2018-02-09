@@ -18,7 +18,7 @@ public class MainActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mImageView = findViewById(R.id.overlapImage);
+//        mImageView = findViewById(R.id.overlapImage);
     }
 
     @Override

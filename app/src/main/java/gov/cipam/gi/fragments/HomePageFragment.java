@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,7 +52,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     LinearLayout                    dotsLinearLayout;
     RecyclerView                    rvState,rvCategory;
     ViewPager                       giSliderViewPager;
-    ScrollView                      scrollView;
+    NestedScrollView                scrollView;
     FirebaseAuth                    mAuth;
     DatabaseReference               mDatabaseState,mDatabaseCategory;
     StartSnapHelper                 startSnapHelper,startSnapHelper1;
@@ -99,6 +100,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         scrollView=view.findViewById(R.id.scroll_view_home);
 
         scrollView.setSmoothScrollingEnabled(true);
+        scrollView.setNestedScrollingEnabled(true);
         startSnapHelper.attachToRecyclerView(rvState);
         startSnapHelper1.attachToRecyclerView(rvCategory);
 
