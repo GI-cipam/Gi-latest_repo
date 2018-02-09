@@ -27,6 +27,15 @@ public class Seller implements Serializable {
         this.lat = lat;
     }
 
+    public Seller(String name, String address, String contact, double lon, double lat, String uid) {
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+        this.lon = lon;
+        this.lat = lat;
+        this.uid = uid;
+    }
+
     public String getName() {
         return name;
     }

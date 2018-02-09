@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -59,6 +60,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     private DatabaseFetch databaseFetch;
     public static ArrayList<States> mDisplayStateList = new ArrayList<>();
     public static ArrayList<Categories> mDisplayCategoryList = new ArrayList<>();
+
 
     public static HomePageFragment newInstance() {
 

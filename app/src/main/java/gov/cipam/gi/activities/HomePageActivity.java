@@ -1,9 +1,11 @@
 package gov.cipam.gi.activities;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.MergeCursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -58,7 +61,7 @@ public class HomePageActivity extends BaseActivity
 
     private static final int REQUEST_INVITE = 23;
     public static final int MIN_NOTIFICATION_DISTANCE=50;
-    public static final int MIN_NOTIFICATION_SELLER_DISTANCE=100;
+    public static final int MIN_NOTIFICATION_SELLER_DISTANCE=30;
     private FirebaseAuth mAuth;
     private DrawerLayout drawer;
     Users user;
@@ -90,15 +93,21 @@ public class HomePageActivity extends BaseActivity
         databaseInstance = new Database(this);
         database = databaseInstance.getWritableDatabase();
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+        }
+
         Intent intent=getIntent();
         boolean isFromNotification=intent.getBooleanExtra("isFromNotification",false);
         if(isFromNotification){
             ArrayList<Seller> myList=(ArrayList<Seller>) intent.getSerializableExtra("selectedSellerList");
-            Toast.makeText(this,myList.size()+" from Main", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this,myList.size()+" from Main", Toast.LENGTH_SHORT).show();
             fragmentInflate(MapsFragment.newInstance(myList));
         }
         else{
-            Toast.makeText(this, "Not from Notification", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Not from Notification", Toast.LENGTH_SHORT).show();
             if(savedInstanceState==null) {
                 fragmentInflate(HomePageFragment.newInstance());
             }
