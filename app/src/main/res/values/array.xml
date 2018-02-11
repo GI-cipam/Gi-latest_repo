@@ -21,6 +21,14 @@
         <item>Rachit Singhal</item>
     </string-array>
 
+    <array name="dev_dp">
+        <item>@drawable/ns1</item>
+        <item>@drawable/ns1</item>
+        <item>@drawable/deepak</item>
+        <item>@drawable/deepak</item>
+        <item>@drawable/kd</item>
+    </array>
+
     <string-array name="dummy_text">
         <item>Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

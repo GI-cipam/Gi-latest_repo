@@ -1,6 +1,7 @@
 package gov.cipam.gi.adapters;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +21,8 @@ import gov.cipam.gi.model.Bio;
 public class BioAdapter extends RecyclerView.Adapter<BioAdapter.BioViewHolder> {
 
     private String[]dev_names;
+    TypedArray dev_dp;
     private String[]dev_email;
-    /*int[] dev_dp={R.drawable.circle_bg_red,
-    R.drawable.circle_bg_purple,R.drawable.circle_bg_blue
-    ,R.drawable.circle_bg_green,R.drawable.circle_bg_orange};*/
     Context mContext;
     BioAdapter.setOnBioClickListener mListener;
 
@@ -45,16 +44,14 @@ public class BioAdapter extends RecyclerView.Adapter<BioAdapter.BioViewHolder> {
     @Override
     public void onBindViewHolder(BioViewHolder holder, int position) {
 
+        dev_dp=holder.itemView.getResources().obtainTypedArray(R.array.dev_dp);
         dev_names=holder.itemView.getResources().getStringArray(R.array.dev_names);
         dev_email=holder.itemView.getResources().getStringArray(R.array.dev_emails);
-        if(position==0){
-            holder.mDp.setImageResource(R.drawable.ns1);
-        }else {
-            holder.mDp.setImageResource(R.drawable.kd);
-        }
+
         for (int i=0;i<=position;i++){
             holder.mName.setText(dev_names[i]);
             holder.mEmail.setText(dev_email[i]);
+            holder.mDp.setImageDrawable(dev_dp.getDrawable(i));
         }
     }
 

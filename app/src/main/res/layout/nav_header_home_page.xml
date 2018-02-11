@@ -12,33 +12,31 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="2dp"
+        android:gravity="center"
         android:background="@drawable/circle_bg_white">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userImage"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
+            android:layout_height="50dp" />
 
         <TextView
             android:id="@+id/userNameShort"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:shadowColor="@color/black"
-            android:shadowRadius="2"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="30sp"
             tools:text="k" />
-    </RelativeLayout>
+    </FrameLayout>
+
     <TextView
         android:id="@+id/nav_header_name"
         android:layout_width="wrap_content"

@@ -115,7 +115,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
                 Seller oneSeller = sellerAndViewIn.getSeller();
                 Product product = getProduct(oneSeller.getUid());
 //            Toast.makeText(getContext(),oneSeller.getUid(), Toast.LENGTH_SHORT).show();
-                Picasso.with(getContext()).load(product.getDpurl()).into(imageView, new Callback() {
+                Picasso.with(getContext())
+                        .load(product.getDpurl())
+                        .resize(200,300).centerCrop()
+                        .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
                         if (marker.isInfoWindowShown()) {

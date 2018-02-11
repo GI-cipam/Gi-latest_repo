@@ -15,10 +15,7 @@
         android:id="@+id/stateListImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
-        app:riv_corner_radius="4dp"
         tools:ignore="ContentDescription" />
 
     <View
@@ -38,7 +35,7 @@
         android:textAlignment="center"
         android:textColor="@color/md_grey_900"
         android:textStyle="bold"
-        android:theme="@style/SmallBodyText" />
+        android:theme="@style/MediumBodyText" />
 
         <ProgressBar
             android:id="@+id/progressBarState"

@@ -1,12 +1,14 @@
 package gov.cipam.gi.firebasemanager;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,6 +18,7 @@ import gov.cipam.gi.R;
 import gov.cipam.gi.common.SharedPref;
 import gov.cipam.gi.model.Users;
 import gov.cipam.gi.utils.Constants;
+import gov.cipam.gi.utils.TextDrawable;
 
 
 public class HeaderViewPresenter implements View.OnClickListener {
@@ -44,6 +47,7 @@ public class HeaderViewPresenter implements View.OnClickListener {
         textvEmail = view.findViewById(R.id.nav_header_email);
         txtvNameInitials=view.findViewById(R.id.userNameShort);
         txtvNameInitials.setVisibility(View.INVISIBLE);
+
         view.setOnClickListener(this);
         setData();
     }
@@ -52,7 +56,6 @@ public class HeaderViewPresenter implements View.OnClickListener {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Log.d("HeaderViewPresenter", "user.getDisplayName(): " + user.getDisplayName());
         users = SharedPref.getSavedObjectFromPreference(context, Constants.KEY_USER_INFO,Constants.KEY_USER_DATA,Users.class);
-
         if(users!=null) {
 
             textvEmail.setText(context.getString(R.string.login_request));
@@ -67,8 +70,8 @@ public class HeaderViewPresenter implements View.OnClickListener {
             else
             {
                 txtvNameInitials.setVisibility(View.VISIBLE);
-                txtvNameInitials.setText(users.getName().substring(0,1));
                 textvEmail.setText(user.getEmail());
+                txtvNameInitials.setText(users.getName().substring(0,1));
                 textvName.setText("Hi "+users.getName().substring(0,1).toUpperCase()+users.getName().substring(1));
                 imgevProfile.setImageResource(R.drawable.circle);
             }

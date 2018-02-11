@@ -2,6 +2,7 @@ package gov.cipam.gi.activities;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -55,6 +56,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getToolbarID();
 
     protected void setUpToolbar(Activity activity) {
+
+        Typeface title = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/montserrat_semibold.otf");
         mToolbar = findViewById(getToolbarID());
         setSupportActionBar(mToolbar);
         loadPreferences();

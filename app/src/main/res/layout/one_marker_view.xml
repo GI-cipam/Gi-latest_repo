@@ -1,82 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:background="@color/white"
-    android:elevation="@dimen/card_elevation"
-    android:layout_margin="5dp"
-    android:layout_height="wrap_content">
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <ImageView
         android:id="@+id/mapInfoWindowImage"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:adjustViewBounds="false"
-        android:scaleType="fitXY"
-        app:layout_constraintDimensionRatio="h,3:2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/circle_bg_orange" />
+        android:layout_width="@dimen/image_parameter_medium"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/md_grey_300"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/mapInfoWindow_ProductName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:autoSizeTextType="uniform"
-            android:defaultFocusHighlightEnabled="false"
-            android:singleLine="false"
-            android:text="TextView"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/mapInfoWindowImage"
-            app:layout_constraintStart_toStartOf="@+id/mapInfoWindowImage"
-            app:layout_constraintTop_toBottomOf="@+id/mapInfoWindowImage" />
+    <TextView
+        android:id="@+id/mapInfoWindow_ProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/mapInfoWindowImage"
+        android:layout_marginTop="@dimen/margin_smaller"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="TextView"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <View
         android:id="@+id/divider"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/image_parameter_medium"
         android:layout_height="1sp"
-        android:layout_below="@id/productListDesc"
-        android:layout_marginTop="4dp"
-        android:background="@color/greyColor"
-        app:layout_constraintEnd_toEndOf="@+id/mapInfoWindowImage"
-        app:layout_constraintStart_toStartOf="@+id/mapInfoWindowImage"
-        app:layout_constraintTop_toBottomOf="@+id/mapInfoWindow_ProductName" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/mapInfoWindow_ProductName"
+        android:layout_marginTop="@dimen/margin_smaller"
+        android:background="@color/greyColor"/>
 
     <TextView
         android:id="@+id/mapInfoWindow_ProductSellerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/divider"
+        android:layout_marginTop="@dimen/margin_smaller"
         android:text="TextView"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/mapInfoWindow_ProductName"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/maoInfoWindow_ProductSellerAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/mapInfoWindow_ProductSellerName"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_smallest"
         android:text="TextView"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/mapInfoWindow_ProductSellerName"
-        app:layout_constraintTop_toBottomOf="@+id/mapInfoWindow_ProductSellerName" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/mapInfoWindow_ProductSellerContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/maoInfoWindow_ProductSellerAddress"
+        android:layout_marginTop="@dimen/margin_smallest"
+        android:layout_gravity="center_horizontal"
+        android:autoLink="phone"
+        android:linksClickable="true"
+        android:textColorLink="@color/drawer_blue"
         android:text="TextView"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/maoInfoWindow_ProductSellerAddress"
-        app:layout_constraintTop_toBottomOf="@+id/maoInfoWindow_ProductSellerAddress" />
-
-    </android.support.constraint.ConstraintLayout>
-</android.support.v7.widget.CardView>
+        android:textSize="12sp" />
+</RelativeLayout>

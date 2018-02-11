@@ -2,6 +2,7 @@ package gov.cipam.gi.fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,6 +34,7 @@ import gov.cipam.gi.activities.StatePreferenceActivity;
 import gov.cipam.gi.common.SharedPref;
 import gov.cipam.gi.model.Users;
 import gov.cipam.gi.utils.Constants;
+import gov.cipam.gi.utils.TextDrawable;
 
 /**
  * Created by karan on 1/25/2018.
@@ -109,7 +111,6 @@ public class AccountInfoFragment extends Fragment implements View.OnClickListene
 /*                mEmailField.setText(getContext().getString(R.string.login_request));
                 mNameField.setText(getContext().getString(R.string.hi));
                 ivProfile.setImageResource(R.drawable.account);*/
-
                 tvNameShort.setVisibility(View.VISIBLE);
                 tvNameShort.setText(users.getName().substring(0,1));
                 mEmailField.setText(user.getEmail());

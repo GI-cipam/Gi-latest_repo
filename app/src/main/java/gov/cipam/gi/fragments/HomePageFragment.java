@@ -102,9 +102,9 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         dotsLinearLayout = view.findViewById(R.id.gi_ll_dots);
         scrollView = view.findViewById(R.id.scroll_view_home);
 
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/choplin_semibold.otf");
+        /*Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/montserrat_semibold.otf");
         txtCategory.setTypeface(typeface);
-        txtState.setTypeface(typeface);
+        txtState.setTypeface(typeface);*/
 
         scrollView.setSmoothScrollingEnabled(true);
         scrollView.setNestedScrollingEnabled(true);

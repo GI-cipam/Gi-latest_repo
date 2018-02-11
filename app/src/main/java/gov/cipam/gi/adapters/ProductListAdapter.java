@@ -83,8 +83,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         private ProductViewHolder(View itemView) {
             super(itemView);
             mItemView=itemView;
-
-
+/*            Typeface title = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/montserrat_semibold.otf");
+            Typeface filler = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/montserrat_light.otf");
+            Typeface tags = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/montserrat_extralight.otf");*/
 
             frameLayout=itemView.findViewById(R.id.productListFrame);
             mTitle=itemView.findViewById(R.id.productListTitle);
@@ -93,7 +94,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             mCategory=itemView.findViewById(R.id.productListCategoryName);
             imageView=itemView.findViewById(R.id.productListImage);
 
-            //mFiller.setTypeface(typeface);
+            /*mTitle.setTypeface(title);
+            mFiller.setTypeface(filler);
+            mState.setTypeface(tags);
+            mCategory.setTypeface(tags);*/
             frameLayout.setOnClickListener(this);
         }
 

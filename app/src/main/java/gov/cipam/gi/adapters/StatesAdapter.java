@@ -86,7 +86,6 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
 
         private StateViewHolder(View itemView) {
             super(itemView);
-            Typeface typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/choplin_book.otf");
 
             relativeLayout=itemView.findViewById(R.id.stateListRelativeLayout);
             mName =itemView.findViewById(R.id.stateListName);
@@ -94,7 +93,8 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
             progressBar=itemView.findViewById(R.id.progressBarState);
             relativeLayout.setOnClickListener(this);
 
-            mName.setTypeface(typeface);
+            /*Typeface typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/montserrat_regular.otf");
+            mName.setTypeface(typeface);*/
         }
 
         @Override
