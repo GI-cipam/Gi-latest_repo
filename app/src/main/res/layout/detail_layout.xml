@@ -1,80 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@color/md_grey_100"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/detail_categoryName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_smaller"
-            android:background="@drawable/bg_round_white"
-            android:fontFamily="sans-serif-condensed"
-            android:paddingBottom="@dimen/padding_smaller"
-            android:paddingEnd="@dimen/padding_small"
-            android:paddingStart="@dimen/padding_small"
-            android:paddingTop="@dimen/padding_smaller"
-            android:text="State"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/detail_stateName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_smaller"
-            android:background="@drawable/bg_round_white"
-            android:fontFamily="sans-serif-condensed"
-            android:paddingBottom="@dimen/padding_smaller"
-            android:paddingEnd="@dimen/padding_small"
-            android:paddingStart="@dimen/padding_small"
-            android:paddingTop="@dimen/padding_smaller"
-            android:text="State"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="12sp" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/greyColor"/>
-        <include
-            android:id="@+id/childHistoryCard"
-            layout="@layout/card_view_group" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/greyColor"/>
+    <include
+        android:id="@+id/childHistoryCard"
+        layout="@layout/card_view_group" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Uniqueness"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_small"
         android:layout_marginBottom="@dimen/padding_smaller"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+        android:text="Uniqueness"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/colorPrimaryDark" />
 
-        <RelativeLayout
+    <RelativeLayout
         android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_smallest"
-        android:layout_marginEnd="@dimen/margin_smallest"
         android:layout_marginTop="@dimen/margin_smallest">
 
         <gov.cipam.gi.utils.WrapContentHeightViewPager
@@ -89,33 +37,23 @@
             android:layout_below="@id/vp_slider"
             android:layout_marginBottom="@dimen/margin_smallest"
             android:gravity="center"
-            android:orientation="horizontal"/>
-        </RelativeLayout>
+            android:orientation="horizontal" />
+    </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/greyColor"/>
-
-        <include
-            android:id="@+id/childDescCard"
-            layout="@layout/card_view_group" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/greyColor"/>
+    <include
+        android:id="@+id/childDescCard"
+        layout="@layout/card_view_group" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/padding_smaller"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginStart="@dimen/margin_small"
         android:text="Sellers"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="@color/colorPrimaryDark" />
 
-        <android.support.v7.widget.RecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/seller_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

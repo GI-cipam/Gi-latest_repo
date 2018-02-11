@@ -8,9 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-
 import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterConfig;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.utils.Constants;
@@ -21,11 +19,11 @@ import gov.cipam.gi.utils.Constants;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    String                                              textSize;
-    boolean                                             downloadImages;
-    Toolbar                                             mToolbar;
-    SharedPreferences                                   sharedPreferences;
-    SharedPreferences.OnSharedPreferenceChangeListener  prefListener;
+    String textSize;
+    boolean downloadImages;
+    Toolbar mToolbar;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.OnSharedPreferenceChangeListener prefListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void initializeTwitter(){
+    protected void initializeTwitter() {
 
         Twitter.initialize(this);
         Twitter.getInstance();
@@ -79,19 +77,18 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         if (textSize.equals(getString(R.string.text_size_small))) {
             setTheme(R.style.TextSizeSmall);
-        }
-        else if (textSize.equals(getString(R.string.text_size_medium))) {
+        } else if (textSize.equals(getString(R.string.text_size_medium))) {
             setTheme(R.style.TextSizeMedium);
-        }
-        else if (textSize.equals(getString(R.string.text_size_large))) {
+        } else if (textSize.equals(getString(R.string.text_size_large))) {
             setTheme(R.style.TextSizeLarge);
         }
     }
+
     protected void loadPreferences() {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         textSize = sharedPreferences.getString(Constants.KEY_TEXT_SIZE, getString(R.string.text_size_small));
-        downloadImages  = sharedPreferences.getBoolean(Constants.KEY_DOWNLOAD_IMAGES, true);
+        downloadImages = sharedPreferences.getBoolean(Constants.KEY_DOWNLOAD_IMAGES, true);
     }
 
     protected void sharedPreferencesListener() {

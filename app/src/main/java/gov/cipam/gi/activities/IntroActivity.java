@@ -19,11 +19,12 @@ import gov.cipam.gi.utils.Constants;
 import gov.cipam.gi.utils.downloadThread;
 
 public class IntroActivity extends AppIntro {
-downloadThread downloadThread1;
+    downloadThread downloadThread1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        downloadThread1=new downloadThread(this);
+        downloadThread1 = new downloadThread(this);
         addSlide(new Onboarding1());
         addSlide(new Onboarding2());
         setSpecs();
@@ -50,7 +51,7 @@ downloadThread downloadThread1;
                 getSharedPreferences(Constants.MY_PREFERENCES, MODE_PRIVATE);
 
         preferences.edit()
-                .putBoolean(Constants.ONBOARDING_COMPLETE,true).apply();
+                .putBoolean(Constants.ONBOARDING_COMPLETE, true).apply();
 
         startActivity(new Intent(this, NewUserActivity.class));
         finish();
@@ -62,10 +63,10 @@ downloadThread downloadThread1;
         finish();
     }
 
-    public void setSpecs(){
+    public void setSpecs() {
         setBarColor(Color.TRANSPARENT);
         setSeparatorColor(Color.TRANSPARENT);
-        setImageNextButton(ContextCompat.getDrawable(getApplicationContext(),R.drawable.next));
+        setImageNextButton(ContextCompat.getDrawable(getApplicationContext(), R.drawable.next));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
@@ -76,5 +77,5 @@ downloadThread downloadThread1;
         // NOTE: you will probably need to ask VIBRATE permission in Manifest.
         setVibrate(true);
         setVibrateIntensity(40);
-        }
     }
+}

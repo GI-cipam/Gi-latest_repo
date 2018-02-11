@@ -5,17 +5,6 @@
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
-
-    <style name="OverFlowButton">
-        <item name="srcCompat">@drawable/ic_menu_share</item>
-        <item name="android:layout_width">25dp</item>
-        <item name="android:layout_height">25dp</item>
-        <item name="android:scaleType">center</item>
-        <item name="android:background">@drawable/round_selector</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusableInTouchMode">true</item>
-        <item name="android:focusable">true</item>
-    </style>
     
     <style name="FabStyle">
         <item name="android:layout_width">wrap_content</item>

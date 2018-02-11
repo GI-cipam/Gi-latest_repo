@@ -1,13 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/layoutTop"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@drawable/image2"></RelativeLayout>
+        android:background="@drawable/image2"/>
 
     <RelativeLayout
         android:id="@+id/layoutBottom"
@@ -24,13 +23,13 @@
     </RelativeLayout>
 
     <!--<ImageView-->
-        <!--android:id="@+id/overlapImage"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_above="@id/layoutBottom"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:src="@mipmap/ic_launcher"-->
-        <!--tools:ignore="ContentDescription" />-->
+    <!--android:id="@+id/overlapImage"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:layout_above="@id/layoutBottom"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:adjustViewBounds="true"-->
+    <!--android:src="@mipmap/ic_launcher"-->
+    <!--tools:ignore="ContentDescription" />-->
 
 </RelativeLayout>

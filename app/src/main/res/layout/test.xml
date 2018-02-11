@@ -1,37 +1,37 @@
-<LinearLayout android:id="@+id/profile_layout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/profile_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_gravity="center"
+    android:orientation="vertical"
     android:paddingBottom="50dp"
     android:paddingLeft="@dimen/padding_small"
-    android:paddingRight="@dimen/padding_small"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:paddingRight="@dimen/padding_small">
 
-        <Button
-            android:id="@+id/btnSkipLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:background="@drawable/btn_gradient_blue"
-            android:text="SKIP LOGIN"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+    <Button
+        android:id="@+id/btnSkipLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:background="@drawable/btn_gradient_blue"
+        android:text="SKIP LOGIN"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@drawable/btn_gradient_blue"
-            android:text="LOG IN"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@drawable/btn_gradient_blue"
+        android:text="LOG IN"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+</LinearLayout>
 

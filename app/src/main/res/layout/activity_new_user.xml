@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="@dimen/padding_small"
     android:weightSum="2"
-    android:orientation="vertical"
     tools:context="gov.cipam.gi.activities.NewUserActivity">
 
     <ImageView
@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:scaleType="center"
         app:srcCompat="@drawable/image2"
-        tools:ignore="ContentDescription"/>
+        tools:ignore="ContentDescription" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,8 +38,8 @@
             android:id="@+id/registerUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_below="@id/skipLogin"
+            android:layout_margin="5dp"
             android:background="@drawable/introbutton"
             android:text="Login"
             android:textSize="14sp" />

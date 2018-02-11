@@ -5,10 +5,12 @@
     android:layout_height="match_parent"
     tools:context="gov.cipam.gi.activities.SettingsActivity">
 
-    <include layout="@layout/toolbar"
+    <include
         android:id="@+id/settings_toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <FrameLayout
         android:id="@+id/settings_frame"
         android:layout_width="match_parent"

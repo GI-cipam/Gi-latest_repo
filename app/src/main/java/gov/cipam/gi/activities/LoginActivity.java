@@ -13,11 +13,11 @@ import gov.cipam.gi.fragments.SignInFragment;
 import gov.cipam.gi.fragments.SignUpFragment;
 
 public class LoginActivity extends BaseActivity {
-    SignInFragment         signInFragment;
-    SignUpFragment         signUpFragment;
-    ViewPager              viewPager;
-    TabLayout              tabLayout;
-    LoginViewPagerAdapter  loginViewPagerAdapter;
+    SignInFragment signInFragment;
+    SignUpFragment signUpFragment;
+    ViewPager viewPager;
+    TabLayout tabLayout;
+    LoginViewPagerAdapter loginViewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +41,13 @@ public class LoginActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        startActivity(new Intent(this,NewUserActivity.class));
+        startActivity(new Intent(this, NewUserActivity.class));
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case android.R.id.home:
                 onBackPressed();

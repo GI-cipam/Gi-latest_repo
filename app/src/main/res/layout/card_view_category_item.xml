@@ -5,8 +5,8 @@
     android:id="@+id/card_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:elevation="@dimen/cardview_default_elevation"
     android:layout_margin="@dimen/padding_smaller"
+    android:elevation="@dimen/cardview_default_elevation"
     android:orientation="horizontal"
     app:cardUseCompatPadding="true">
 
@@ -14,9 +14,9 @@
         android:id="@+id/categoryRelativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/card_dp_category"

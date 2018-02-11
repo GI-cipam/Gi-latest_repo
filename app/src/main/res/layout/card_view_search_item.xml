@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:id="@+id/search_list_linear_layout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_list_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:background="?attr/selectableItemBackground"
-    android:weightSum="4"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:orientation="horizontal"
+    android:weightSum="4">
 
     <gov.cipam.gi.utils.SquareImageView
         android:id="@+id/search_list_image"
@@ -21,9 +21,9 @@
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_marginEnd="@dimen/margin_small"
         android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_small">
+        android:layout_weight="3">
 
         <TextView
             android:id="@+id/search_list_tv2"

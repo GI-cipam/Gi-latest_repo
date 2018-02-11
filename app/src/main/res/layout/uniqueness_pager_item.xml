@@ -1,41 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="wrap_content"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?attr/selectableItemBackground"
-    android:background="@drawable/card_bg"
-    android:clickable="true"
-    android:focusable="true"
-    android:padding="@dimen/padding_smallest"
-    android:layout_margin="@dimen/margin_smallest"
+    app:cardUseCompatPadding="true">
 
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <TextView
-        android:id="@+id/uniqueness_text"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_smaller"
-        android:layout_marginEnd="@dimen/margin_smaller"
-        android:layout_marginStart="@dimen/margin_smaller"
-        android:layout_marginTop="@dimen/margin_smaller"
-        android:text="1"
-        style="?attr/text_size_detail"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textColor="@color/colorPrimaryDark" />
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
 
-    <TextView
-        android:id="@+id/card_gi_uniqueness"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:layout_marginBottom="@dimen/margin_smaller"
-        android:layout_marginEnd="@dimen/margin_smaller"
-        android:layout_marginStart="@dimen/margin_smaller"
-        android:layout_marginTop="@dimen/margin_smaller"
-        android:layout_toEndOf="@id/uniqueness_text"
-        android:lineSpacingExtra="4sp"
-        android:text="@string/long_text"
-        android:textColor="#1f1f1f"
-        style="?attr/text_size_detail" />
+        <TextView
+            android:id="@+id/uniqueness_text"
+            style="?attr/text_size_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_smaller"
+            android:layout_marginEnd="@dimen/margin_smaller"
+            android:layout_marginStart="@dimen/margin_smaller"
+            android:layout_marginTop="@dimen/margin_smaller"
+            android:text="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/card_gi_uniqueness"
+            style="?attr/text_size_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_smaller"
+            android:layout_marginEnd="@dimen/margin_smaller"
+            android:layout_marginStart="@dimen/margin_smaller"
+            android:layout_marginTop="@dimen/margin_smaller"
+            android:layout_toEndOf="@id/uniqueness_text"
+            android:fontFamily="serif"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/long_text"
+            android:textColor="#1f1f1f" />
 
     </RelativeLayout>
+</android.support.v7.widget.CardView>

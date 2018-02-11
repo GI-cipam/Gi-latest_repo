@@ -1,9 +1,9 @@
 package gov.cipam.gi.activities;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import gov.cipam.gi.R;
@@ -12,7 +12,7 @@ import gov.cipam.gi.fragments.AccountInfoFragment;
 import gov.cipam.gi.fragments.BioScreenFragment;
 import gov.cipam.gi.utils.Constants;
 
-public class NavItemActivity extends BaseActivity implements FragmentManager.OnBackStackChangedListener{
+public class NavItemActivity extends BaseActivity implements FragmentManager.OnBackStackChangedListener {
 
     Fragment fragment;
     String navItem;
@@ -24,31 +24,31 @@ public class NavItemActivity extends BaseActivity implements FragmentManager.OnB
         setUpToolbar(this);
 
 
-        navItem=getIntent().getStringExtra(Constants.NAV_CATEGORY);
+        navItem = getIntent().getStringExtra(Constants.NAV_CATEGORY);
 
         fragmentInflate();
         getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
-    public void fragmentInflate(){
+    public void fragmentInflate() {
 
-        switch (navItem){
+        switch (navItem) {
             case "AccountInfo":
-                fragment= AccountInfoFragment.newInstance();
+                fragment = AccountInfoFragment.newInstance();
                 navFragmentInflate(fragment);
                 break;
             case "BioScreen":
-                fragment= BioScreenFragment.newInstance();
+                fragment = BioScreenFragment.newInstance();
                 navFragmentInflate(fragment);
                 break;
             case "AboutScreen":
-                fragment= AboutFragment.newInstance();
+                fragment = AboutFragment.newInstance();
                 navFragmentInflate(fragment);
                 break;
         }
     }
 
-    private void navFragmentInflate(Fragment fragment){
+    private void navFragmentInflate(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.nav_activity_frame_layout, fragment);
         fragmentTransaction.commit();
@@ -62,7 +62,7 @@ public class NavItemActivity extends BaseActivity implements FragmentManager.OnB
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 break;
@@ -82,13 +82,11 @@ public class NavItemActivity extends BaseActivity implements FragmentManager.OnB
 
     @Override
     public void onBackStackChanged() {
-        if(getCurrentFragment() instanceof AboutFragment){
+        if (getCurrentFragment() instanceof AboutFragment) {
             mToolbar.setTitle(getString(R.string.about_us));
-        }
-        else if (getCurrentFragment() instanceof AccountInfoFragment){
+        } else if (getCurrentFragment() instanceof AccountInfoFragment) {
             mToolbar.setTitle(getString(R.string.account_info));
-        }
-        else if (getCurrentFragment() instanceof BioScreenFragment){
+        } else if (getCurrentFragment() instanceof BioScreenFragment) {
             mToolbar.setTitle(getString(R.string.developer_screen));
         }
     }

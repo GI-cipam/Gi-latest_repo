@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/state_preference_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
@@ -12,9 +12,9 @@
         android:id="@+id/statePreferenceImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:cropToPadding="false"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center"/>
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/statePreferenceName"
@@ -28,10 +28,11 @@
         android:textColor="@color/gray"
         android:textSize="18sp"
         android:textStyle="bold" />
+
     <ProgressBar
         android:id="@+id/progressBarStatePreference"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

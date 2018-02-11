@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/mapInfoWindowImage"
@@ -18,8 +17,8 @@
         android:id="@+id/mapInfoWindow_ProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/mapInfoWindowImage"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_smaller"
         android:ellipsize="end"
         android:maxLines="1"
@@ -32,17 +31,17 @@
         android:id="@+id/divider"
         android:layout_width="@dimen/image_parameter_medium"
         android:layout_height="1sp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/mapInfoWindow_ProductName"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_smaller"
-        android:background="@color/greyColor"/>
+        android:background="@color/greyColor" />
 
     <TextView
         android:id="@+id/mapInfoWindow_ProductSellerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/divider"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_smaller"
         android:text="TextView"
         android:textSize="12sp" />
@@ -51,8 +50,8 @@
         android:id="@+id/maoInfoWindow_ProductSellerAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/mapInfoWindow_ProductSellerName"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/margin_smallest"
         android:text="TextView"
@@ -62,13 +61,13 @@
         android:id="@+id/mapInfoWindow_ProductSellerContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/maoInfoWindow_ProductSellerAddress"
-        android:layout_marginTop="@dimen/margin_smallest"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_smallest"
         android:autoLink="phone"
         android:linksClickable="true"
-        android:textColorLink="@color/drawer_blue"
         android:text="TextView"
+        android:textColorLink="@color/drawer_blue"
         android:textSize="12sp" />
 </RelativeLayout>

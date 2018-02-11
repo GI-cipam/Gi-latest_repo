@@ -17,6 +17,7 @@ import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -69,7 +70,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     int page_position = 0;
     ExpandableTextView etvHistory,etvDesc;
     TextView txtvTitleHistory,txtvTitleDesc,txtState,txtCategory,txtHistory,txtDesc;
-    LinearLayout historyLinearLayout,descLinearLayout;
+    CardView historyLinearLayout,descLinearLayout;
     String name,address,contact;
     Double lon,lat;
     LinearLayout dotsLinearLayout;
@@ -205,8 +206,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
         rvSeller = view.findViewById(R.id.seller_recycler_view);
         imageView = view.findViewById(R.id.productDetailImage);
-        txtState = view.findViewById(R.id.detail_stateName);
-        txtCategory = view.findViewById(R.id.detail_categoryName);
+        /*txtState = view.findViewById(R.id.detail_stateName);
+        txtCategory = view.findViewById(R.id.detail_categoryName);*/
         viewPager = view.findViewById(R.id.vp_slider);
         dotsLinearLayout = view.findViewById(R.id.ll_dots);
         historyLinearLayout = view.findViewById(R.id.childHistoryCard);
@@ -278,8 +279,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     private void setData(){
         etvHistory.setText(product.getHistory());
         etvDesc.setText(product.getDescription());
-        txtCategory.setText(product.getCategory());
-        txtState.setText(product.getState());
+        /*txtCategory.setText(product.getCategory());
+        txtState.setText(product.getState());*/
 
         Uniqueness uniqueness=new Uniqueness(getString(R.string.long_text));
         uniquenessList.add(uniqueness);
