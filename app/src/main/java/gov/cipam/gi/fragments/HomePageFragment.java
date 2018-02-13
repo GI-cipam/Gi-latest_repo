@@ -3,21 +3,18 @@ package gov.cipam.gi.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import gov.cipam.gi.R;
+import gov.cipam.gi.activities.AllStatesActivity;
 import gov.cipam.gi.activities.ProductListActivity;
 import gov.cipam.gi.adapters.CategoryAdapter;
 import gov.cipam.gi.adapters.GiSliderImageAdapter;
@@ -45,9 +43,10 @@ import gov.cipam.gi.utils.StartSnapHelper;
 public class HomePageFragment extends Fragment implements CategoryAdapter.setOnCategoryClickListener,
         StatesAdapter.setOnStateClickedListener
         , GiSliderImageAdapter.setOnGiClickListener
-        , ViewPager.OnPageChangeListener {
+        , ViewPager.OnPageChangeListener
+        ,View.OnClickListener{
 
-    TextView txtCategory,txtState;
+    TextView txtCategory,txtState,txtMore;
     private TextView[] dots;
     int page_position = 0;
     LinearLayout dotsLinearLayout;
@@ -94,6 +93,8 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        txtMore=view.findViewById(R.id.more_text);
         txtCategory=view.findViewById(R.id.category_text);
         txtState=view.findViewById(R.id.states_text);
         rvState = view.findViewById(R.id.recycler_states);
@@ -101,10 +102,6 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         giSliderViewPager = view.findViewById(R.id.gi_vp_slider);
         dotsLinearLayout = view.findViewById(R.id.gi_ll_dots);
         scrollView = view.findViewById(R.id.scroll_view_home);
-
-        /*Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/montserrat_semibold.otf");
-        txtCategory.setTypeface(typeface);
-        txtState.setTypeface(typeface);*/
 
         scrollView.setSmoothScrollingEnabled(true);
         scrollView.setNestedScrollingEnabled(true);
@@ -117,16 +114,22 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         rvCategory.setAdapter(new CategoryAdapter(mDisplayCategoryList, getContext(), this));
         giSliderViewPager.setAdapter(new GiSliderImageAdapter(mDisplayCategoryList, getActivity(), this));
 
-        rvState.setLayoutManager(new GridLayoutManager(getContext(), getActivity().getResources().getInteger(R.integer.portrait_grid_no), GridLayoutManager.VERTICAL, false) {
+        rvState.setLayoutManager(new GridLayoutManager(getContext(),2 , GridLayoutManager.VERTICAL, false) {
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         });
 
-        rvCategory.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        rvCategory.setLayoutManager(new GridLayoutManager(getContext(), getActivity().getResources().getInteger(R.integer.portrait_grid_no), GridLayoutManager.VERTICAL, false) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
 
         giSliderViewPager.setOnPageChangeListener(this);
+        txtMore.setOnClickListener(this);
     }
 
     /*private void setAutoScroll(){
@@ -224,5 +227,13 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.more_text:
+                startActivity(new Intent(getContext(), AllStatesActivity.class));
+        }
     }
 }

@@ -20,7 +20,7 @@ import gov.cipam.gi.utils.Constants;
 public abstract class BaseActivity extends AppCompatActivity {
 
     String textSize;
-    boolean downloadImages;
+    boolean downloadImages,notificationPreference;
     Toolbar mToolbar;
     SharedPreferences sharedPreferences;
     SharedPreferences.OnSharedPreferenceChangeListener prefListener;
@@ -40,7 +40,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(prefListener);
     }
 
@@ -55,7 +54,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void setUpToolbar(Activity activity) {
 
-        Typeface title = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/montserrat_semibold.otf");
         mToolbar = findViewById(getToolbarID());
         setSupportActionBar(mToolbar);
         loadPreferences();
@@ -89,6 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         textSize = sharedPreferences.getString(Constants.KEY_TEXT_SIZE, getString(R.string.text_size_small));
         downloadImages = sharedPreferences.getBoolean(Constants.KEY_DOWNLOAD_IMAGES, true);
+        notificationPreference=sharedPreferences.getBoolean(Constants.KEY_NOTIFICATIONS,true);
     }
 
     protected void sharedPreferencesListener() {

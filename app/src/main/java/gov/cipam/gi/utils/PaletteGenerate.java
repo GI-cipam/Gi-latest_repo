@@ -1,22 +1,26 @@
 package gov.cipam.gi.utils;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
+
+import gov.cipam.gi.R;
 
 /**
  * Created by karan on 1/2/2018.
  */
 
-public class PaletteGenerate {
+public class PaletteGenerate implements Palette.PaletteAsyncListener{
+    View view;
 
-    public void createPaletteAsync(Bitmap bitmap) {
-        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-            public void onGenerated(Palette p) {
-            }
-        });
+    public Palette createPaletteAsync(Bitmap bitmap) {
+        return Palette.from(bitmap).generate();
     }
 
     private Palette createPaletteSync(Bitmap bitmap) {
@@ -31,16 +35,30 @@ public class PaletteGenerate {
         return p.getDarkVibrantSwatch();
     }
 
-    public void setToolbarColor(Bitmap bitmap,Toolbar toolbar) {
+    public void setViewColor(Bitmap bitmap, TextView textView) {
 
         if(bitmap!=null) {
-            Palette p = createPaletteSync(bitmap);
+            Palette p = createPaletteAsync(bitmap);
             Palette.Swatch vibrantSwatch = checkVibrantSwatch(p);
 
+            if(vibrantSwatch!=null){
+                textView.setBackgroundColor(vibrantSwatch.getRgb());
+            }
+            else {
+                textView.setBackgroundColor(Color.parseColor("#88000000"));
+            }
             /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                 window.setStatusBarColor(vibrantSwatch.getRgb());*/
 
-            toolbar.setBackgroundColor(vibrantSwatch.getRgb());
+
         }
+        else {
+
+        }
+    }
+
+    @Override
+    public void onGenerated(Palette palette) {
+
     }
 }

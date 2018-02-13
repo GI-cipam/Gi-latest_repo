@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/md_light_blue_A700</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="text_size_primary">@style/LargeBodyText</item>
         <item name="text_color_primary">@color/gray</item>
         <item name="text_color_secondary">@color/gray</item>
@@ -13,6 +13,7 @@
         <item name="layout_bg">@color/white</item>
         <item name="category_title">@color/gray_dark</item>
         <item name="android:windowBackground">@color/off_whiter</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">

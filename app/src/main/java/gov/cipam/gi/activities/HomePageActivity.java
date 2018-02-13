@@ -1,6 +1,7 @@
 package gov.cipam.gi.activities;
 
 import android.Manifest;
+import android.app.SharedElementCallback;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -79,7 +80,6 @@ public class HomePageActivity extends BaseActivity
     Cursor searchCursorHistoryNew, searchCursorOtherNew;
     boolean isFABOpen = false;
 
-    NetworkChangeReceiver networkChangeReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class HomePageActivity extends BaseActivity
 
         setUpToolbar(this);
         initializeTwitter();
-        showErrorSnackbar();
+        //showErrorSnackbar();
         databaseInstance = new Database(this);
         database = databaseInstance.getWritableDatabase();
 
@@ -118,6 +118,7 @@ public class HomePageActivity extends BaseActivity
         user = SharedPref.getSavedObjectFromPreference(HomePageActivity.this, Constants.KEY_USER_INFO, Constants.KEY_USER_DATA, Users.class);
         setNavigation();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -151,21 +152,14 @@ public class HomePageActivity extends BaseActivity
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        if (mAuth.getCurrentUser().isAnonymous()) {
-            inflater.inflate(R.menu.activity_home_page_anonymous, menu);
-            searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-            setSearchParameters();
+        inflater.inflate(R.menu.activity_home_page, menu);
 
-        } else {
-            inflater.inflate(R.menu.activity_home_page, menu);
-//        SearchManager searchManager =
-//                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-            setSearchParameters();
-        }
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        setSearchParameters();
 
-//        searchView.setSearchableInfo(
-//                searchManager.getSearchableInfo(getComponentName()));
+        if (mAuth.getCurrentUser().isAnonymous())
+            menu.findItem(R.id.action_logout).setVisible(false);
+
         return true;
     }
 
@@ -336,15 +330,11 @@ public class HomePageActivity extends BaseActivity
         if (currentUser == null) {
             startActivity(new Intent(this, NewUserActivity.class));
         }
-        registerReceiver(networkChangeReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
-        // register broadcast receiver which listens for change in network state
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        // unregister broadcast receiver
-        unregisterReceiver(networkChangeReceiver);
     }
 
     public void logoutAction() {
@@ -403,58 +393,6 @@ public class HomePageActivity extends BaseActivity
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
-    }
-
-    private void showErrorSnackbar() {
-
-        networkChangeReceiver = new NetworkChangeReceiver() {
-
-            Snackbar snackbar = null;
-
-            @Override
-            protected void dismissSnackbar() {
-
-                if (snackbar != null) {
-
-                    // dismiss snackbar
-                    snackbar.dismiss();
-                }
-            }
-
-            @Override
-            protected void setUpLayout() {
-
-                frameLayout = findViewById(R.id.home_page_frame_layout);
-
-                // check if no internet connection
-                if (!NetworkUtil.getConnectivityStatus(HomePageActivity.this)) {
-
-                    Log.e("ERRROR", "");
-
-                    snackbar = Snackbar.make(frameLayout, R.string.error_connection, Snackbar.LENGTH_INDEFINITE);
-                    snackbar.setActionTextColor(Color.CYAN);
-                    snackbar.setAction(R.string.connection_restore, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
-                        }
-                    });
-
-                    final View snackBarView = snackbar.getView();
-                    final FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackBarView.getLayoutParams();
-
-                    params.setMargins(params.leftMargin,
-                            params.topMargin,
-                            params.rightMargin,
-                            (int) (params.bottomMargin + getResources().getDimension(R.dimen.snackbar_margin)));
-
-                    snackBarView.setLayoutParams(params);
-//                    snackBarView.setElevation(0);
-
-                    snackbar.show();
-                }
-            }
-        };
     }
 
     @Override
@@ -516,6 +454,4 @@ public class HomePageActivity extends BaseActivity
     public void onClick(View view) {
 
     }
-
-
 }

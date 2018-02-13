@@ -7,6 +7,7 @@ package gov.cipam.gi.model;
 public class StatePreference {
     String state;
 
+
     public StatePreference(String state) {
         this.state = state;
     }

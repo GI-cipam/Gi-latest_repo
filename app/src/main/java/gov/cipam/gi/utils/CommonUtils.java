@@ -75,32 +75,4 @@ public class CommonUtils {
             imageView.setImageResource(R.drawable.image_off);
         }
     }
-
-    public static void setTextSize(Context context,TextView textView){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String textSize = sharedPreferences.getString(Constants.KEY_TEXT_SIZE,context.getString(R.string.text_size_small));
-
-        if (textSize.equals(context.getString(R.string.text_size_small))) {
-            context.setTheme(R.style.TextSizeSmall);
-            textView.setTextSize(R.style.SmallBodyText);
-        }
-        else if (textSize.equals(context.getString(R.string.text_size_medium))) {
-            context.setTheme(R.style.TextSizeMedium);
-            textView.setTextSize(R.style.MediumBodyText);
-        }
-        else if (textSize.equals(context.getString(R.string.text_size_large))) {
-            context.setTheme(R.style.TextSizeLarge);
-            textView.setTextSize(R.style.LargeBodyText);
-        }
-
-    }
-
-        /*Pattern pattern;
-        Matcher matcher;
-
-        final String PASSWORD_PATTERN = "((!)(@)(#)($)(%)(^)(&))";
-        pattern = Pattern.compile(password);
-        matcher = pattern.matcher(password);
-
-        return matcher.matches();*/
 }

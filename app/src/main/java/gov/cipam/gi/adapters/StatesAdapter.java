@@ -1,7 +1,11 @@
 package gov.cipam.gi.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
@@ -17,10 +22,14 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.model.States;
+import gov.cipam.gi.utils.PaletteGenerate;
 import gov.cipam.gi.utils.RoundedTransformation;
 
 /**
@@ -30,6 +39,8 @@ import gov.cipam.gi.utils.RoundedTransformation;
 public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewHolder> {
     setOnStateClickedListener mListener;
     ArrayList<States> mListOfStates;
+    URL url;
+    Bitmap bitmap;
     Context mContext;
 
     public StatesAdapter(setOnStateClickedListener mListener, ArrayList<States> mListOfStates, Context mContext) {
@@ -48,21 +59,23 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
     }
 
     @Override
-    public void onBindViewHolder(final StateViewHolder holder, int position) {
+    public void onBindViewHolder(final StateViewHolder holder, final int position) {
+        final PaletteGenerate paletteGenerate=new PaletteGenerate();
         holder.mName.setText(mListOfStates.get(position).getName());
         String DpUrl=mListOfStates.get(position).getDpurl();
+
         holder.progressBar.setVisibility(View.VISIBLE);
-        //holder.mCircularImage.setImageResource(R.drawable.image1);
         Picasso.with(mContext)
                 .load(DpUrl)
-                .transform(new RoundedTransformation(10,0))
-                .resize(400,400)
                 .placeholder(R.drawable.image)
+                .resize(400,400)
                 .centerCrop()
-                .into(holder.mDp, new Callback() {
+                .into(holder.mDp,new Callback() {
                     @Override
                     public void onSuccess() {
                         holder.progressBar.setVisibility(View.INVISIBLE);
+                        bitmap = ((BitmapDrawable)holder.mDp.getDrawable()).getBitmap();
+                        paletteGenerate.setViewColor(bitmap,holder.mName);
                     }
 
                     @Override
@@ -70,6 +83,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
                         holder.progressBar.setVisibility(View.INVISIBLE);
                         holder.mDp.setImageResource(R.drawable.image);
                     }
+
                 });
     }
 
@@ -92,15 +106,13 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
             mDp =itemView.findViewById(R.id.stateListImage);
             progressBar=itemView.findViewById(R.id.progressBarState);
             relativeLayout.setOnClickListener(this);
-
-            /*Typeface typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/montserrat_regular.otf");
-            mName.setTypeface(typeface);*/
         }
 
         @Override
         public void onClick(View v) {
             mListener.onStateClickedListener(v,getAdapterPosition());
         }
+
     }
 
 }
