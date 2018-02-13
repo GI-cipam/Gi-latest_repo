@@ -20,7 +20,6 @@ public class DatabaseFetch {
 
     private Database databaseInstance;
     private SQLiteDatabase database;
-
         public void populateDisplayListFromDB(Context context) {
 
             mDisplayStateList.clear();
