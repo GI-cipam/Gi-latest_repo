@@ -26,14 +26,11 @@ import gov.cipam.gi.model.Categories;
 public class GiSliderImageAdapter extends PagerAdapter implements View.OnClickListener {
 
     private ArrayList<Categories> mCategories;
-    ImageView imgvSliderImage;
-    TextView txtvGiSlider;
+    private ImageView imgvSliderImage;
     private Activity activity;
-    LayoutInflater layoutInflater;
-    setOnGiClickListener mListener;
-    RelativeLayout relativeLayout;
+    private ProgressBar progressBar;
     int position;
-    ProgressBar progressBar;
+    setOnGiClickListener mListener;
 
     public GiSliderImageAdapter(ArrayList<Categories> mCategories, Activity activity,setOnGiClickListener mListener) {
         this.mCategories = mCategories;
@@ -51,12 +48,12 @@ public class GiSliderImageAdapter extends PagerAdapter implements View.OnClickLi
     }
     public Object instantiateItem(ViewGroup container, int position) {
             this.position=position;
-        layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = layoutInflater.inflate(R.layout.card_view_gi_item, container, false);
 
-        relativeLayout=view.findViewById(R.id.giRelativeLayout);
-        txtvGiSlider=view.findViewById(R.id.card_name_gi);
+        final RelativeLayout relativeLayout=view.findViewById(R.id.giRelativeLayout);
+        final TextView txtvGiSlider=view.findViewById(R.id.card_name_gi);
         imgvSliderImage=view.findViewById(R.id.card_dp_gi);
         progressBar=view.findViewById(R.id.progressBarGi);
 

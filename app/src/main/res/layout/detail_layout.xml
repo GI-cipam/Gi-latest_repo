@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/md_grey_100"
     android:orientation="vertical">
 
@@ -10,52 +11,83 @@
         android:id="@+id/childHistoryCard"
         layout="@layout/card_view_group" />
 
-    <TextView
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_smaller"
-        android:text="Uniqueness"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textColor="@color/colorPrimaryDark" />
+        app:cardUseCompatPadding="true">
 
-    <RelativeLayout
-        android:id="@+id/relative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_smallest">
-
-        <gov.cipam.gi.utils.WrapContentHeightViewPager
-            android:id="@+id/vp_slider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:id="@+id/ll_dots"
+        <RelativeLayout
+            android:id="@+id/relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/vp_slider"
             android:layout_marginBottom="@dimen/margin_smallest"
-            android:gravity="center"
-            android:orientation="horizontal" />
-    </RelativeLayout>
+            android:layout_marginTop="@dimen/margin_smallest"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/text_uniqueness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_smaller"
+                android:layout_marginStart="@dimen/margin_small"
+                android:text="Uniqueness"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorPrimaryDark"
+                style="?attr/text_size_title"
+                android:textStyle="bold" />
+
+            <gov.cipam.gi.utils.WrapContentHeightViewPager
+                android:id="@+id/vp_slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_uniqueness" />
+
+            <LinearLayout
+                android:id="@+id/ll_dots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vp_slider"
+                android:layout_marginBottom="@dimen/margin_smallest"
+                android:gravity="center"
+                android:orientation="horizontal" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
     <include
         android:id="@+id/childDescCard"
         layout="@layout/card_view_group" />
 
-    <TextView
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_smaller"
-        android:text="Sellers"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textColor="@color/colorPrimaryDark" />
+        app:cardUseCompatPadding="true">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/seller_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_smallest"
+            android:layout_marginTop="@dimen/margin_smallest"
+            android:background="@android:color/white">
 
+            <TextView
+                android:id="@+id/text_seller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_smaller"
+                android:layout_marginStart="@dimen/margin_small"
+                android:text="Sellers"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/colorPrimaryDark"
+                style="?attr/text_size_title"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/seller_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_seller" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

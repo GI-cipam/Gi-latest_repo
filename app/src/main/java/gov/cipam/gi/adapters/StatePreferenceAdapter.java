@@ -28,8 +28,8 @@ import gov.cipam.gi.utils.RoundedTransformation;
 public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreferenceAdapter.StatePreferenceViewHolder> {
 
     private ArrayList<StatePreference> statePreferences;
+    private ArrayList<StatePreference> statePreference =new ArrayList<>();
     setOnPreferenceStateClickListener mListener;
-    ArrayList<StatePreference> statePreference =new ArrayList<>();
 
     public StatePreferenceAdapter(ArrayList<StatePreference> statePreferences,setOnPreferenceStateClickListener onPreferenceStateClickListener) {
         this.statePreferences = statePreferences;

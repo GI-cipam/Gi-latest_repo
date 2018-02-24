@@ -1,8 +1,6 @@
 package gov.cipam.gi.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,13 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
@@ -29,11 +23,9 @@ import gov.cipam.gi.model.Product;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductViewHolder> {
 
-    String                              strHashtag;
-    private ArrayList<Product>          GIList;
-    private Context                     mContext;
+    private ArrayList<Product> GIList;
+    private Context mContext;
     private setOnProductClickedListener mListener;
-    private View mItemView;
 
     public ProductListAdapter(ArrayList<Product> GIList, Context mContext, setOnProductClickedListener mListener) {
         this.GIList = GIList;
@@ -41,21 +33,21 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         this.mListener = mListener;
     }
 
-    public interface setOnProductClickedListener{
+    public interface setOnProductClickedListener {
         void onProductClicked(ProductListAdapter.ProductViewHolder view, int position);
     }
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_product_list,parent,false);
-        return  new ProductListAdapter.ProductViewHolder(itemView);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_product_list, parent, false);
+        return new ProductListAdapter.ProductViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
 
-        strHashtag=holder.itemView.getResources().getString(R.string.note);
-        ViewCompat.setTransitionName(holder.itemView.findViewById(R.id.productListImage),String.valueOf(position+"_image"));
+        final String strHashtag = holder.itemView.getResources().getString(R.string.note);
+        ViewCompat.setTransitionName(holder.itemView.findViewById(R.id.productListImage), String.valueOf(position + "_image"));
         holder.mTitle.setText(GIList.get(position).getName());
         holder.mFiller.setText(GIList.get(position).getDetail());
         holder.mState.setText(strHashtag.concat(GIList.get(position).getState()));
@@ -66,7 +58,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                 .fit()
                 //.placeholder(R.drawable.image)
                 .into(holder.imageView);
-        ViewCompat.setTransitionName(holder.imageView,GIList.get(position).getUid());
+        ViewCompat.setTransitionName(holder.imageView, GIList.get(position).getUid());
     }
 
     @Override
@@ -76,34 +68,26 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView             mTitle,mFiller,mState,mCategory;
-        public ImageView            imageView;
-        private FrameLayout         frameLayout;
+        private TextView mTitle, mFiller, mState, mCategory;
+        public ImageView imageView;
+        private FrameLayout frameLayout;
 
         private ProductViewHolder(View itemView) {
             super(itemView);
-            mItemView=itemView;
-/*            Typeface title = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/montserrat_semibold.otf");
-            Typeface filler = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/montserrat_light.otf");
-            Typeface tags = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/montserrat_extralight.otf");*/
 
-            frameLayout=itemView.findViewById(R.id.productListFrame);
-            mTitle=itemView.findViewById(R.id.productListTitle);
-            mFiller=itemView.findViewById(R.id.productListDesc);
-            mState=itemView.findViewById(R.id.productListStateName);
-            mCategory=itemView.findViewById(R.id.productListCategoryName);
-            imageView=itemView.findViewById(R.id.productListImage);
+            frameLayout = itemView.findViewById(R.id.productListFrame);
+            mTitle = itemView.findViewById(R.id.productListTitle);
+            mFiller = itemView.findViewById(R.id.productListDesc);
+            mState = itemView.findViewById(R.id.productListStateName);
+            mCategory = itemView.findViewById(R.id.productListCategoryName);
+            imageView = itemView.findViewById(R.id.productListImage);
 
-            /*mTitle.setTypeface(title);
-            mFiller.setTypeface(filler);
-            mState.setTypeface(tags);
-            mCategory.setTypeface(tags);*/
             frameLayout.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            mListener.onProductClicked(this,getAdapterPosition());
+            mListener.onProductClicked(this, getAdapterPosition());
         }
     }
 }

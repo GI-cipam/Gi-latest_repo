@@ -29,12 +29,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.ms.square.android.expandabletextview.ExpandableTextView;
+import com.twitter.sdk.android.core.models.Card;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -69,11 +71,11 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
     int page_position = 0;
     ExpandableTextView etvHistory,etvDesc;
-    TextView txtvTitleHistory,txtvTitleDesc,txtState,txtCategory,txtHistory,txtDesc;
     CardView historyLinearLayout,descLinearLayout;
+    LinearLayout dotsLinearLayout;
+    TextView txtvTitleHistory,txtvTitleDesc;
     String name,address,contact;
     Double lon,lat;
-    LinearLayout dotsLinearLayout;
     WrapContentHeightViewPager viewPager;
     private TextView[] dots;
     RecyclerView rvSeller;

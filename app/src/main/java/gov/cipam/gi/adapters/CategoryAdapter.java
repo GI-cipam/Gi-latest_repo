@@ -78,7 +78,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             mName =itemView.findViewById(R.id.card_name_category_alternate);
             mDp =itemView.findViewById(R.id.image_category);
 
-            /*Typeface typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/montserrat_regular.otf");
+            /*Typeface typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/helvetica_lighter.otf");
             mName.setTypeface(typeface);*/
             linearLayout.setOnClickListener(this);
         }

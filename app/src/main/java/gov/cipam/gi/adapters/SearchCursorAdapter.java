@@ -23,7 +23,7 @@ import android.support.v4.widget.CursorAdapter;
 public class SearchCursorAdapter extends CursorAdapter {
 
     Context mContext;
-    Cursor cursor;
+    private Cursor cursor;
     private setOnSuggestionClickListener mListener;
     private String mQuery;
 

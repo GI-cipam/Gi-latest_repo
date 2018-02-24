@@ -3,6 +3,7 @@ package gov.cipam.gi.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -107,6 +108,10 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         scrollView.setNestedScrollingEnabled(true);
         startSnapHelper.attachToRecyclerView(rvState);
         startSnapHelper1.attachToRecyclerView(rvCategory);
+
+        /*Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/helvetica_bolder.otf");
+        txtState.setTypeface(typeface);
+        txtCategory.setTypeface(typeface);*/
 
         addBottomDots(0);
         //setAutoScroll();

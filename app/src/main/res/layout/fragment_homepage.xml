@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll_view_home"
     android:layout_width="match_parent"
@@ -10,9 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipToPadding="false"
         android:orientation="vertical"
-        android:weightSum="5"
-        android:clipToPadding="false">
+        android:weightSum="5">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -33,55 +34,61 @@
                 android:orientation="horizontal" />
         </RelativeLayout>
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:background="@android:color/white"
-            android:elevation="@dimen/card_elevation"
-            android:orientation="vertical">
+            app:cardUseCompatPadding="true">
 
-            <TextView
-                android:id="@+id/category_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="sans-serif-condensed"
-                android:padding="@dimen/padding_smaller"
-                android:text="Categories"
-                android:textAlignment="center"
-                android:textColor="?attr/text_color_primary"
-                android:textStyle="bold"
-                android:theme="@style/LargeBodyText" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_categories"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginBottom="@dimen/margin_small"/>
-        </LinearLayout>
+                android:layout_marginBottom="@dimen/margin_smaller"
+                android:layout_marginTop="@dimen/margin_smaller"
+                android:layout_weight="2"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="@dimen/padding_smaller"
+                    android:text="Categories"
+                    android:textAlignment="center"
+                    android:textColor="?attr/text_color_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:theme="@style/MediumBodyText" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_small" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_marginBottom="@dimen/margin_smaller"
             android:layout_marginTop="@dimen/margin_smaller"
+            android:layout_weight="2"
             android:background="?attr/layout_bg"
-            android:elevation="@dimen/padding_smaller"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/states_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
                 android:padding="@dimen/padding_smaller"
                 android:text="States"
                 android:textAllCaps="false"
                 android:textColor="?attr/text_color_primary"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:theme="@style/LargeBodyText" />
+                android:theme="@style/MediumBodyText" />
 
             <TextView
                 android:id="@+id/more_text"
@@ -93,7 +100,7 @@
                 android:focusable="true"
                 android:padding="@dimen/padding_smaller"
                 android:text="View All"
-                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textColor="@color/md_blue_500"
                 android:textStyle="bold"
                 android:theme="@style/SmallBodyText" />

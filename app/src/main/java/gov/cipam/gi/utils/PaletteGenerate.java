@@ -17,7 +17,6 @@ import gov.cipam.gi.R;
  */
 
 public class PaletteGenerate implements Palette.PaletteAsyncListener{
-    View view;
 
     public Palette createPaletteAsync(Bitmap bitmap) {
         return Palette.from(bitmap).generate();
@@ -47,13 +46,6 @@ public class PaletteGenerate implements Palette.PaletteAsyncListener{
             else {
                 textView.setBackgroundColor(Color.parseColor("#88000000"));
             }
-            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                window.setStatusBarColor(vibrantSwatch.getRgb());*/
-
-
-        }
-        else {
-
         }
     }
 

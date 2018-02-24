@@ -19,10 +19,9 @@ import gov.cipam.gi.model.Uniqueness;
 
 public class UniquenessPagerAdapter extends PagerAdapter {
 
-    LayoutInflater layoutInflater;
+
     private ArrayList<Uniqueness> mUniqueness;
-    Activity activity;
-    TextView txtUni,txtPos;
+    private Activity activity;
 
     public UniquenessPagerAdapter(ArrayList<Uniqueness> mUniqueness, Activity activity) {
         this.mUniqueness= mUniqueness;
@@ -32,10 +31,10 @@ public class UniquenessPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 
-        layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.uniqueness_pager_item, container, false);
-        txtUni=view.findViewById(R.id.card_gi_uniqueness);
-        txtPos=view.findViewById(R.id.uniqueness_text);
+        final TextView txtUni=view.findViewById(R.id.card_gi_uniqueness);
+        final TextView txtPos=view.findViewById(R.id.uniqueness_text);
 
         txtUni.setText(mUniqueness.get(position).getInfo());
         txtPos.setText(String.valueOf(position+1));

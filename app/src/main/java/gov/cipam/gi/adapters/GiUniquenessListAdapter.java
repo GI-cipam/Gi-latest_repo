@@ -19,8 +19,7 @@ import gov.cipam.gi.model.Uniqueness;
 public class GiUniquenessListAdapter extends RecyclerView.Adapter<GiUniquenessListAdapter.UniquenessViewHolder> {
 
     Context mContext;
-    private List<Uniqueness> mUniquenessList;
-    String[] unique;
+    List<Uniqueness> mUniquenessList;
     public GiUniquenessListAdapter(Context mContext) {
         this.mContext = mContext;
     }
@@ -34,7 +33,7 @@ public class GiUniquenessListAdapter extends RecyclerView.Adapter<GiUniquenessLi
 
     @Override
     public void onBindViewHolder(UniquenessViewHolder holder, int position) {
-        unique=holder.itemView.getResources().getStringArray(R.array.dummy_text);
+        final String[] unique=holder.itemView.getResources().getStringArray(R.array.dummy_text);
         //holder.tvUniqueness.setText(mUniquenessList.get(position).getInfo());
 
         for(int i=0;i<=position;i++){

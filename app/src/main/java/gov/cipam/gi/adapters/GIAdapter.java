@@ -24,7 +24,7 @@ import gov.cipam.gi.model.Categories;
 
 public class GIAdapter extends RecyclerView.Adapter<GIAdapter.GiViewHolder> {
 
-    ArrayList<Categories> mCategoryList;
+    private ArrayList<Categories> mCategoryList;
     Context mContext;
     setOnGIClickListener mListener;
 

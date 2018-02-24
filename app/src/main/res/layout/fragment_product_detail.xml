@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,25 +11,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/productDetailImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/productDetailImage"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/image_parameter_large"
-                android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                android:transitionName="commonImage"
-                tools:ignore="ContentDescription,UnusedAttribute" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#22000000"
-                android:visibility="gone" />
-        </RelativeLayout>
+            android:layout_height="@dimen/image_parameter_large"
+            android:fitsSystemWindows="true"
+            android:scaleType="centerCrop"
+            android:transitionName="commonImage"
+            tools:ignore="ContentDescription,UnusedAttribute" />
 
         <include layout="@layout/detail_layout" />
     </LinearLayout>

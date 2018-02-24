@@ -20,6 +20,7 @@ import gov.cipam.gi.utils.Constants;
 import static gov.cipam.gi.fragments.HomePageFragment.mDisplayStateList;
 
 public class AllStatesActivity extends BaseActivity implements StatesAdapter.setOnStateClickedListener {
+
     RecyclerView rvAllStates;
     DatabaseFetch databaseFetch;
     DatabaseReference mDatabaseState;

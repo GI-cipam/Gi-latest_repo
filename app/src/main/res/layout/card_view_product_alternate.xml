@@ -25,7 +25,8 @@
         android:id="@+id/productListTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/productListImage"
+        android:layout_above="@+id/productListDesc"
+        android:layout_alignParentStart="true"
         android:letterSpacing="0.02"
         android:paddingBottom="@dimen/padding_small"
         android:paddingEnd="@dimen/padding_small"
@@ -48,6 +49,7 @@
         android:lineSpacingExtra="3sp"
         android:padding="@dimen/padding_small"
         android:text="@string/permission_rationale"
+        android:textAllCaps="false"
         android:textColor="#1f1f1f"
         android:textSize="14sp" />
 

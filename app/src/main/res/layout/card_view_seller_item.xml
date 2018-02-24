@@ -22,8 +22,10 @@
             android:layout_marginEnd="@dimen/margin_smaller"
             android:layout_marginStart="@dimen/margin_smaller"
             android:layout_marginTop="@dimen/margin_smaller"
+            android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp" />
 
         <View
             android:id="@+id/dividerView"
@@ -42,7 +44,6 @@
             android:layout_marginEnd="@dimen/margin_smaller"
             android:layout_marginStart="@dimen/margin_smaller"
             android:layout_marginTop="@dimen/margin_smaller"
-            android:fontFamily="serif"
             android:lineSpacingExtra="4sp"
             android:textColor="#1f1f1f" />
 

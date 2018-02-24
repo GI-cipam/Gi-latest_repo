@@ -2,10 +2,7 @@ package gov.cipam.gi.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,17 +11,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.makeramen.roundedimageview.RoundedImageView;
-import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import gov.cipam.gi.R;
@@ -38,9 +28,8 @@ import gov.cipam.gi.utils.RoundedTransformation;
 
 public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewHolder> {
     setOnStateClickedListener mListener;
-    ArrayList<States> mListOfStates;
-    URL url;
-    Bitmap bitmap;
+    private ArrayList<States> mListOfStates;
+    private Bitmap bitmap;
     Context mContext;
 
     public StatesAdapter(setOnStateClickedListener mListener, ArrayList<States> mListOfStates, Context mContext) {
@@ -49,33 +38,35 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
         this.mContext = mContext;
     }
 
-    public interface setOnStateClickedListener{
+    public interface setOnStateClickedListener {
         void onStateClickedListener(View view, int position);
     }
+
     @Override
     public StateViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_state_item,parent,false);
-        return  new StatesAdapter.StateViewHolder(itemView);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_state_item, parent, false);
+        return new StatesAdapter.StateViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final StateViewHolder holder, final int position) {
-        final PaletteGenerate paletteGenerate=new PaletteGenerate();
+        final PaletteGenerate paletteGenerate = new PaletteGenerate();
         holder.mName.setText(mListOfStates.get(position).getName());
-        String DpUrl=mListOfStates.get(position).getDpurl();
+        String DpUrl = mListOfStates.get(position).getDpurl();
 
         holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(mContext)
                 .load(DpUrl)
                 .placeholder(R.drawable.image)
-                .resize(400,400)
+                .transform(new RoundedTransformation(5, 0))
+                .resize(300, 300)
                 .centerCrop()
-                .into(holder.mDp,new Callback() {
+                .into(holder.mDp, new Callback() {
                     @Override
                     public void onSuccess() {
                         holder.progressBar.setVisibility(View.INVISIBLE);
-                        bitmap = ((BitmapDrawable)holder.mDp.getDrawable()).getBitmap();
-                        paletteGenerate.setViewColor(bitmap,holder.mName);
+                        bitmap = ((BitmapDrawable) holder.mDp.getDrawable()).getBitmap();
+                        paletteGenerate.setViewColor(bitmap, holder.mName);
                     }
 
                     @Override
@@ -92,7 +83,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
         return mListOfStates.size();
     }
 
-    public class StateViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class StateViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mName;
         private ImageView mDp;
         private ProgressBar progressBar;
@@ -101,16 +92,17 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
         private StateViewHolder(View itemView) {
             super(itemView);
 
-            relativeLayout=itemView.findViewById(R.id.stateListRelativeLayout);
-            mName =itemView.findViewById(R.id.stateListName);
-            mDp =itemView.findViewById(R.id.stateListImage);
-            progressBar=itemView.findViewById(R.id.progressBarState);
+            relativeLayout = itemView.findViewById(R.id.stateListRelativeLayout);
+            mName = itemView.findViewById(R.id.stateListName);
+            mDp = itemView.findViewById(R.id.stateListImage);
+            progressBar = itemView.findViewById(R.id.progressBarState);
             relativeLayout.setOnClickListener(this);
+
         }
 
         @Override
         public void onClick(View v) {
-            mListener.onStateClickedListener(v,getAdapterPosition());
+            mListener.onStateClickedListener(v, getAdapterPosition());
         }
 
     }

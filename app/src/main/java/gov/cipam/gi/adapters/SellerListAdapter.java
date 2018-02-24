@@ -18,8 +18,8 @@ import gov.cipam.gi.model.Seller;
 
 public class SellerListAdapter extends RecyclerView.Adapter<SellerListAdapter.SellerViewHolder> {
 
+    private ArrayList<Seller> mSellerList;
     Context mContext;
-    ArrayList<Seller> mSellerList;
     setOnSellerClickListener mListener;
 
     public SellerListAdapter(Context mContext, ArrayList<Seller> mSellerList, setOnSellerClickListener mListener) {
