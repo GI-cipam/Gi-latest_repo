@@ -42,7 +42,7 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
 
     @Override
     public StatePreferenceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_state_preference_item,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_state_preference_item,parent,false);
         return  new StatePreferenceAdapter.StatePreferenceViewHolder(itemView);
     }
 
@@ -67,7 +67,7 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
                     @Override
                     public void onError() {
                         holder.progressBar.setVisibility(View.INVISIBLE);
-                        holder.mDp.setImageResource(R.drawable.image);
+                        holder.mDp.setImageResource(R.drawable.ic_placeholder_image);
                     }
                 });
     }
@@ -87,8 +87,8 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
             super(itemView);
 
             relativeLayout=itemView.findViewById(R.id.state_preference_parent);
-            mName =itemView.findViewById(R.id.statePreferenceName);
-            mDp =itemView.findViewById(R.id.statePreferenceImage);
+            mName =itemView.findViewById(R.id.text_state_preference);
+            mDp =itemView.findViewById(R.id.image_state_preference);
             progressBar=itemView.findViewById(R.id.progressBarStatePreference);
 
             progressBar.setVisibility(View.INVISIBLE);

@@ -9,10 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import gov.cipam.gi.R;
-import gov.cipam.gi.model.Bio;
 
 /**
  * Created by karan on 1/25/2018.
@@ -37,7 +34,7 @@ public class BioAdapter extends RecyclerView.Adapter<BioAdapter.BioViewHolder> {
 
     @Override
     public BioViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_bio_item,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bio,parent,false);
         return  new BioAdapter.BioViewHolder(itemView);
     }
 
@@ -67,9 +64,9 @@ public class BioAdapter extends RecyclerView.Adapter<BioAdapter.BioViewHolder> {
         private BioViewHolder(View itemView) {
             super(itemView);
 
-            mName =itemView.findViewById(R.id.bioName);
-            mEmail=itemView.findViewById(R.id.bioEmail);
-            mDp =itemView.findViewById(R.id.bioImage);
+            mName =itemView.findViewById(R.id.text_bio_name);
+            mEmail=itemView.findViewById(R.id.text_bio_email);
+            mDp =itemView.findViewById(R.id.image_bio);
         }
 
         @Override

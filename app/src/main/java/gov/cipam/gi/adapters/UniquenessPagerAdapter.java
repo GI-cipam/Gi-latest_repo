@@ -32,9 +32,9 @@ public class UniquenessPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
 
         final LayoutInflater layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.uniqueness_pager_item, container, false);
-        final TextView txtUni=view.findViewById(R.id.card_gi_uniqueness);
-        final TextView txtPos=view.findViewById(R.id.uniqueness_text);
+        View view = layoutInflater.inflate(R.layout.item_uniqueness_new, container, false);
+        final TextView txtUni=view.findViewById(R.id.text_gi_uniqueness);
+        final TextView txtPos=view.findViewById(R.id.text_uniqueness_position);
 
         txtUni.setText(mUniqueness.get(position).getInfo());
         txtPos.setText(String.valueOf(position+1));

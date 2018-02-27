@@ -66,7 +66,7 @@ public class IntroActivity extends AppIntro {
     public void setSpecs() {
         setBarColor(Color.TRANSPARENT);
         setSeparatorColor(Color.TRANSPARENT);
-        setImageNextButton(ContextCompat.getDrawable(getApplicationContext(), R.drawable.next));
+        setImageNextButton(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_next));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }

@@ -50,18 +50,18 @@ public class GiSliderImageAdapter extends PagerAdapter implements View.OnClickLi
             this.position=position;
         final LayoutInflater layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = layoutInflater.inflate(R.layout.card_view_gi_item, container, false);
+        View view = layoutInflater.inflate(R.layout.item_gi_image, container, false);
 
         final RelativeLayout relativeLayout=view.findViewById(R.id.giRelativeLayout);
-        final TextView txtvGiSlider=view.findViewById(R.id.card_name_gi);
-        imgvSliderImage=view.findViewById(R.id.card_dp_gi);
+        final TextView txtvGiSlider=view.findViewById(R.id.text_gi);
+        imgvSliderImage=view.findViewById(R.id.image_gi);
         progressBar=view.findViewById(R.id.progressBarGi);
 
         progressBar.setVisibility(View.VISIBLE);
         txtvGiSlider.setText(mCategories.get(position).getName());
         Picasso.with(activity)
                 .load(mCategories.get(position).getDpurl())
-                .placeholder(R.drawable.bg_round_white)
+                .placeholder(R.drawable.btn_round_white)
                 .into(imgvSliderImage, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -70,7 +70,7 @@ public class GiSliderImageAdapter extends PagerAdapter implements View.OnClickLi
 
                     @Override
                     public void onError() {
-                    imgvSliderImage.setImageResource(R.drawable.image_off);
+                    imgvSliderImage.setImageResource(R.drawable.ic_image_off);
                     progressBar.setVisibility(View.GONE);
                     }
                 });

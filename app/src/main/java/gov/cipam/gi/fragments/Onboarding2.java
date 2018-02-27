@@ -46,7 +46,7 @@ public class Onboarding2 extends Fragment implements ISlideBackgroundColorHolder
 
         skipButton=view.findViewById(R.id.skipButton);
         skipButton.setTextColor(getDefaultBackgroundColor());
-        skipButton.setBackgroundResource(R.drawable.introbutton);
+        skipButton.setBackgroundResource(R.drawable.btn_intro);
         skipButton.setOnClickListener(this);
     }
 

@@ -5,25 +5,19 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -39,14 +33,11 @@ import java.util.ArrayList;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.ProductListActivity;
-import gov.cipam.gi.activities.SearchResultsActivity;
-import gov.cipam.gi.adapters.CategoryAdapter;
 import gov.cipam.gi.database.Database;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
 import gov.cipam.gi.model.SellerAndView;
 import gov.cipam.gi.utils.Constants;
-import gov.cipam.gi.utils.DetailsTransition;
 
 /**
  * Created by karan on 11/20/2017.
@@ -103,7 +94,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
             public View getInfoContents(final Marker marker) {
                 TextView sellerNAme, sellerAddress, sellerContact, productName;
                 ImageView imageView;
-                View itemView = LayoutInflater.from(getContext()).inflate(R.layout.one_marker_view, null);
+                View itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_marker, null);
                 productName = itemView.findViewById(R.id.mapInfoWindow_ProductName);
                 sellerNAme = itemView.findViewById(R.id.mapInfoWindow_ProductSellerName);
                 sellerAddress = itemView.findViewById(R.id.maoInfoWindow_ProductSellerAddress);

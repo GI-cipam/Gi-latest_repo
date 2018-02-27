@@ -6,18 +6,18 @@
         <item
             android:checkable="false"
             android:id="@+id/nav_about_us"
-            android:icon="@drawable/information_variant"
+            android:icon="@drawable/ic_information_variant"
             android:title="@string/about_us" />
 
     <item android:title="@string/nav_drawer_title">
         <menu>
             <item
                 android:id="@+id/nav_account"
-                android:icon="@drawable/ic_account_circle_grey_24dp"
+                android:icon="@drawable/ic_account_circle"
                 android:title="@string/account_info" />
             <item
                 android:id="@+id/nav_sign_up"
-                android:icon="@drawable/login"
+                android:icon="@drawable/ic_menu_login"
                 android:title="@string/sign_up" />
 
             <item android:id="@+id/nav_share"
@@ -25,7 +25,7 @@
                 android:title="@string/share"/>
 
             <item android:id="@+id/nav_bio"
-                android:icon="@drawable/information"
+                android:icon="@drawable/ic_menu_information"
                 android:title="@string/developers"/>
         </menu>
     </item>

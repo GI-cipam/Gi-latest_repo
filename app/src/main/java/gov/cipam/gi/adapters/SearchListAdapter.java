@@ -20,7 +20,6 @@ import gov.cipam.gi.model.Categories;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
 import gov.cipam.gi.model.States;
-import gov.cipam.gi.utils.RoundedTransformation;
 
 /**
  * Created by NITANT SOOD on 10-01-2018.
@@ -87,13 +86,13 @@ public class SearchListAdapter extends BaseExpandableListAdapter{
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         LayoutInflater inflator = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflator.inflate(R.layout.card_view_search_item,null);
+        convertView = inflator.inflate(R.layout.item_search,null);
         LinearLayout linearLayout=convertView.findViewById(R.id.search_list_linear_layout);
-        TextView tvTitle=convertView.findViewById(R.id.search_list_tv1);
-        TextView tvFiller=convertView.findViewById(R.id.search_list_tv2);
-        TextView tvFiller1=convertView.findViewById(R.id.search_list_tv4);
-        TextView tvExtra=convertView.findViewById(R.id.search_list_tv3);
-        ImageView imageView=convertView.findViewById(R.id.search_list_image);
+        TextView tvTitle=convertView.findViewById(R.id.text_search_title);
+        TextView tvFiller=convertView.findViewById(R.id.text_search_state);
+        TextView tvFiller1=convertView.findViewById(R.id.text_search_category);
+        TextView tvExtra=convertView.findViewById(R.id.text_search_contact);
+        ImageView imageView=convertView.findViewById(R.id.image_search);
 
         String parentName=parentHeaders.get(groupPosition);
         switch (parentName){
@@ -140,7 +139,7 @@ public class SearchListAdapter extends BaseExpandableListAdapter{
                 Seller seller=(Seller) parentChildListMapping.get(parentName).get(childPosition);
                 tvTitle.setText(seller.getName());
                 tvExtra.setText(seller.getcontact());
-                imageView.setImageResource(R.drawable.account);
+                imageView.setImageResource(R.drawable.ic_account);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 tvFiller.setText(seller.getaddress());
                 break;

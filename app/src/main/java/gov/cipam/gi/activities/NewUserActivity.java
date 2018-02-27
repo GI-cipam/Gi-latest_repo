@@ -28,8 +28,8 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         launchActivity();
         mAuth = FirebaseAuth.getInstance();
 
-        skipLoginBtn=findViewById(R.id.btnSkipLogin);
-        registerUserButton=findViewById(R.id.btnLogin);
+        skipLoginBtn=findViewById(R.id.button_skip_login);
+        registerUserButton=findViewById(R.id.button_login);
 
         skipLoginBtn.setOnClickListener(this);
         registerUserButton.setOnClickListener(this);

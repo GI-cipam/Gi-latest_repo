@@ -32,7 +32,7 @@
     <string name="text_size_medium">Medium</string>
     <string name="text_size_large">Large</string>
 
-    <!--keys for settings-->
+    <!--keys ic_menu_settingsings-->
     <string name="image_download_key">image_download</string>
     <string name="theme_key">app_theme</string>
     <string name="text_key">text_size</string>

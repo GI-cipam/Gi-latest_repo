@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/childHistoryCard"
-        layout="@layout/card_view_group" />
+        layout="@layout/partial_layout_group" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -56,7 +56,7 @@
 
     <include
         android:id="@+id/childDescCard"
-        layout="@layout/card_view_group" />
+        layout="@layout/partial_layout_group" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

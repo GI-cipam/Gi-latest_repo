@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import gov.cipam.gi.R;
@@ -26,7 +25,7 @@ public class GiUniquenessListAdapter extends RecyclerView.Adapter<GiUniquenessLi
 
     @Override
     public UniquenessViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_uniqueness_item,parent,false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_uniqueness,parent,false);
         return  new GiUniquenessListAdapter.UniquenessViewHolder(itemView);
 
     }
@@ -52,8 +51,8 @@ public class GiUniquenessListAdapter extends RecyclerView.Adapter<GiUniquenessLi
 
         public UniquenessViewHolder(View itemView) {
             super(itemView);
-            tvUniqueness = itemView.findViewById(R.id.gi_uniqueness);
-            tvposition=itemView.findViewById(R.id.uniqueness_text);
+            tvUniqueness = itemView.findViewById(R.id.text_uniqueness);
+            tvposition=itemView.findViewById(R.id.text_uniqueness_position);
         }
     }
 }

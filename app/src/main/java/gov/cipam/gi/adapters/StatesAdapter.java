@@ -44,7 +44,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
 
     @Override
     public StateViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_state_item, parent, false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_state, parent, false);
         return new StatesAdapter.StateViewHolder(itemView);
     }
 
@@ -57,7 +57,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
         holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(mContext)
                 .load(DpUrl)
-                .placeholder(R.drawable.image)
+                .placeholder(R.drawable.ic_placeholder_image)
                 .transform(new RoundedTransformation(5, 0))
                 .resize(300, 300)
                 .centerCrop()
@@ -72,7 +72,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
                     @Override
                     public void onError() {
                         holder.progressBar.setVisibility(View.INVISIBLE);
-                        holder.mDp.setImageResource(R.drawable.image);
+                        holder.mDp.setImageResource(R.drawable.ic_placeholder_image);
                     }
 
                 });
@@ -93,8 +93,8 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
             super(itemView);
 
             relativeLayout = itemView.findViewById(R.id.stateListRelativeLayout);
-            mName = itemView.findViewById(R.id.stateListName);
-            mDp = itemView.findViewById(R.id.stateListImage);
+            mName = itemView.findViewById(R.id.text_state);
+            mDp = itemView.findViewById(R.id.image_state);
             progressBar = itemView.findViewById(R.id.progressBarState);
             relativeLayout.setOnClickListener(this);
 

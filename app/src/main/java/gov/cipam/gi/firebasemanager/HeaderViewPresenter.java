@@ -1,24 +1,20 @@
 package gov.cipam.gi.firebasemanager;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.squareup.picasso.Picasso;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.common.SharedPref;
 import gov.cipam.gi.model.Users;
 import gov.cipam.gi.utils.Constants;
-import gov.cipam.gi.utils.TextDrawable;
 
 
 public class HeaderViewPresenter implements View.OnClickListener {
@@ -60,12 +56,12 @@ public class HeaderViewPresenter implements View.OnClickListener {
 
             textvEmail.setText(context.getString(R.string.login_request));
             textvName.setText(context.getString(R.string.hi));
-            imgevProfile.setImageResource(R.drawable.account);
+            imgevProfile.setImageResource(R.drawable.ic_account);
 
             if (mAuth.getCurrentUser().isAnonymous()){
                 textvEmail.setText(context.getString(R.string.login_request));
                 textvName.setText(context.getString(R.string.hi));
-                imgevProfile.setImageResource(R.drawable.account);
+                imgevProfile.setImageResource(R.drawable.ic_account);
             }
             else
             {

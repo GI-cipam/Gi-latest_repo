@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/registerUser"
-            android:background="@drawable/introbutton"
+            android:background="@drawable/btn_intro"
             android:text="Guest Login"
             android:textSize="14sp" />
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/skipLogin"
             android:layout_margin="5dp"
-            android:background="@drawable/introbutton"
+            android:background="@drawable/btn_intro"
             android:text="Login"
             android:textSize="14sp" />
 

@@ -1,7 +1,6 @@
 package gov.cipam.gi.adapters;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.model.Categories;
@@ -40,14 +38,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_category_item_alternate,parent,false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_category_alternate,parent,false);
         return  new CategoryAdapter.CategoryViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final CategoryViewHolder holder, int position) {
 
-        iconResource= new int[]{R.drawable.corn,R.drawable.truck,R.drawable.palette,R.drawable.cookie,R.drawable.earth,R.drawable.view_dashboard};
+        iconResource= new int[]{R.drawable.ic_corn,R.drawable.ic_truck,R.drawable.ic_palette,R.drawable.ic_cookie,R.drawable.ic_earth,R.drawable.ic_dashboard};
         bgDrawable=new int[]{R.drawable.circle_bg_blue,R.drawable.circle_bg_orange,R.drawable.circle_bg_red,R.drawable.circle_bg_green,R.drawable.circle_bg_pink,R.drawable.circle_bg_purple};
         holder.mName.setText(mCategoryList.get(position).getName());
 
@@ -75,7 +73,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
             view=itemView.findViewById(R.id.categoryIcon);
             linearLayout=itemView.findViewById(R.id.categoryLinearLayout);
-            mName =itemView.findViewById(R.id.card_name_category_alternate);
+            mName =itemView.findViewById(R.id.text_category_alternate);
             mDp =itemView.findViewById(R.id.image_category);
 
             /*Typeface typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/helvetica_lighter.otf");

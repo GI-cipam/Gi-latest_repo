@@ -47,7 +47,7 @@ public class WebViewActivity extends BaseActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.close);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_close);
             actionBar.setTitle("");
         }
     }

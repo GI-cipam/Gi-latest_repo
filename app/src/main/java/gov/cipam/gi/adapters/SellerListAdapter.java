@@ -33,7 +33,7 @@ public class SellerListAdapter extends RecyclerView.Adapter<SellerListAdapter.Se
     }
     @Override
     public SellerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_seller_item,parent,false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_seller,parent,false);
         return  new SellerListAdapter.SellerViewHolder(itemView);
 
     }
@@ -56,9 +56,9 @@ public class SellerListAdapter extends RecyclerView.Adapter<SellerListAdapter.Se
         public SellerViewHolder(View itemView) {
             super(itemView);
 
-            textViewSellerName =itemView.findViewById(R.id.card_seller_name);
-            textViewSellerAddress =itemView.findViewById(R.id.card_seller_address);
-            textViewSellerContact=itemView.findViewById(R.id.card_seller_contact);
+            textViewSellerName =itemView.findViewById(R.id.text_seller_name);
+            textViewSellerAddress =itemView.findViewById(R.id.text_seller_address);
+            textViewSellerContact=itemView.findViewById(R.id.text_seller_contact);
             textViewSellerContact.setOnClickListener(this);
         }
 

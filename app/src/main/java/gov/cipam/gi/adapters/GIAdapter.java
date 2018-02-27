@@ -40,7 +40,7 @@ public class GIAdapter extends RecyclerView.Adapter<GIAdapter.GiViewHolder> {
 
     @Override
     public GiViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_gi_item,parent,false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_gi_image,parent,false);
         return  new GIAdapter.GiViewHolder(itemView);
     }
 
@@ -61,7 +61,7 @@ public class GIAdapter extends RecyclerView.Adapter<GIAdapter.GiViewHolder> {
                     @Override
                     public void onError() {
                         holder.progressBar.setVisibility(View.INVISIBLE);
-                        holder.mDp.setImageResource(R.drawable.image);
+                        holder.mDp.setImageResource(R.drawable.ic_placeholder_image);
                     }
                 });
     }
@@ -81,8 +81,8 @@ public class GIAdapter extends RecyclerView.Adapter<GIAdapter.GiViewHolder> {
             super(itemView);
 
             relativeLayout=itemView.findViewById(R.id.giRelativeLayout);
-            mName =itemView.findViewById(R.id.card_name_gi);
-            mDp =itemView.findViewById(R.id.card_dp_gi);
+            mName =itemView.findViewById(R.id.text_gi);
+            mDp =itemView.findViewById(R.id.image_gi);
             progressBar=itemView.findViewById(R.id.progressBarGi);
 
             relativeLayout.setOnClickListener(this);

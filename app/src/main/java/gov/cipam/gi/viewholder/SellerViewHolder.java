@@ -18,9 +18,9 @@ public class SellerViewHolder extends RecyclerView.ViewHolder {
     public SellerViewHolder(View itemView) {
         super(itemView);
 
-        textViewSellerName =itemView.findViewById(R.id.card_seller_name);
-        textViewSellerAddress =itemView.findViewById(R.id.card_seller_address);
-        textViewSellerContact=itemView.findViewById(R.id.card_seller_contact);
+        textViewSellerName =itemView.findViewById(R.id.text_seller_name);
+        textViewSellerAddress =itemView.findViewById(R.id.text_seller_address);
+        textViewSellerContact=itemView.findViewById(R.id.text_seller_contact);
     }
 
     public void bindSellerDetails(Seller seller){

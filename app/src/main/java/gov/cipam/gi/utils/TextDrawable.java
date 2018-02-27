@@ -34,7 +34,7 @@ public class TextDrawable extends ShapeDrawable {
         text = builder.toUpperCase ? builder.text.toUpperCase() : builder.text;
         color = builder.color;
 
-        // text paint settings
+        // text paint ic_menu_settings
         fontSize = builder.fontSize;
         textPaint = new Paint();
         textPaint.setColor(builder.textColor);
@@ -45,7 +45,7 @@ public class TextDrawable extends ShapeDrawable {
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setStrokeWidth(builder.borderThickness);
 
-        // border paint settings
+        // border paint ic_menu_settings
         borderThickness = builder.borderThickness;
         borderPaint = new Paint();
         borderPaint.setColor(getDarkerShade(color));

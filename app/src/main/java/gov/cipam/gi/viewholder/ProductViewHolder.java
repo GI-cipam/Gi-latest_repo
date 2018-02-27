@@ -38,7 +38,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
         Picasso.with(itemView.getContext())
                 .load(product.getDpurl())
                 .fit()
-                .placeholder(R.drawable.image)
+                .placeholder(R.drawable.ic_placeholder_image)
                 .into(imageView);
     }
 

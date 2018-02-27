@@ -284,7 +284,7 @@ public class HomePageActivity extends BaseActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle ic_tab_navigation view item clicks here.
         switch (item.getItemId()) {
 
             case R.id.nav_account:

@@ -35,7 +35,7 @@ public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.YoutubeV
     }
     @Override
     public YoutubeAdapter.YoutubeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.card_view_youtube_item,parent,false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_youtube,parent,false);
         return  new YoutubeAdapter.YoutubeViewHolder (itemView);
     }
 

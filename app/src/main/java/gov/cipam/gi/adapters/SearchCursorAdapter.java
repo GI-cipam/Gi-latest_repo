@@ -45,16 +45,16 @@ public class SearchCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View view = LayoutInflater.from(context).inflate(R.layout.suggestion_item_view,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_suggestion,parent,false);
         return view;
     }
 
     @Override
     public void bindView(View view, final Context context, final Cursor cursor) {
 
-        TextView suggestion_Name=view.findViewById(R.id.suggestionName);
-        ImageView suggestionImage=view.findViewById(R.id.suggestionImage);
-        TextView suggestion_Type=view.findViewById(R.id.suggestionType);
+        TextView suggestion_Name=view.findViewById(R.id.text_suggestion_name);
+        ImageView suggestionImage=view.findViewById(R.id.image_suggestion);
+        TextView suggestion_Type=view.findViewById(R.id.text_suggestion_type);
 
         final String suggestion_name=cursor.getString(cursor.getColumnIndex(Database.GI_SEARCH_NAME));
         final String suggestion_type=cursor.getString(cursor.getColumnIndex(Database.GI_SEARCH_TYPE));
@@ -70,10 +70,10 @@ public class SearchCursorAdapter extends CursorAdapter {
         suggestion_Type.setText("in "+suggestion_type);
 
         if(suggestion_type.equals(Database.GI_HISTORY)){
-            suggestionImage.setImageResource(R.drawable.history);
+            suggestionImage.setImageResource(R.drawable.ic_history);
         }
         else{
-            suggestionImage.setImageResource(R.drawable.information_outline);
+            suggestionImage.setImageResource(R.drawable.ic_information_outline);
         }
         view.setTag(cursor.getPosition());
                 view.setOnClickListener(new View.OnClickListener() {

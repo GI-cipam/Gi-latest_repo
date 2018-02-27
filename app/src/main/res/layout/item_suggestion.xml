@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:paddingBottom="@dimen/padding_small"
+    android:paddingTop="@dimen/padding_small">
+
+    <TextView
+        android:id="@+id/text_suggestion_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@+id/image_suggestion"
+        android:text="@string/app_intro_done_button"
+        android:textAlignment="viewStart"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/image_suggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        app:srcCompat="@drawable/ic_history" />
+
+    <TextView
+        android:id="@+id/text_suggestion_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/text_suggestion_name"
+        android:layout_below="@id/text_suggestion_name"
+        android:text="@string/app_intro_done_button"
+        android:textColor="@color/md_teal_300" />
+</RelativeLayout>

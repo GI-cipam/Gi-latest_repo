@@ -1,13 +1,11 @@
 package gov.cipam.gi.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -60,7 +58,7 @@ public class CommonUtils {
         if (image_download) {
             imageView.setImageBitmap(mBitmap);
         } else {
-            imageView.setImageResource(R.drawable.image_off);
+            imageView.setImageResource(R.drawable.ic_image_off);
         }
     }
 
@@ -72,7 +70,7 @@ public class CommonUtils {
         if (image_download) {
             Picasso.with(activity).load(ImageUrl).into(imageView);
         } else {
-            imageView.setImageResource(R.drawable.image_off);
+            imageView.setImageResource(R.drawable.ic_image_off);
         }
     }
 }
