@@ -16,18 +16,35 @@
     <string-array name="dev_names">
         <item>Nitant Sood</item>
         <item>Karan Kapoor</item>
-        <item>Deepak Kataria</item>
+        <item>Deepak Singh</item>
         <item>Kunwar Deepak</item>
         <item>Rachit Singhal</item>
     </string-array>
 
     <array name="dev_dp">
         <item>@drawable/ns1</item>
-        <item>@drawable/ns1</item>
-        <item>@drawable/deepak</item>
+        <item>@drawable/karan_dp</item>
         <item>@drawable/deepak</item>
         <item>@drawable/kd</item>
+        <item>@drawable/rachit_dp</item>
     </array>
+
+    <array name="bg_drawable">
+        <item>@drawable/circle_bg_blue</item>
+        <item>@drawable/circle_bg_green</item>
+        <item>@drawable/circle_bg_orange</item>
+        <item>@drawable/circle_bg_pink</item>
+        <item>@drawable/circle_bg_purple</item>
+        <item>@drawable/circle_bg_red</item>
+    </array>
+
+    <string-array name="dev_emails">
+        <item>Nsgm3a@gmail.com</item>
+        <item>Karan26796@gmail.com</item>
+        <item>Deepak Kataria</item>
+        <item>2596Kunwar@gmail.com</item>
+        <item>Rachitsinghal99@gmail.com</item>
+    </string-array>
 
     <string-array name="dummy_text">
         <item>Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,14 +62,7 @@
         <item>Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at</item>
-    </string-array>
 
-    <string-array name="dev_emails">
-        <item>nsgm3a@gmail.com</item>
-        <item>Karan Kapoor</item>
-        <item>Deepak Kataria</item>
-        <item>Kunwar Deepak</item>
-        <item>Rachit Singhal</item>
     </string-array>
 
 </resources>

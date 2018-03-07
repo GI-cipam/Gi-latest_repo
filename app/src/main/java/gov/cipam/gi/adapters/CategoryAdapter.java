@@ -1,18 +1,21 @@
 package gov.cipam.gi.adapters;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.model.Categories;
+import gov.cipam.gi.utils.SquareLayout;
 
 /**
  * Created by NITANT SOOD on 28-11-2017.
@@ -25,6 +28,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     setOnCategoryClickListener mListener;
     private int iconResource[];
     private int bgDrawable[];
+    TypedArray bg;
 
     public CategoryAdapter(ArrayList<Categories> mCategoryList, Context mContext, setOnCategoryClickListener mListener) {
         this.mCategoryList = mCategoryList;

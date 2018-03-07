@@ -46,4 +46,3 @@
         android:theme="@style/MediumBodyText"
         android:typeface="serif" />
 </LinearLayout>
-

@@ -21,7 +21,8 @@
             style="?attr/text_size_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/padding_smaller"
+            android:paddingTop="@dimen/padding_smallest"
+            android:paddingBottom="@dimen/padding_small"
             android:paddingEnd="@dimen/padding_small"
             android:paddingStart="@dimen/padding_small"
             android:text="Uniqueness"
@@ -34,10 +35,7 @@
             android:id="@+id/dividerViewUni"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginEnd="@dimen/margin_smaller"
-            android:layout_marginStart="@dimen/margin_smaller"
-            android:background="@color/greyColor"
-            android:visibility="gone"/>
+            android:background="@color/greyColor" />
 
         <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"

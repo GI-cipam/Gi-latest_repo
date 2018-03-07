@@ -62,13 +62,13 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
 
         switch (id){
 
-            case R.id.btnSkipLogin:
+            case R.id.button_skip_login:
 
                 GuestLogin login = new GuestLogin(this);
                 login.guestLogin();
                 break;
 
-            case R.id.btnLogin:
+            case R.id.button_login:
                 startActivity(new Intent(this,LoginActivity.class));
                 finish();
                 break;

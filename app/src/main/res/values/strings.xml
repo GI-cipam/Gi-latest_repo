@@ -103,14 +103,10 @@
     <string name="new_user">New User? Sign Up.</string>
     <string name="logging_in">Logging in user</string>
 
-    <string name="long_text">Copyright 2014 Manabu Shimobe
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an , either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.</string>
+    <string name="long_text">A professional body under the aegis of Department of Industrial Policy and Promotion (DIPP)
+        which ensures focused action on issues related to IPRs and addresses the 7 identified objectives of the policy.
+        CIPAM assists in simplifying and streamlining of IP processes, apart from undertaking steps for furthering IPR awareness,
+        commercialization and enforcement.</string>
     <string name="error_connection">You\'re Offline </string>
     <string name="connection_restore">Go Online</string>
     <string name="welcome">Welcome!</string>

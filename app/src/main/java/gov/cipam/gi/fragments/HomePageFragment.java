@@ -56,7 +56,6 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     NestedScrollView scrollView;
     FirebaseAuth mAuth;
     DatabaseReference mDatabaseState, mDatabaseCategory;
-    StartSnapHelper startSnapHelper, startSnapHelper1;
     private DatabaseFetch databaseFetch;
     public static ArrayList<States> mDisplayStateList = new ArrayList<>();
     public static ArrayList<Categories> mDisplayCategoryList = new ArrayList<>();
@@ -87,8 +86,6 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
 
         mDatabaseState = FirebaseDatabase.getInstance().getReference("States");
         mDatabaseCategory = FirebaseDatabase.getInstance().getReference("Categories");
-        startSnapHelper = new StartSnapHelper();
-        startSnapHelper1 = new StartSnapHelper();
     }
 
     @Override
@@ -106,8 +103,6 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
 
         scrollView.setSmoothScrollingEnabled(true);
         scrollView.setNestedScrollingEnabled(true);
-        startSnapHelper.attachToRecyclerView(rvState);
-        startSnapHelper1.attachToRecyclerView(rvCategory);
 
         /*Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/helvetica_bolder.otf");
         txtState.setTypeface(typeface);

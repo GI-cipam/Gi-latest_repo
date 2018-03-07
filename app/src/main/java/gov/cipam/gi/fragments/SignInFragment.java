@@ -83,8 +83,6 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
 
         imageView = view.findViewById(R.id.signin_image_view);
 
-        imageView.setImageResource(R.drawable.image1);
-
         mSignInButton.setOnClickListener(this);
         mForgotPass.setOnClickListener(this);
         googleSignInButton.setOnClickListener(this);

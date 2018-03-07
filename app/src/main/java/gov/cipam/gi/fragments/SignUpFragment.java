@@ -70,7 +70,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
         imageView = view.findViewById(R.id.ImageViewSignUp);
 
-        imageView.setImageResource(R.drawable.image1);
 
         mSignupButton.setOnClickListener(this);
 
@@ -100,6 +99,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             // store name and email to firebase database
             FirebaseAuthentication firebaseAuthentication = new FirebaseAuthentication(getContext());
             firebaseAuthentication.startSignUp(email, password, name, mProgressDialog);
+            startActivity(new Intent(getContext(), StatePreferenceActivity.class));
         }
     }
 
@@ -109,7 +109,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.sign_up_button:
                 signUp();
-                startActivity(new Intent(getContext(), StatePreferenceActivity.class));
                 break;
         }
     }
