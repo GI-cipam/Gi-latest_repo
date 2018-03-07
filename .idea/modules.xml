@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Gi-latest_repo.iml" filepath="$PROJECT_DIR$/Gi-latest_repo.iml" />
-<<<<<<< HEAD
-      <module fileurl="file://C:\Users\hp\Documents\Android_studio\GI_latest-repo\Gi-latest_repo\.idea\Gi-latest_repo.iml" filepath="C:\Users\hp\Documents\Android_studio\GI_latest-repo\Gi-latest_repo\.idea\Gi-latest_repo.iml" />
-=======
->>>>>>> 8882ae0efb78eb3ee32345cfe5974de5fddda4ea
+      <module fileurl="file://C:\Users\NITANT SOOD\Desktop\Indications-master\Indications-master\Gi-latest_repo.iml" filepath="C:\Users\NITANT SOOD\Desktop\Indications-master\Indications-master\Gi-latest_repo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Indications-master.iml" filepath="$PROJECT_DIR$/Indications-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

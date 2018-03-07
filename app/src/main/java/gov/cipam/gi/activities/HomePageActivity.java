@@ -53,7 +53,6 @@ public class HomePageActivity extends BaseActivity
     //private FirebaseAuth mAuth;
     private DrawerLayout drawer;
     BottomNavigationView bottomNavigationView;
-    Users user;
     SearchView searchView;
     FrameLayout frameLayout;
     String[] historyItem;
