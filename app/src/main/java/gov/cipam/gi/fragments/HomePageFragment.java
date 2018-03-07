@@ -65,7 +65,6 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     public static HomePageFragment newInstance() {
 
         Bundle args = new Bundle();
-
         HomePageFragment fragment = new HomePageFragment();
         fragment.setArguments(args);
         return fragment;
@@ -80,7 +79,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
 
         databaseFetch = new DatabaseFetch();
         databaseFetch.populateDisplayListFromDB(getContext());
