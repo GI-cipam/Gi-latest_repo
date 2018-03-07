@@ -20,10 +20,9 @@ import gov.cipam.gi.activities.IntroActivity;
  * Created by karan on 11/10/2017.
  */
 
-public class Onboarding2 extends Fragment implements ISlideBackgroundColorHolder,View.OnClickListener {
+public class Onboarding2 extends Fragment implements ISlideBackgroundColorHolder {
 
     LinearLayout     layoutContainer;
-    Button           skipButton;
     IntroActivity    introActivity;
 
     @Override
@@ -43,31 +42,17 @@ public class Onboarding2 extends Fragment implements ISlideBackgroundColorHolder
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        skipButton=view.findViewById(R.id.skipButton);
-        skipButton.setTextColor(getDefaultBackgroundColor());
-        skipButton.setBackgroundResource(R.drawable.btn_intro);
-        skipButton.setOnClickListener(this);
     }
 
     @Override
     public int getDefaultBackgroundColor() {
-        return ContextCompat.getColor(getContext(),R.color.colorAccent);
+        return ContextCompat.getColor(getContext(),R.color.colorPrimary);
     }
 
     @Override
     public void setBackgroundColor(@ColorInt int backgroundColor) {
         if (layoutContainer != null) {
             layoutContainer.setBackgroundColor(backgroundColor);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        int id=view.getId();
-        switch (id){
-            case R.id.skipButton:
         }
     }
 }

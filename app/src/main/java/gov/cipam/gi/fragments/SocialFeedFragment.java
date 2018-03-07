@@ -111,10 +111,4 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
         item.setVisible(false);
     }
 
-    /*private void setProgressDialogAnimation(ProgressBar mProgressBar, int process) {
-        ObjectAnimator animation = ObjectAnimator.ofInt(mProgressBar, "progress", 0, process);
-        animation.setDuration(3);//30 second
-        animation.setInterpolator(new DecelerateInterpolator());
-        animation.start();
-    }*/
 }

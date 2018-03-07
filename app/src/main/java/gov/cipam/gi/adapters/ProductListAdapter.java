@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -52,12 +54,21 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.mFiller.setText(GIList.get(position).getDetail());
         holder.mState.setText(strHashtag.concat(GIList.get(position).getState()));
         holder.mCategory.setText(strHashtag.concat(GIList.get(position).getCategory()));
-
+        holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(mContext)
                 .load(GIList.get(position).getDpurl())
                 .fit()
-                //.placeholder(R.drawable.image)
-                .into(holder.imageView);
+                .into(holder.imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        holder.progressBar.setVisibility(View.INVISIBLE);
+                    }
+                });
         ViewCompat.setTransitionName(holder.imageView, GIList.get(position).getUid());
     }
 
@@ -71,6 +82,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         private TextView mTitle, mFiller, mState, mCategory;
         public ImageView imageView;
         private FrameLayout frameLayout;
+        private ProgressBar progressBar;
 
         private ProductViewHolder(View itemView) {
             super(itemView);
@@ -81,6 +93,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             mState = itemView.findViewById(R.id.productListStateName);
             mCategory = itemView.findViewById(R.id.productListCategoryName);
             imageView = itemView.findViewById(R.id.productListImage);
+            progressBar=itemView.findViewById(R.id.product_progress);
 
             frameLayout.setOnClickListener(this);
         }

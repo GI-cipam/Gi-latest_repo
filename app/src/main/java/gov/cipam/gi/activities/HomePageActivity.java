@@ -1,21 +1,17 @@
 package gov.cipam.gi.activities;
 
 import android.Manifest;
-import android.app.SharedElementCallback;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.MergeCursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -25,7 +21,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,8 +47,6 @@ import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
 import gov.cipam.gi.model.Users;
 import gov.cipam.gi.utils.Constants;
-import gov.cipam.gi.utils.NetworkChangeReceiver;
-import gov.cipam.gi.utils.NetworkUtil;
 
 public class HomePageActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,
@@ -64,6 +57,7 @@ public class HomePageActivity extends BaseActivity
     public static final int MIN_NOTIFICATION_SELLER_DISTANCE = 30;
     private FirebaseAuth mAuth;
     private DrawerLayout drawer;
+    BottomNavigationView bottomNavigationView;
     Users user;
     SearchView searchView;
     FrameLayout frameLayout;
@@ -264,7 +258,6 @@ public class HomePageActivity extends BaseActivity
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
-
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     selectedFragment = HomePageFragment.newInstance();

@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import gov.cipam.gi.R;
+import gov.cipam.gi.utils.GaussianBlurTransformation;
 
 /**
  * Created by karan on 1/25/2018.
@@ -40,7 +43,6 @@ public class BioAdapter extends RecyclerView.Adapter<BioAdapter.BioViewHolder> {
 
     @Override
     public void onBindViewHolder(BioViewHolder holder, int position) {
-
         dev_dp=holder.itemView.getResources().obtainTypedArray(R.array.dev_dp);
         dev_names=holder.itemView.getResources().getStringArray(R.array.dev_names);
         dev_email=holder.itemView.getResources().getStringArray(R.array.dev_emails);

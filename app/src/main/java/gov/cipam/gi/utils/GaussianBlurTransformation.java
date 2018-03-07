@@ -26,7 +26,7 @@ public class GaussianBlurTransformation implements Transformation {
      * @param context The context to create the RenderScript instance from.
      */
     public GaussianBlurTransformation(final Context context) {
-        this(context, 25f);
+        this(context, 20f);
     }
 
     /**
