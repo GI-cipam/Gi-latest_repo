@@ -6,9 +6,6 @@
         android:id="@+id/action_settings"
         android:title="@string/settings" />
         <item
-        android:id="@+id/action_logout"
-        android:title="@string/logout"/>
-        <item
             android:id="@+id/action_start_service"
             android:title="Start Service"/>
     </group>

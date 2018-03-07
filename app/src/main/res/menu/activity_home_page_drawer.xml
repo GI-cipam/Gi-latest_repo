@@ -11,14 +11,6 @@
 
     <item android:title="@string/nav_drawer_title">
         <menu>
-            <item
-                android:id="@+id/nav_account"
-                android:icon="@drawable/ic_account_circle"
-                android:title="@string/account_info" />
-            <item
-                android:id="@+id/nav_sign_up"
-                android:icon="@drawable/ic_menu_login"
-                android:title="@string/sign_up" />
 
             <item android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"

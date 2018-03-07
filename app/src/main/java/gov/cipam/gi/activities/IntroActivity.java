@@ -24,10 +24,7 @@ public class IntroActivity extends AppIntro {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        downloadThread1 = new downloadThread(this);
-        addSlide(new Onboarding1());
-        addSlide(new Onboarding2());
-        setSpecs();
+        CheckOnboardingStatus();
     }
 
     @Override
@@ -47,15 +44,30 @@ public class IntroActivity extends AppIntro {
     }
 
     public void finishOnboarding() {
-        SharedPreferences preferences =
-                getSharedPreferences(Constants.MY_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(Constants.MY_PREFERENCES, MODE_PRIVATE);
 
-        preferences.edit()
-                .putBoolean(Constants.ONBOARDING_COMPLETE, true).apply();
+        preferences.edit().putBoolean(Constants.ONBOARDING_COMPLETE, true).apply();
 
-        startActivity(new Intent(this, NewUserActivity.class));
+        startActivity(new Intent(this, HomePageActivity.class));
         finish();
     }
+    public void CheckOnboardingStatus() {
+
+        SharedPreferences preferences = getSharedPreferences(Constants.MY_PREFERENCES, MODE_PRIVATE);
+        if (!preferences.getBoolean(Constants.ONBOARDING_COMPLETE, false)){
+            downloadThread1 = new downloadThread(this);
+            addSlide(new Onboarding1());
+            addSlide(new Onboarding2());
+            setSpecs();
+        }
+        else {
+            startActivity(new Intent(this, HomePageActivity.class));
+            finish();
+        }
+
+
+    }
+
 
     @Override
     public void onBackPressed() {

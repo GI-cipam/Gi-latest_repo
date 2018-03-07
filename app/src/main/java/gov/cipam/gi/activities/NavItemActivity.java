@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.fragments.AboutFragment;
-import gov.cipam.gi.fragments.AccountInfoFragment;
+
 import gov.cipam.gi.fragments.BioScreenFragment;
 import gov.cipam.gi.utils.Constants;
 
@@ -33,10 +33,7 @@ public class NavItemActivity extends BaseActivity implements FragmentManager.OnB
     public void fragmentInflate() {
 
         switch (navItem) {
-            case "AccountInfo":
-                fragment = AccountInfoFragment.newInstance();
-                navFragmentInflate(fragment);
-                break;
+
             case "BioScreen":
                 fragment = BioScreenFragment.newInstance();
                 navFragmentInflate(fragment);
@@ -84,9 +81,8 @@ public class NavItemActivity extends BaseActivity implements FragmentManager.OnB
     public void onBackStackChanged() {
         if (getCurrentFragment() instanceof AboutFragment) {
             mToolbar.setTitle(getString(R.string.about_us));
-        } else if (getCurrentFragment() instanceof AccountInfoFragment) {
-            mToolbar.setTitle(getString(R.string.account_info));
-        } else if (getCurrentFragment() instanceof BioScreenFragment) {
+        }
+         else if (getCurrentFragment() instanceof BioScreenFragment) {
             mToolbar.setTitle(getString(R.string.developer_screen));
         }
     }

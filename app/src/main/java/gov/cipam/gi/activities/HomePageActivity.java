@@ -2,7 +2,6 @@ package gov.cipam.gi.activities;
 
 import android.Manifest;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -19,7 +18,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,23 +27,20 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.appinvite.AppInviteInvitation;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.adapters.SearchCursorAdapter;
 import gov.cipam.gi.background.LocationService;
-import gov.cipam.gi.common.SharedPref;
 import gov.cipam.gi.database.Database;
-import gov.cipam.gi.firebasemanager.HeaderViewPresenter;
+import gov.cipam.gi.common.HeaderViewPresenter;
 import gov.cipam.gi.fragments.HomePageFragment;
 import gov.cipam.gi.fragments.MapsFragment;
 import gov.cipam.gi.fragments.SocialFeedFragment;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
-import gov.cipam.gi.model.Users;
+
 import gov.cipam.gi.utils.Constants;
 
 public class HomePageActivity extends BaseActivity
@@ -55,7 +50,7 @@ public class HomePageActivity extends BaseActivity
     private static final int REQUEST_INVITE = 23;
     public static final int MIN_NOTIFICATION_DISTANCE = 50;
     public static final int MIN_NOTIFICATION_SELLER_DISTANCE = 30;
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
     private DrawerLayout drawer;
     BottomNavigationView bottomNavigationView;
     Users user;
@@ -105,11 +100,11 @@ public class HomePageActivity extends BaseActivity
             }
         }
 
-        mAuth = FirebaseAuth.getInstance();
+       // mAuth = FirebaseAuth.getInstance();
         populateInitialSearchCursor();
         drawer = findViewById(R.id.drawer_layout);
 
-        user = SharedPref.getSavedObjectFromPreference(HomePageActivity.this, Constants.KEY_USER_INFO, Constants.KEY_USER_DATA, Users.class);
+        //user = SharedPref.getSavedObjectFromPreference(HomePageActivity.this, Constants.KEY_USER_INFO, Constants.KEY_USER_DATA, Users.class);
         setNavigation();
     }
 
@@ -137,7 +132,7 @@ public class HomePageActivity extends BaseActivity
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        HeaderViewPresenter headerviewPresenter = new HeaderViewPresenter(this, navigationView.getHeaderView(0), drawer, mAuth, user);
+        HeaderViewPresenter headerviewPresenter = new HeaderViewPresenter(this, navigationView.getHeaderView(0), drawer);
         headerviewPresenter.initViews();
 
     }
@@ -150,9 +145,9 @@ public class HomePageActivity extends BaseActivity
 
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         setSearchParameters();
-
+/*
         if (mAuth.getCurrentUser().isAnonymous())
-            menu.findItem(R.id.action_logout).setVisible(false);
+            menu.findItem(R.id.action_logout).setVisible(false);*/
 
         return true;
     }
@@ -239,9 +234,9 @@ public class HomePageActivity extends BaseActivity
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
-            case R.id.action_logout:
+/*            case R.id.action_logout:
                 logoutAction();
-                break;
+                break;*/
             case R.id.action_search:
                 break;
             case R.id.action_start_service:
@@ -279,17 +274,17 @@ public class HomePageActivity extends BaseActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle ic_tab_navigation view item clicks here.
         switch (item.getItemId()) {
-
+/*
             case R.id.nav_account:
                 navItem = "AccountInfo";
                 startActivity(new Intent(this, NavItemActivity.class)
                         .putExtra(Constants.NAV_CATEGORY, navItem));
-                break;
+                break;*/
 
-            case R.id.nav_sign_up:
+/*            case R.id.nav_sign_up:
                 mAuth.signOut();
                 startActivity(new Intent(this, LoginActivity.class));
-                break;
+                break;*/
 
             case R.id.nav_about_us:
                 navItem = "AboutScreen";
@@ -319,10 +314,10 @@ public class HomePageActivity extends BaseActivity
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+/*        FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(this, NewUserActivity.class));
-        }
+        }*/
     }
 
     @Override
@@ -330,7 +325,7 @@ public class HomePageActivity extends BaseActivity
         super.onStop();
     }
 
-    public void logoutAction() {
+/*    public void logoutAction() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setMessage(R.string.logout);
 
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -344,7 +339,7 @@ public class HomePageActivity extends BaseActivity
             public void onClick(DialogInterface dialog, int id) {
             }
         }).show();
-    }
+    }*/
 
     public void fragmentInflate(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
