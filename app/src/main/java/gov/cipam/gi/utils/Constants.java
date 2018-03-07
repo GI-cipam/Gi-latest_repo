@@ -13,6 +13,7 @@ public class Constants {
 
     public static final String MY_PREFERENCES="my_preferences";
     public static final String ONBOARDING_COMPLETE ="onboarding_complete";
+    public static final String ONDOWNLOAD_INITIATED="ondownload_initiated";
     public static final String KEY_CHILD_NAME = "name";
     public static final String KEY_CHILD_USERS = "email";
     public static final String KEY_USERS="Users";

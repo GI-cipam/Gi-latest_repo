@@ -55,7 +55,10 @@ public class IntroActivity extends AppIntro {
 
         SharedPreferences preferences = getSharedPreferences(Constants.MY_PREFERENCES, MODE_PRIVATE);
         if (!preferences.getBoolean(Constants.ONBOARDING_COMPLETE, false)){
-            downloadThread1 = new downloadThread(this);
+            if(!preferences.getBoolean(Constants.ONDOWNLOAD_INITIATED,false)) {
+                downloadThread1 = new downloadThread(this);
+                preferences.edit().putBoolean(Constants.ONDOWNLOAD_INITIATED, true).apply();
+            }
             addSlide(new Onboarding1());
             addSlide(new Onboarding2());
             setSpecs();
