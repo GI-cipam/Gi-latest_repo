@@ -73,7 +73,7 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
         //setProgressDialogAnimation(progressBar,0);
 
         final SearchTimeline searchTimeline = new SearchTimeline.Builder()
-                .query("#hiking")
+                .query("#letstalkip")
                 .maxItemsPerRequest(50)
                 .build();
 
