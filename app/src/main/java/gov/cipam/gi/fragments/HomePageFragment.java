@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.twitter.sdk.android.tweetui.TweetUi;
 
 import java.util.ArrayList;
 
@@ -86,6 +87,9 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
 
         mDatabaseState = FirebaseDatabase.getInstance().getReference("States");
         mDatabaseCategory = FirebaseDatabase.getInstance().getReference("Categories");
+
+        new Thread(() -> TweetUi.getInstance()).start();
+
     }
 
     @Override
