@@ -87,6 +87,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     StartSnapHelper startSnapHelper;
     PaletteGenerate paletteGenerate;
     Product product;
+    CardView uniquenessCard,sellerCard;
     boolean isImagePreLoaded = false;
     public static Bitmap mBitmap;
 
@@ -130,6 +131,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         database = databaseInstance.getReadableDatabase();
         paletteGenerate=new PaletteGenerate();
         populateSellerListFromDB();
+        populateUniquenessList1fromDB();
         setHasOptionsMenu(true);
 
         super.onCreate(savedInstanceState);
@@ -154,6 +156,17 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
             sellerList.add(oneSeller);
         }
         sellerCursor.close();
+    }
+
+    private void populateUniquenessList1fromDB() {
+        String[] s={product.getUid()};
+        Cursor uniquenessCursor=database.query(Database.GI_UNIQUENESS_TABLE,null,Database.GI_UNIQUENESS_UID+"=?",s,null,null,null,null);
+        while(uniquenessCursor.moveToNext()){
+            String oneUniqueInfo=uniquenessCursor.getString(uniquenessCursor.getColumnIndex(Database.GI_UNIQUENESS_VALUE));
+            Uniqueness uniqueness=new Uniqueness(oneUniqueInfo);
+            uniquenessList.add(uniqueness);
+        }
+        uniquenessCursor.close();
     }
 
     @Override
@@ -206,6 +219,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        sellerCard=view.findViewById(R.id.seller_card);
+        uniquenessCard=view.findViewById(R.id.uniqueness_card);
         rvSeller = view.findViewById(R.id.seller_recycler_view);
         imageView = view.findViewById(R.id.productDetailImage);
         /*txtState = view.findViewById(R.id.detail_stateName);
@@ -241,6 +256,13 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         }
 
         viewPager.setOnPageChangeListener(this);
+
+//        if(sellerList.size()==0){
+//            sellerCard.setVisibility(View.INVISIBLE);
+//        }
+//        if(uniquenessList.size()==0){
+//            uniquenessCard.setVisibility(View.INVISIBLE);
+//        }
     }
 
 
@@ -284,19 +306,19 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         /*txtCategory.setText(product.getCategory());
         txtState.setText(product.getState());*/
 
-        Uniqueness uniqueness=new Uniqueness(getString(R.string.long_text));
-        uniquenessList.add(uniqueness);
-
-        uniqueness=new Uniqueness(getString(R.string.long_text));
-        uniquenessList.add(uniqueness);
-        uniqueness=new Uniqueness(getString(R.string.long_text));
-        uniquenessList.add(uniqueness);
-
-        uniqueness=new Uniqueness(getString(R.string.long_text));
-        uniquenessList.add(uniqueness);
-
-        uniqueness=new Uniqueness(getString(R.string.long_text));
-        uniquenessList.add(uniqueness);
+//        Uniqueness uniqueness=new Uniqueness(getString(R.string.long_text));
+//        uniquenessList.add(uniqueness);
+//
+//        uniqueness=new Uniqueness(getString(R.string.long_text));
+//        uniquenessList.add(uniqueness);
+//        uniqueness=new Uniqueness(getString(R.string.long_text));
+//        uniquenessList.add(uniqueness);
+//
+//        uniqueness=new Uniqueness(getString(R.string.long_text));
+//        uniquenessList.add(uniqueness);
+//
+//        uniqueness=new Uniqueness(getString(R.string.long_text));
+//        uniquenessList.add(uniqueness);
 
     }
     @Override
