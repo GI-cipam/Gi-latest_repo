@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -49,7 +50,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void onBindViewHolder(ProductViewHolder holder, int position) {
 
         final String strHashtag = holder.itemView.getResources().getString(R.string.note);
-        ViewCompat.setTransitionName(holder.itemView.findViewById(R.id.productListImage), String.valueOf(position + "_image"));
+        ViewCompat.setTransitionName(holder.itemView.findViewById(R.id.image_product), String.valueOf(position + "_image"));
         holder.mTitle.setText(GIList.get(position).getName());
         holder.mFiller.setText(GIList.get(position).getDetail());
         holder.mState.setText(strHashtag.concat(GIList.get(position).getState()));
@@ -81,21 +82,21 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         private TextView mTitle, mFiller, mState, mCategory;
         public ImageView imageView;
-        private FrameLayout frameLayout;
+        private LinearLayout linearLayout;
         private ProgressBar progressBar;
 
         private ProductViewHolder(View itemView) {
             super(itemView);
 
-            frameLayout = itemView.findViewById(R.id.productListFrame);
-            mTitle = itemView.findViewById(R.id.productListTitle);
-            mFiller = itemView.findViewById(R.id.productListDesc);
-            mState = itemView.findViewById(R.id.productListStateName);
-            mCategory = itemView.findViewById(R.id.productListCategoryName);
-            imageView = itemView.findViewById(R.id.productListImage);
+            linearLayout= itemView.findViewById(R.id.parent_product);
+            mTitle = itemView.findViewById(R.id.text_product_title);
+            mFiller = itemView.findViewById(R.id.text_product_desc);
+            mState = itemView.findViewById(R.id.text_product_state);
+            mCategory = itemView.findViewById(R.id.text_product_category);
+            imageView = itemView.findViewById(R.id.image_product);
             progressBar=itemView.findViewById(R.id.product_progress);
 
-            frameLayout.setOnClickListener(this);
+            linearLayout.setOnClickListener(this);
         }
 
         @Override

@@ -1,12 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/productListFrame"
-    android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_product"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_smallest"
     android:clickable="true"
     android:focusable="true"
-    android:padding="@dimen/padding_smallest">
+    android:background="?attr/selectableItemBackground">
 
-    <include layout="@layout/item_product_alternate" />
-</FrameLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_bg"
+        android:padding="1dp">
+
+        <ImageView
+            android:id="@+id/image_product"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_parameter_large"
+            android:cropToPadding="true"
+            android:scaleType="centerCrop"
+            android:transitionName="commonImage"
+            tools:ignore="ContentDescription,UnusedAttribute" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_parameter_large"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/image_gradient" />
+
+        <ProgressBar
+            android:id="@+id/product_progress"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/text_product_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/image_product"
+            android:layout_alignParentStart="true"
+            android:letterSpacing="0.02"
+            android:paddingBottom="@dimen/padding_small"
+            android:paddingEnd="@dimen/padding_small"
+            android:paddingStart="@dimen/padding_small"
+            android:shadowColor="@color/black_1"
+            android:shadowRadius="5"
+            android:text="Hill"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:theme="@style/LargeBodyText"
+            tools:text="Headline" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_product_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:fontFamily="serif"
+            android:lineSpacingExtra="3sp"
+            android:padding="@dimen/padding_small"
+            android:text="@string/permission_rationale"
+            android:textAllCaps="false"
+            android:textColor="#1f1f1f"
+            android:textSize="14sp" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/padding_small"
+            android:layout_below="@id/text_product_desc"
+            android:background="@color/greyColor" />
+
+        <TextView
+            android:id="@+id/text_product_category"
+            style="@style/TextViewTags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_product_desc"
+            android:layout_toEndOf="@+id/text_product_state" />
+
+        <TextView
+            android:id="@+id/text_product_state"
+            style="@style/TextViewTags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/divider"
+            android:layout_marginStart="@dimen/margin_smaller" />
+    </RelativeLayout>
+</LinearLayout>

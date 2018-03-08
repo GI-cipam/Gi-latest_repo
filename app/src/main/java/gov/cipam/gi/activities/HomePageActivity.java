@@ -75,8 +75,12 @@ public class HomePageActivity extends BaseActivity
         setUpToolbar(this);
         initializeTwitter();
         //showErrorSnackbar();
-
         drawer = findViewById(R.id.drawer_layout);
+        navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -103,7 +107,7 @@ public class HomePageActivity extends BaseActivity
                 fragmentInflate(HomePageFragment.newInstance());
             }
         }
-
+        navigationView.setNavigationItemSelectedListener(this);
         populateInitialSearchCursor();
 
     }

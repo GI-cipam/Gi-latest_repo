@@ -7,12 +7,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -33,6 +37,7 @@ import java.util.ArrayList;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.ProductListActivity;
+import gov.cipam.gi.adapters.MapsSellerAdapter;
 import gov.cipam.gi.database.Database;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
@@ -43,12 +48,17 @@ import gov.cipam.gi.utils.Constants;
  * Created by karan on 11/20/2017.
  */
 
-public class MapsFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+public class MapsFragment extends Fragment implements OnMapReadyCallback
+        ,GoogleMap.OnInfoWindowClickListener
+        ,MapsSellerAdapter.setOnMapSellerClickedListener{
+
     MapView mapView;
     GoogleMap map;
+    RecyclerView rvSellers;
+    LinearLayout layoutBottomSheet;
     ArrayList<Seller> selectedSellerList;
     ArrayList<Seller> allSellerList=new ArrayList<>();
-
+    BottomSheetBehavior sheetBehavior;
     Database databaseInstance;
     SQLiteDatabase database;
     public static boolean hasSpecializedList=false;
@@ -69,7 +79,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_maps, container, false);
+        return inflater.inflate(R.layout.fragment_maps_alternate, container, false);
     }
 
     @Override
@@ -77,6 +87,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
         super.onViewCreated(view, savedInstanceState);
         databaseInstance = new Database(getContext());
         database = databaseInstance.getReadableDatabase();
+
+        layoutBottomSheet=view.findViewById(R.id.bottom_sheet);
+        sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
+        rvSellers=view.findViewById(R.id.recycler_map_sellers);
+
+        rvSellers.setLayoutManager(new GridLayoutManager(getContext(),2));
+        rvSellers.setAdapter(new MapsSellerAdapter(this));
+
         SupportMapFragment mapFragment1=(SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapFragment);
         mapFragment1.getMapAsync(this);
     }
@@ -279,5 +297,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
             startActivity(new Intent(getContext(), ProductListActivity.class)
                     .putExtra(Constants.KEY_TYPE, Database.GI_PRODUCT)
                     .putExtras(bundle));
+    }
+    
+    @Override
+    public void onMapSellerClicked(MapsSellerAdapter.MapsSellerViewHolder view, int position) {
+
     }
 }
