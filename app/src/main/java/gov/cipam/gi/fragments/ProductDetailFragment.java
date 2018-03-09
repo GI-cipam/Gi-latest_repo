@@ -14,7 +14,6 @@ import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
@@ -26,17 +25,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.ms.square.android.expandabletextview.ExpandableTextView;
-import com.twitter.sdk.android.core.models.Card;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -46,7 +41,6 @@ import java.util.TimerTask;
 import gov.cipam.gi.activities.MapsActivity;
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.WebViewActivity;
-import gov.cipam.gi.adapters.GiUniquenessListAdapter;
 import gov.cipam.gi.adapters.SellerListAdapter;
 import gov.cipam.gi.adapters.UniquenessPagerAdapter;
 import gov.cipam.gi.database.Database;
@@ -88,12 +82,15 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     PaletteGenerate paletteGenerate;
     Product product;
     CardView uniquenessCard,sellerCard;
+    ImageButton micHistoryButton, micDescriptionButton;
     boolean isImagePreLoaded = false;
     public static Bitmap mBitmap;
 
     private TextToSpeech myTTS;
     private int MY_DATA_CHECK_CODE = 0;
     int tts_check = 0;
+    int micHistoryFlag = 0;
+    int micDescriptionFlag = 0;
 
 
     @Nullable
@@ -230,12 +227,21 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         historyLinearLayout = view.findViewById(R.id.childHistoryCard);
         descLinearLayout = view.findViewById(R.id.childDescCard);
         txtvTitleHistory = historyLinearLayout.findViewById(R.id.headingText);
+        micHistoryButton =historyLinearLayout.findViewById(R.id.tts_on_off);
+        micHistoryButton.setOnClickListener(view1 -> {
+            micHistoryTTS();
+
+    });
         txtvTitleHistory.setText("History");
         etvHistory=historyLinearLayout.findViewById(R.id.expand_text_view);
         //txtHistory = historyLinearLayout.findViewById(R.id.descText);
 
         txtvTitleDesc = descLinearLayout.findViewById(R.id.headingText);
         txtvTitleDesc.setText("Description");
+        micDescriptionButton =descLinearLayout.findViewById(R.id.tts_on_off);
+        micDescriptionButton.setOnClickListener(view12 -> {
+            micDescriptionTTS();
+        });
         etvDesc=descLinearLayout.findViewById(R.id.expand_text_view);
         //txtDesc = descLinearLayout.findViewById(R.id.descText);
 
@@ -264,6 +270,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 //            uniquenessCard.setVisibility(View.INVISIBLE);
 //        }
     }
+
 
 
     //speak the user text
@@ -436,6 +443,40 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         }
         else if (initStatus == TextToSpeech.ERROR) {
             Toast.makeText(getContext(), "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    private void micHistoryTTS(){
+        if (micHistoryFlag ==0){
+            myTTS.stop();
+            micHistoryButton.setImageResource(R.drawable.microphone_off_green);
+            micHistoryFlag =1;
+            speakWords(product.getHistory());
+            micDescriptionButton.setImageResource(R.drawable.ic_menu_microphone_green);
+            micDescriptionFlag =0;
+        }
+        else{
+            micHistoryButton.setImageResource(R.drawable.ic_menu_microphone_green);
+            micHistoryFlag =0;
+            myTTS.stop();
+            micDescriptionButton.setImageResource(R.drawable.ic_menu_microphone_green);
+        }
+    }
+    private void micDescriptionTTS() {
+        if (micDescriptionFlag ==0){
+            myTTS.stop();
+            micDescriptionButton.setImageResource(R.drawable.microphone_off_green);
+            speakWords(product.getDescription());
+            micDescriptionFlag =1;
+            micHistoryButton.setImageResource(R.drawable.ic_menu_microphone_green);
+            micHistoryFlag =0;
+        }
+        else {
+            micDescriptionButton.setImageResource(R.drawable.ic_menu_microphone_green);
+            micDescriptionFlag = 0;
+            myTTS.stop();
+            micHistoryButton.setImageResource(R.drawable.ic_menu_microphone_green);
         }
     }
 }
