@@ -58,13 +58,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
 ,View.OnClickListener{
 
     MapView mapView;
-    FloatingActionButton fabBottomSheet;
     GoogleMap map;
     RecyclerView rvSellers;
+    FloatingActionButton fabBottomSheet;
     LinearLayout layoutBottomSheet;
+    BottomSheetBehavior sheetBehavior;
     ArrayList<Seller> selectedSellerList;
     ArrayList<Seller> allSellerList = new ArrayList<>();
-    BottomSheetBehavior sheetBehavior;
     Database databaseInstance;
     SQLiteDatabase database;
     public static boolean hasSpecializedList = false;

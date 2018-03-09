@@ -50,9 +50,7 @@ public class HomePageActivity extends BaseActivity
     public static final int MIN_NOTIFICATION_SELLER_DISTANCE = 30;
     //private FirebaseAuth mAuth;
     private DrawerLayout drawer;
-    BottomNavigationView bottomNavigationView;
     SearchView searchView;
-    FrameLayout frameLayout;
     String[] historyItem;
     String mQuery = "";
     BottomNavigationView navigation;
