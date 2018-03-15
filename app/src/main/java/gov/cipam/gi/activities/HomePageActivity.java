@@ -51,10 +51,8 @@ public class HomePageActivity extends BaseActivity
     //private FirebaseAuth mAuth;
     private DrawerLayout drawer;
     SearchView searchView;
-    String[] historyItem;
-    String mQuery = "";
+    String historyItem[], mQuery = "",navItem;
     BottomNavigationView navigation;
-    String navItem;
     NavigationView navigationView;
     Cursor searchCursorHistory, searchCursorOther;
     SearchCursorAdapter searchCursorAdapter;

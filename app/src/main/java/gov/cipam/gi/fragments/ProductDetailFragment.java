@@ -71,7 +71,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
     int page_position = 0;
     ExpandableTextView etvHistory,etvDesc;
-    CardView historyLinearLayout,descLinearLayout;
+    LinearLayout historyLinearLayout,descLinearLayout;
     LinearLayout dotsLinearLayout;
     TextView txtvTitleHistory,txtvTitleDesc;
     String name,address,contact;
@@ -219,8 +219,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        sellerCard=view.findViewById(R.id.seller_card);
-        uniquenessCard=view.findViewById(R.id.uniqueness_card);
+        /*sellerCard=view.findViewById(R.id.seller_card);
+        uniquenessCard=view.findViewById(R.id.uniqueness_card);*/
         rvSeller = view.findViewById(R.id.seller_recycler_view);
         imageView = view.findViewById(R.id.productDetailImage);
         /*txtState = view.findViewById(R.id.detail_stateName);
