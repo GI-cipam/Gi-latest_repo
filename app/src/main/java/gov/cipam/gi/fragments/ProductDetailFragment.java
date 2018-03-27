@@ -53,6 +53,7 @@ import gov.cipam.gi.utils.WrapContentHeightViewPager;
 
 import static gov.cipam.gi.utils.Constants.EXTRA_URL;
 
+
 /**
  * Created by karan on 12/14/2017.
  */
@@ -65,14 +66,14 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
     int page_position = 0, MY_DATA_CHECK_CODE = 0, micHistoryFlag = 0, micDescriptionFlag = 0;
     float pitch, speed;
+    String name, address, contact;
     boolean isImagePreLoaded = false;
     Double lon, lat;
-    String name, address, contact;
 
     SharedPreferences sharedPreferences;
     ExpandableTextView etvHistory, etvDesc;
     LinearLayout dotsLinearLayout;
-    RelativeLayout historyLinearLayout, descLinearLayout;
+    RelativeLayout historyLinearLayout, descLinearLayout, bottomSheetTTS;
     TextView titleHistoryTv, titleDescTv, dots[];
     WrapContentHeightViewPager viewPager;
     RecyclerView rvSeller;
@@ -88,7 +89,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     private TextToSpeech myTTS;
 
     BottomSheetBehavior sheetBehavior;
-    RelativeLayout bottomSheetTTS;
     public static Bitmap mBitmap;
 
     public ProductDetailFragment() {
@@ -238,8 +238,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
             }
         }
     }
-
-    //txtDesc = descLinearLayout.findViewById(R.id.descText);
 
     private void populateSellerListFromDB() {
 
@@ -437,7 +435,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
             micHistoryButton.setImageResource(R.drawable.ic_menu_microphone_green);
             micHistoryFlag = 0;
             myTTS.stop();
-            micDescriptionButton.setImageResource(R.drawable.ic_menu_microphone_green);
         }
     }
 
@@ -452,8 +449,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         } else {
             micDescriptionButton.setImageResource(R.drawable.ic_menu_microphone_green);
             micDescriptionFlag = 0;
-            myTTS.stop();
-            micHistoryButton.setImageResource(R.drawable.ic_menu_microphone_green);
+
         }
     }
 }

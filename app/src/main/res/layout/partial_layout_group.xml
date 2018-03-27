@@ -13,7 +13,6 @@
     android:paddingBottom="@dimen/padding_smaller"
     android:paddingTop="@dimen/padding_smaller">
 
-
     <ImageButton
         android:id="@+id/tts_on_off"
         android:layout_width="wrap_content"
@@ -25,11 +24,14 @@
         app:srcCompat="@drawable/ic_menu_microphone_green"
         tools:ignore="ContentDescription" />
 
+
     <TextView
         android:id="@+id/headingText"
         style="?attr/text_size_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:paddingBottom="@dimen/padding_small"
         android:paddingEnd="@dimen/padding_small"
         android:paddingStart="@dimen/padding_small"
