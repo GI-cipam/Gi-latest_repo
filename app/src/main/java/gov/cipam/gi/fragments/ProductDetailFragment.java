@@ -318,7 +318,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     @Override
     public void onPause() {
         super.onPause();
-        setRetainInstance(true);
     }
 
     /*private void setAutoScroll() {
@@ -358,6 +357,12 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
         if (dots.length > 0)
             dots[currentPage].setTextColor(Color.parseColor("#d3d3d3"));
+    }
+
+    @Override
+    public void onDestroy() {
+        myTTS.shutdown();
+        super.onDestroy();
     }
 
     @Override

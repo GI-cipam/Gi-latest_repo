@@ -24,6 +24,9 @@ public class IntroActivity extends AppIntro {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         checkOnBoardingStatus();
     }
 
@@ -51,19 +54,19 @@ public class IntroActivity extends AppIntro {
         startActivity(new Intent(this, HomePageActivity.class));
         finish();
     }
+
     public void checkOnBoardingStatus() {
 
         SharedPreferences preferences = getSharedPreferences(Constants.MY_PREFERENCES, MODE_PRIVATE);
-        if (!preferences.getBoolean(Constants.ONBOARDING_COMPLETE, false)){
-            if(!preferences.getBoolean(Constants.ONDOWNLOAD_INITIATED,false)) {
+        if (!preferences.getBoolean(Constants.ONBOARDING_COMPLETE, false)) {
+            if (!preferences.getBoolean(Constants.ONDOWNLOAD_INITIATED, false)) {
                 downloadThread1 = new downloadThread(this);
                 preferences.edit().putBoolean(Constants.ONDOWNLOAD_INITIATED, true).apply();
             }
             addSlide(new Onboarding1());
             addSlide(new Onboarding2());
             setSpecs();
-        }
-        else {
+        } else {
             startActivity(new Intent(this, HomePageActivity.class));
             finish();
         }
