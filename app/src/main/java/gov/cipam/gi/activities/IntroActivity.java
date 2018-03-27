@@ -24,7 +24,7 @@ public class IntroActivity extends AppIntro {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CheckOnboardingStatus();
+        checkOnBoardingStatus();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class IntroActivity extends AppIntro {
         startActivity(new Intent(this, HomePageActivity.class));
         finish();
     }
-    public void CheckOnboardingStatus() {
+    public void checkOnBoardingStatus() {
 
         SharedPreferences preferences = getSharedPreferences(Constants.MY_PREFERENCES, MODE_PRIVATE);
         if (!preferences.getBoolean(Constants.ONBOARDING_COMPLETE, false)){

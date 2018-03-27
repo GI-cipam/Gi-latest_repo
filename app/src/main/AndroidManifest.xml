@@ -36,13 +36,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.IntroActivity"
-            android:screenOrientation="portrait"
-            >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.ProductListActivity"
@@ -71,6 +70,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps"
@@ -92,8 +92,9 @@
         <activity
             android:name=".activities.NavItemActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.AllStatesActivity"
-            android:label="All States"/>
+        <activity
+            android:name=".activities.AllStatesActivity"
+            android:label="All States" />
     </application>
 
 </manifest>

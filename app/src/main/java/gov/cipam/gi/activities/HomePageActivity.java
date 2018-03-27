@@ -34,13 +34,11 @@ import gov.cipam.gi.R;
 import gov.cipam.gi.adapters.SearchCursorAdapter;
 import gov.cipam.gi.background.LocationService;
 import gov.cipam.gi.database.Database;
-import gov.cipam.gi.common.HeaderViewPresenter;
 import gov.cipam.gi.fragments.HomePageFragment;
 import gov.cipam.gi.fragments.MapsFragment;
 import gov.cipam.gi.fragments.SocialFeedFragment;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
-
 import gov.cipam.gi.utils.Constants;
 
 public class HomePageActivity extends BaseActivity
@@ -52,13 +50,9 @@ public class HomePageActivity extends BaseActivity
     public static final int MIN_NOTIFICATION_SELLER_DISTANCE = 30;
     //private FirebaseAuth mAuth;
     private DrawerLayout drawer;
-    BottomNavigationView bottomNavigationView;
     SearchView searchView;
-    FrameLayout frameLayout;
-    String[] historyItem;
-    String mQuery = "";
+    String historyItem[], mQuery = "",navItem;
     BottomNavigationView navigation;
-    String navItem;
     NavigationView navigationView;
     Cursor searchCursorHistory, searchCursorOther;
     SearchCursorAdapter searchCursorAdapter;
@@ -77,6 +71,17 @@ public class HomePageActivity extends BaseActivity
         setUpToolbar(this);
         initializeTwitter();
         //showErrorSnackbar();
+        drawer = findViewById(R.id.drawer_layout);
+        navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
         databaseInstance = new Database(this);
         database = databaseInstance.getWritableDatabase();
 
@@ -98,13 +103,9 @@ public class HomePageActivity extends BaseActivity
                 fragmentInflate(HomePageFragment.newInstance());
             }
         }
-
-       // mAuth = FirebaseAuth.getInstance();
+        navigationView.setNavigationItemSelectedListener(this);
         populateInitialSearchCursor();
-        drawer = findViewById(R.id.drawer_layout);
 
-        //user = SharedPref.getSavedObjectFromPreference(HomePageActivity.this, Constants.KEY_USER_INFO, Constants.KEY_USER_DATA, Users.class);
-        setNavigation();
     }
 
 
@@ -120,22 +121,6 @@ public class HomePageActivity extends BaseActivity
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
-    private void setNavigation() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        HeaderViewPresenter headerviewPresenter = new HeaderViewPresenter(this, navigationView.getHeaderView(0), drawer);
-        headerviewPresenter.initViews();
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -144,10 +129,6 @@ public class HomePageActivity extends BaseActivity
 
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         setSearchParameters();
-/*
-        if (mAuth.getCurrentUser().isAnonymous())
-            menu.findItem(R.id.action_logout).setVisible(false);*/
-
         return true;
     }
 
@@ -233,9 +214,6 @@ public class HomePageActivity extends BaseActivity
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
-/*            case R.id.action_logout:
-                logoutAction();
-                break;*/
             case R.id.action_search:
                 break;
             case R.id.action_start_service:
@@ -273,17 +251,6 @@ public class HomePageActivity extends BaseActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle ic_tab_navigation view item clicks here.
         switch (item.getItemId()) {
-/*
-            case R.id.nav_account:
-                navItem = "AccountInfo";
-                startActivity(new Intent(this, NavItemActivity.class)
-                        .putExtra(Constants.NAV_CATEGORY, navItem));
-                break;*/
-
-/*            case R.id.nav_sign_up:
-                mAuth.signOut();
-                startActivity(new Intent(this, LoginActivity.class));
-                break;*/
 
             case R.id.nav_about_us:
                 navItem = "AboutScreen";
@@ -309,36 +276,6 @@ public class HomePageActivity extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-/*        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) {
-            startActivity(new Intent(this, NewUserActivity.class));
-        }*/
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-/*    public void logoutAction() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this).setMessage(R.string.logout);
-
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                mAuth.signOut();
-                startActivity(new Intent(HomePageActivity.this, LoginActivity.class));
-                finish();
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-            }
-        }).show();
-    }*/
 
     public void fragmentInflate(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
