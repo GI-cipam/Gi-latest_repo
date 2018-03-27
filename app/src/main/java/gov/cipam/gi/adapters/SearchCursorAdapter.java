@@ -23,7 +23,6 @@ import gov.cipam.gi.database.Database;
 
 public class SearchCursorAdapter extends CursorAdapter {
 
-    Context mContext;
     private Cursor cursor;
     private setOnSuggestionClickListener mListener;
     private String mQuery;
@@ -80,13 +79,11 @@ public class SearchCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 int k = (int) v.getTag();
-//                        Toast.makeText(mContext,k+" position", Toast.LENGTH_SHORT).show();
                 if (mCursor.moveToPosition(k)) {
                     String name = mCursor.getString(mCursor.getColumnIndex(Database.GI_SEARCH_NAME));
                     String type = mCursor.getString(mCursor.getColumnIndex(Database.GI_SEARCH_TYPE));
 
                     mListener.onSuggestionClickListener(v, type, name);
-//                          Toast.makeText(mContext, name + "of type :" + type + " clicked", Toast.LENGTH_SHORT).show();
                 }
             }
         });

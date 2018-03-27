@@ -24,20 +24,20 @@ public class AllStatesActivity extends BaseActivity implements StatesAdapter.set
     RecyclerView rvAllStates;
     DatabaseFetch databaseFetch;
     DatabaseReference mDatabaseState;
-    FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_states);
         setUpToolbar(this);
-        mAuth = FirebaseAuth.getInstance();
+
         mToolbar.setTitle(AllStatesActivity.class.getName());
         databaseFetch = new DatabaseFetch();
         databaseFetch.populateDisplayListFromDB(this);
         mDatabaseState=FirebaseDatabase.getInstance().getReference("States");
 
         rvAllStates=findViewById(R.id.allStatesRecycler);
-        rvAllStates.setAdapter(new StatesAdapter(this,mDisplayStateList,this));
+        rvAllStates.setAdapter(new StatesAdapter(this,mDisplayStateList));
         rvAllStates.setLayoutManager(new GridLayoutManager(this,3));
 
     }

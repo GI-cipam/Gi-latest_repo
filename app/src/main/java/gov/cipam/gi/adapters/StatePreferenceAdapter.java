@@ -29,7 +29,7 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
 
     private ArrayList<StatePreference> statePreferences;
     private ArrayList<StatePreference> statePreference =new ArrayList<>();
-    setOnPreferenceStateClickListener mListener;
+    private setOnPreferenceStateClickListener mListener;
 
     public StatePreferenceAdapter(ArrayList<StatePreference> statePreferences,setOnPreferenceStateClickListener onPreferenceStateClickListener) {
         this.statePreferences = statePreferences;

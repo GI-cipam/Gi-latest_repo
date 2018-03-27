@@ -30,7 +30,11 @@
             android:key="@string/text_key"
             android:summary="@string/text_summary"
             android:title="@string/text_size" />
-        
+        <Preference
+            android:icon="@drawable/ic_menu_microphone_dark"
+            android:key="tts"
+            android:summary="Set Speech Pitch and Speed"
+            android:title="Set TTS" />
     </PreferenceCategory>
 
 </PreferenceScreen>

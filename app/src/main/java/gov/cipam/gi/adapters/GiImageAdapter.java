@@ -23,7 +23,7 @@ import gov.cipam.gi.model.Categories;
  * Created by karan on 1/26/2018.
  */
 
-public class GiSliderImageAdapter extends PagerAdapter implements View.OnClickListener {
+public class GiImageAdapter extends PagerAdapter implements View.OnClickListener {
 
     private ArrayList<Categories> mCategories;
     private ImageView imgvSliderImage;
@@ -32,13 +32,13 @@ public class GiSliderImageAdapter extends PagerAdapter implements View.OnClickLi
     int position;
     setOnGiClickListener mListener;
 
-    public GiSliderImageAdapter(ArrayList<Categories> mCategories, Activity activity,setOnGiClickListener mListener) {
+    public GiImageAdapter(ArrayList<Categories> mCategories, Activity activity, setOnGiClickListener mListener) {
         this.mCategories = mCategories;
         this.activity = activity;
-        this.mListener=mListener;
+        this.mListener = mListener;
     }
 
-    public interface setOnGiClickListener{
+    public interface setOnGiClickListener {
         void onGiItemClicked(View view, int position);
     }
 
@@ -46,32 +46,34 @@ public class GiSliderImageAdapter extends PagerAdapter implements View.OnClickLi
     public int getCount() {
         return mCategories.size();
     }
+
     public Object instantiateItem(ViewGroup container, int position) {
-            this.position=position;
+        this.position = position;
         final LayoutInflater layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        assert layoutInflater != null;
         View view = layoutInflater.inflate(R.layout.item_gi_image, container, false);
 
-        final RelativeLayout relativeLayout=view.findViewById(R.id.giRelativeLayout);
-        final TextView txtvGiSlider=view.findViewById(R.id.text_gi);
-        imgvSliderImage=view.findViewById(R.id.image_gi);
-        progressBar=view.findViewById(R.id.progressBarGi);
+        final RelativeLayout relativeLayout = view.findViewById(R.id.giRelativeLayout);
+        final TextView GiSliderTv = view.findViewById(R.id.text_gi);
+        imgvSliderImage = view.findViewById(R.id.image_gi);
+        progressBar = view.findViewById(R.id.progressBarGi);
 
         progressBar.setVisibility(View.VISIBLE);
-        txtvGiSlider.setText(mCategories.get(position).getName());
+        GiSliderTv.setText(mCategories.get(position).getName());
         Picasso.with(activity)
                 .load(mCategories.get(position).getDpurl())
                 .placeholder(R.drawable.btn_round_white)
                 .into(imgvSliderImage, new Callback() {
                     @Override
                     public void onSuccess() {
-                    progressBar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onError() {
-                    imgvSliderImage.setImageResource(R.drawable.ic_image_off);
-                    progressBar.setVisibility(View.GONE);
+                        imgvSliderImage.setImageResource(R.drawable.ic_image_off);
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
         container.addView(view);
@@ -82,17 +84,17 @@ public class GiSliderImageAdapter extends PagerAdapter implements View.OnClickLi
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view==object;
+        return view == object;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        View view= (View) object;
+        View view = (View) object;
         container.removeView(view);
     }
-    
+
     @Override
     public void onClick(View view) {
-        mListener.onGiItemClicked(view,position);
+        mListener.onGiItemClicked(view, position);
     }
 }

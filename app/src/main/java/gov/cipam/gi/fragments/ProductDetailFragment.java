@@ -10,14 +10,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -26,29 +24,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.ms.square.android.expandabletextview.ExpandableTextView;
-import com.twitter.sdk.android.core.models.Card;
 
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import gov.cipam.gi.activities.MapsActivity;
 import gov.cipam.gi.R;
+import gov.cipam.gi.activities.MapsActivity;
 import gov.cipam.gi.activities.WebViewActivity;
-import gov.cipam.gi.adapters.GiUniquenessListAdapter;
 import gov.cipam.gi.adapters.SellerListAdapter;
-import gov.cipam.gi.adapters.UniquenessPagerAdapter;
+import gov.cipam.gi.adapters.GiUniquenessAdapter;
 import gov.cipam.gi.database.Database;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
@@ -67,33 +59,69 @@ import static gov.cipam.gi.utils.Constants.EXTRA_URL;
  */
 
 public class ProductDetailFragment extends Fragment implements SellerListAdapter.setOnSellerClickListener
-        ,ViewPager.OnPageChangeListener,View.OnClickListener,TextToSpeech.OnInitListener{
+        , ViewPager.OnPageChangeListener
+        , View.OnClickListener
+        , View.OnLongClickListener
+        , TextToSpeech.OnInitListener {
 
+    String name, address, contact;
     int page_position = 0;
-    ExpandableTextView etvHistory,etvDesc;
-    LinearLayout historyLinearLayout,descLinearLayout;
-    LinearLayout dotsLinearLayout;
-    TextView txtvTitleHistory,txtvTitleDesc;
-    String name,address,contact;
-    Double lon,lat;
-    WrapContentHeightViewPager viewPager;
-    private TextView[] dots;
-    RecyclerView rvSeller;
-    ArrayList<Seller> sellerList;
-    ArrayList<Uniqueness> uniquenessList;
-    Database databaseInstance;
-    SQLiteDatabase database;
-    ImageView imageView;
-    StartSnapHelper startSnapHelper;
-    PaletteGenerate paletteGenerate;
-    Product product;
-    CardView uniquenessCard,sellerCard;
     boolean isImagePreLoaded = false;
-    public static Bitmap mBitmap;
-
     private TextToSpeech myTTS;
     private int MY_DATA_CHECK_CODE = 0;
     int tts_check = 0;
+    Double lon, lat;
+
+    Database databaseInstance;
+    SQLiteDatabase database;
+
+    ArrayList<Seller> sellerList;
+    ArrayList<Uniqueness> uniquenessList;
+
+    BottomSheetBehavior sheetBehavior;
+    ExpandableTextView etvHistory, etvDesc;
+    LinearLayout historyLinearLayout, descLinearLayout, dotsLinearLayout;
+    RelativeLayout bottomSheetTTS;
+    TextView titleHistoryTv, titleDescTv, dots[];
+    WrapContentHeightViewPager viewPager;
+    RecyclerView rvSeller;
+    ImageView imageView;
+    ImageButton closeBottomSheetBtn;
+    StartSnapHelper startSnapHelper;
+    PaletteGenerate paletteGenerate;
+    Product product;
+
+    public static Bitmap mBitmap;
+
+    public ProductDetailFragment() {
+    }
+
+    public static ProductDetailFragment newInstance(Product product, Bitmap bitmap) {
+
+        Bundle args = new Bundle();
+        args.putSerializable("nalin", product);
+        ProductDetailFragment fragment = new ProductDetailFragment();
+        fragment.setArguments(args);
+        mBitmap = bitmap;
+        return fragment;
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        sellerList = new ArrayList<>();
+        uniquenessList = new ArrayList<>();
+        databaseInstance = new Database(getContext());
+        startSnapHelper = new StartSnapHelper();
+
+        database = databaseInstance.getReadableDatabase();
+        paletteGenerate = new PaletteGenerate();
+        populateSellerListFromDB();
+        populateUniquenessList1fromDB();
+        setHasOptionsMenu(true);
+
+        super.onCreate(savedInstanceState);
+    }
 
 
     @Nullable
@@ -106,157 +134,43 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         return inflater.inflate(R.layout.fragment_product_detail, container, false);
     }
 
-    public ProductDetailFragment() {
-    }
-
-
-    public static ProductDetailFragment newInstance(Product product, Bitmap bitmap) {
-
-        Bundle args = new Bundle();
-        args.putSerializable("nalin", product);
-        ProductDetailFragment fragment = new ProductDetailFragment();
-        fragment.setArguments(args);
-        mBitmap=bitmap;
-        return fragment;
-    }
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        sellerList = new ArrayList<>();
-        uniquenessList=new ArrayList<>();
-        databaseInstance = new Database(getContext());
-        startSnapHelper=new StartSnapHelper();
-
-        database = databaseInstance.getReadableDatabase();
-        paletteGenerate=new PaletteGenerate();
-        populateSellerListFromDB();
-        populateUniquenessList1fromDB();
-        setHasOptionsMenu(true);
-
-        super.onCreate(savedInstanceState);
-    }
-
-    private void populateSellerListFromDB() {
-
-        Bundle b=getArguments();
-        product=(Product)b.get("nalin");
-        String[] s={product.getUid()};
-        Cursor sellerCursor=database.query(Database.GI_SELLER_TABLE,null,Database.GI_SELLER_UID+"=?",s,null,null,null,null);
-        while(sellerCursor.moveToNext()){
-
-            name=sellerCursor.getString(sellerCursor.getColumnIndex(Database.GI_SELLER_NAME));
-            address=sellerCursor.getString(sellerCursor.getColumnIndex(Database.GI_SELLER_ADDRESS));
-            contact=sellerCursor.getString(sellerCursor.getColumnIndex(Database.GI_SELLER_CONTACT));
-            lat=sellerCursor.getDouble(sellerCursor.getColumnIndex(Database.GI_SELLER_LAT));
-            lon=sellerCursor.getDouble(sellerCursor.getColumnIndex(Database.GI_SELLER_LON));
-
-            Seller oneSeller = new Seller(name, address, contact, lon, lat);
-
-            sellerList.add(oneSeller);
-        }
-        sellerCursor.close();
-    }
-
-    private void populateUniquenessList1fromDB() {
-        String[] s={product.getUid()};
-        Cursor uniquenessCursor=database.query(Database.GI_UNIQUENESS_TABLE,null,Database.GI_UNIQUENESS_UID+"=?",s,null,null,null,null);
-        while(uniquenessCursor.moveToNext()){
-            String oneUniqueInfo=uniquenessCursor.getString(uniquenessCursor.getColumnIndex(Database.GI_UNIQUENESS_VALUE));
-            Uniqueness uniqueness=new Uniqueness(oneUniqueInfo);
-            uniquenessList.add(uniqueness);
-        }
-        uniquenessCursor.close();
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        MenuItem settingsAction=menu.findItem(R.id.action_settings_product_list);
-        settingsAction.setVisible(false);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id=item.getItemId();
-
-        switch (id){
-            case android.R.id.home:
-                getActivity().getSupportFragmentManager()
-                        .popBackStackImmediate();
-                break;
-            case R.id.action_location:
-                startActivity(new Intent(getContext(),MapsActivity.class)
-                        .putExtra("latitude",lat)
-                        .putExtra("longitude",lon)
-                        .putExtra("address",address));
-                break;
-
-            case R.id.action_url:
-                String url="https://google.com";
-                Uri uri=Uri.parse(url);
-                openCustomChromeTab(uri);
-                break;
-            case R.id.action_tts:
-
-                /*Define TTS action here*/
-                if (tts_check==0){
-                    //get the text entered
-                    String words = product.getHistory();
-                    speakWords(words);
-                    tts_check=1;
-                }
-                else {
-                    myTTS.stop();
-                    tts_check=0;
-                }
-                break;
-        }
-        return true;
-    }
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*sellerCard=view.findViewById(R.id.seller_card);
-        uniquenessCard=view.findViewById(R.id.uniqueness_card);*/
+
         rvSeller = view.findViewById(R.id.seller_recycler_view);
         imageView = view.findViewById(R.id.productDetailImage);
-        /*txtState = view.findViewById(R.id.detail_stateName);
-        txtCategory = view.findViewById(R.id.detail_categoryName);*/
         viewPager = view.findViewById(R.id.vp_slider);
         dotsLinearLayout = view.findViewById(R.id.ll_dots);
-        historyLinearLayout = view.findViewById(R.id.childHistoryCard);
-        descLinearLayout = view.findViewById(R.id.childDescCard);
-        txtvTitleHistory = historyLinearLayout.findViewById(R.id.headingText);
-        txtvTitleHistory.setText("History");
-        etvHistory=historyLinearLayout.findViewById(R.id.expand_text_view);
-        //txtHistory = historyLinearLayout.findViewById(R.id.descText);
-
-        txtvTitleDesc = descLinearLayout.findViewById(R.id.headingText);
-        txtvTitleDesc.setText("Description");
-        etvDesc=descLinearLayout.findViewById(R.id.expand_text_view);
-        //txtDesc = descLinearLayout.findViewById(R.id.descText);
-
+        historyLinearLayout = view.findViewById(R.id.child_history_layout);
+        descLinearLayout = view.findViewById(R.id.child_desc_layout);
+        titleHistoryTv = historyLinearLayout.findViewById(R.id.headingText);
+        titleHistoryTv.setText("History");
+        etvHistory = historyLinearLayout.findViewById(R.id.expand_text_view);
+        bottomSheetTTS = view.findViewById(R.id.bottom_sheet_tts);
+        sheetBehavior = BottomSheetBehavior.from(bottomSheetTTS);
+        closeBottomSheetBtn = view.findViewById(R.id.button_close_bottom_sheet);
+        titleDescTv = descLinearLayout.findViewById(R.id.headingText);
+        titleDescTv.setText("Description");
+        etvDesc = descLinearLayout.findViewById(R.id.expand_text_view);
         setData();
 
         addBottomDots(0);
-        //setAutoScroll();
 
         rvSeller.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        rvSeller.setAdapter(new SellerListAdapter(getContext(), sellerList, this));
-        viewPager.setAdapter(new UniquenessPagerAdapter(uniquenessList,getActivity()));
+        rvSeller.setAdapter(new SellerListAdapter(sellerList, this));
+        viewPager.setAdapter(new GiUniquenessAdapter(uniquenessList, getActivity()));
 
-        if(mBitmap!=null) {
+        if (mBitmap != null) {
             CommonUtils.loadImageFromBitmap(imageView, mBitmap, getActivity());
-        }
-        else{
-            CommonUtils.loadImageFromURL(imageView,product.getDpurl(),getActivity());
+        } else {
+            CommonUtils.loadImageFromURL(imageView, product.getDpurl(), getActivity());
         }
 
+        closeBottomSheetBtn.setOnClickListener(this);
         viewPager.setOnPageChangeListener(this);
-
+        imageView.setOnLongClickListener(this);
 //        if(sellerList.size()==0){
 //            sellerCard.setVisibility(View.INVISIBLE);
 //        }
@@ -265,13 +179,101 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 //        }
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem settingsAction = menu.findItem(R.id.action_settings_product_list);
+        settingsAction.setVisible(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                getActivity().getSupportFragmentManager()
+                        .popBackStackImmediate();
+                break;
+            case R.id.action_location:
+                startActivity(new Intent(getContext(), MapsActivity.class)
+                        .putExtra("latitude", lat)
+                        .putExtra("longitude", lon)
+                        .putExtra("address", address));
+                break;
+
+            case R.id.action_url:
+                String url = "https://google.com";
+                Uri uri = Uri.parse(url);
+                openCustomChromeTab(uri);
+                break;
+            case R.id.action_tts:
+
+                /*Define TTS action here*/
+                if (tts_check == 0) {
+                    //get the text entered
+                    String words = product.getHistory();
+                    speakWords(words);
+                    tts_check = 1;
+                } else {
+                    myTTS.stop();
+                    tts_check = 0;
+                }
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onInit(int initStatus) {
+        //check for successful instantiation
+        if (initStatus == TextToSpeech.SUCCESS) {
+            if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE)
+                myTTS.setLanguage(Locale.US);
+        } else if (initStatus == TextToSpeech.ERROR) {
+            Toast.makeText(getContext(), "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void populateSellerListFromDB() {
+
+        Bundle b = getArguments();
+        product = (Product) b.get("nalin");
+        String[] s = {product.getUid()};
+        Cursor sellerCursor = database.query(Database.GI_SELLER_TABLE, null, Database.GI_SELLER_UID + "=?", s, null, null, null, null);
+        while (sellerCursor.moveToNext()) {
+
+            name = sellerCursor.getString(sellerCursor.getColumnIndex(Database.GI_SELLER_NAME));
+            address = sellerCursor.getString(sellerCursor.getColumnIndex(Database.GI_SELLER_ADDRESS));
+            contact = sellerCursor.getString(sellerCursor.getColumnIndex(Database.GI_SELLER_CONTACT));
+            lat = sellerCursor.getDouble(sellerCursor.getColumnIndex(Database.GI_SELLER_LAT));
+            lon = sellerCursor.getDouble(sellerCursor.getColumnIndex(Database.GI_SELLER_LON));
+
+            Seller oneSeller = new Seller(name, address, contact, lon, lat);
+
+            sellerList.add(oneSeller);
+        }
+        sellerCursor.close();
+    }
+
+
+    private void populateUniquenessList1fromDB() {
+        String[] s = {product.getUid()};
+        Cursor uniquenessCursor = database.query(Database.GI_UNIQUENESS_TABLE, null, Database.GI_UNIQUENESS_UID + "=?", s, null, null, null, null);
+        while (uniquenessCursor.moveToNext()) {
+            String oneUniqueInfo = uniquenessCursor.getString(uniquenessCursor.getColumnIndex(Database.GI_UNIQUENESS_VALUE));
+            Uniqueness uniqueness = new Uniqueness(oneUniqueInfo);
+            uniquenessList.add(uniqueness);
+        }
+        uniquenessCursor.close();
+    }
+
 
     //speak the user text
     private void speakWords(String speech) {
         //speak straight away
         myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
     }
-
 
     private void openCustomChromeTab(Uri uri) {
         CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
@@ -300,27 +302,11 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         return PendingIntent.getBroadcast(getContext(), actionSource, actionIntent, 0);
     }
 
-    private void setData(){
+    private void setData() {
         etvHistory.setText(product.getHistory());
         etvDesc.setText(product.getDescription());
-        /*txtCategory.setText(product.getCategory());
-        txtState.setText(product.getState());*/
-
-//        Uniqueness uniqueness=new Uniqueness(getString(R.string.long_text));
-//        uniquenessList.add(uniqueness);
-//
-//        uniqueness=new Uniqueness(getString(R.string.long_text));
-//        uniquenessList.add(uniqueness);
-//        uniqueness=new Uniqueness(getString(R.string.long_text));
-//        uniquenessList.add(uniqueness);
-//
-//        uniqueness=new Uniqueness(getString(R.string.long_text));
-//        uniquenessList.add(uniqueness);
-//
-//        uniqueness=new Uniqueness(getString(R.string.long_text));
-//        uniquenessList.add(uniqueness);
-
     }
+
     @Override
     public void onSellerClicked(View v, int Position) {
 
@@ -338,7 +324,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         setRetainInstance(true);
     }
 
-    private void setAutoScroll(){
+    /*private void setAutoScroll() {
         final Handler handler = new Handler();
 
         final Runnable update = new Runnable() {
@@ -359,7 +345,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
                 handler.post(update);
             }
         }, 100, 5000);
-    }
+    }*/
 
     private void addBottomDots(int currentPage) {
         dots = new TextView[uniquenessList.size()];
@@ -368,7 +354,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(getActivity());
             dots[i].setText(Html.fromHtml("&#8226;"));
-            dots[i].setTextSize(35);
+            dots[i].setTextSize(25);
             dots[i].setTextColor(Color.parseColor("#3897f0"));
             dotsLinearLayout.addView(dots[i]);
         }
@@ -406,8 +392,9 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-
+        switch (v.getId()) {
+            case R.id.button_close_bottom_sheet:
+                sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
     }
 
@@ -417,8 +404,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
             if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
                 //the user has the necessary data - create the TTS
                 myTTS = new TextToSpeech(getContext(), this);
-            }
-            else {
+            } else {
                 //no data - install it now
                 Intent installTTSIntent = new Intent();
                 installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
@@ -428,14 +414,14 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     }
 
     @Override
-    public void onInit(int initStatus) {
-        //check for successful instantiation
-        if (initStatus == TextToSpeech.SUCCESS) {
-            if(myTTS.isLanguageAvailable(Locale.US)==TextToSpeech.LANG_AVAILABLE)
-                myTTS.setLanguage(Locale.US);
+    public boolean onLongClick(View v) {
+        if (v == imageView) {
+            if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            } else {
+                sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
         }
-        else if (initStatus == TextToSpeech.ERROR) {
-            Toast.makeText(getContext(), "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
-        }
+        return false;
     }
 }

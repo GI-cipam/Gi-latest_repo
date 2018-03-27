@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -25,27 +24,23 @@ import gov.cipam.gi.model.States;
  * Created by NITANT SOOD on 10-01-2018.
  */
 
-public class SearchListAdapter extends BaseExpandableListAdapter{
-    public Context mContext;
+public class SearchListAdapter extends BaseExpandableListAdapter {
     private ArrayList<String> parentHeaders;
-    private Map<String,ArrayList> parentChildListMapping;
+    private Map<String, ArrayList> parentChildListMapping;
 
 
-    public SearchListAdapter(Context mContext, ArrayList<String> myParentHeaders, Map<String, ArrayList> parentChildListMapping) {
-        this.mContext = mContext;
+    public SearchListAdapter(ArrayList<String> myParentHeaders, Map<String, ArrayList> parentChildListMapping) {
         this.parentHeaders = myParentHeaders;
         this.parentChildListMapping = parentChildListMapping;
     }
 
     @Override
     public int getGroupCount() {
-//        Toast.makeText(mContext,parentHeaders.size()+"", Toast.LENGTH_SHORT).show();
         return parentHeaders.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-//        Toast.makeText(mContext, ""+parentChildListMapping.get(parentHeaders.get(groupPosition)).size(), Toast.LENGTH_SHORT).show();
         return (parentChildListMapping.get(parentHeaders.get(groupPosition))).size();
     }
 
@@ -76,67 +71,66 @@ public class SearchListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        LayoutInflater inflator = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflator.inflate(R.layout.search_list_parent_item,parent,false);
-        TextView parentText=convertView.findViewById(R.id.searchListParentName);
-        parentText.setText((String)getGroup(groupPosition));
+        LayoutInflater inflator = (LayoutInflater) convertView.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = inflator.inflate(R.layout.search_list_parent_item, parent, false);
+        TextView parentText = convertView.findViewById(R.id.searchListParentName);
+        parentText.setText((String) getGroup(groupPosition));
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        LayoutInflater inflator = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflator.inflate(R.layout.item_search,null);
-        LinearLayout linearLayout=convertView.findViewById(R.id.search_list_linear_layout);
-        TextView tvTitle=convertView.findViewById(R.id.text_search_title);
-        TextView tvFiller=convertView.findViewById(R.id.text_search_state);
-        TextView tvFiller1=convertView.findViewById(R.id.text_search_category);
-        TextView tvExtra=convertView.findViewById(R.id.text_search_contact);
-        ImageView imageView=convertView.findViewById(R.id.image_search);
+        LayoutInflater inflator = (LayoutInflater) convertView.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = inflator.inflate(R.layout.item_search, null);
+        TextView tvTitle = convertView.findViewById(R.id.text_search_title);
+        TextView tvFiller = convertView.findViewById(R.id.text_search_state);
+        TextView tvFiller1 = convertView.findViewById(R.id.text_search_category);
+        TextView tvExtra = convertView.findViewById(R.id.text_search_contact);
+        ImageView imageView = convertView.findViewById(R.id.image_search);
 
-        String parentName=parentHeaders.get(groupPosition);
-        switch (parentName){
+        String parentName = parentHeaders.get(groupPosition);
+        switch (parentName) {
             case Database.GI_PRODUCT:
 
-                Product product=(Product) parentChildListMapping.get(parentName).get(childPosition);
-                String strHashtag=convertView.getResources().getString(R.string.note);
+                Product product = (Product) parentChildListMapping.get(parentName).get(childPosition);
+                String strHashtag = convertView.getResources().getString(R.string.note);
                 tvTitle.setText(product.getName());
                 tvFiller.setText(strHashtag.concat(product.getState()));
                 tvFiller1.setText(strHashtag.concat(product.getCategory()));
                 tvExtra.setVisibility(View.INVISIBLE);
                 Picasso.with(parent.getContext())
                         .load(product.getDpurl())
-                        .resize(300,300)
+                        .resize(300, 300)
                         .centerCrop()
                         .into(imageView);
                 break;
 
             case Database.GI_CATEGORY:
-                Categories categories=(Categories) parentChildListMapping.get(parentName).get(childPosition);
+                Categories categories = (Categories) parentChildListMapping.get(parentName).get(childPosition);
                 tvTitle.setText(categories.getName());
                 tvFiller.setVisibility(View.INVISIBLE);
                 tvExtra.setVisibility(View.INVISIBLE);
                 Picasso.with(parent.getContext())
                         .load(categories.getDpurl())
-                        .resize(300,300)
+                        .resize(300, 300)
                         .centerCrop()
                         .into(imageView);
                 break;
 
             case Database.GI_STATE:
-                States state=(States) parentChildListMapping.get(parentName).get(childPosition);
+                States state = (States) parentChildListMapping.get(parentName).get(childPosition);
                 tvTitle.setText(state.getName());
                 tvFiller.setVisibility(View.INVISIBLE);
                 tvExtra.setVisibility(View.INVISIBLE);
                 Picasso.with(parent.getContext())
                         .load(state.getDpurl())
-                        .resize(300,300)
+                        .resize(300, 300)
                         .centerCrop()
                         .into(imageView);
                 break;
 
             case Database.GI_SELLER:
-                Seller seller=(Seller) parentChildListMapping.get(parentName).get(childPosition);
+                Seller seller = (Seller) parentChildListMapping.get(parentName).get(childPosition);
                 tvTitle.setText(seller.getName());
                 tvExtra.setText(seller.getcontact());
                 imageView.setImageResource(R.drawable.ic_account);

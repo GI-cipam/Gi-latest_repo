@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.appinvite.AppInviteInvitation;
@@ -51,7 +50,7 @@ public class HomePageActivity extends BaseActivity
     //private FirebaseAuth mAuth;
     private DrawerLayout drawer;
     SearchView searchView;
-    String historyItem[], mQuery = "",navItem;
+    String historyItem[], mQuery = "", navItem;
     BottomNavigationView navigation;
     NavigationView navigationView;
     Cursor searchCursorHistory, searchCursorOther;

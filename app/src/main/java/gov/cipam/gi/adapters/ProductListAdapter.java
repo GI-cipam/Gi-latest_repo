@@ -27,12 +27,10 @@ import gov.cipam.gi.model.Product;
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductViewHolder> {
 
     private ArrayList<Product> GIList;
-    private Context mContext;
     private setOnProductClickedListener mListener;
 
-    public ProductListAdapter(ArrayList<Product> GIList, Context mContext, setOnProductClickedListener mListener) {
+    public ProductListAdapter(ArrayList<Product> GIList, setOnProductClickedListener mListener) {
         this.GIList = GIList;
-        this.mContext = mContext;
         this.mListener = mListener;
     }
 
@@ -42,7 +40,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_product, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
         return new ProductListAdapter.ProductViewHolder(itemView);
     }
 
@@ -56,7 +54,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.mState.setText(strHashtag.concat(GIList.get(position).getState()));
         holder.mCategory.setText(strHashtag.concat(GIList.get(position).getCategory()));
         holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(mContext)
+        Picasso.with(holder.itemView.getContext())
                 .load(GIList.get(position).getDpurl())
                 .fit()
                 .into(holder.imageView, new Callback() {
