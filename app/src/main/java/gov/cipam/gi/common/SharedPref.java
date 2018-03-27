@@ -12,13 +12,11 @@ import com.google.gson.Gson;
 
 public class SharedPref {
 
-    public static void saveObjectToSharedPreference(Context context, String preferenceFileName, String serializedObjectKey, Object object) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName, 0);
-        SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
-        final Gson gson = new Gson();
-        String serializedObject = gson.toJson(object);
-        sharedPreferencesEditor.putString(serializedObjectKey, serializedObject);
-        sharedPreferencesEditor.apply();
+    public static void saveObjectToSharedPreference(Context context, float pitch, float speed) {
+        SharedPreferences.Editor myPrefs=context.getSharedPreferences("myPrefs",Context.MODE_PRIVATE).edit();
+        myPrefs.putFloat("pitch",pitch);
+        myPrefs.putFloat("speed",speed);
+        myPrefs.apply();
     }
 
 

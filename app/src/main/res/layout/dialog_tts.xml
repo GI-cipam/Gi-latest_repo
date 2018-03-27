@@ -67,7 +67,7 @@
         android:progress="5" />
 
     <Button
-        android:id="@+id/button_settings_tts"
+        android:id="@+id/button_save_tts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|right"
