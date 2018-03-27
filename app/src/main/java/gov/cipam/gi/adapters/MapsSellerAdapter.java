@@ -1,6 +1,5 @@
 package gov.cipam.gi.adapters;
 
-import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,17 +31,17 @@ public class MapsSellerAdapter extends RecyclerView.Adapter<MapsSellerAdapter.Ma
 
     @Override
     public MapsSellerAdapter.MapsSellerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_map_seller,parent,false);
-        return  new MapsSellerAdapter.MapsSellerViewHolder(itemView);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_map_seller, parent, false);
+        return new MapsSellerAdapter.MapsSellerViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MapsSellerViewHolder holder, int position) {
-        name=holder.itemView.getContext().getResources().getStringArray(R.array.dev_names);
-        address=holder.itemView.getContext().getResources().getStringArray(R.array.dev_emails);
-        contacts=holder.itemView.getContext().getResources().getStringArray(R.array.dev_emails);
+        name = holder.itemView.getContext().getResources().getStringArray(R.array.dev_names);
+        address = holder.itemView.getContext().getResources().getStringArray(R.array.dev_emails);
+        contacts = holder.itemView.getContext().getResources().getStringArray(R.array.dev_emails);
 
-        for(int i=0;i<=position;i++){
+        for (int i = 0; i < name.length; i++) {
             holder.mName.setText(name[i]);
             holder.mAddress.setText(name[i]);
             holder.mContact.setText(contacts[i]);
@@ -54,24 +53,24 @@ public class MapsSellerAdapter extends RecyclerView.Adapter<MapsSellerAdapter.Ma
         return 5;
     }
 
-    public class MapsSellerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView mName,mContact,mAddress;
+    public class MapsSellerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView mName, mContact, mAddress;
         LinearLayout linearLayout;
 
         private MapsSellerViewHolder(View itemView) {
             super(itemView);
 
-            linearLayout=itemView.findViewById(R.id.linear_layout_map_seller);
-            mName=itemView.findViewById(R.id.text_map_seller_name);
-            mAddress=itemView.findViewById(R.id.text_map_seller_address);
-            mContact=itemView.findViewById(R.id.text_map_seller_contact);
+            linearLayout = itemView.findViewById(R.id.linear_layout_map_seller);
+            mName = itemView.findViewById(R.id.text_map_seller_name);
+            mAddress = itemView.findViewById(R.id.text_map_seller_address);
+            mContact = itemView.findViewById(R.id.text_map_seller_contact);
 
             linearLayout.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            mListener.onMapSellerClicked(this,getAdapterPosition());
+            mListener.onMapSellerClicked(this, getAdapterPosition());
         }
     }
 }

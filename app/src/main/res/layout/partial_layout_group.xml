@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardUseCompatPadding="true">-->
-
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="@dimen/margin_small"
     android:background="@android:color/white"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
     android:paddingBottom="@dimen/padding_smaller"
-    android:paddingTop="@dimen/padding_smaller"
-    android:layout_marginBottom="@dimen/margin_small"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:paddingTop="@dimen/padding_smaller">
 
+<<<<<<< HEAD
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -48,44 +43,59 @@
                 android:background="@android:color/transparent"
                 app:srcCompat="@drawable/ic_menu_microphone_green" />
         </RelativeLayout>
+=======
+    <TextView
+        android:id="@+id/headingText"
+        style="?attr/text_size_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_small"
+        android:paddingEnd="@dimen/padding_small"
+        android:paddingStart="@dimen/padding_small"
+        android:paddingTop="@dimen/padding_smaller"
+        android:text="Uniqueness"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
+>>>>>>> 72edba8868b026ec3db72037d89b6d46909b14ab
 
-        <View
-            android:id="@+id/dividerViewUni"
+    <View
+        android:id="@+id/dividerViewUni"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/greyColor" />
+
+    <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/expand_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?selectableItemBackground"
+        expandableTextView:animDuration="200"
+        expandableTextView:maxCollapsedLines="?attr/exp_text">
+
+        <TextView
+            android:id="@id/expandable_text"
+            style="?attr/text_size_detail"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/greyColor" />
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:fontFamily="serif"
+            android:lineSpacingExtra="2sp"
+            android:textColor="#1f1f1f" />
 
-        <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/expand_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            expandableTextView:animDuration="200"
-            expandableTextView:maxCollapsedLines="?attr/exp_text">
+        <ImageButton
+            android:id="@id/expand_collapse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_smallest"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/padding_smaller"
+            tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@id/expandable_text"
-                style="?attr/text_size_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:layout_marginStart="@dimen/margin_small"
-                android:fontFamily="serif"
-                android:lineSpacingExtra="2sp"
-                android:textColor="#1f1f1f" />
+    </com.ms.square.android.expandabletextview.ExpandableTextView>
 
-            <ImageButton
-                android:id="@id/expand_collapse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:padding="@dimen/padding_smaller"
-                android:layout_margin="@dimen/margin_smallest"
-                tools:ignore="ContentDescription" />
-
-        </com.ms.square.android.expandabletextview.ExpandableTextView>
-
-    </LinearLayout>
-<!--
-</android.support.v7.widget.CardView>-->
+</LinearLayout>

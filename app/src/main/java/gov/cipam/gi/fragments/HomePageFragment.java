@@ -3,7 +3,6 @@ package gov.cipam.gi.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,14 +28,13 @@ import gov.cipam.gi.R;
 import gov.cipam.gi.activities.AllStatesActivity;
 import gov.cipam.gi.activities.ProductListActivity;
 import gov.cipam.gi.adapters.CategoryAdapter;
-import gov.cipam.gi.adapters.GiSliderImageAdapter;
+import gov.cipam.gi.adapters.GiImageAdapter;
 import gov.cipam.gi.adapters.StatesAdapter;
 import gov.cipam.gi.common.DatabaseFetch;
 import gov.cipam.gi.database.Database;
 import gov.cipam.gi.model.Categories;
 import gov.cipam.gi.model.States;
 import gov.cipam.gi.utils.Constants;
-import gov.cipam.gi.utils.StartSnapHelper;
 
 /**
  * Created by karan on 11/20/2017.
@@ -44,7 +42,7 @@ import gov.cipam.gi.utils.StartSnapHelper;
 
 public class HomePageFragment extends Fragment implements CategoryAdapter.setOnCategoryClickListener,
         StatesAdapter.setOnStateClickedListener
-        , GiSliderImageAdapter.setOnGiClickListener
+        , GiImageAdapter.setOnGiClickListener
         , ViewPager.OnPageChangeListener
         ,View.OnClickListener{
 
@@ -113,9 +111,9 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
 
         addBottomDots(0);
         //setAutoScroll();
-        rvState.setAdapter(new StatesAdapter(this, mDisplayStateList, getContext()));
-        rvCategory.setAdapter(new CategoryAdapter(mDisplayCategoryList, getContext(), this));
-        giSliderViewPager.setAdapter(new GiSliderImageAdapter(mDisplayCategoryList, getActivity(), this));
+        rvState.setAdapter(new StatesAdapter(this, mDisplayStateList));
+        rvCategory.setAdapter(new CategoryAdapter(mDisplayCategoryList, this));
+        giSliderViewPager.setAdapter(new GiImageAdapter(mDisplayCategoryList, getActivity(), this));
 
         rvState.setLayoutManager(new GridLayoutManager(getContext(),2 , GridLayoutManager.VERTICAL, false) {
             @Override
@@ -165,7 +163,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(getContext());
             dots[i].setText(Html.fromHtml("&#8226;"));
-            dots[i].setTextSize(35);
+            dots[i].setTextSize(30);
             dots[i].setTextColor(Color.parseColor("#aeaeae"));
             dotsLinearLayout.addView(dots[i]);
         }

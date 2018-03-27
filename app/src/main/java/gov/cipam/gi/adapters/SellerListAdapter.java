@@ -1,6 +1,5 @@
 package gov.cipam.gi.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +18,9 @@ import gov.cipam.gi.model.Seller;
 public class SellerListAdapter extends RecyclerView.Adapter<SellerListAdapter.SellerViewHolder> {
 
     private ArrayList<Seller> mSellerList;
-    Context mContext;
-    setOnSellerClickListener mListener;
+    private setOnSellerClickListener mListener;
 
-    public SellerListAdapter(Context mContext, ArrayList<Seller> mSellerList, setOnSellerClickListener mListener) {
-        this.mContext = mContext;
+    public SellerListAdapter(ArrayList<Seller> mSellerList, setOnSellerClickListener mListener) {
         this.mSellerList = mSellerList;
         this.mListener = mListener;
     }
@@ -33,7 +30,7 @@ public class SellerListAdapter extends RecyclerView.Adapter<SellerListAdapter.Se
     }
     @Override
     public SellerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_seller,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_seller,parent,false);
         return  new SellerListAdapter.SellerViewHolder(itemView);
 
     }

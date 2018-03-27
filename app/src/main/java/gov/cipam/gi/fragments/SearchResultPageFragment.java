@@ -77,7 +77,7 @@ public class SearchResultPageFragment extends Fragment {
         mType=getArguments().getString(Constants.KEY_TYPE);
         fetchDataFromAllDB();
 
-        searchResultAdapter=new SearchListAdapter(getActivity(),searchListHeaders,parentChildListMapping);
+        searchResultAdapter=new SearchListAdapter(searchListHeaders,parentChildListMapping);
         searchResultListView=view.findViewById(R.id.searchResultListView);
         searchResultListView.setAdapter(searchResultAdapter);
 

@@ -1,6 +1,5 @@
 package gov.cipam.gi.adapters;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -30,12 +29,10 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
     setOnStateClickedListener mListener;
     private ArrayList<States> mListOfStates;
     private Bitmap bitmap;
-    Context mContext;
 
-    public StatesAdapter(setOnStateClickedListener mListener, ArrayList<States> mListOfStates, Context mContext) {
+    public StatesAdapter(setOnStateClickedListener mListener, ArrayList<States> mListOfStates) {
         this.mListener = mListener;
         this.mListOfStates = mListOfStates;
-        this.mContext = mContext;
     }
 
     public interface setOnStateClickedListener {
@@ -44,7 +41,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
 
     @Override
     public StateViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_state, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_state, parent, false);
         return new StatesAdapter.StateViewHolder(itemView);
     }
 
@@ -55,7 +52,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
         String DpUrl = mListOfStates.get(position).getDpurl();
 
         holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.with(mContext)
+        Picasso.with(holder.itemView.getContext())
                 .load(DpUrl)
                 .placeholder(R.drawable.ic_placeholder_image)
                 .transform(new RoundedTransformation(5, 0))

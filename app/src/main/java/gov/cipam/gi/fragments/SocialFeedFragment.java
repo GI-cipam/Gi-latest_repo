@@ -1,24 +1,20 @@
 package gov.cipam.gi.fragments;
 
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.SearchTimeline;
@@ -34,10 +30,10 @@ import gov.cipam.gi.R;
 public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     ProgressBar progressBar;
 
-    TweetTimelineRecyclerViewAdapter    adapter;
-    RecyclerView                        recyclerView;
-    SwipeRefreshLayout                  swipeRefreshLayout;
-    private static final String         LOG_TAG ="Refresh" ;
+    TweetTimelineRecyclerViewAdapter adapter;
+    RecyclerView recyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
+    private static final String LOG_TAG = "Refresh";
 
 
     public static SocialFeedFragment newInstance() {
@@ -52,7 +48,7 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_social_feed,container,false);
+        return inflater.inflate(R.layout.fragment_social_feed, container, false);
 
     }
 
@@ -68,9 +64,16 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
 
         progressBar = view.findViewById(R.id.progressBar);
         recyclerView = view.findViewById(R.id.recyclerViewSocialFeed);
-        swipeRefreshLayout=view.findViewById(R.id.socialFeedSwipeRefreshLayout);
+        swipeRefreshLayout = view.findViewById(R.id.socialFeedSwipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //setProgressDialogAnimation(progressBar,0);
+        setAdapter();
+
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.md_red_500, R.color.md_blue_500, R.color.md_green_500);
+    }
+
+    private void setAdapter() {
+        swipeRefreshLayout.setRefreshing(true);
 
         final SearchTimeline searchTimeline = new SearchTimeline.Builder()
                 .query("#letstalkip")
@@ -83,8 +86,8 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
                 .build();
 
         recyclerView.setAdapter(adapter);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeResources(R.color.md_red_500,R.color.md_blue_500,R.color.md_green_500);
+
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -107,7 +110,7 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem item=menu.findItem(R.id.action_search);
+        MenuItem item = menu.findItem(R.id.action_search);
         item.setVisible(false);
     }
 

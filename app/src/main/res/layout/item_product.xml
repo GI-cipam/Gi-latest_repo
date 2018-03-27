@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:focusable="true"
     android:clickable="true"
-    android:background="?selectableItemBackground"
+    android:background="@android:color/white"
     android:layout_marginBottom="@dimen/margin_small">
 
     <RelativeLayout
@@ -58,7 +58,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:background="?selectableItemBackground">
 
         <TextView
             android:id="@+id/text_product_desc"

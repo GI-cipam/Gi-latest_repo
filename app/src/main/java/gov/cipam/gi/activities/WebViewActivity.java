@@ -1,5 +1,6 @@
 package gov.cipam.gi.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -13,6 +14,7 @@ public class WebViewActivity extends BaseActivity {
 
     WebView webView;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +22,7 @@ public class WebViewActivity extends BaseActivity {
         setContentView(R.layout.activity_web_view);
         setUpToolbar(this);
 
-        webView=findViewById(R.id.webView);
+        webView = findViewById(R.id.webView);
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(true);

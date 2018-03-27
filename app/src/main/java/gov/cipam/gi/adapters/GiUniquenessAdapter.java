@@ -17,13 +17,13 @@ import gov.cipam.gi.model.Uniqueness;
  * Created by karan on 1/26/2018.
  */
 
-public class UniquenessPagerAdapter extends PagerAdapter {
+public class GiUniquenessAdapter extends PagerAdapter {
 
 
     private ArrayList<Uniqueness> mUniqueness;
     private Activity activity;
 
-    public UniquenessPagerAdapter(ArrayList<Uniqueness> mUniqueness, Activity activity) {
+    public GiUniquenessAdapter(ArrayList<Uniqueness> mUniqueness, Activity activity) {
         this.mUniqueness= mUniqueness;
         this.activity=activity;
     }

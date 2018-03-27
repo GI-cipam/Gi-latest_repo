@@ -55,7 +55,14 @@ import gov.cipam.gi.utils.Constants;
 public class MapsFragment extends Fragment implements OnMapReadyCallback
         , GoogleMap.OnInfoWindowClickListener
         , MapsSellerAdapter.setOnMapSellerClickedListener
-,View.OnClickListener{
+        ,View.OnClickListener{
+
+    public static boolean hasSpecializedList = false;
+    ArrayList<Seller> selectedSellerList;
+    ArrayList<Seller> allSellerList = new ArrayList<>();
+
+    Database databaseInstance;
+    SQLiteDatabase database;
 
     MapView mapView;
     GoogleMap map;
@@ -63,11 +70,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
     FloatingActionButton fabBottomSheet;
     LinearLayout layoutBottomSheet;
     BottomSheetBehavior sheetBehavior;
-    ArrayList<Seller> selectedSellerList;
-    ArrayList<Seller> allSellerList = new ArrayList<>();
-    Database databaseInstance;
-    SQLiteDatabase database;
-    public static boolean hasSpecializedList = false;
 
     public static MapsFragment newInstance(ArrayList<Seller> seletedSellerList) {
 
