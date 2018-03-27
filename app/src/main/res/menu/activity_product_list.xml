@@ -3,26 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-    android:icon="@drawable/ic_menu_settings"
-    android:id="@+id/action_settings_product_list"
-    android:title="@string/settings"
-    app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/action_tts"
-        android:icon="@drawable/ic_menu_microphone"
-        android:title="@string/text_to_speech"
-        app:showAsAction="ifRoom"/>
+        android:id="@+id/action_settings_product_list"
+        android:icon="@drawable/ic_menu_settings"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_url"
         android:icon="@drawable/ic_menu_information"
         android:title="@string/url"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/action_location"
-        android:title="@string/open_in_map"
+    <item
+        android:id="@+id/action_location"
         android:icon="@drawable/ic_menu_map_marker"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/open_in_map"
+        app:showAsAction="ifRoom" />
 
 </menu>

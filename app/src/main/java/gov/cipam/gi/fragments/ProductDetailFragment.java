@@ -1,12 +1,12 @@
 package gov.cipam.gi.fragments;
 
 import android.app.Activity;
-import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,6 @@ import gov.cipam.gi.database.Database;
 import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
 import gov.cipam.gi.model.Uniqueness;
-import gov.cipam.gi.utils.ChromeTabActionBroadcastReceiver;
 import gov.cipam.gi.utils.CommonUtils;
 import gov.cipam.gi.utils.CustomTabActivityHelper;
 import gov.cipam.gi.utils.PaletteGenerate;
@@ -63,18 +63,16 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         , View.OnLongClickListener
         , TextToSpeech.OnInitListener {
 
-    String name, address, contact;
-    int page_position = 0;
-    private int MY_DATA_CHECK_CODE = 0;
-    int tts_check = 0;
-    int micHistoryFlag = 0;
-    int micDescriptionFlag = 0;
+    int page_position = 0, MY_DATA_CHECK_CODE = 0, micHistoryFlag = 0, micDescriptionFlag = 0;
+    float pitch, speed;
     boolean isImagePreLoaded = false;
     Double lon, lat;
     String name, address, contact;
 
+    SharedPreferences sharedPreferences;
     ExpandableTextView etvHistory, etvDesc;
-    LinearLayout historyLinearLayout, descLinearLayout, dotsLinearLayout;
+    LinearLayout dotsLinearLayout;
+    RelativeLayout historyLinearLayout, descLinearLayout;
     TextView titleHistoryTv, titleDescTv, dots[];
     WrapContentHeightViewPager viewPager;
     RecyclerView rvSeller;
@@ -88,7 +86,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     Product product;
     ImageButton micHistoryButton, micDescriptionButton, closeBottomSheetBtn;
     private TextToSpeech myTTS;
-
 
     BottomSheetBehavior sheetBehavior;
     RelativeLayout bottomSheetTTS;
@@ -114,7 +111,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         uniquenessList = new ArrayList<>();
         databaseInstance = new Database(getContext());
         startSnapHelper = new StartSnapHelper();
-
+        sharedPreferences = getContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
         database = databaseInstance.getReadableDatabase();
         paletteGenerate = new PaletteGenerate();
         populateSellerListFromDB();
@@ -221,19 +218,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
                 Uri uri = Uri.parse(url);
                 openCustomChromeTab(uri);
                 break;
-            case R.id.action_tts:
-
-                /*Define TTS action here*/
-                if (tts_check == 0) {
-                    //get the text entered
-                    String words = product.getHistory();
-                    speakWords(words);
-                    tts_check = 1;
-                } else {
-                    myTTS.stop();
-                    tts_check = 0;
-                }
-                break;
         }
         return true;
     }
@@ -241,15 +225,22 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     @Override
     public void onInit(int initStatus) {
         //check for successful instantiation
+        pitch = sharedPreferences.getFloat("pitch", 5);
+        speed = sharedPreferences.getFloat("speed", 5);
         if (initStatus == TextToSpeech.SUCCESS) {
-            if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE)
+            if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE) {
+                myTTS.setSpeechRate(speed);
+                myTTS.setPitch(pitch);
                 myTTS.setLanguage(Locale.US);
-        } else if (initStatus == TextToSpeech.ERROR) {
-            Toast.makeText(getContext(), "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
+
+            } else if (initStatus == TextToSpeech.ERROR) {
+                Toast.makeText(getContext(), "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
     //txtDesc = descLinearLayout.findViewById(R.id.descText);
+
     private void populateSellerListFromDB() {
 
         Bundle b = getArguments();
@@ -294,7 +285,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
 
         intentBuilder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
-        intentBuilder.setActionButton(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher), "Action Button", createPendingIntent(ChromeTabActionBroadcastReceiver.ACTION_ACTION_BUTTON));
         intentBuilder.setShowTitle(true);
         CustomTabsIntent customTabsIntent = intentBuilder.build();
         CustomTabActivityHelper.openCustomTab(getActivity(), customTabsIntent, uri, new CustomTabActivityHelper.CustomTabFallback() {
@@ -309,12 +299,6 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         Intent webViewIntent = new Intent(getContext(), WebViewActivity.class);
         webViewIntent.putExtra(EXTRA_URL, uri.toString());
         startActivity(webViewIntent);
-    }
-
-    private PendingIntent createPendingIntent(int actionSource) {
-        Intent actionIntent = new Intent(getContext(), ChromeTabActionBroadcastReceiver.class);
-        actionIntent.putExtra(ChromeTabActionBroadcastReceiver.KEY_ACTION_SOURCE, actionSource);
-        return PendingIntent.getBroadcast(getContext(), actionSource, actionIntent, 0);
     }
 
     private void setData() {

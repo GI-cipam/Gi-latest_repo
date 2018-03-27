@@ -86,8 +86,6 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
         urlOption.setVisible(false);
         MenuItem locationAction=menu.findItem(R.id.action_location);
         locationAction.setVisible(false);
-        MenuItem ttsAction=menu.findItem(R.id.action_tts);
-        ttsAction.setVisible(false);
     }
 
 

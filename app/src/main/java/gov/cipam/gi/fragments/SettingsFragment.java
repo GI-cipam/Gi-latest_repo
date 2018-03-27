@@ -22,12 +22,12 @@ import gov.cipam.gi.common.SharedPref;
 public class SettingsFragment extends PreferenceFragment implements
         Preference.OnPreferenceClickListener, View.OnClickListener {
 
-    int pitch, speed;
+    private float pitch = 1;
+    private float speed = 1;
     Preference tts;
     Button mSaveBtn;
     Dialog mDialog;
     Spinner mTTSSpinner;
-    SharedPref sharedPref;
     SeekBar mPitchSeekBar, mSpeedSeekBar;
 
     public static SettingsFragment newInstance() {
@@ -42,7 +42,6 @@ public class SettingsFragment extends PreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.app_preferences);
-        sharedPref = new SharedPref();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class SettingsFragment extends PreferenceFragment implements
         mPitchSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                pitch = progress;
+                pitch = (float) progress;
             }
 
             @Override
@@ -70,7 +69,7 @@ public class SettingsFragment extends PreferenceFragment implements
         mSpeedSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                speed = progress;
+                speed = (float) progress;
             }
 
             @Override
@@ -108,8 +107,9 @@ public class SettingsFragment extends PreferenceFragment implements
 
         mSaveBtn = mDialog.findViewById(R.id.button_save_tts);
         mTTSSpinner = mDialog.findViewById(R.id.spinner_tts_accent);
-        mPitchSeekBar = mDialog.findViewById(R.id.seekPitch);
         mSpeedSeekBar = mDialog.findViewById(R.id.seekSpeed);
+        mSpeedSeekBar.setThumbOffset(3);
+        mPitchSeekBar = mDialog.findViewById(R.id.seekPitch);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,
                 getActivity().getResources().getStringArray(R.array.dev_names));
         mTTSSpinner.setAdapter(adapter);
@@ -121,6 +121,7 @@ public class SettingsFragment extends PreferenceFragment implements
             case R.id.button_save_tts:
                 SharedPref.saveObjectToSharedPreference(getActivity(), pitch, speed);
                 mDialog.dismiss();
+                Toast.makeText(getActivity(), pitch + " " + speed, Toast.LENGTH_SHORT).show();
                 break;
         }
 

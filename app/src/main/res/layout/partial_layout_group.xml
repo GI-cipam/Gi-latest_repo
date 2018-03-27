@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,12 +16,14 @@
 
     <ImageButton
         android:id="@+id/tts_on_off"
-        app:srcCompat="@drawable/ic_menu_microphone_green"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:padding="@dimen/padding_smaller"
+        app:srcCompat="@drawable/ic_menu_microphone_green"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/headingText"
@@ -41,6 +44,7 @@
         android:id="@+id/dividerViewUni"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@id/headingText"
         android:background="@color/greyColor" />
 
     <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -48,6 +52,7 @@
         android:id="@+id/expand_text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/dividerViewUni"
         android:background="?selectableItemBackground"
         expandableTextView:animDuration="200"
         expandableTextView:maxCollapsedLines="?attr/exp_text">
@@ -74,4 +79,4 @@
             tools:ignore="ContentDescription" />
 
     </com.ms.square.android.expandabletextview.ExpandableTextView>
-</LinearLayout>
+</RelativeLayout>
