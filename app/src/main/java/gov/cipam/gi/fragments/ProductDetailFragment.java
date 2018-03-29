@@ -454,7 +454,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         } else {
             micDescriptionButton.setImageResource(R.drawable.ic_menu_microphone_green);
             micDescriptionFlag = 0;
-
+            myTTS.stop();
         }
     }
 }

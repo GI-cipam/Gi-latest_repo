@@ -5,11 +5,21 @@ package gov.cipam.gi.model;
  */
 
 public class Bio {
-    String name,email;
+    String name, email;
+    int dp;
 
-    public Bio(String name, String email) {
+    public int getDp() {
+        return dp;
+    }
+
+    public void setDp(int dp) {
+        this.dp = dp;
+    }
+
+    public Bio(String name, String email, int dp) {
         this.name = name;
         this.email = email;
+        this.dp = dp;
     }
 
     public String getName() {

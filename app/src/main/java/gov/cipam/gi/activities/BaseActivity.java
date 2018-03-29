@@ -21,7 +21,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     String textSize;
     boolean downloadImages,notificationPreference;
-    float ttsSpeed,ttsPitch;
     Toolbar mToolbar;
     SharedPreferences sharedPreferences;
     SharedPreferences.OnSharedPreferenceChangeListener prefListener;

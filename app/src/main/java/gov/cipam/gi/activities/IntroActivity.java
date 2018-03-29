@@ -70,10 +70,7 @@ public class IntroActivity extends AppIntro {
             startActivity(new Intent(this, HomePageActivity.class));
             finish();
         }
-
-
     }
-
 
     @Override
     public void onBackPressed() {
