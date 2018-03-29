@@ -225,14 +225,11 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     @Override
     public void onInit(int initStatus) {
         //check for successful instantiation
-        pitch = sharedPreferences.getFloat("pitch", 5);
+        pitch = sharedPreferences.getFloat("pitch",5);
         speed = sharedPreferences.getFloat("speed", 5);
         if (initStatus == TextToSpeech.SUCCESS) {
             if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE) {
-                myTTS.setSpeechRate(speed);
-                myTTS.setPitch(pitch);
-                myTTS.setLanguage(Locale.US);
-
+                initTTS();
             } else if (initStatus == TextToSpeech.ERROR) {
                 Toast.makeText(getContext(), "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
             }
@@ -431,6 +428,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     private void micHistoryTTS() {
         if (micHistoryFlag == 0) {
             myTTS.stop();
+            initTTS();
             micHistoryButton.setImageResource(R.drawable.microphone_off_green);
             micHistoryFlag = 1;
             speakWords(product.getHistory());
@@ -446,6 +444,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     private void micDescriptionTTS() {
         if (micDescriptionFlag == 0) {
             myTTS.stop();
+            initTTS();
             micDescriptionButton.setImageResource(R.drawable.microphone_off_green);
             speakWords(product.getDescription());
             micDescriptionFlag = 1;
@@ -454,7 +453,12 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         } else {
             micDescriptionButton.setImageResource(R.drawable.ic_menu_microphone_green);
             micDescriptionFlag = 0;
-
+            myTTS.stop();
         }
+    }
+    private void initTTS(){
+        myTTS.setSpeechRate(speed);
+        myTTS.setPitch(pitch);
+        myTTS.setLanguage(Locale.US);
     }
 }
