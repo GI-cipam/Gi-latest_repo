@@ -1,4 +1,4 @@
-package gov.cipam.gi.utils;
+package gov.cipam.gi.webview;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

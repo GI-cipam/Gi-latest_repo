@@ -12,13 +12,11 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,7 +53,7 @@ import gov.cipam.gi.utils.Constants;
 public class MapsFragment extends Fragment implements OnMapReadyCallback
         , GoogleMap.OnInfoWindowClickListener
         , MapsSellerAdapter.setOnMapSellerClickedListener
-        ,View.OnClickListener{
+        , View.OnClickListener {
 
     public static boolean hasSpecializedList = false;
     ArrayList<Seller> selectedSellerList;
@@ -94,7 +92,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
         super.onViewCreated(view, savedInstanceState);
         databaseInstance = new Database(getContext());
         database = databaseInstance.getReadableDatabase();
-        fabBottomSheet=view.findViewById(R.id.button_bottom_sheet);
+        fabBottomSheet = view.findViewById(R.id.button_bottom_sheet);
         layoutBottomSheet = view.findViewById(R.id.bottom_sheet_layout);
         sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
         rvSellers = view.findViewById(R.id.recycler_map_sellers);
@@ -303,30 +301,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
 
         ImageView imageView = infoView.findViewById(R.id.mapInfoWindowImage);
 
-//        Bitmap bitmap=null;
-//        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
-//        if(drawable!=null) {
-//            bitmap = drawable.getBitmap();
-//        }
-//
-//        ProductDetailFragment productDetailFragment=ProductDetailFragment.newInstance(product,bitmap);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            productDetailFragment.setSharedElementEnterTransition(new DetailsTransition());
-//            productDetailFragment.setEnterTransition(new Fade());
-//            this.setSharedElementEnterTransition(new DetailsTransition());
-//            this.setEnterTransition(new Fade());
-//            this.setExitTransition(new Fade());
-//        }
-//
-//        MapsFragment mapsFragment=MapsFragment.newInstance(null);
-//        getActivity().getSupportFragmentManager()
-//                .beginTransaction()
-//                .addSharedElement(imageView, "commonImage")
-//                .replace(R.id.product_list_frame_layout, productDetailFragment)
-//                .addToBackStack(mapsFragment.getClass().getName())
-//                .commit();
-
-
         Bundle bundle = new Bundle();
         bundle.putSerializable("ppp", product);
         startActivity(new Intent(getContext(), ProductListActivity.class)
@@ -341,7 +315,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.button_bottom_sheet:
                 if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
                     sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);

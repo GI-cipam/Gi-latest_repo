@@ -1,6 +1,7 @@
-package gov.cipam.gi.utils;
+package gov.cipam.gi.webview;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsClient;
@@ -9,20 +10,6 @@ import android.support.customtabs.CustomTabsServiceConnection;
 import android.support.customtabs.CustomTabsSession;
 
 import java.util.List;
-
-import gov.cipam.gi.shared.CustomTabsHelper;
-import gov.cipam.gi.shared.ServiceConnection;
-import gov.cipam.gi.shared.ServiceConnectionCallback;
-
-/**
- * Helper class to manage connection to the custom tab activity
- *
- * Adapted from the CustomTabActivityHelper in the sample code here:
- *
- * https://github.com/GoogleChrome/custom-tabs-client/blob/master/demos/src/main/java/org/chromium/customtabsdemos/CustomTabActivityHelper.java
- *
- * Created by segun.famisa on 04/06/2016.
- */
 
 public class CustomTabActivityHelper implements ServiceConnectionCallback {
 
@@ -52,31 +39,27 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
     /**
      * Utility method for opening a custom tab
      *
-     * @param activity Host activity
+     * @param activity         Host activity
      * @param customTabsIntent custom tabs intent
-     * @param uri uri to open
-     * @param fallback fallback to handle case where custom tab cannot be opened
+     * @param uri              uri to open
+     * @param fallback         fallback to handle case where custom tab cannot be opened
      */
-    public static void openCustomTab(Activity activity, CustomTabsIntent customTabsIntent,
-                                     Uri uri, CustomTabFallback fallback) {
+    public static void openCustomTab(Activity activity, CustomTabsIntent customTabsIntent, Uri uri, CustomTabFallback fallback, boolean fallbackToBrowser) {
         String packageName = CustomTabsHelper.getPackageNameToUse(activity);
-
-        if (packageName == null) {
-            // no package name, means there's no chromium browser.
-            // Trigger fallback
-            if (fallback != null) {
-                fallback.openUri(activity, uri);
-            }
-        } else {
-            // set package name to use
+        if (packageName != null) {
             customTabsIntent.intent.setPackage(packageName);
             customTabsIntent.launchUrl(activity, uri);
+        } else if (fallback == null || fallbackToBrowser) {
+            activity.startActivity(new Intent("android.intent.action.VIEW").setData(uri));
+        } else {
+            fallback.openUri(activity, uri);
         }
     }
 
 
     /**
      * Binds the activity to the custom tabs service.
+     *
      * @param activity activity to be "bound" to the service
      */
     public void bindCustomTabsService(Activity activity) {
@@ -91,6 +74,7 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
 
     /**
      * Unbinds the activity from the custom tabs service
+     *
      * @param activity
      */
     public void unbindCustomTabsService(Activity activity) {
@@ -117,6 +101,7 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
 
     /**
      * Register a Callback to be called when connected or disconnected from the Custom Tabs Service.
+     *
      * @param connectionCallback
      */
     public void setConnectionCallback(CustomTabConnectionCallback connectionCallback) {
@@ -124,8 +109,8 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
     }
 
     /**
-     * @see {@link CustomTabsSession#mayLaunchUrl(Uri, Bundle, List)}.
      * @return true if call to mayLaunchUrl was accepted.
+     * @see {@link CustomTabsSession#mayLaunchUrl(Uri, Bundle, List)}.
      */
     public boolean mayLaunchUrl(Uri uri, Bundle extras, List<Bundle> otherLikelyBundles) {
         if (mCustomTabsClient == null) return false;

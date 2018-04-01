@@ -1,4 +1,4 @@
-package gov.cipam.gi.DirectionAPI;
+package gov.cipam.gi.directionAPI;
 
 import android.os.AsyncTask;
 

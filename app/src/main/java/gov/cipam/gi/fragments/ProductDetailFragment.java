@@ -1,6 +1,5 @@
 package gov.cipam.gi.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,7 +37,6 @@ import java.util.Locale;
 
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.MapsActivity;
-import gov.cipam.gi.activities.WebViewActivity;
 import gov.cipam.gi.adapters.GiUniquenessAdapter;
 import gov.cipam.gi.adapters.SellerListAdapter;
 import gov.cipam.gi.database.Database;
@@ -46,12 +44,11 @@ import gov.cipam.gi.model.Product;
 import gov.cipam.gi.model.Seller;
 import gov.cipam.gi.model.Uniqueness;
 import gov.cipam.gi.utils.CommonUtils;
-import gov.cipam.gi.utils.CustomTabActivityHelper;
 import gov.cipam.gi.utils.PaletteGenerate;
 import gov.cipam.gi.utils.StartSnapHelper;
 import gov.cipam.gi.utils.WrapContentHeightViewPager;
-
-import static gov.cipam.gi.utils.Constants.EXTRA_URL;
+import gov.cipam.gi.webview.CustomTabActivityHelper;
+import gov.cipam.gi.webview.WebViewFallback;
 
 
 /**
@@ -90,6 +87,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
     BottomSheetBehavior sheetBehavior;
     public static Bitmap mBitmap;
+    private CustomTabActivityHelper mCustomTabActivityHelper;
+    private CustomTabActivityHelper.CustomTabConnectionCallback mConnectionCallback;
 
     public ProductDetailFragment() {
     }
@@ -117,7 +116,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         populateSellerListFromDB();
         populateUniquenessList1fromDB();
         setHasOptionsMenu(true);
-
+        setupCustomTabHelper();
         super.onCreate(savedInstanceState);
     }
 
@@ -143,23 +142,23 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         dotsLinearLayout = view.findViewById(R.id.ll_dots);
         historyLinearLayout = view.findViewById(R.id.child_history_layout);
         descLinearLayout = view.findViewById(R.id.child_desc_layout);
-        titleHistoryTv = historyLinearLayout.findViewById(R.id.headingText);
+        titleHistoryTv = historyLinearLayout.findViewById(R.id.text_heading);
         titleHistoryTv.setText("History");
         etvHistory = historyLinearLayout.findViewById(R.id.expand_text_view);
         bottomSheetTTS = view.findViewById(R.id.bottom_sheet_tts);
         sheetBehavior = BottomSheetBehavior.from(bottomSheetTTS);
         closeBottomSheetBtn = view.findViewById(R.id.button_close_bottom_sheet);
-        titleDescTv = descLinearLayout.findViewById(R.id.headingText);
+        titleDescTv = descLinearLayout.findViewById(R.id.text_heading);
         titleDescTv.setText("Description");
         etvDesc = descLinearLayout.findViewById(R.id.expand_text_view);
-        micHistoryButton = historyLinearLayout.findViewById(R.id.tts_on_off);
+        micHistoryButton = historyLinearLayout.findViewById(R.id.button_tts_on_off);
         micHistoryButton.setOnClickListener(view1 ->
 
         {
             micHistoryTTS();
 
         });
-        micDescriptionButton = descLinearLayout.findViewById(R.id.tts_on_off);
+        micDescriptionButton = descLinearLayout.findViewById(R.id.button_tts_on_off);
         setData();
         micDescriptionButton.setOnClickListener(view12 ->
 
@@ -215,8 +214,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
 
             case R.id.action_url:
                 String url = "https://google.com";
-                Uri uri = Uri.parse(url);
-                openCustomChromeTab(uri);
+                launchCustomTab(url);
                 break;
         }
         return true;
@@ -225,7 +223,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     @Override
     public void onInit(int initStatus) {
         //check for successful instantiation
-        pitch = sharedPreferences.getFloat("pitch",5);
+        pitch = sharedPreferences.getFloat("pitch", 5);
         speed = sharedPreferences.getFloat("speed", 5);
         if (initStatus == TextToSpeech.SUCCESS) {
             if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE) {
@@ -276,25 +274,18 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
     }
 
-    private void openCustomChromeTab(Uri uri) {
+    private void launchCustomTab(String url) {
         CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
-
         intentBuilder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
         intentBuilder.setShowTitle(true);
-        CustomTabsIntent customTabsIntent = intentBuilder.build();
-        CustomTabActivityHelper.openCustomTab(getActivity(), customTabsIntent, uri, new CustomTabActivityHelper.CustomTabFallback() {
-            @Override
-            public void openUri(Activity activity, Uri uri) {
-                openWebView(uri);
-            }
-        });
+        CustomTabActivityHelper.openCustomTab(getActivity(), intentBuilder.build(), Uri.parse(url), new WebViewFallback(), false);
     }
 
-    private void openWebView(Uri uri) {
-        Intent webViewIntent = new Intent(getContext(), WebViewActivity.class);
-        webViewIntent.putExtra(EXTRA_URL, uri.toString());
-        startActivity(webViewIntent);
+    private void setupCustomTabHelper() {
+        this.mCustomTabActivityHelper = new CustomTabActivityHelper();
+        this.mCustomTabActivityHelper.setConnectionCallback(this.mConnectionCallback);
     }
+
 
     private void setData() {
         etvHistory.setText(product.getHistory());
@@ -456,7 +447,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
             myTTS.stop();
         }
     }
-    private void initTTS(){
+
+    private void initTTS() {
         myTTS.setSpeechRate(speed);
         myTTS.setPitch(pitch);
         myTTS.setLanguage(Locale.US);

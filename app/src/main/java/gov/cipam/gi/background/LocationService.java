@@ -21,8 +21,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -31,13 +29,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import gov.cipam.gi.DirectionAPI.DirectionFinder;
-import gov.cipam.gi.DirectionAPI.DirectionFinderListener;
-import gov.cipam.gi.DirectionAPI.Route;
+import gov.cipam.gi.directionAPI.DirectionFinder;
+import gov.cipam.gi.directionAPI.DirectionFinderListener;
+import gov.cipam.gi.directionAPI.Route;
 import gov.cipam.gi.activities.HomePageActivity;
 import gov.cipam.gi.database.Database;
 import gov.cipam.gi.model.Seller;
-import gov.cipam.gi.utils.StartSnapHelper;
 
 /**
  * Created by NITANT SOOD on 01-02-2018.

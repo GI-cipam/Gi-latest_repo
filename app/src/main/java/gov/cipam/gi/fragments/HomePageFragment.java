@@ -44,9 +44,9 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         StatesAdapter.setOnStateClickedListener
         , GiImageAdapter.setOnGiClickListener
         , ViewPager.OnPageChangeListener
-        ,View.OnClickListener{
+        , View.OnClickListener {
 
-    TextView txtCategory,txtState,txtMore;
+    TextView txtCategory, txtState, txtMore;
     private TextView[] dots;
     int page_position = 0;
     LinearLayout dotsLinearLayout;
@@ -85,7 +85,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         mDatabaseState = FirebaseDatabase.getInstance().getReference("States");
         mDatabaseCategory = FirebaseDatabase.getInstance().getReference("Categories");
 
-        new Thread(() -> TweetUi.getInstance()).start();
+        new Thread(TweetUi::getInstance).start();
 
     }
 
@@ -93,9 +93,9 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        txtMore=view.findViewById(R.id.more_text);
-        txtCategory=view.findViewById(R.id.category_text);
-        txtState=view.findViewById(R.id.states_text);
+        txtMore = view.findViewById(R.id.more_text);
+        txtCategory = view.findViewById(R.id.category_text);
+        txtState = view.findViewById(R.id.states_text);
         rvState = view.findViewById(R.id.recycler_states);
         rvCategory = view.findViewById(R.id.recycler_categories);
         giSliderViewPager = view.findViewById(R.id.gi_vp_slider);
@@ -105,17 +105,13 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
         scrollView.setSmoothScrollingEnabled(true);
         scrollView.setNestedScrollingEnabled(true);
 
-        /*Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/helvetica_bolder.otf");
-        txtState.setTypeface(typeface);
-        txtCategory.setTypeface(typeface);*/
-
         addBottomDots(0);
         //setAutoScroll();
         rvState.setAdapter(new StatesAdapter(this, mDisplayStateList));
         rvCategory.setAdapter(new CategoryAdapter(mDisplayCategoryList, this));
         giSliderViewPager.setAdapter(new GiImageAdapter(mDisplayCategoryList, getActivity(), this));
 
-        rvState.setLayoutManager(new GridLayoutManager(getContext(),2 , GridLayoutManager.VERTICAL, false) {
+        rvState.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false) {
             @Override
             public boolean canScrollVertically() {
                 return false;
@@ -232,7 +228,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.more_text:
                 startActivity(new Intent(getContext(), AllStatesActivity.class));
         }

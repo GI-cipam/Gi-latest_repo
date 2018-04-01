@@ -14,7 +14,7 @@
     android:paddingTop="@dimen/padding_smaller">
 
     <ImageButton
-        android:id="@+id/tts_on_off"
+        android:id="@+id/button_tts_on_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -26,7 +26,7 @@
 
 
     <TextView
-        android:id="@+id/headingText"
+        android:id="@+id/text_heading"
         style="?attr/text_size_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
         android:id="@+id/dividerViewUni"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/headingText"
+        android:layout_below="@id/text_heading"
         android:background="@color/greyColor" />
 
     <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:android="http://schemas.android.com/apk/res/android"

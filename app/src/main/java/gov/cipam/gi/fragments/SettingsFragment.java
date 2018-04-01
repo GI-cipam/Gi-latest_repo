@@ -1,6 +1,8 @@
 package gov.cipam.gi.fragments;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -21,14 +23,14 @@ import gov.cipam.gi.common.SharedPref;
 
 public class SettingsFragment extends PreferenceFragment implements
         Preference.OnPreferenceClickListener, View.OnClickListener {
-
-    private float pitch = 1;
-    private float speed = 1;
+    private int pitchInitial, speedInitial;
+    private float pitch, speed;
     Preference tts;
     Button mSaveBtn;
     Dialog mDialog;
     Spinner mTTSSpinner;
     SeekBar mPitchSeekBar, mSpeedSeekBar;
+    SharedPreferences sharedPreferences;
 
     public static SettingsFragment newInstance() {
 
@@ -42,6 +44,11 @@ public class SettingsFragment extends PreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.app_preferences);
+        sharedPreferences = getActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        pitchInitial = (int) sharedPreferences.getFloat("pitch", 0);
+        speedInitial = (int) sharedPreferences.getFloat("speed", 0);
+
+
     }
 
     @Override
@@ -108,11 +115,15 @@ public class SettingsFragment extends PreferenceFragment implements
         mSaveBtn = mDialog.findViewById(R.id.button_save_tts);
         mTTSSpinner = mDialog.findViewById(R.id.spinner_tts_accent);
         mSpeedSeekBar = mDialog.findViewById(R.id.seekSpeed);
+
+
         mSpeedSeekBar.setThumbOffset(3);
         mPitchSeekBar = mDialog.findViewById(R.id.seekPitch);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,
                 getActivity().getResources().getStringArray(R.array.dev_names));
         mTTSSpinner.setAdapter(adapter);
+        mPitchSeekBar.setProgress(pitchInitial);
+        mSpeedSeekBar.setProgress(speedInitial);
     }
 
     @Override

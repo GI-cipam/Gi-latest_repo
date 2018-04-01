@@ -2,6 +2,8 @@ package gov.cipam.gi.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.KeyEvent;
@@ -13,6 +15,7 @@ import gov.cipam.gi.R;
 public class WebViewActivity extends BaseActivity {
 
     WebView webView;
+    String url;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -38,7 +41,10 @@ public class WebViewActivity extends BaseActivity {
     private class MyBrowser extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
+            if (!url.startsWith("https://")) {
+                return false;
+            }
+            WebViewActivity.this.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(url)));
             return true;
         }
 

@@ -1,4 +1,4 @@
-package gov.cipam.gi.DirectionAPI;
+package gov.cipam.gi.directionAPI;
 
 /**
  * Created by Nitant Sood on 1/02/2018.
