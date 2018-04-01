@@ -223,7 +223,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     @Override
     public void onInit(int initStatus) {
         //check for successful instantiation
-        pitch = sharedPreferences.getFloat("pitch", 5);
+        pitch = sharedPreferences.getFloat("pitch",5);
         speed = sharedPreferences.getFloat("speed", 5);
         if (initStatus == TextToSpeech.SUCCESS) {
             if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE) {
@@ -448,7 +448,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
         }
     }
 
-    private void initTTS() {
+    private void initTTS(){
         myTTS.setSpeechRate(speed);
         myTTS.setPitch(pitch);
         myTTS.setLanguage(Locale.US);
