@@ -82,7 +82,9 @@
         </activity>
         <activity
             android:name=".activities.StatePreferenceActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+        </activity>
         <activity
             android:name=".activities.NavItemActivity"
             android:screenOrientation="portrait" />

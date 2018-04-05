@@ -37,7 +37,7 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
     }
 
     public interface setOnPreferenceStateClickListener{
-        void onPreferenceStateClicked(Bundle bundle);
+        void onPreferenceStateClicked(int position,View view);
     }
 
     @Override
@@ -49,12 +49,13 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
     @Override
     public void onBindViewHolder(final StatePreferenceViewHolder holder, int position) {
 
-        holder.mName.setText(statePreferences.get(position).getState());
+        holder.mName.setText(statePreferences.get(position).getState().getName());
 
         holder.progressBar.setVisibility(View.VISIBLE);
 
         Picasso.with(holder.itemView.getContext())
-                .load("https://www.w3schools.com/howto/img_fjords.jpg")
+                .load(statePreferences
+                        .get(position).getState().getDpurl())
                 .transform(new RoundedTransformation(10,0))
                 .resize(200,200)
                 .centerCrop()
@@ -97,17 +98,16 @@ public class StatePreferenceAdapter extends RecyclerView.Adapter<StatePreference
 
         @Override
         public void onClick(View v) {
-            Bundle bundle=new Bundle();
-            mListener.onPreferenceStateClicked(bundle);
+            mListener.onPreferenceStateClicked(getAdapterPosition(),v);
 
-            if(statePreference.contains(statePreferences.get(getAdapterPosition()))){
-                statePreference.remove(statePreferences.get(getAdapterPosition()));
-                relativeLayout.setBackgroundColor(Color.TRANSPARENT);
-            }
-            else {
-                statePreference.add(statePreferences.get(getAdapterPosition()));
-                relativeLayout.setBackgroundColor(ContextCompat.getColor(v.getContext(),R.color.colorSelector));
-            }
+//            if(statePreference.contains(statePreferences.get(getAdapterPosition()))){
+//                statePreference.remove(statePreferences.get(getAdapterPosition()));
+//                relativeLayout.setBackgroundColor(Color.TRANSPARENT);
+//            }
+//            else {
+//                statePreference.add(statePreferences.get(getAdapterPosition()));
+//                relativeLayout.setBackgroundColor(ContextCompat.getColor(v.getContext(),R.color.colorSelector));
+//            }
 
         }
     }

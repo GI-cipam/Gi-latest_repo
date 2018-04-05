@@ -5,18 +5,26 @@ package gov.cipam.gi.model;
  */
 
 public class StatePreference {
-    String state;
+    States state;
+    boolean isSelected=false;
 
+    public boolean isSelected() {
+        return isSelected;
+    }
 
-    public StatePreference(String state) {
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public StatePreference(States state) {
         this.state = state;
     }
 
-    public String getState() {
+    public States getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(States state) {
         this.state = state;
     }
 }
