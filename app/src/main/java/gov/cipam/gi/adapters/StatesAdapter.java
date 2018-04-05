@@ -62,8 +62,8 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.StateViewH
                     @Override
                     public void onSuccess() {
                         holder.progressBar.setVisibility(View.INVISIBLE);
-                        bitmap = ((BitmapDrawable) holder.mDp.getDrawable()).getBitmap();
-                        paletteGenerate.setViewColor(bitmap, holder.mName);
+                        /*bitmap = ((BitmapDrawable) holder.mDp.getDrawable()).getBitmap();
+                        paletteGenerate.setViewColor(bitmap, holder.mName);*/
                     }
 
                     @Override

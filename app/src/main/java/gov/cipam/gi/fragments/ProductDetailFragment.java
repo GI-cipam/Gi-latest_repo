@@ -223,7 +223,7 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     @Override
     public void onInit(int initStatus) {
         //check for successful instantiation
-        pitch = sharedPreferences.getFloat("pitch",5);
+        pitch = sharedPreferences.getFloat("pitch", 5);
         speed = sharedPreferences.getFloat("speed", 5);
         if (initStatus == TextToSpeech.SUCCESS) {
             if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE) {
@@ -429,16 +429,20 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
             micHistoryButton.setImageResource(R.drawable.ic_menu_microphone_green);
             micHistoryFlag = 0;
             myTTS.stop();
+
         }
+
     }
 
+
     private void micDescriptionTTS() {
+
         if (micDescriptionFlag == 0) {
             myTTS.stop();
             initTTS();
             micDescriptionButton.setImageResource(R.drawable.microphone_off_green);
-            speakWords(product.getDescription());
             micDescriptionFlag = 1;
+            speakWords(product.getDescription());
             micHistoryButton.setImageResource(R.drawable.ic_menu_microphone_green);
             micHistoryFlag = 0;
         } else {
@@ -446,9 +450,10 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
             micDescriptionFlag = 0;
             myTTS.stop();
         }
+
     }
 
-    private void initTTS(){
+    private void initTTS() {
         myTTS.setSpeechRate(speed);
         myTTS.setPitch(pitch);
         myTTS.setLanguage(Locale.US);

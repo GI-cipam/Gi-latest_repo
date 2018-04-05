@@ -18,6 +18,7 @@ import android.widget.Toast;
 import gov.cipam.gi.R;
 import gov.cipam.gi.activities.StatePreferenceActivity;
 import gov.cipam.gi.common.SharedPref;
+import gov.cipam.gi.utils.Constants;
 
 /**
  * Created by karan on 11/20/2017.
@@ -108,7 +109,8 @@ public class SettingsFragment extends PreferenceFragment implements
                 mDialog.show();
                 break;
             case KEY_STATE_PREFERENCE:
-                startActivity(new Intent(getActivity(), StatePreferenceActivity.class));
+                startActivity(new Intent(getActivity(), StatePreferenceActivity.class)
+                        .putExtra(Constants.INTENT_TYPE, 1));
                 break;
         }
         return false;

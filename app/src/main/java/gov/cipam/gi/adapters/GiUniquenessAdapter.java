@@ -32,7 +32,7 @@ public class GiUniquenessAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
 
         final LayoutInflater layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.item_uniqueness_new, container, false);
+        View view = layoutInflater.inflate(R.layout.item_uniqueness, container, false);
         final TextView txtUni=view.findViewById(R.id.text_gi_uniqueness);
         final TextView txtPos=view.findViewById(R.id.text_uniqueness_position);
 

@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,15 +25,18 @@ import gov.cipam.gi.adapters.StatePreferenceAdapter;
 import gov.cipam.gi.database.Database;
 import gov.cipam.gi.model.StatePreference;
 import gov.cipam.gi.model.States;
+import gov.cipam.gi.utils.Constants;
 
 public class StatePreferenceActivity extends BaseActivity implements
         StatePreferenceAdapter.setOnPreferenceStateClickListener {
 
+    int intentType;
     Database databaseInstance;
     private SQLiteDatabase database;
     private ArrayList<StatePreference> statePreferences = new ArrayList<>();
     private ArrayList<StatePreference> selectedStatePreferences = new ArrayList<>();
     RecyclerView rvStatePreference;
+    TextView statesTv;
     StatePreferenceAdapter statePreferenceAdapter;
 
     @Override
@@ -40,7 +45,14 @@ public class StatePreferenceActivity extends BaseActivity implements
         setContentView(R.layout.activity_state_preference);
 
         setUpToolbar(this);
+        mToolbar.setSubtitle("Select at least 6 states");
+        try {
+            intentType = getIntent().getIntExtra(Constants.INTENT_TYPE, 0);
+        } catch (NullPointerException e) {
+            Log.e(StatePreferenceActivity.class.getName(), e.getMessage());
+        }
 
+        statesTv = findViewById(R.id.text_state_count);
         rvStatePreference = findViewById(R.id.recycler_preference_state);
         rvStatePreference.setLayoutManager(new GridLayoutManager(this, 3));
         //rvStatePreference.addItemDecoration(new DividerItemDecoration(this,GridLayoutManager.VERTICAL));
@@ -92,9 +104,13 @@ public class StatePreferenceActivity extends BaseActivity implements
             case R.id.action_done:
                 int count = addToDatabase();
                 if (count >= 6) {
-                    Toast.makeText(this, count + "", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(this, HomePageActivity.class));
-                    finish();
+                    if (intentType == 0) {
+                        Toast.makeText(this, count + "", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(this, HomePageActivity.class));
+                        finish();
+                    } else if (intentType == 1) {
+                        onBackPressed();
+                    }
                 } else {
                     Toast.makeText(this, "Please select 6 states or more to continue", Toast.LENGTH_SHORT).show();
                 }

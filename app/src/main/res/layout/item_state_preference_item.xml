@@ -21,10 +21,9 @@
             android:cropToPadding="false"
             android:scaleType="centerCrop" />
 
-        <View
+        <gov.cipam.gi.utils.SquareImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/image_state_preference"
             android:background="@drawable/image_gradient" />
 
         <TextView

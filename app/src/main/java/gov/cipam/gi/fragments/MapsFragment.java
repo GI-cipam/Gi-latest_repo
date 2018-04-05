@@ -93,7 +93,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
         databaseInstance = new Database(getContext());
         database = databaseInstance.getReadableDatabase();
         fabBottomSheet = view.findViewById(R.id.button_bottom_sheet);
-        layoutBottomSheet = view.findViewById(R.id.bottom_sheet_layout);
+        layoutBottomSheet = view.findViewById(R.id.bottom_sheet);
         sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
         rvSellers = view.findViewById(R.id.recycler_map_sellers);
 
