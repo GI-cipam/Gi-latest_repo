@@ -56,6 +56,8 @@ public class Database extends SQLiteOpenHelper {
     public static final String GI_UNIQUENESS_UID="gi_uniqueness_uid";
     public static final String GI_UNIQUENESS_VALUE="gi_uniqueness_value";
 
+    public static final String GI_PREFERENCE_STATE_TABLE="gi_preference_state_table";
+
     public Database(Context context) {
         super(context,DB_NAME,null,DB_VER);
     }
@@ -86,12 +88,18 @@ public class Database extends SQLiteOpenHelper {
         String createTableGIUniqueness="Create table "+GI_UNIQUENESS_TABLE+"( "+
                 GI_UNIQUENESS_UID+" text, "+GI_UNIQUENESS_VALUE+" text);";
 
+
+        String createTableGIPreferenceState="Create table "+GI_PREFERENCE_STATE_TABLE+"( "+
+                GI_STATE_DP_URL+" text, "+GI_STATE_NAME+" text);";
+
         db.execSQL(createTableGICategory);
         db.execSQL(createTableGIProducts);
         db.execSQL(createTableGISeller);
         db.execSQL(createTableGIState);
         db.execSQL(createTableGISearch);
         db.execSQL(createTableGIUniqueness);
+        db.execSQL(createTableGIPreferenceState);
+
     }
 
     @Override

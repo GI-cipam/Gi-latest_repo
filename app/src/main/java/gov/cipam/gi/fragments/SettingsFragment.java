@@ -2,6 +2,7 @@ package gov.cipam.gi.fragments;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import gov.cipam.gi.R;
+import gov.cipam.gi.activities.StatePreferenceActivity;
 import gov.cipam.gi.common.SharedPref;
 
 /**
@@ -22,10 +24,12 @@ import gov.cipam.gi.common.SharedPref;
  */
 
 public class SettingsFragment extends PreferenceFragment implements
-        Preference.OnPreferenceClickListener, View.OnClickListener {
+        Preference.OnPreferenceClickListener
+        , View.OnClickListener {
+    private final static String KEY_TTS = "tts", KEY_STATE_PREFERENCE = "state_preference";
     private int pitchInitial, speedInitial;
     private float pitch, speed;
-    Preference tts;
+    Preference tts, state_preferences;
     Button mSaveBtn;
     Dialog mDialog;
     Spinner mTTSSpinner;
@@ -48,12 +52,12 @@ public class SettingsFragment extends PreferenceFragment implements
         pitchInitial = (int) sharedPreferences.getFloat("pitch", 0);
         speedInitial = (int) sharedPreferences.getFloat("speed", 0);
 
-
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        tts = findPreference("tts");
+        tts = findPreference(KEY_TTS);
+        state_preferences = findPreference(KEY_STATE_PREFERENCE);
         setmDialog();
 
         mPitchSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -91,6 +95,7 @@ public class SettingsFragment extends PreferenceFragment implements
         });
 
         tts.setOnPreferenceClickListener(this);
+        state_preferences.setOnPreferenceClickListener(this);
         mSaveBtn.setOnClickListener(this);
 
     }
@@ -98,9 +103,12 @@ public class SettingsFragment extends PreferenceFragment implements
     @Override
     public boolean onPreferenceClick(Preference preference) {
         switch (preference.getKey()) {
-            case "tts":
+            case KEY_TTS:
                 Toast.makeText(getActivity(), "tts", Toast.LENGTH_SHORT).show();
                 mDialog.show();
+                break;
+            case KEY_STATE_PREFERENCE:
+                startActivity(new Intent(getActivity(), StatePreferenceActivity.class));
                 break;
         }
         return false;

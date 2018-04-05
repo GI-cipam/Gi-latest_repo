@@ -36,6 +36,12 @@
             android:summary="Set Speech Pitch and Speed"
             android:title="Set TTS" />
     </PreferenceCategory>
-
+    <PreferenceCategory android:title="State Preferences">
+        <Preference
+            android:icon="@drawable/ic_close_dark"
+            android:key="state_preference"
+            android:summary="Select to be viewed on homepage"
+            android:title="Select states" />
+    </PreferenceCategory>
 </PreferenceScreen>
 

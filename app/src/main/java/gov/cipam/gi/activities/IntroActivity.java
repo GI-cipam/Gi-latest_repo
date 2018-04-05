@@ -51,7 +51,7 @@ public class IntroActivity extends AppIntro {
 
         preferences.edit().putBoolean(Constants.ONBOARDING_COMPLETE, true).apply();
 
-        startActivity(new Intent(this, HomePageActivity.class));
+        startActivity(new Intent(this, StatePreferenceActivity.class));
         finish();
     }
 

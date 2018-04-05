@@ -24,4 +24,5 @@ public class Constants {
     public static final String KEY_QUERY ="query" ;
     public static final String NAV_CATEGORY ="nav_item" ;
     public static final ArrayList<StatePreference> states=new ArrayList<>();
+    public static final String INTENT_TYPE = "intent";
 }
