@@ -454,8 +454,8 @@ public class ProductDetailFragment extends Fragment implements SellerListAdapter
     }
 
     private void initTTS() {
-        myTTS.setSpeechRate(speed);
-        myTTS.setPitch(pitch);
+        myTTS.setSpeechRate(1);
+        myTTS.setPitch(1);
         myTTS.setLanguage(Locale.US);
     }
 }

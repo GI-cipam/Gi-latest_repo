@@ -15,6 +15,7 @@ import com.github.paolorotolo.appintro.AppIntro;
 import gov.cipam.gi.R;
 import gov.cipam.gi.fragments.Onboarding1;
 import gov.cipam.gi.fragments.Onboarding2;
+import gov.cipam.gi.fragments.Onboarding3;
 import gov.cipam.gi.utils.Constants;
 import gov.cipam.gi.utils.downloadThread;
 
@@ -66,6 +67,7 @@ public class IntroActivity extends AppIntro {
             }
             addSlide(new Onboarding1());
             addSlide(new Onboarding2());
+            addSlide(new Onboarding3());
             setSpecs();
         } else {
             startActivity(new Intent(this, HomePageActivity.class));

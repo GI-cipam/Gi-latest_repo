@@ -1,129 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools"
-
-    android:id="@+id/onboarding_2_linear_layout"
-
+    android:id="@+id/onboarding_3_linear_layout"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
-
     android:gravity="center_horizontal"
-
     android:orientation="vertical"
-
     android:padding="@dimen/padding_smaller"
-
     android:weightSum="5">
 
-
     <TextView
-
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
-
         android:layout_margin="@dimen/margin_smaller"
-
-        android:text="Search"
-
+        android:text="Scroll through GIs"
         android:textAlignment="center"
-
         android:textColor="@android:color/white"
-
-        android:textSize="30sp"
-
-        android:textStyle="bold"
-
-        android:typeface="serif" />
-
-
-    <TextView
-
-        android:layout_width="match_parent"
-
-        android:layout_height="wrap_content"
-
-        android:layout_margin="@dimen/margin_smaller"
-
-        android:text="Search For States, Categories and GI Products"
-
-        android:textAlignment="center"
-
-        android:textColor="@android:color/white"
-
         android:textSize="18sp" />
 
-
     <ImageView
-
         android:layout_width="match_parent"
-
         android:layout_height="0dp"
-
         android:layout_margin="@dimen/margin_smaller"
-
         android:layout_weight="2"
-
-        app:srcCompat="@drawable/onboard_search"
-
+        app:srcCompat="@drawable/onboard_2_img_2"
         tools:ignore="ContentDescription" />
 
-
     <TextView
-
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
-
         android:layout_margin="@dimen/margin_smaller"
-
-        android:text="Explore"
-
+        android:text="Read throgh history and interesting facts about GIs"
         android:textAlignment="center"
-
         android:textColor="@android:color/white"
-
-        android:textSize="30sp"
-
-        android:textStyle="bold"
-
-        android:typeface="serif" />
-
-
-    <TextView
-
-        android:layout_width="match_parent"
-
-        android:layout_height="wrap_content"
-
-        android:layout_margin="@dimen/margin_smaller"
-
-        android:text="Locate Sellers and GI Products on Map"
-
-        android:textAlignment="center"
-
-        android:textColor="@android:color/white"
-
         android:textSize="18sp" />
 
-
     <ImageView
-
         android:layout_width="match_parent"
-
         android:layout_height="0dp"
-
         android:layout_margin="@dimen/margin_smaller"
-
         android:layout_weight="2"
-
-        app:srcCompat="@drawable/onboard_map"
-
+        app:srcCompat="@drawable/onboard_2_img_1"
         tools:ignore="ContentDescription" />
-
 </LinearLayout>

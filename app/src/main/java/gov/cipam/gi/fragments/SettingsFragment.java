@@ -30,7 +30,7 @@ public class SettingsFragment extends PreferenceFragment implements
     private final static String KEY_TTS = "tts", KEY_STATE_PREFERENCE = "state_preference";
     private int pitchInitial, speedInitial;
     private float pitch, speed;
-    Preference tts, state_preferences;
+    Preference tts, statePreferences;
     Button mSaveBtn;
     Dialog mDialog;
     Spinner mTTSSpinner;
@@ -50,15 +50,15 @@ public class SettingsFragment extends PreferenceFragment implements
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.app_preferences);
         sharedPreferences = getActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
-        pitchInitial = (int) sharedPreferences.getFloat("pitch", 0);
-        speedInitial = (int) sharedPreferences.getFloat("speed", 0);
+        pitchInitial = (int) sharedPreferences.getFloat("pitch", 5);
+        speedInitial = (int) sharedPreferences.getFloat("speed", 5);
 
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         tts = findPreference(KEY_TTS);
-        state_preferences = findPreference(KEY_STATE_PREFERENCE);
+        statePreferences = findPreference(KEY_STATE_PREFERENCE);
         setmDialog();
 
         mPitchSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -96,7 +96,7 @@ public class SettingsFragment extends PreferenceFragment implements
         });
 
         tts.setOnPreferenceClickListener(this);
-        state_preferences.setOnPreferenceClickListener(this);
+        statePreferences.setOnPreferenceClickListener(this);
         mSaveBtn.setOnClickListener(this);
 
     }
