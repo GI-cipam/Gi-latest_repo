@@ -30,7 +30,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         setUpToolbar(this);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.mapActivity);
+                .findFragmentById(R.id.maps_activity_fragment);
         getData();
         mapFragment.getMapAsync(this);
     }

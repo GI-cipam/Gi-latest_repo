@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Categories {
     private String name,dpurl;
     @JsonIgnore
-    ArrayList<Product> categoryProductList=new ArrayList<>();
+    private ArrayList<Product> categoryProductList=new ArrayList<>();
 
     public Categories(){
 

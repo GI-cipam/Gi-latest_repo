@@ -71,7 +71,7 @@ public class SearchListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        LayoutInflater inflator = (LayoutInflater) convertView.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflator = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflator.inflate(R.layout.search_list_parent_item, parent, false);
         TextView parentText = convertView.findViewById(R.id.searchListParentName);
         parentText.setText((String) getGroup(groupPosition));
@@ -80,7 +80,7 @@ public class SearchListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        LayoutInflater inflator = (LayoutInflater) convertView.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflator = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflator.inflate(R.layout.item_search, null);
         TextView tvTitle = convertView.findViewById(R.id.text_search_title);
         TextView tvFiller = convertView.findViewById(R.id.text_search_state);

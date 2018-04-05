@@ -6,12 +6,12 @@
     tools:context="gov.cipam.gi.activities.StatePreferenceActivity">
 
     <include
-        android:id="@+id/state_preference_toolbar"
+        android:id="@+id/state_preference_activity_toolbar"
         layout="@layout/toolbar" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_preference_state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/state_preference_toolbar" />
+        android:layout_below="@id/state_preference_activity_toolbar" />
 </RelativeLayout>

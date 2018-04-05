@@ -63,7 +63,7 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
         super.onViewCreated(view, savedInstanceState);
 
         progressBar = view.findViewById(R.id.progressBar);
-        recyclerView = view.findViewById(R.id.recyclerViewSocialFeed);
+        recyclerView = view.findViewById(R.id.recycler_social_feed);
         swipeRefreshLayout = view.findViewById(R.id.socialFeedSwipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         setAdapter();

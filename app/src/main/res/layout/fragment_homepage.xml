@@ -43,7 +43,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/category_text"
+                android:id="@+id/text_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -71,7 +71,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/states_text"
+                android:id="@+id/text_states"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_smaller"
@@ -82,10 +82,10 @@
                 android:theme="@style/MediumBodyText" />
 
             <TextView
-                android:id="@+id/more_text"
+                android:id="@+id/text_view_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/states_text"
+                android:layout_alignBottom="@id/text_states"
                 android:layout_alignParentEnd="true"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
@@ -101,7 +101,7 @@
                 android:id="@+id/recycler_states"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/states_text" />
+                android:layout_below="@id/text_states" />
 
         </RelativeLayout>
 

@@ -8,9 +8,9 @@
     tools:context="gov.cipam.gi.activities.SplashScreenActivity"
     android:background="@color/md_blue_500">
 
-    <ImageView
+    <gov.cipam.gi.utils.SquareImageView
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         app:srcCompat="@drawable/ic_menu_search"
         tools:ignore="ContentDescription" />

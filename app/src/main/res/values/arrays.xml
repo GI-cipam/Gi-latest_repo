@@ -30,12 +30,12 @@
     </array>
 
     <array name="bg_drawable">
-        <item>@drawable/circle_bg_blue</item>
-        <item>@drawable/circle_bg_green</item>
-        <item>@drawable/circle_bg_orange</item>
-        <item>@drawable/circle_bg_pink</item>
-        <item>@drawable/circle_bg_purple</item>
-        <item>@drawable/circle_bg_red</item>
+        <item>@drawable/circle_bg_agriculture_blue</item>
+        <item>@drawable/circle_bg_foodstuff_green</item>
+        <item>@drawable/circle_bg_manufactured_orange</item>
+        <item>@drawable/circle_bg_natural_pink</item>
+        <item>@drawable/circle_bg_textile_purple</item>
+        <item>@drawable/circle_bg_handicraft_red</item>
     </array>
 
     <string-array name="dev_emails">

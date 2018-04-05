@@ -2,7 +2,6 @@ package gov.cipam.gi.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -69,7 +68,7 @@ StatePreferenceAdapter.setOnPreferenceStateClickListener{
 
     @Override
     protected int getToolbarID() {
-        return R.id.state_preference_toolbar;
+        return R.id.state_preference_activity_toolbar;
     }
 
     @Override

@@ -93,9 +93,9 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        txtMore = view.findViewById(R.id.more_text);
-        txtCategory = view.findViewById(R.id.category_text);
-        txtState = view.findViewById(R.id.states_text);
+        txtMore = view.findViewById(R.id.text_view_all);
+        txtCategory = view.findViewById(R.id.text_category);
+        txtState = view.findViewById(R.id.text_states);
         rvState = view.findViewById(R.id.recycler_states);
         rvCategory = view.findViewById(R.id.recycler_categories);
         giSliderViewPager = view.findViewById(R.id.gi_vp_slider);
@@ -229,7 +229,7 @@ public class HomePageFragment extends Fragment implements CategoryAdapter.setOnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.more_text:
+            case R.id.text_view_all:
                 startActivity(new Intent(getContext(), AllStatesActivity.class));
         }
     }

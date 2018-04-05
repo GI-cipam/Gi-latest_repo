@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,23 +33,23 @@ public class AllStatesActivity extends BaseActivity implements StatesAdapter.set
         mToolbar.setTitle(AllStatesActivity.class.getName());
         databaseFetch = new DatabaseFetch();
         databaseFetch.populateDisplayListFromDB(this);
-        mDatabaseState=FirebaseDatabase.getInstance().getReference("States");
+        mDatabaseState = FirebaseDatabase.getInstance().getReference("States");
 
-        rvAllStates=findViewById(R.id.allStatesRecycler);
-        rvAllStates.setAdapter(new StatesAdapter(this,mDisplayStateList));
-        rvAllStates.setLayoutManager(new GridLayoutManager(this,3));
+        rvAllStates = findViewById(R.id.recycler_all_states);
+        rvAllStates.setAdapter(new StatesAdapter(this, mDisplayStateList));
+        rvAllStates.setLayoutManager(new GridLayoutManager(this, 3));
 
     }
 
     @Override
     protected int getToolbarID() {
-        return R.id.all_states_toolbar;
+        return R.id.all_states_activity_toolbar;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 break;
@@ -60,8 +59,8 @@ public class AllStatesActivity extends BaseActivity implements StatesAdapter.set
 
     @Override
     public void onStateClickedListener(View view, int position) {
-            startActivity(new Intent(this, ProductListActivity.class)
-                    .putExtra(Constants.KEY_TYPE, Database.GI_STATE)
-                    .putExtra(Constants.KEY_VALUE, mDisplayStateList.get(position).getName()));
+        startActivity(new Intent(this, ProductListActivity.class)
+                .putExtra(Constants.KEY_TYPE, Database.GI_STATE)
+                .putExtra(Constants.KEY_VALUE, mDisplayStateList.get(position).getName()));
     }
 }

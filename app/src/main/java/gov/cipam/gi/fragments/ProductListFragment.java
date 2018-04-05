@@ -60,7 +60,7 @@ public class ProductListFragment extends Fragment implements  ProductListAdapter
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        productListRecycler=view.findViewById(R.id.product_list_recycler_view);
+        productListRecycler=view.findViewById(R.id.recycler_product_list);
         productListAdapter=new ProductListAdapter(ProductListActivity.subGIList,this);
         productListRecycler.setAdapter(productListAdapter);
         //productListRecycler.setLayoutManager(new GridLayoutManager(getContext(),1));

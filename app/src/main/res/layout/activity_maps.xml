@@ -1,15 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
+
     <include
         android:id="@+id/maps_activity_toolbar"
-        layout="@layout/toolbar"/>
+        layout="@layout/toolbar" />
+
     <fragment
-        android:id="@+id/mapActivity"
+        android:id="@+id/maps_activity_fragment"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        tools:context="gov.cipam.gi.activities.MapsActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:context="gov.cipam.gi.activities.MapsActivity" />
 </LinearLayout>

@@ -37,7 +37,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>-->
 
-    <include layout="@layout/detail_layout" />
+    <include layout="@layout/layout_product_detail" />
 
     <include layout="@layout/fragment_bottom_sheet_tts" />
 </android.support.design.widget.CoordinatorLayout>

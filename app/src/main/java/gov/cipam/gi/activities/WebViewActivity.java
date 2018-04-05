@@ -62,7 +62,7 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     protected int getToolbarID() {
-        return R.id.webViewToolbar;
+        return R.id.web_view_activity_toolbar;
     }
 
     @Override

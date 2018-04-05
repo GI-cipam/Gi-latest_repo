@@ -7,7 +7,7 @@
     tools:context="gov.cipam.gi.activities.WebViewActivity">
 
     <include
-        android:id="@+id/webViewToolbar"
+        android:id="@+id/web_view_activity_toolbar"
         layout="@layout/toolbar" />
 
     <WebView

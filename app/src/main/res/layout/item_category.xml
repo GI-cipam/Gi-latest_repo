@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/circle_bg_green">
+        android:background="@drawable/circle_bg_foodstuff_green">
 
         <ImageView
             android:id="@+id/image_category"
@@ -29,8 +29,7 @@
             android:id="@+id/categoryIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/ic_menu_settings" />
+            android:layout_centerInParent="true"/>
 
     </RelativeLayout>
 

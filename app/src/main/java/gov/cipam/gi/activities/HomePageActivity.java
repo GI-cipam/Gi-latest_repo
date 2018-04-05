@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.MergeCursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -19,13 +20,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.appinvite.AppInvite;
 import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.android.gms.appinvite.AppInviteReferral;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
@@ -41,16 +47,18 @@ import gov.cipam.gi.model.Seller;
 import gov.cipam.gi.utils.Constants;
 
 public class HomePageActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,
-        TabLayout.OnTabSelectedListener, SearchCursorAdapter.setOnSuggestionClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener
+        , View.OnClickListener
+        , TabLayout.OnTabSelectedListener
+        , SearchCursorAdapter.setOnSuggestionClickListener
+        , GoogleApiClient.OnConnectionFailedListener {
 
+    String historyItem[], mQuery = "", navItem;
     private static final int REQUEST_INVITE = 23;
     public static final int MIN_NOTIFICATION_DISTANCE = 50;
     public static final int MIN_NOTIFICATION_SELLER_DISTANCE = 30;
-    //private FirebaseAuth mAuth;
-    private DrawerLayout drawer;
+
     SearchView searchView;
-    String historyItem[], mQuery = "", navItem;
     BottomNavigationView navigation;
     NavigationView navigationView;
     Cursor searchCursorHistory, searchCursorOther;
@@ -59,8 +67,7 @@ public class HomePageActivity extends BaseActivity
     Database databaseInstance;
     SQLiteDatabase database;
     Cursor searchCursorHistoryNew, searchCursorOtherNew;
-    boolean isFABOpen = false;
-
+    GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +75,12 @@ public class HomePageActivity extends BaseActivity
         setContentView(R.layout.activity_home_page);
 
         setUpToolbar(this);
+
+        initAppInvites();
+
         initializeTwitter();
         //showErrorSnackbar();
-        drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -94,10 +104,8 @@ public class HomePageActivity extends BaseActivity
         boolean isFromNotification = intent.getBooleanExtra("isFromNotification", false);
         if (isFromNotification) {
             ArrayList<Seller> myList = (ArrayList<Seller>) intent.getSerializableExtra("selectedSellerList");
-//            Toast.makeText(this,myList.size()+" from Main", Toast.LENGTH_SHORT).show();
             fragmentInflate(MapsFragment.newInstance(myList));
         } else {
-//            Toast.makeText(this, "Not from Notification", Toast.LENGTH_SHORT).show();
             if (savedInstanceState == null) {
                 fragmentInflate(HomePageFragment.newInstance());
             }
@@ -129,6 +137,106 @@ public class HomePageActivity extends BaseActivity
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         setSearchParameters();
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_INVITE) {
+            if (requestCode == RESULT_OK) {
+                String[] ids = AppInviteInvitation.getInvitationIds(requestCode, data);
+                for (String id : ids) {
+                    Log.d(HomePageActivity.class.getName(), id);
+                }
+            }
+        } else {
+            Toast.makeText(this, "sorry", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    protected int getToolbarID() {
+        return R.id.home_activity_toolbar;
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onSuggestionClickListener(View view, String type, String name) {
+        switch (type) {
+
+            case Database.GI_CATEGORY:
+                startActivity(new Intent(this, ProductListActivity.class)
+                        .putExtra(Constants.KEY_TYPE, type)
+                        .putExtra(Constants.KEY_VALUE, name));
+                break;
+
+            case Database.GI_STATE:
+                startActivity(new Intent(this, ProductListActivity.class)
+                        .putExtra(Constants.KEY_TYPE, type)
+                        .putExtra(Constants.KEY_VALUE, name));
+                break;
+
+            case Database.GI_HISTORY:
+                Bundle args = new Bundle();
+                args.putString(Constants.KEY_QUERY, name);
+                args.putString(Constants.KEY_TYPE, Database.GI_HISTORY);
+                startActivity(new Intent(HomePageActivity.this, SearchResultsActivity.class)
+                        .putExtras(args));
+                break;
+
+            case Database.GI_PRODUCT:
+
+                String[] s = {name};
+                Cursor cursor = database.query(Database.GI_PRODUCT_TABLE, null, Database.GI_PRODUCT_NAME + "=?", s, null, null, null);
+
+                cursor.moveToNext();
+                String detail, category, state, dpurl, uid, history, description;
+
+                name = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_NAME));
+                detail = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DETAIL));
+                category = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_CATEGORY));
+                state = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_STATE));
+                dpurl = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DP_URL));
+                uid = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_UID));
+                history = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_HISTORY));
+                description = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DESCRIPTION));
+
+                Product oneGI = new Product(name, dpurl, detail, category, state, description, history, uid);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ppp", oneGI);
+                startActivity(new Intent(this, ProductListActivity.class)
+                        .putExtras(bundle)
+                        .putExtra(Constants.KEY_TYPE, type));
+
+                cursor.close();
+                break;
+        }
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
     }
 
     private void populateInitialSearchCursor() {
@@ -260,6 +368,8 @@ public class HomePageActivity extends BaseActivity
             case R.id.nav_share:
                 Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.share_message))
                         .setMessage(getString(R.string.default_message))
+                        .setDeepLink(Uri.parse(""))
+                        .setCallToActionText("Install")
                         .build();
                 startActivityForResult(intent, REQUEST_INVITE);
                 break;
@@ -282,99 +392,19 @@ public class HomePageActivity extends BaseActivity
         fragmentTransaction.commit();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void initAppInvites() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(AppInvite.API)
+                .enableAutoManage(this, this)
+                .build();
 
-        if (requestCode == REQUEST_INVITE) {
-            if (requestCode == RESULT_OK) {
-                String[] ids = AppInviteInvitation.getInvitationIds(requestCode, data);
-                for (String id : ids) {
-
-                }
-            }
-        } else {
-            Toast.makeText(this, "sorry", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    @Override
-    protected int getToolbarID() {
-        return R.id.toolbar;
-    }
-
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onSuggestionClickListener(View view, String type, String name) {
-        switch (type) {
-
-            case Database.GI_CATEGORY:
-                startActivity(new Intent(this, ProductListActivity.class)
-                        .putExtra(Constants.KEY_TYPE, type)
-                        .putExtra(Constants.KEY_VALUE, name));
-                break;
-
-            case Database.GI_STATE:
-                startActivity(new Intent(this, ProductListActivity.class)
-                        .putExtra(Constants.KEY_TYPE, type)
-                        .putExtra(Constants.KEY_VALUE, name));
-                break;
-
-            case Database.GI_HISTORY:
-                Bundle args = new Bundle();
-                args.putString(Constants.KEY_QUERY, name);
-                args.putString(Constants.KEY_TYPE, Database.GI_HISTORY);
-                startActivity(new Intent(HomePageActivity.this, SearchResultsActivity.class)
-                        .putExtras(args));
-                break;
-
-            case Database.GI_PRODUCT:
-
-                String[] s = {name};
-                Cursor cursor = database.query(Database.GI_PRODUCT_TABLE, null, Database.GI_PRODUCT_NAME + "=?", s, null, null, null);
-
-                cursor.moveToNext();
-                String detail, category, state, dpurl, uid, history, description;
-
-                name = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_NAME));
-                detail = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DETAIL));
-                category = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_CATEGORY));
-                state = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_STATE));
-                dpurl = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DP_URL));
-                uid = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_UID));
-                history = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_HISTORY));
-                description = cursor.getString(cursor.getColumnIndex(Database.GI_PRODUCT_DESCRIPTION));
-
-                Product oneGI = new Product(name, dpurl, detail, category, state, description, history, uid);
-
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("ppp", oneGI);
-                startActivity(new Intent(this, ProductListActivity.class)
-                        .putExtras(bundle)
-                        .putExtra(Constants.KEY_TYPE, type));
-
-                cursor.close();
-                break;
-        }
-
-    }
-
-    @Override
-    public void onClick(View view) {
-
+        AppInvite.AppInviteApi.getInvitation(mGoogleApiClient, this, true)
+                .setResultCallback(appInviteInvitationResult -> {
+                    if (appInviteInvitationResult.getStatus().isSuccess()) {
+                        Intent intent = appInviteInvitationResult.getInvitationIntent();
+                        String deepLink = AppInviteReferral.getDeepLink(intent);
+                        String invitationId = AppInviteReferral.getInvitationId(intent);
+                    }
+                });
     }
 }

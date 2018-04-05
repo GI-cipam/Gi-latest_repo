@@ -6,14 +6,14 @@
     tools:context="gov.cipam.gi.activities.SettingsActivity">
 
     <include
-        android:id="@+id/settings_toolbar"
+        android:id="@+id/settings_activity_toolbar"
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <FrameLayout
-        android:id="@+id/settings_frame"
+        android:id="@+id/settings_activity_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_toolbar" />
+        android:layout_below="@+id/settings_activity_toolbar" />
 </RelativeLayout>

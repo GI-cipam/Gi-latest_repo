@@ -20,14 +20,14 @@ public class SettingsActivity extends BaseActivity {
 
     @Override
     protected int getToolbarID() {
-        return R.id.settings_toolbar;
+        return R.id.settings_activity_toolbar;
     }
 
     public void inflateSettingsFragment(){
         FragmentManager mFragmentManager = getFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
         SettingsFragment mPrefsFragment = SettingsFragment.newInstance();
-        mFragmentTransaction.replace(R.id.settings_frame, mPrefsFragment);
+        mFragmentTransaction.replace(R.id.settings_activity_frame_layout, mPrefsFragment);
         mFragmentTransaction.commit();
     }
 
