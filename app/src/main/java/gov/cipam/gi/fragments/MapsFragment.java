@@ -12,6 +12,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -57,7 +58,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
         , View.OnClickListener {
 
     public static boolean hasSpecializedList = false;
-    ArrayList<Seller> selectedSellerList;
+    ArrayList<Seller> selectedSellerList=new ArrayList<>();
     ArrayList<Seller> allSellerList = new ArrayList<>();
 
     ArrayList<Marker> selectedsellerMarkerList=new ArrayList<>();
@@ -104,7 +105,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
 
         rvSellers = view.findViewById(R.id.recycler_map_sellers);
 
-        rvSellers.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+//        rvSellers.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        rvSellers.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         mapsSellerAdapter=new MapsSellerAdapter(this,selectedSellerList);
         rvSellers.setAdapter(mapsSellerAdapter);
         if(selectedSellerList!=null)
@@ -207,12 +209,19 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
 
                 } else {
                     map.setMyLocationEnabled(true);// Write you code here if permission already given.
-                    selectedSellerList = (ArrayList<Seller>) getArguments().getSerializable("selectedSellerList");
-                    if (selectedSellerList != null && selectedSellerList.size() > 0) {
+                    ArrayList<Seller> newList = (ArrayList<Seller>) getArguments().getSerializable("selectedSellerList");
+                    if (newList != null && newList.size() > 0) {
 //                        Toast.makeText(getContext(), selectedSellerList.size() + "", Toast.LENGTH_SHORT).show();
+                        selectedSellerList.clear();
+                        selectedSellerList.addAll(newList);
+                        layoutBottomSheet.setVisibility(View.VISIBLE);
+                        fabBottomSheet.setVisibility(View.VISIBLE);
                         addMarkerForSelectedSeller();
                         mapsSellerAdapter.notifyDataSetChanged();
+
                     } else {
+                        layoutBottomSheet.setVisibility(View.INVISIBLE);
+                        fabBottomSheet.setVisibility(View.INVISIBLE);
 //                        Toast.makeText(getContext(), "No List provided", Toast.LENGTH_SHORT).show();
 
                     }
