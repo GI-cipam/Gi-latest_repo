@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -59,6 +60,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
     ArrayList<Seller> selectedSellerList;
     ArrayList<Seller> allSellerList = new ArrayList<>();
 
+    ArrayList<Marker> selectedsellerMarkerList=new ArrayList<>();
+
     Database databaseInstance;
     SQLiteDatabase database;
 
@@ -69,6 +72,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
     LinearLayout layoutBottomSheet;
     BottomSheetBehavior sheetBehavior;
 
+    MapsSellerAdapter mapsSellerAdapter;
     public static MapsFragment newInstance(ArrayList<Seller> seletedSellerList) {
 
         Bundle args = new Bundle();
@@ -92,13 +96,19 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
         super.onViewCreated(view, savedInstanceState);
         databaseInstance = new Database(getContext());
         database = databaseInstance.getReadableDatabase();
+
         fabBottomSheet = view.findViewById(R.id.button_bottom_sheet);
         layoutBottomSheet = view.findViewById(R.id.bottom_sheet);
         sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
+
+
         rvSellers = view.findViewById(R.id.recycler_map_sellers);
 
         rvSellers.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        rvSellers.setAdapter(new MapsSellerAdapter(this));
+        mapsSellerAdapter=new MapsSellerAdapter(this,selectedSellerList);
+        rvSellers.setAdapter(mapsSellerAdapter);
+        if(selectedSellerList!=null)
+        Toast.makeText(getContext(), "My" + selectedSellerList.size(), Toast.LENGTH_SHORT).show();
 
         SupportMapFragment mapFragment1 = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapFragment);
         mapFragment1.getMapAsync(this);
@@ -201,6 +211,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
                     if (selectedSellerList != null && selectedSellerList.size() > 0) {
 //                        Toast.makeText(getContext(), selectedSellerList.size() + "", Toast.LENGTH_SHORT).show();
                         addMarkerForSelectedSeller();
+                        mapsSellerAdapter.notifyDataSetChanged();
                     } else {
 //                        Toast.makeText(getContext(), "No List provided", Toast.LENGTH_SHORT).show();
 
@@ -223,6 +234,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
             SellerAndView sellerAndView = new SellerAndView(currentSeller, null);
             marker.setTag(sellerAndView);
+            selectedsellerMarkerList.add(marker);
             builder.include(marker.getPosition());
         }
         LatLngBounds bounds = builder.build();
@@ -311,6 +323,23 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback
     @Override
     public void onMapSellerClicked(MapsSellerAdapter.MapsSellerViewHolder view, int position) {
 
+        Seller oneSeller=selectedSellerList.get(position);
+        for(int i=0;i<selectedsellerMarkerList.size();i++){
+            Marker marker=selectedsellerMarkerList.get(i);
+            SellerAndView sellerAndView=(SellerAndView) marker.getTag();
+            Seller seller=sellerAndView.getSeller();
+
+            if(seller.getUid().equals(oneSeller.getUid())){
+                if (marker.isInfoWindowShown()) {
+                    marker.hideInfoWindow();
+                    marker.showInfoWindow();
+                }
+                else
+                {
+                    marker.showInfoWindow();
+                }
+            }
+        }
     }
 
     @Override

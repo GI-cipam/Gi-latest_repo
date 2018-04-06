@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import gov.cipam.gi.R;
+import gov.cipam.gi.model.Seller;
 
 /**
  * Created by karan on 3/8/2018.
@@ -15,12 +18,11 @@ import gov.cipam.gi.R;
 
 public class MapsSellerAdapter extends RecyclerView.Adapter<MapsSellerAdapter.MapsSellerViewHolder> {
 
-    private String[] name;
-    private String[] address;
-    private String[] contacts;
+    ArrayList<Seller> selectedSellerList;
     setOnMapSellerClickedListener mListener;
 
-    public MapsSellerAdapter(setOnMapSellerClickedListener mListener) {
+    public MapsSellerAdapter(setOnMapSellerClickedListener mListener, ArrayList<Seller> selectedSellerList) {
+        this.selectedSellerList = selectedSellerList;
         this.mListener = mListener;
     }
 
@@ -37,21 +39,21 @@ public class MapsSellerAdapter extends RecyclerView.Adapter<MapsSellerAdapter.Ma
 
     @Override
     public void onBindViewHolder(MapsSellerViewHolder holder, int position) {
-        name = holder.itemView.getContext().getResources().getStringArray(R.array.dev_names);
-        address = holder.itemView.getContext().getResources().getStringArray(R.array.dev_emails);
-        contacts = holder.itemView.getContext().getResources().getStringArray(R.array.dev_emails);
 
-        for (int i = 0; i < name.length; i++) {
-            holder.mName.setText(name[i]);
-            holder.mAddress.setText(name[i]);
-            holder.mContact.setText(contacts[i]);
-        }
+        holder.mName.setText(selectedSellerList.get(position).getName());
+        holder.mAddress.setText(selectedSellerList.get(position).getaddress());
+        holder.mContact.setText(selectedSellerList.get(position).getcontact());
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        if (selectedSellerList != null) {
+            return selectedSellerList.size();
+        }
+        else
+            return 0;
     }
+
 
     public class MapsSellerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mName, mContact, mAddress;
